@@ -1,0 +1,53 @@
+/* Bottom Navigation CSS */
+.bottom-nav-container{
+    position: fixed;
+    bottom:0;
+
+    width : 100vw;
+    height : 50px;
+
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    align-items: center;
+    justify-items: center;
+}
+
+.bottom-icon{
+    width:2rem;
+    height:2rem;
+}
+
+
+/* Top Navigation CSS */
+.top-nav-container{
+    width : 100vw;
+    height : 50px;
+
+    position: fixed;
+    top:0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: lightsteelblue;
+}
+
+.top-icon{
+    position: fixed;
+    right : 1rem;
+    top : 0.813rem;
+
+    width:1.5rem;
+    height:1.5rem;
+}
+
+.top-nav-text-container{
+    width : 35vw;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    font-size : 1.125rem;
+}
