@@ -30,9 +30,9 @@
 }
 
 .line-purple{
-    border : 1px solid #603AAE;
-    color : #603AAE;
-    background-color: white;
+    border : 1px solid var(--violet-600);
+    color : var(--violet-600);
+    background-color: var(--white);
 }
 
 .line-black{
@@ -62,5 +62,43 @@
 .full-red{
     border : 1px solid var(--red-600 );
     background-color: var(--red-600 );
+    color : var(--white );
+}
+
+/* disabled */
+
+.line-purple-disabled{
+    border : 1px solid var(--violet-300);
+    color : var(--violet-300);
+    background-color: white;
+}
+
+.line-black-disabled{
+    border : 1px solid var(--gray-300);
+    color : var(--gray-300);
+    background-color: var(--white);
+}
+
+.line-red-disabled{
+    border : 1px solid var(--red-300);
+    color : var(--red-300 );
+    background-color: white;
+}
+
+.full-purple-disabled{
+    border : 1px solid var(--violet-300);
+    background-color:  var(--violet-300);
+    color : white;
+}
+
+.full-black-disabled{
+    border : 1px solid var(--gray-300);
+    background-color: var(--gray-300);
+    color : var(--white);
+}
+
+.full-red-disabled{
+    border : 1px solid var(--red-300 );
+    background-color: var(--red-300 );
     color : var(--white );
 }
