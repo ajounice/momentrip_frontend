@@ -11,7 +11,12 @@ interface ButtonProps{
 }
 
 function Button({ buttonStyle, onClickEvent }:ButtonProps) {
-  const css : string = `${buttonStyle.styleType}-${buttonStyle.color} ${buttonStyle.size} ${buttonStyle.fontWeight}`;
+  let css;
+  if (buttonStyle.disabled) {
+    css = `${buttonStyle.styleType}-${buttonStyle.color}-disabled ${buttonStyle.size} ${buttonStyle.fontWeight}`;
+  } else {
+    css = `${buttonStyle.styleType}-${buttonStyle.color} ${buttonStyle.size} ${buttonStyle.fontWeight}`;
+  }
 
   return (
     // eslint-disable-next-line max-len,react/button-has-type

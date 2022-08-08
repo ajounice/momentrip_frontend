@@ -14,7 +14,7 @@ function HomePage() {
     color: 'purple',
     size: 'sm',
     fontWeight: 'normal',
-    disabled: false,
+    disabled: true,
   };
 
   const [follow, setFollow] = useState<IButton>(defaultData);
@@ -31,7 +31,7 @@ function HomePage() {
         color: 'purple',
         size: 'sm',
         fontWeight: 'normal',
-        disabled: false,
+        disabled: true,
       });
     } else {
       setFollow({
@@ -41,7 +41,7 @@ function HomePage() {
         color: 'purple',
         size: 'sm',
         fontWeight: 'normal',
-        disabled: false,
+        disabled: true,
       });
     }
   };

@@ -3,6 +3,7 @@ export type StyleType = 'line' | 'full';
 export type ButtonType = 'button' | 'submit' | 'reset';
 export type FontWeight = 'light' | 'normal' | 'bold';
 
+/* Button Interface */
 export interface IButton{
   text : string;
   buttonType : ButtonType;
@@ -12,3 +13,11 @@ export interface IButton{
   fontWeight : FontWeight;
   disabled : boolean;
 }
+
+/* Tag Interface */
+// export interface ITag{
+//   text : string;
+//   color :
+//   size : Size;
+//   disabled : boolean;
+// }
