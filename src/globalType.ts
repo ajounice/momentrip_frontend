@@ -14,10 +14,3 @@ export interface IButton{
   disabled : boolean;
 }
 
-/* Tag Interface */
-// export interface ITag{
-//   text : string;
-//   color :
-//   size : Size;
-//   disabled : boolean;
-// }

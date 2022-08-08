@@ -1,15 +1,15 @@
 import React from 'react';
 import '../../styles/components/common/Tag.css';
 
-interface TagProps{
+interface ITag{
     tag : string;
 }
 
-function Tag({ tag }:TagProps) {
+function Tag({ tag }:ITag) {
   return (
     <div className="tag-container">
       <span className="tag-text">
-        #&nbsp;
+        #
         {tag}
       </span>
     </div>

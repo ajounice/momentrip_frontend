@@ -50,7 +50,7 @@ function HomePage() {
     <div className="home-page-container">
       <TopNavigation />
       Home
-      <Tag tag="Home" />
+      <Tag tag="부산" />
       <Button
         buttonStyle={follow}
         onClickEvent={onClickHandler}
