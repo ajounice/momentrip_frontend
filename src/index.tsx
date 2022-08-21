@@ -11,12 +11,15 @@ import MyPage from './pages/MyPage';
 import WishPage from './pages/WishPage';
 import UploadShortFormPage from './pages/UploadShortFormPage';
 import LoginPage from './pages/LoginPage';
+import { BottomNavigation, TopNavigation } from './components/common/Navigation';
 
 const root = ReactDOM.createRoot(
+  // eslint-disable-next-line no-undef
   document.getElementById('root') as HTMLElement,
 );
 root.render(
   <React.StrictMode>
+    <TopNavigation />
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />}>Rendering Page</Route>
@@ -29,6 +32,7 @@ root.render(
         <Route path="/login" element={<LoginPage />}>LoginPage</Route>
       </Routes>
     </BrowserRouter>
+    <BottomNavigation />
   </React.StrictMode>,
 );
 

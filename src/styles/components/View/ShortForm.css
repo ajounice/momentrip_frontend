@@ -1,0 +1,6 @@
+.short-form-container{
+    width : 100vw;
+    height : 100vh;
+
+    background-color: var(--blue-400);
+}

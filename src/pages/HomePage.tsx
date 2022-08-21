@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import Tag from '../components/common/Tag';
-import Button from '../components/Button/Button';
-import { BottomNavigation, TopNavigation } from '../components/common/Navigation';
 import {
   IButton,
 } from '../globalType';
+import { ShortForm } from '../components/View/ShortForm';
 
 function HomePage() {
   const defaultData:IButton = {
@@ -19,7 +17,7 @@ function HomePage() {
 
   const [follow, setFollow] = useState<IButton>(defaultData);
 
-  // eslint-disable-next-line no-undef,max-len
+  // eslint-disable-next-line no-undef,max-len,no-unused-vars
   const onClickHandler:React.MouseEventHandler<HTMLButtonElement> = (event :React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
@@ -48,14 +46,8 @@ function HomePage() {
 
   return (
     <div className="home-page-container">
-      <TopNavigation />
-      Home
-      <Tag tag="부산" />
-      <Button
-        buttonStyle={follow}
-        onClickEvent={onClickHandler}
-      />
-      <BottomNavigation />
+      <ShortForm />
+
     </div>
   );
 }
