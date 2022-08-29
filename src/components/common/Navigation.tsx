@@ -35,7 +35,7 @@ const TopNavigation = function () {
 
   const [topNavContainerStyle, setTopNavContainerStyle] = useState('top-nav-text-container style-home');
 
-  const onClickHandlerTopNavigation = function (e :React.MouseEvent) {
+  const onClickHandlerTopNavigation = function (e: React.MouseEvent) {
     e.preventDefault();
 
     console.log(e.currentTarget.innerHTML);
@@ -74,12 +74,24 @@ const TopNavigation = function () {
     <div className="top-nav-container">
       <RiNotification2Line fill={current.alarmColor} className="top-icon" />
       <div className={`${topNavContainerStyle}`}>
-        {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
-        <h1 className={current.following ? 'style-current-black' : 'style-not-current'} onClick={onClickHandlerTopNavigation}>팔로잉</h1>
-        {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
-        <h1 className={current.home ? 'style-current-white' : 'style-not-current'} onClick={onClickHandlerTopNavigation}>홈</h1>
-        {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
-        <h1 className={current.search ? 'style-current-black' : 'style-not-current'} onClick={onClickHandlerTopNavigation}>검색</h1>
+        <h1
+          className={current.following ? 'style-current-black' : 'style-not-current'}
+          onClick={onClickHandlerTopNavigation}
+        >
+          팔로잉
+        </h1>
+        <h1
+          className={current.home ? 'style-current-white' : 'style-not-current'}
+          onClick={onClickHandlerTopNavigation}
+        >
+          홈
+        </h1>
+        <h1
+          className={current.search ? 'style-current-black' : 'style-not-current'}
+          onClick={onClickHandlerTopNavigation}
+        >
+          검색
+        </h1>
       </div>
     </div>
   );
@@ -95,7 +107,23 @@ const VerticalNavigation = function () {
 
   return (
     <div className="vertical-navigation-container">
-      { like ? <RiHeart3Fill fill={iconColor} onClick={() => { setLike(false); }} className="icon" /> : <RiHeart3Line fill={iconColor} onClick={() => { setLike(true); }} className="icon" />}
+      {like ? (
+        <RiHeart3Fill
+          fill={iconColor}
+          onClick={() => {
+            setLike(false);
+          }}
+          className="icon"
+        />
+      ) : (
+        <RiHeart3Line
+          fill={iconColor}
+          onClick={() => {
+            setLike(true);
+          }}
+          className="icon"
+        />
+      )}
       <RiQuestionAnswerLine fill={iconColor} className="icon" />
       <RiShareForwardFill fill={iconColor} className="icon" />
       <RiListUnordered fill={iconColor} className="icon" />
