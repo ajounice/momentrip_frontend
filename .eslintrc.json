@@ -5,11 +5,7 @@
   }, // js 환경
   "extends": [
     "plugin:@typescript-eslint/recommended",
-    "next",
-    "next/core-web-vitals",
-    "prettier",
-    "plugin:testing-library/react",
-    "plugin:jest-dom/recommended"
+    "prettier"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -19,5 +15,5 @@
     "ecmaVersion": 12, //ecma 버전
     "sourceType": "module"
   },
-  "plugins": ["@typescript-eslint", "testing-library", "jest-dom"] //확장 라이브러리
+  "plugins": ["@typescript-eslint"] //확장 라이브러리
 }
