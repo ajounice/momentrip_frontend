@@ -1,3 +1,4 @@
+import './input.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
@@ -22,15 +23,33 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<App />}>Rendering Page</Route>
-        <Route path="/home" element={<HomePage />}>Home</Route>
-        <Route path="/following" element={<FollowingPage />}>Following</Route>
-        <Route path="/search" element={<SearchPage />}>Search</Route>
-        <Route path="/mypage" element={<MyPage />}>MyPage</Route>
-        <Route path="/wish" element={<WishPage />}>WishPage</Route>
-        <Route path="/upload" element={<UploadShortFormPage />}>UploadShortFormPage</Route>
-        <Route path="/login" element={<LoginPage />}>LoginPage</Route>
-        <Route path="/auth/kakao/callback" element={<Auth />}>Auth</Route>
+        <Route path="/" element={<App />}>
+          Rendering Page
+        </Route>
+        <Route path="/home" element={<HomePage />}>
+          Home
+        </Route>
+        <Route path="/following" element={<FollowingPage />}>
+          Following
+        </Route>
+        <Route path="/search" element={<SearchPage />}>
+          Search
+        </Route>
+        <Route path="/mypage" element={<MyPage />}>
+          MyPage
+        </Route>
+        <Route path="/wish" element={<WishPage />}>
+          WishPage
+        </Route>
+        <Route path="/upload" element={<UploadShortFormPage />}>
+          UploadShortFormPage
+        </Route>
+        <Route path="/login" element={<LoginPage />}>
+          LoginPage
+        </Route>
+        <Route path="/auth/kakao/callback" element={<Auth />}>
+          Auth
+        </Route>
       </Routes>
     </BrowserRouter>
     <BottomNavigation />

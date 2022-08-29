@@ -1,14 +1,12 @@
-import React, {
-  Dispatch, SetStateAction, useEffect, useState,
-} from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import '../../styles/components/Button/FollowButton.css';
 
-interface FollowProps{
-  follow : boolean;
-  setFollow : Dispatch<SetStateAction<boolean>>;
+interface FollowProps {
+  follow: boolean;
+  setFollow: Dispatch<SetStateAction<boolean>>;
 }
 
-function FollowButton({ follow, setFollow }:FollowProps) {
+function FollowButton({ follow, setFollow }: FollowProps) {
   const [buttonCss, setButtonCss] = useState<string>('follow-button');
   const [buttonText, setButtonText] = useState<string>('팔로우');
 
@@ -23,11 +21,13 @@ function FollowButton({ follow, setFollow }:FollowProps) {
       setButtonText('팔로우');
     }
   };
-  useEffect(() => {
-  }, [follow]);
+  // useEffect(() => {
+  // }, [follow]);
 
   return (
-    <button className={buttonCss} onClick={onClickFollow} type="button">{buttonText}</button>
+    <button className={buttonCss} onClick={onClickFollow} type="button">
+      {buttonText}
+    </button>
   );
 }
 
