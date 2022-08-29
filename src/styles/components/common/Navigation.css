@@ -1,10 +1,12 @@
 /* Bottom Navigation CSS */
 .bottom-nav-container{
+    z-index : 999;
+
     position: fixed;
     bottom:0;
 
     width : 100vw;
-    height : 50px;
+    height : 48px;
 
     display: grid;
     grid-template-columns: repeat(3,1fr);
@@ -20,34 +22,86 @@
 
 /* Top Navigation CSS */
 .top-nav-container{
-    width : 100vw;
+    z-index : 999;
+
+    width : 100%;
     height : 50px;
 
-    position: fixed;
-    top:0;
+    position : fixed;
+    top : 24px;
 
     display: flex;
     justify-content: center;
     align-items: center;
-
-    background-color: lightsteelblue;
 }
 
 .top-icon{
-    position: fixed;
-    right : 1rem;
-    top : 0.813rem;
+    width :24px;
+    height : 24px;
 
-    width:1.5rem;
-    height:1.5rem;
+    padding : 12px;
+
+    position: fixed;
+    right : 12px;
+    top : 24px;
 }
 
 .top-nav-text-container{
-    width : 35vw;
+    padding : 12px;
+
+    width : 35%;
+    height : 30px;
 
     display: flex;
     flex-direction: row;
+    align-items: center;
     justify-content: space-between;
 
     font-size : 1.125rem;
+}
+
+.top-nav-text-container h1{
+    height : 30px;
+    text-align: center;
+
+    display: flex;
+    align-items: center;
+    /*text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25), 0 4px 4px rgba(0, 0, 0, 0.25);*/
+}
+
+.style-home{
+    color : var(--white);
+}
+
+.style-not-home{
+    color : var(--black);
+}
+
+.style-current-white{
+    border-bottom: 3px solid var(--white);
+}
+
+.style-current-black{
+    border-bottom: 3px solid var(--black);
+}
+
+.style-not-current{
+    border-bottom: 3px solid transparent;
+}
+
+/* vertical navigation */
+.vertical-navigation-container{
+    z-index : 999;
+
+    width : 32px;
+    height : 216px;
+
+    position : fixed;
+    bottom : 82px;
+    right : 14px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }

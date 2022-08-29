@@ -1,0 +1,14 @@
+.short-form-container{
+    width : 100vw;
+    height : 100vh;
+    background-color: var(--blue-400);
+}
+
+.short-form{
+    object-fit: cover;
+}
+
+.swiper-container{
+    width : 100vw;
+    height : 100vh;
+}
