@@ -7,7 +7,7 @@ const TagItem = ({ id, name, value }: { id: string; name: string; value: string 
   return (
     <div>
       <div>
-        <Link to={'?keyword='}>
+        <Link to={'?keyword=' + id}>
           <button
             name={name}
             id={id}

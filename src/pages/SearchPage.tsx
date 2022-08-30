@@ -2,41 +2,42 @@ import React from 'react';
 import SearchBar from '../components/Search/SearchBar';
 import TagList from '../components/Search/TagList';
 import ThumbnailList from '../components/Search/ThumbnailList';
+import { TopNavigation } from '../components/common/Navigation';
 
 const dummy_data = [
   {
     name: 'tag-busan',
-    id: 'tag-busan',
+    id: '부산',
     value: '부산',
   },
   {
     name: 'tag-jeju',
-    id: 'tag-jeju',
+    id: '제주섬섬',
     value: '제주섬섬',
   },
   {
     name: 'tag-suwon',
-    id: 'tag-suwon',
+    id: '수원시',
     value: '수원시',
   },
   {
     name: 'tag-night',
-    id: 'tag-night',
+    id: '야경',
     value: '야경',
   },
   {
     name: 'tag-ic',
-    id: 'tag-ic',
+    id: '인천',
     value: '인천',
   },
   {
     name: 'tag-hks',
-    id: 'tag-hks',
+    id: '호캉스',
     value: '호캉스',
   },
   {
     name: 'tag-bks',
-    id: 'tag-bks',
+    id: '바캉스',
     value: '바캉스',
   },
 ];
@@ -63,8 +64,9 @@ const dummy_thumbnail_data = [
 const SearchPage = () => {
   return (
     <div className="px-4">
+      <TopNavigation />
       {/* SearchBar */}
-      <div className="">
+      <div className="mt-20">
         {/* TODO SearchBar에서 엔터치면 값 전달되서 after로 넘어가게 구현 */}
         <SearchBar />
         <p className="mt-4 text-md font-bold">인기태그</p>
