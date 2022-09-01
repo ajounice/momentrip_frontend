@@ -6,7 +6,7 @@ import './styles/pages/HomePage.css';
 function App() {
   return (
     <div className="App">
-      <Link to="/home">
+      <Link to="/login">
         <span>Rendering Page</span>
       </Link>
     </div>
