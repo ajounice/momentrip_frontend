@@ -10,6 +10,7 @@ import FollowingPage from './pages/FollowingPage';
 import SearchPage from './pages/SearchPage';
 import MyPage from './pages/MyPage';
 import WishPage from './pages/WishPage';
+import ComAvatar from './pages/components/ComAvatar';
 import UploadShortFormPage from './pages/UploadShortFormPage';
 import LoginPage from './Login/page/LoginPage';
 import { BottomNavigation } from './components/common/Navigation';
@@ -48,6 +49,9 @@ root.render(
           LoginPage
         </Route>
         <Route path="/auth/kakao/callback" element={<Auth />}>
+          Auth
+        </Route>
+        <Route path="/com-avatar" element={<ComAvatar />}>
           Auth
         </Route>
       </Routes>
