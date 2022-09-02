@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../../styles/components/common/Navigation.css';
+import {useNavigate} from 'react-router-dom';
 import {
   // eslint-disable-next-line max-len
   RiInboxArchiveLine,
@@ -13,25 +14,42 @@ import {
   RiHeart3Fill,
 } from 'react-icons/ri';
 
-const iconColor = 'white';
+const defaultCurrent = {
+  home: true,
+  search: false,
+  following: false,
+  alarmColor: 'white',
+};
 
 const BottomNavigation = function () {
+  const [color, setColor] = useState('white');
+
+  useEffect(()=>{
+    console.log("Vertical : ",color);
+
+    if(window.location.pathname === '/home'){
+      setColor('white');
+    }else{
+      setColor('black');
+    }
+  },[window.location.pathname]);
+
   return (
     <div className="bottom-nav-container">
-      <RiInboxArchiveLine fill={iconColor} className="icon" />
-      <RiVideoAddLine fill={iconColor} className="icon" />
-      <RiUser3Line fill={iconColor} className="icon" />
+      <RiInboxArchiveLine fill={color} className="icon" />
+      <RiVideoAddLine fill={color} className="icon" />
+      <RiUser3Line fill={color} className="icon" />
     </div>
   );
 };
 
 const TopNavigation = function () {
-  const [current, setCurrent] = useState({
-    home: true,
-    search: false,
-    following: false,
-    alarmColor: 'white',
-  });
+  const [current, setCurrent] = useState(defaultCurrent);
+  const navigation = useNavigate();
+
+  useEffect(() => {
+    console.log(current);
+  }, [current]);
 
   const [topNavContainerStyle, setTopNavContainerStyle] = useState('top-nav-text-container style-home');
 
@@ -40,35 +58,29 @@ const TopNavigation = function () {
 
     console.log(e.currentTarget.innerHTML);
     if (e.currentTarget.innerHTML === '홈') {
-      setCurrent({
-        home: true,
-        search: false,
-        following: false,
-        alarmColor: 'white',
-      });
+      setCurrent(defaultCurrent);
       setTopNavContainerStyle('top-nav-text-container style-home');
+      navigation('/home');
     } else if (e.currentTarget.innerHTML === '검색') {
       setCurrent({
+        ...defaultCurrent,
         home: false,
         search: true,
-        following: false,
         alarmColor: 'black',
       });
       setTopNavContainerStyle('top-nav-text-container style-not-home');
+      navigation('/search');
     } else {
       setCurrent({
+        ...defaultCurrent,
         home: false,
-        search: false,
         following: true,
         alarmColor: 'black',
       });
       setTopNavContainerStyle('top-nav-text-container style-not-home');
+      navigation('/following');
     }
   };
-
-  useEffect(() => {
-    console.log(current);
-  }, [current, topNavContainerStyle]);
 
   return (
     <div className="top-nav-container">
@@ -104,12 +116,27 @@ const VerticalNavigation = function () {
   // 해당 숏폼에 달린 댓글 정보
 
   const [like, setLike] = useState(false);
+  const [color, setColor] = useState('white');
+
+  useEffect(()=>{
+    if (window.location.pathname === '/home') {
+      setColor('white');
+    } else {
+      setColor('black');
+    }
+
+    console.log("Bottom");
+    console.log(window.location.pathname);
+    console.log(color);
+  },[window.location.pathname]);
+
+
 
   return (
     <div className="vertical-navigation-container">
       {like ? (
         <RiHeart3Fill
-          fill={iconColor}
+          fill={color}
           onClick={() => {
             setLike(false);
           }}
@@ -117,16 +144,16 @@ const VerticalNavigation = function () {
         />
       ) : (
         <RiHeart3Line
-          fill={iconColor}
+          fill={color}
           onClick={() => {
             setLike(true);
           }}
           className="icon"
         />
       )}
-      <RiQuestionAnswerLine fill={iconColor} className="icon" />
-      <RiShareForwardFill fill={iconColor} className="icon" />
-      <RiListUnordered fill={iconColor} className="icon" />
+      <RiQuestionAnswerLine fill={color} className="icon" />
+      <RiShareForwardFill fill={color} className="icon" />
+      <RiListUnordered fill={color} className="icon" />
     </div>
   );
 };
