@@ -12,6 +12,7 @@ import LoginPage from "./Login/page/LoginPage";
 import { Auth } from "./Login/Auth";
 import RenderingPage from "./pages/RenderingPage";
 import { INavProps } from "./globalType";
+import UserProfileSetting from "./pages/User/UserProfileSetting";
 
 declare global {
   interface Window {
@@ -58,6 +59,10 @@ function App() {
         </Route>
         <Route path="/auth/kakao/callback" element={<Auth />}>
           Auth
+        </Route>
+        // TODO
+        <Route path={'/user/profile/setting'} element={<UserProfileSetting />}>
+          UserProfileSetting
         </Route>
       </Routes>
     </>

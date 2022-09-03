@@ -68,3 +68,11 @@ export interface IShortFormVideo{
   // videoUploader :
   videoTitle : string;
 }
+
+// nav props
+export interface INavProps{
+  top : boolean;
+  vertical : boolean;
+  bottom : boolean;
+  color : string;
+}
