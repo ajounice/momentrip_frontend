@@ -241,3 +241,8 @@ code {
   height: 54px;
   padding: 12px;
 }
+
+.renderImg{
+  width : 100vw;
+  height : 100vh;
+}

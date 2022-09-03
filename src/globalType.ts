@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 export type Size = 'sm' | 'md' | 'lg';
 export type StyleType = 'line' | 'full';
 export type ButtonType = 'button' | 'submit' | 'reset';
@@ -61,10 +63,32 @@ interface ITourInfo{
   longitude : number; // 경도
 }
 
+export interface IVerticalNavigation {
+  isSelectComment : boolean;
+  setIsSelectComment : Dispatch<SetStateAction<boolean>>;
+
+  isClickedShare : boolean;
+  setIsClickedShare : Dispatch<SetStateAction<boolean>>;
+
+  isSelectedHeart : boolean;
+  setIsSelectedHeart : Dispatch<SetStateAction<boolean>>;
+
+  isSelectedInfo : boolean;
+  setIsSelectedInfo : Dispatch<SetStateAction<boolean>>;
+}
+
 export interface IShortFormVideo{
   videoUrl : string;
   videoHidden : boolean; // 보여줄지 안보여줄지
   videoStop : boolean;
   // videoUploader :
   videoTitle : string;
+}
+
+// nav props
+export interface INavProps{
+  top : boolean;
+  vertical : boolean;
+  bottom : boolean;
+  color : string;
 }
