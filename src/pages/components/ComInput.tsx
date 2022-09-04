@@ -2,6 +2,7 @@ import React from 'react';
 import Input from '../../components/common/Input';
 import { useForm } from 'react-hook-form';
 import { useEffect } from 'react';
+import { useState } from 'react';
 
 // interface IFormType {
 //   input1: string;
@@ -37,7 +38,37 @@ const ComInput = () => {
     console.log(errors);
     return;
   };
-  const serverCheck = false;
+
+  const [idCheck, setIdCheck] = useState(true);
+  const [idCheckMsg, setIdCheckMsg] = useState('');
+  const [serverCheck, setServerCheck] = useState(false); // 서버에서 체크한 적이 있는지
+
+  const serverValidCheck = (str: string) => {
+    if (str === 'testid') {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  // useEffect(() => {
+  //   if (isSubmitted) {
+  //     if (watch('input4').length > 10) {
+  //       setIdCheckMsg('아이디의 길이는 10글자 이내여야합니다.');
+  //       setIdCheck(true);
+  //       // } else if (serverValidCheck(watch('input4'))) {
+  //       // TODO validCheck=서버에서 사용자가 입력한 값을 보내고 유효한지 (중복이 아닌지 등) true(valid) false(invalid)로 반환받은 값을 보냄
+  //       // setIdCheckMsg('중복된 아이디입니다.');
+  //       // setIdCheck(true);
+  //       // setServerCheck(true);
+  //     } else if (watch('input4') === '') {
+  //       setIdCheckMsg('아이디를 입력해주세요.');
+  //       setIdCheck(true);
+  //     } else {
+  //       setIdCheck(false);
+  //     }
+  //   }
+  // }, [watch('input4')]);
 
   return (
     <div>
@@ -76,19 +107,18 @@ const ComInput = () => {
           <Input
             type="text"
             id="input4"
-            label="이름 (require, max10)"
+            label="닉네임 (require, max10)"
             disabled={false}
             placeholder="텍스트를 입력하세요"
             register={register('input4', {
-              required: '이름을 입력해주세요',
-              maxLength: {
-                value: 10,
-                message: '글자 수는 10자 이하입니다.',
+              required: '닉네임을 입력해주세요',
+              pattern: {
+                value: /^[0-9a-zA-Z\b.]*$/i,
+                message: '숫자와 영어, 마침표로만 작성해주세요',
               },
             })}
             errorMessage={errors.input4?.message}
-            validCheck={watch('input4') !== 'testid'}
-            validMessage={isSubmitted ? '유효한 아이디입니다.' : ''}
+            // validMessage={isSubmitted && serverCheck ? '유효한 아이디입니다.' : ''}
           ></Input>
         </div>
         <div className="my-8">
@@ -97,8 +127,17 @@ const ComInput = () => {
             id="input5"
             disabled={false}
             placeholder="텍스트를 입력하세요"
-            defaultValue="입력된 텍스트"
+            defaultValue="사전에 입력된 텍스트, 기존에 저장된 정보를 불러올때 등"
             register={register('input5')}
+          ></Input>
+        </div>
+        <div className="my-8">
+          <Input
+            type="password"
+            id="input6"
+            disabled={false}
+            placeholder="비밀번호 입력"
+            register={register('input6')}
           ></Input>
         </div>
 

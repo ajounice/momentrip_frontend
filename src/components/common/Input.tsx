@@ -6,12 +6,9 @@ interface IInput {
   id: string;
   label?: string;
   disabled: boolean;
-
   register?: UseFormRegisterReturn;
   placeholder: string;
-  validMessage?: string;
   errorMessage?: any;
-  validCheck?: boolean;
   defaultValue?: string;
 }
 // valid나 error msg 둘 중 하나만 필요
@@ -21,10 +18,8 @@ export default function Input({
   label,
   id,
   disabled = false,
-  validCheck = false,
   register,
   placeholder = '',
-  validMessage,
   errorMessage,
   defaultValue = '',
 }: IInput) {
@@ -46,12 +41,7 @@ export default function Input({
             disabled={disabled}
             defaultValue={defaultValue}
           />
-          {errorMessage ? (
-            <span className="text-red-600 text-sm font-medium">{errorMessage}</span>
-          ) : (
-            validCheck && validMessage && <span className="text-blue-600 text-sm font-medium">{validMessage}</span>
-          )}
-          {/* 유효한 값이고 validmessage가 존재하면 */}
+          {errorMessage && <span className="text-red-600 text-sm font-medium">{errorMessage}</span>}
         </div>
       ) : (
         <div className="mt-1 border-b border-gray-300 ">
