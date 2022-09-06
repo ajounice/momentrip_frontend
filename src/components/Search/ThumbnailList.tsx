@@ -1,5 +1,5 @@
 import React from 'react';
-import Thumbnail from './Thumbnail';
+import RoundSF from '../ShortForm/RoundSF';
 
 interface InterThumbnail {
   src: string;
@@ -10,7 +10,7 @@ const ThumbnailList = ({ DataThumbnailList }: any) => {
     <div className="flex overflow-x-auto">
       <div className="gap-1 flex ml-4git ">
         {DataThumbnailList.map((data: any) => (
-          <Thumbnail key={data.id} src={data.src} href={data.href} />
+          <RoundSF key={data.id} src={data.src} href={data.href} shortFormId={1} likeCount={11} />
         ))}
       </div>
     </div>

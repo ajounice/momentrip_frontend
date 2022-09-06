@@ -77,7 +77,7 @@ const SearchPage = () => {
     <div className="px-4">
       <TopNavigation />
       {/* SearchBar */}
-      <div className="mt-20">
+      <div className="mt-20 h-full">
         <SearchBar setKeyword={setSearchKeyword} />
         {/* 검색하기 전 */}
         {searchKeyword === '' ? (
