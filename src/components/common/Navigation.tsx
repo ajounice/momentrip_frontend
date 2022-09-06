@@ -23,15 +23,19 @@ const defaultCurrent = {
   alarmColor: 'white',
 };
 
-const BottomNavigation = function () {
 
-  const color ='white';
+interface IBottomNavigation{
+  color : 'black'| 'white';
+}
+
+function BottomNavigation({color}:IBottomNavigation) {
+  const navigation = useNavigate();
 
   return (
     <div className="bottom-nav-container">
-      <RiInboxArchiveLine fill={color} className="icon" />
-      <RiVideoAddLine fill={color} className="icon" />
-      <RiUser3Line fill={color} className="icon" />
+      <RiInboxArchiveLine onClick={()=>{navigation('/wish')}} fill={color} className="icon" />
+      <RiVideoAddLine onClick={()=>{navigation('/upload')}} fill={color} className="icon" />
+      <RiUser3Line onClick={()=>{navigation('/mypage')}} fill={color} className="icon" />
     </div>
   );
 };

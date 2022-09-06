@@ -68,7 +68,7 @@ root.render(
         </Route>
       </Routes>
     </BrowserRouter>
-    <BottomNavigation />
+    {/*<BottomNavigation color={'white'}/>*/}
   </React.StrictMode>,
 );
 

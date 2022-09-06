@@ -13,6 +13,7 @@ import { Auth } from "./Login/Auth";
 import RenderingPage from "./pages/RenderingPage";
 import { INavProps } from "./globalType";
 import UserProfileSetting from "./User/UserProfileSetting";
+import { Modal, CommentModal } from "./components/Modal";
 
 declare global {
   interface Window {
@@ -64,6 +65,12 @@ function App() {
         <Route path={'/user/profile/setting'} element={<UserProfileSetting />}>
           UserProfileSetting
         </Route>
+
+        // TODO test 용
+        <Route path={'/test'} element={<Modal />}>
+          test
+        </Route>
+
       </Routes>
     </>
   );
