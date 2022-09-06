@@ -1,0 +1,18 @@
+.my-page-container{
+    width : 100vw;
+    height : 100vh;
+
+    background-color: var(--yellow-100);
+}
+
+.my-page-top-container{
+    width : 100vw;
+    height : 50px;
+}
+
+.my-page-bottom-container{
+    width : 100vw;
+    height : 48px;
+
+    background-color: var(--red-200);
+}

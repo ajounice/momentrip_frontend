@@ -1,3 +1,5 @@
+import React, { Dispatch, SetStateAction } from "react";
+
 export type Size = 'sm' | 'md' | 'lg';
 export type StyleType = 'line' | 'full';
 export type ButtonType = 'button' | 'submit' | 'reset';
@@ -5,13 +7,13 @@ export type FontWeight = 'light' | 'normal' | 'bold';
 
 /* Button Interface */
 export interface IButton{
-  text : string;
-  buttonType : ButtonType;
+  text: string;
+  buttonType: ButtonType;
   styleType: StyleType;
-  color : string;
-  size : Size;
-  fontWeight : FontWeight;
-  disabled : boolean;
+  color: string;
+  size: Size;
+  fontWeight: FontWeight;
+  disabled: boolean;
 }
 
 /* comment Interface */
@@ -24,7 +26,7 @@ export interface IButton{
 *  댓글 id
 * */
 
-interface IComment{
+export interface IComment{
   writerID : string;
   writerNickName : string;
   writerProfileImage : string;
@@ -61,10 +63,60 @@ interface ITourInfo{
   longitude : number; // 경도
 }
 
+export interface IVerticalNavigation {
+  isSelectComment : boolean;
+  setIsSelectComment : Dispatch<SetStateAction<boolean>>;
+
+  isClickedShare : boolean;
+  setIsClickedShare : Dispatch<SetStateAction<boolean>>;
+
+  isSelectedHeart : boolean;
+  setIsSelectedHeart : Dispatch<SetStateAction<boolean>>;
+
+  isSelectedInfo : boolean;
+  setIsSelectedInfo : Dispatch<SetStateAction<boolean>>;
+}
+
 export interface IShortFormVideo{
   videoUrl : string;
   videoHidden : boolean; // 보여줄지 안보여줄지
   videoStop : boolean;
   // videoUploader :
   videoTitle : string;
+}
+
+// nav props
+export interface INavProps{
+  top : boolean;
+  vertical : boolean;
+  bottom : boolean;
+  color : string;
+}
+
+
+// TopBar Props
+export interface ITopBar{
+  // 왼쪽 뒤로가기 버튼
+  beforeButton? : boolean;
+  beforeButtonOnClickEvent? : React.MouseEventHandler<HTMLDivElement>;
+
+  //  뒤로가기 버튼 옆에 왼쪽 텍스트
+  leftText? : string;
+  leftTextType? : "user" | "page" |null;
+
+  // 가운데 텍스트
+  centerText : string; // 안쓸경우 ""
+  centerTextType : "user" | "page" | null; // centerText === "" 인 경우 null
+
+  // 알람 아이콘
+  alarm? : boolean;
+  alarmOnClickEvent? : React.MouseEventHandler<HTMLDivElement>;
+
+  // check icon button
+  checkButton? : boolean;
+  checkButtonOnClickEvent? : React.MouseEventHandler<HTMLDivElement>;
+
+  // dropdown menu bar
+  dropdown? : boolean;
+  dropdownList? : string[];
 }

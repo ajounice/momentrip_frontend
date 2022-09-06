@@ -61,7 +61,7 @@ function ShortForm() {
         </SwiperSlide>
       </Swiper>
 
-      <VerticalNavigation />
+
     </div>
   );
 }
