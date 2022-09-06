@@ -1,8 +1,7 @@
 import React from 'react';
 import Input from '../../components/common/Input';
 import { useForm } from 'react-hook-form';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 // interface IFormType {
 //   input1: string;

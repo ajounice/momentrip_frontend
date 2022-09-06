@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Avatar from '../components/common/Avatar';
 import { TopNavigation } from '../components/common/Navigation';
-import FullSF from '../components/Following/FullSF';
+import FullSF from '../components/ShortForm/FullSF';
 
 const mockFollowUsersData = {
   user: [
@@ -140,7 +140,7 @@ const mockShortFormListsData = {
     {
       userId: 4,
       shortFormId: 4,
-      src: 'https://blog.kakaocdn.net/dn/RS1O8/btqEwRYEgAG/SI0UZck2vAg7NAy4ZybGFk/img.png',
+      src: 'https://png.pngtree.com/thumb_back/fh260/png-vector/20200530/ourmid/pngtree-beach-png-image_2215226.jpg',
       href: 'https://blog.kakaocdn.net/dn/RS1O8/btqEwRYEgAG/SI0UZck2vAg7NAy4ZybGFk/img.png',
       likeCount: 41,
       innerAvatar: {
@@ -155,23 +155,29 @@ function FollowingPage() {
       <TopNavigation />
       <div className="mt-20">
         {/* 팔로잉한 유저 리스트 */}
-        <div className="flex gap-6 overflow-x-auto whitespace-nowrap">
-          {mockFollowUsersData.user.map((data) => (
-            <Link to={data.profile}>
-              <>
-                {data.userName.length > 5 ? (
-                  <Avatar
-                    size="md"
-                    src={data.src}
-                    nickname={data.userName.substring(0, 5) + '..'}
-                    biz={data.biz}
-                  ></Avatar>
-                ) : (
-                  <Avatar size="md" src={data.src} nickname={data.userName} biz={data.biz}></Avatar>
-                )}
-              </>
-            </Link>
-          ))}
+        <div className="overflow-x-auto">
+          <div className="flex whitespace-nowrap">
+            {mockFollowUsersData.user.map((data) => (
+              <Link to={data.profile}>
+                <>
+                  {data.userName.length > 5 ? (
+                    <div className="w-20">
+                      <Avatar
+                        size="md"
+                        src={data.src}
+                        nickname={data.userName.substring(0, 5) + '..'}
+                        biz={data.biz}
+                      ></Avatar>
+                    </div>
+                  ) : (
+                    <div className="w-20">
+                      <Avatar size="md" src={data.src} nickname={data.userName} biz={data.biz}></Avatar>
+                    </div>
+                  )}
+                </>
+              </Link>
+            ))}
+          </div>
         </div>
         {/* 구분선 */}
         <hr className="my-4 border-gray-700"></hr>

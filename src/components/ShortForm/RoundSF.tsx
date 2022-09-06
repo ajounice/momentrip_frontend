@@ -15,13 +15,14 @@ interface InterThumbnail {
   shortFormId: number;
   likeCount?: number;
 }
-const Thumbnail = ({ src, href, shortFormId, likeCount }: InterThumbnail) => {
+
+export default function RoundSF({ src, href, shortFormId, likeCount }: InterThumbnail) {
   const [isLike, setIsLike] = useState(false);
 
   return (
     <div className="w-36 relative">
       <a href={href}>
-        <img src={src} className=" rounded-md " />
+        <img src={src} className=" rounded-md w-full h-[300px] object-cover " />
       </a>
       <div className="absolute bottom-2 w-7 right-2 flex flex-col justify-center items-center">
         <button className="" onClick={() => setIsLike(!isLike)}>
@@ -32,6 +33,4 @@ const Thumbnail = ({ src, href, shortFormId, likeCount }: InterThumbnail) => {
       </div>
     </div>
   );
-};
-
-export default Thumbnail;
+}

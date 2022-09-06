@@ -1,3 +1,5 @@
+import { BsFillPatchCheckFill } from 'react-icons/bs';
+
 export interface IAvatar {
   size?: string;
   src: string;
@@ -36,7 +38,7 @@ export default function Avatar({ size = 'sm', src, nickname, biz = false }: IAva
           <img className={`rounded-full object-cover ${sizes[size]}  m-auto`} src={src} />
           <div className={`flex w-full ${maginSizes[size]}`}>
             {nickname}
-            {biz && <span className="ml-1">V</span>}
+            {biz && <BsFillPatchCheckFill className="fill-gray-400 inline-block"></BsFillPatchCheckFill>}
           </div>
         </div>
       ) : (
@@ -45,7 +47,7 @@ export default function Avatar({ size = 'sm', src, nickname, biz = false }: IAva
           <img className={`rounded-full object-cover ${sizes[size]}  m-auto`} src={src} />
           <div className={`w-full ${maginSizes[size]}`}>
             {nickname}
-            {biz && <span className="ml-1">V</span>}
+            {biz && <BsFillPatchCheckFill className="fill-gray-400 inline-block"></BsFillPatchCheckFill>}
           </div>
         </div>
       )}

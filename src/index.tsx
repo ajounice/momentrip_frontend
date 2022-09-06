@@ -12,6 +12,7 @@ import MyPage from './pages/MyPage';
 import WishPage from './pages/WishPage';
 import ComAvatar from './pages/components/ComAvatar';
 import ComInnerTab from './pages/components/ComInnerTab';
+import ComSF from './pages/components/ComSF';
 import ComInput from './pages/components/ComInput';
 import UploadShortFormPage from './pages/UploadShortFormPage';
 import LoginPage from './Login/page/LoginPage';
@@ -60,6 +61,9 @@ root.render(
           innertab
         </Route>
         <Route path="/com-input" element={<ComInput />}>
+          input
+        </Route>
+        <Route path="/com-sf" element={<ComSF />}>
           input
         </Route>
       </Routes>
