@@ -4,16 +4,6 @@ body {
     'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  overflow-y: hidden;
-
-  width :100vw;
-  height : 100vh;
-}
-
-#root{
-  width : 100vw;
-  height : 100vh;
 }
 
 video {
@@ -23,7 +13,6 @@ video {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
-
 :root {
   --black: #000000;
   --white: #ffffff;
