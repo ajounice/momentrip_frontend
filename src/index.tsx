@@ -14,6 +14,7 @@ import ComAvatar from './pages/components/ComAvatar';
 import ComInnerTab from './pages/components/ComInnerTab';
 import ComSF from './pages/components/ComSF';
 import ComInput from './pages/components/ComInput';
+import ComModal from './pages/components/ComModal';
 import UploadShortFormPage from './pages/UploadShortFormPage';
 import LoginPage from './Login/page/LoginPage';
 import { BottomNavigation } from './components/common/Navigation';
@@ -66,6 +67,7 @@ root.render(
         <Route path="/com-sf" element={<ComSF />}>
           input
         </Route>
+        <Route path="/com-modal" element={<ComModal />}></Route>
       </Routes>
     </BrowserRouter>
     <BottomNavigation />
