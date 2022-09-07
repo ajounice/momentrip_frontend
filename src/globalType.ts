@@ -98,7 +98,6 @@ export interface INavProps{
 export interface ITopBar{
   // 왼쪽 뒤로가기 버튼
   beforeButton? : boolean;
-  beforeButtonOnClickEvent? : React.MouseEventHandler<HTMLDivElement>;
 
   //  뒤로가기 버튼 옆에 왼쪽 텍스트
   leftText? : string;
