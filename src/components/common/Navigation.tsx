@@ -1,6 +1,6 @@
-import React, { Dispatch, SetStateAction, useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import '../../styles/components/common/Navigation.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 import {
   RiInboxArchiveLine,
@@ -26,6 +26,7 @@ const defaultCurrent = {
 
 interface IBottomNavigation{
   color : 'black'| 'white';
+  // activeCSS? : boolean;
 }
 
 function BottomNavigation({color}:IBottomNavigation) {
@@ -34,12 +35,13 @@ function BottomNavigation({color}:IBottomNavigation) {
   return (
     <div className="bottom-nav-container">
       <RiInboxArchiveLine onClick={()=>{navigation('/wish')}} fill={color} className="icon" />
-      <div className={"upload-button"}>
-        <label htmlFor={'upload-file'}>
+      {/*<div className={(window.location.pathname === '/upload' && activeCSS === true) ? `upload-button active` : "upload-button"}>*/}
+        {/*<label htmlFor={'upload-file'}>*/}
+        {/* TODO::click하면 모달 띄우는 방식으로 수정 */}
           <RiVideoAddLine onClick={()=>{navigation('/upload')}} fill={color} className="icon" />
-        </label>
-        <input accept="video/*" type={'file'} id="upload-file"/>
-      </div>
+        {/*</label>*/}
+        {/*<input accept="video/*" type={'file'} id="upload-file"/>*/}
+      {/*</div>*/}
       <RiUser3Line onClick={()=>{navigation('/mypage')}} fill={color} className="icon" />
     </div>
   );

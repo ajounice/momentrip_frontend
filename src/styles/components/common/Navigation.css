@@ -5,7 +5,7 @@
     position: fixed;
     bottom : 0;
 
-    width : 100vw;
+    width : 100%;
     height : 48px;
 
     /*background-color: white;*/
@@ -32,15 +32,9 @@
     border: 0;
 }
 
-.upload input[type="file"] {  /* 파일 필드 숨기기 */
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip:rect(0,0,0,0);
-    border: 0;
+.active{
+    background-color: white;
+    border-radius: 50%;
 }
 
 /* Top Navigation CSS */

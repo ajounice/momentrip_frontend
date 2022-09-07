@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import React, { useState } from 'react';
 import './App.css';
 import './styles/pages/HomePage.css';
+
 import HomePage from './pages/HomePage';
 import FollowingPage from './pages/FollowingPage';
 import SearchPage from './pages/SearchPage';
