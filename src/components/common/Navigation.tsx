@@ -10,7 +10,6 @@ import {
   RiHeart3Line,
   RiQuestionAnswerLine,
   RiShareForwardLine,
-  RiShareForwardFill,
   RiListUnordered,
   RiHeart3Fill, RiArrowLeftLine, RiCheckFill, RiMore2Fill
 } from "react-icons/ri";
@@ -45,7 +44,7 @@ function BottomNavigation({color}:IBottomNavigation) {
       <RiUser3Line onClick={()=>{navigation('/mypage')}} fill={color} className="icon" />
     </div>
   );
-};
+}
 
 const TopNavigation = function () {
   const [current, setCurrent] = useState(defaultCurrent);
@@ -177,8 +176,6 @@ const VerticalNavigation = function ({isSelectedInfo,setIsSelectedInfo,isSelecte
   // );
 };
 
-
-
 function TopBar(
   {
     beforeButton,
@@ -197,6 +194,22 @@ function TopBar(
 ){
 
   const [dropDown, setDropDown] = useState<boolean>(false);
+  const navigation = useNavigate();
+
+
+  /* onClickEvent in TopBar */
+  // click event type 6
+  // 프로필 편집 // routing
+
+
+  // 개인정보 설정 // 없애도 될듯 ?
+  // 설정 // routing
+  // 공유 // url 생성 ? 모달로 띄어주기 ?
+  // 사용자 차단 // server api
+  // 사용자 신고 // server api
+  // 선택
+  // 폴더 삭제 // server api
+  // 폴더 이름 변경 // server api
 
   return(
     <div className={"top-bar-container"}>
@@ -235,7 +248,7 @@ function TopBar(
         {/* 알람 */}
         {
           alarm
-          ?        <div onClick={alarmOnClickEvent} className={"right-icon-container"} >
+          ?  <div onClick={alarmOnClickEvent} className={"right-icon-container"} >
               <>
                 <RiNotification2Line className={"alarm-icon"}/>
               </>
@@ -253,8 +266,17 @@ function TopBar(
                     (dropdownList !== undefined && dropDown )?
                       <div className={"dropdown-container"}>
                         {
-                          dropdownList.map((item, i) => {
-                            return <div className={"dropdown-list-item"}>{item}</div>
+                          dropdownList.map((item) => {
+                            return(
+                              <div
+                                className={"dropdown-list-item"}
+                                onClick={item === "프로필 편집"
+                                  ? ()=>{navigation('/user/profile/setting')}
+                                  : ()=>{alert(item)}
+                              }
+                              >
+                              {item}
+                            </div>)
                           })
                         }
                       </div>

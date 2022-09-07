@@ -221,3 +221,31 @@
     width : 54px;
     height : 54px;
 }
+
+.dropdown-container{
+    position: absolute;
+    top:20px;
+    right : 20px;
+
+    width : 135px;
+    height : auto;
+
+    background: white;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+}
+
+.dropdown-list-item{
+    width : 135px;
+    height : 38px;
+    border-radius: 5px;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-indent: 10px;
+}
+
+.dropdown-list-item:hover{
+    background-color: var(--gray-300);
+}
