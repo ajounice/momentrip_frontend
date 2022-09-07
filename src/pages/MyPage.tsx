@@ -3,6 +3,7 @@ import '../styles/pages/MyPage.css';
 import { BottomNavigation, TopBar } from "../components/common/Navigation";
 import Avatar from "../components/common/Avatar";
 import RoundSF from "../components/ShortForm/RoundSF";
+import FullSF from "../components/ShortForm/FullSF";
 
 const dummy_thumbnail_data = [
   {
@@ -73,13 +74,12 @@ function MyPage() {
       {/*<ThumbnailList DataThumbnailList={dummy_thumbnail_data} />*/}
 
       <section className={"my-page-short-form-outer-container"}>
-        <RoundSF src={dummy_thumbnail_data[0].src} href={dummy_thumbnail_data[0].href} shortFormId={1} likeCount={4}/>
-        <RoundSF src={dummy_thumbnail_data[0].src} href={dummy_thumbnail_data[0].href} shortFormId={1} likeCount={4}/>
-        <RoundSF src={dummy_thumbnail_data[0].src} href={dummy_thumbnail_data[0].href} shortFormId={1} likeCount={4}/>
-        <RoundSF src={dummy_thumbnail_data[0].src} href={dummy_thumbnail_data[0].href} shortFormId={1} likeCount={4}/>
-        <RoundSF src={dummy_thumbnail_data[0].src} href={dummy_thumbnail_data[0].href} shortFormId={1} likeCount={4}/>
-        <RoundSF src={dummy_thumbnail_data[0].src} href={dummy_thumbnail_data[0].href} shortFormId={1} likeCount={4}/>
-
+        <FullSF src={dummy_thumbnail_data[0].src} href={dummy_thumbnail_data[0].href} shortFormId={1} likeCount={4}/>
+        <FullSF src={dummy_thumbnail_data[0].src} href={dummy_thumbnail_data[0].href} shortFormId={1} likeCount={4}/>
+        <FullSF src={dummy_thumbnail_data[0].src} href={dummy_thumbnail_data[0].href} shortFormId={1} likeCount={4}/>
+        <FullSF src={dummy_thumbnail_data[0].src} href={dummy_thumbnail_data[0].href} shortFormId={1} likeCount={4}/>
+        <FullSF src={dummy_thumbnail_data[0].src} href={dummy_thumbnail_data[0].href} shortFormId={1} likeCount={4}/>
+        <FullSF src={dummy_thumbnail_data[0].src} href={dummy_thumbnail_data[0].href} shortFormId={1} likeCount={4}/>
       </section>
 
       <div className={"my-page-bottom-container"}>
