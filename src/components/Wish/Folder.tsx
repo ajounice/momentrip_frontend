@@ -9,7 +9,7 @@ interface IFolder {
 
 const Folder = ({ label, id, thumbnail, link }: IFolder) => {
   return (
-    <>
+    <div className="">
       <div className="bg-gray-100">
         {thumbnail.length === 1 ? (
           <div className="w-full relative after:pb-[100%] after:block">
@@ -30,7 +30,7 @@ const Folder = ({ label, id, thumbnail, link }: IFolder) => {
         )}
       </div>
       <div className="pt-2 pl-1 font-semibold">{label}</div>
-    </>
+    </div>
   );
 };
 

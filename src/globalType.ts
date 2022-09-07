@@ -105,7 +105,7 @@ export interface ITopBar{
 
   // 가운데 텍스트
   centerText : string; // 안쓸경우 ""
-  centerTextType : "user" | "page" | null; // centerText === "" 인 경우 null
+  centerTextType : "user" | "page" | null | string; // centerText === "" 인 경우 null
 
   // 알람 아이콘
   alarm? : boolean;

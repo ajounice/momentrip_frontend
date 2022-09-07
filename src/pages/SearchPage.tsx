@@ -2,7 +2,6 @@ import React from 'react';
 import SearchBar from '../components/Search/SearchBar';
 import TagList from '../components/Search/TagList';
 import ThumbnailList from '../components/Search/ThumbnailList';
-import { TopNavigation } from '../components/common/Navigation';
 import InnerTab from '../components/common/InnerTab';
 import { useState, useEffect } from 'react';
 
@@ -75,9 +74,8 @@ const SearchPage = () => {
 
   return (
     <div className="px-4">
-      <TopNavigation />
       {/* SearchBar */}
-      <div className="mt-20 h-full">
+      <div className="my-20 h-full">
         <SearchBar setKeyword={setSearchKeyword} />
         {/* 검색하기 전 */}
         {searchKeyword === '' ? (

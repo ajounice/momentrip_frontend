@@ -2,10 +2,9 @@ import ReactPlayer from 'react-player';
 import React from 'react';
 import { IShortFormVideo } from '../../globalType';
 
-function ShortFormVideo(videoProps : IShortFormVideo) {
+function ShortFormVideo(videoProps: IShortFormVideo) {
   return (
     <>
-      {' '}
       <ReactPlayer
         width={window.innerWidth}
         height={window.innerHeight}
@@ -14,7 +13,11 @@ function ShortFormVideo(videoProps : IShortFormVideo) {
         url={videoProps.videoUrl}
         muted
         playing
-        onPlay={() => { console.log('play'); }}
+        autoPlay
+        loop
+        onPlay={() => {
+          console.log('play');
+        }}
       />
     </>
   );

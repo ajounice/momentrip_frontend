@@ -1,29 +1,29 @@
-.login-container{
-    width : 100vw;
-    height : 100vh;
+.login-container {
+  width: 100vw;
+  height: 100vh;
 }
 
-.login-background-img{
-    width : 100vw;
-    height : 100vh;
+.login-background-img {
+  width: 100vw;
+  height: 100vh;
 }
 
-.kakao-button-container{
-    width : 100vw;
-    height : 20vh;
+.kakao-button-container {
+  width: 100vw;
+  height: 20vh;
 
-    position: absolute;
-    bottom : 200px;
-    right : 0;
+  position: absolute;
+  bottom: 200px;
+  right: 0;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
-    z-index: 900;
+  z-index: 900;
 }
 
-.kakao-login-button{
+/* .kakao-login-button{
     z-index: 999;
-}
+} */

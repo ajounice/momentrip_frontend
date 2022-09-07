@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Avatar from '../components/common/Avatar';
-import { TopNavigation } from '../components/common/Navigation';
 import Folder from '../components/Wish/Folder';
 
 const mockFolderListData = {
@@ -40,15 +39,16 @@ const mockFolderListData = {
 function WishPage() {
   return (
     <div className="px-4">
-      {/* title */}
-      <div>
-        {/* TODO 탑 네비게이션에서 텍스트받도록 수정 */}
-        {/* TODO 알림 아이콘 대신 + 버튼 */}
-        <div className="pt-4 text-lg font-semibold text-center">위시리스트</div>
-        <div className="grid">
-          {mockFolderListData.Folders.map((data, i) => (
-            <Folder label={data.label} id={data.id} thumbnail={data.thumbnail} link={data.link}></Folder>
-          ))}
+      <div className="my-20">
+        {/* title */}
+        <div>
+          {/* TODO 탑 네비게이션에서 텍스트받도록 수정 */}
+          {/* TODO 알림 아이콘 대신 + 버튼 */}
+          <div className="grid grid-cols-2 gap-2">
+            {mockFolderListData.Folders.map((data, i) => (
+              <Folder label={data.label} id={data.id} thumbnail={data.thumbnail} link={data.link}></Folder>
+            ))}
+          </div>
         </div>
       </div>
     </div>

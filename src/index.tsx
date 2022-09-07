@@ -17,16 +17,18 @@ import ComInput from './pages/components/ComInput';
 import ComModal from './pages/components/ComModal';
 import UploadShortFormPage from './pages/UploadShortFormPage';
 import LoginPage from './Login/page/LoginPage';
-import { BottomNavigation } from './components/common/Navigation';
 import { Auth } from './Login/Auth';
+import TopNavigation from './components/Navigation/TopNavigation';
 
 const root = ReactDOM.createRoot(
   // eslint-disable-next-line no-undef
   document.getElementById('root') as HTMLElement,
 );
+
 root.render(
   <React.StrictMode>
     <BrowserRouter>
+      <TopNavigation />
       <Routes>
         <Route path="/" element={<App />}>
           Rendering Page
@@ -49,9 +51,9 @@ root.render(
         <Route path="/upload" element={<UploadShortFormPage />}>
           UploadShortFormPage
         </Route>
-        <Route path="/login" element={<LoginPage />}>
+        {/* <Route path="/login" element={<LoginPage />}>
           LoginPage
-        </Route>
+        </Route> */}
         <Route path="/auth/kakao/callback" element={<Auth />}>
           callback
         </Route>
