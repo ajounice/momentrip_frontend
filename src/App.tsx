@@ -1,19 +1,19 @@
-import { Route, Routes } from "react-router-dom";
-import React, { useState } from "react";
+import { Route, Routes } from 'react-router-dom';
+import React, { useState } from 'react';
 import './App.css';
 import './styles/pages/HomePage.css';
-import HomePage from "./pages/HomePage";
-import FollowingPage from "./pages/FollowingPage";
-import SearchPage from "./pages/SearchPage";
-import MyPage from "./pages/MyPage";
-import WishPage from "./pages/WishPage";
-import UploadShortFormPage from "./pages/UploadShortFormPage";
-import LoginPage from "./Login/page/LoginPage";
-import { Auth } from "./Login/Auth";
-import RenderingPage from "./pages/RenderingPage";
-import { INavProps } from "./globalType";
-import UserProfileSetting from "./User/UserProfileSetting";
-import { Modal, CommentModal } from "./components/Modal";
+import HomePage from './pages/HomePage';
+import FollowingPage from './pages/FollowingPage';
+import SearchPage from './pages/SearchPage';
+import MyPage from './pages/MyPage';
+import WishPage from './pages/WishPage';
+import UploadShortFormPage from './pages/UploadShortFormPage';
+import LoginPage from './Login/page/LoginPage';
+import { Auth } from './Login/Auth';
+import RenderingPage from './pages/RenderingPage';
+import { INavProps } from './globalType';
+import UserProfileSetting from './User/UserProfileSetting';
+// import { Modal, CommentModal } from "./components/Modal";
 
 declare global {
   interface Window {
@@ -21,15 +21,15 @@ declare global {
   }
 }
 
-const defaultINavProps : INavProps = {
-  top : true,
-  vertical : true,
-  bottom : true,
-  color : 'black',
-}
+const defaultINavProps: INavProps = {
+  top: true,
+  vertical: true,
+  bottom: true,
+  color: 'black',
+};
 
 function App() {
-  const [ navProps , setNavProps ] = useState<INavProps>(defaultINavProps);
+  const [navProps, setNavProps] = useState<INavProps>(defaultINavProps);
 
   return (
     <>
@@ -65,12 +65,10 @@ function App() {
         <Route path={'/user/profile/setting'} element={<UserProfileSetting />}>
           UserProfileSetting
         </Route>
-
-        // TODO test 용
-        <Route path={'/test'} element={<Modal />}>
+        {/* // TODO test 용 */}
+        {/* <Route path={'/test'} element={<Modal />}>
           test
-        </Route>
-
+        </Route> */}
       </Routes>
     </>
   );
