@@ -13,7 +13,7 @@ import { Auth } from "./Login/Auth";
 import RenderingPage from "./pages/RenderingPage";
 import { INavProps } from "./globalType";
 import UserProfileSetting from "./User/UserProfileSetting";
-import { Modal, CommentModal } from "./components/Modal";
+import { Modal } from "./components/Modal";
 
 declare global {
   interface Window {
