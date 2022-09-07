@@ -2,10 +2,8 @@ import React, { useEffect, useState } from 'react';
 import 'swiper/css';
 import '../../styles/components/View/ShortForm.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import {
-  A11y, Navigation, Pagination, Scrollbar,
-} from 'swiper';
-import { VerticalNavigation } from '../common/Navigation';
+import { A11y, Navigation, Pagination, Scrollbar } from 'swiper';
+import VerticalNavigation from '../Navigation/VerticalNavigation';
 import ShortFormVideo from './ShortFormVideo';
 
 // export interface IShortFormVideo{
@@ -20,6 +18,35 @@ import ShortFormVideo from './ShortFormVideo';
 //   videoHidden: false,
 //   videoStop: true,
 // };
+
+const mockShortFormVideoData = {
+  Video: [
+    {
+      videoUrl: 'video/s1.mp4',
+      videoHidden: true,
+      videoStop: false,
+      videoTitle: '첫 번째 비디오',
+    },
+    {
+      videoUrl: 'video/s2.mp4',
+      videoHidden: false,
+      videoStop: true,
+      videoTitle: '두본째 비디오',
+    },
+    {
+      videoUrl: 'video/s3.mp4',
+      videoHidden: false,
+      videoStop: true,
+      videoTitle: '두본째 비디오',
+    },
+    {
+      videoUrl: 'video/s4.mp4',
+      videoHidden: false,
+      videoStop: true,
+      videoTitle: '두본째 비디오',
+    },
+  ],
+};
 
 function ShortForm() {
   const [currentVideoIndex, setCurrentVideoIndex] = useState<number>(0);
@@ -42,7 +69,6 @@ function ShortForm() {
 
   return (
     <div className="short-form-container">
-
       <Swiper
         className="swiper-container"
         modules={[Navigation, Pagination, Scrollbar, A11y]}
@@ -50,18 +76,38 @@ function ShortForm() {
         slidesPerView={1}
         scrollbar={{ draggable: true }}
         onSwiper={(swiper) => console.log(swiper)}
-        onSlideChange={(swiper) => { console.log('slide change'); setCurrentVideoIndex(swiper.activeIndex); }}
+        onSlideChange={(swiper) => {
+          console.log('slide change');
+          setCurrentVideoIndex(swiper.activeIndex);
+        }}
       >
-
-        <SwiperSlide className="short-form">
-          <ShortFormVideo videoUrl="https://s3-us-west-2.amazonaws.com/s.cdpn.io/485050/movie.ogg" videoHidden videoStop={false} videoTitle="첫 번째 비디오" />
+        {/* <SwiperSlide className="short-form">
+          <ShortFormVideo
+            videoUrl="https://s3-us-west-2.amazonaws.com/s.cdpn.io/485050/movie.ogg"
+            videoHidden
+            videoStop={false}
+            videoTitle="첫 번째 비디오"
+          />
         </SwiperSlide>
         <SwiperSlide>
-          <ShortFormVideo videoUrl="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" videoHidden={false} videoStop videoTitle="두본째 비ㅣㄷ오" />
-        </SwiperSlide>
+          <ShortFormVideo
+            videoUrl="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+            videoHidden={false}
+            videoStop
+            videoTitle="두본째 비ㅣㄷ오"
+          />
+        </SwiperSlide> */}
+        {mockShortFormVideoData.Video.map((data) => (
+          <SwiperSlide className="short-form">
+            <ShortFormVideo
+              videoUrl={data.videoUrl}
+              videoHidden={data.videoHidden}
+              videoStop={data.videoStop}
+              videoTitle={data.videoTitle}
+            />
+          </SwiperSlide>
+        ))}
       </Swiper>
-
-
     </div>
   );
 }

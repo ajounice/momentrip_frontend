@@ -240,8 +240,52 @@ code {
   padding: 12px;
 }
 
+.renderImg {
+  width: 100vw;
+  height: 100vh;
+}
 
-.renderImg{
-  width : 100vw;
-  height : 100vh;
+@import url('https://fonts.googleapis.com/css2?family=Kalam&family=Nanum+Gothic:wght@700&family=Nanum+Pen+Script&display=swap');
+
+.overlay {
+  margin: 0;
+  overflow-x: hidden;
+}
+
+.overlay {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.4);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.overlay h1 {
+  font-size: 58px;
+  letter-spacing: 0px;
+  margin: 0 0 5px;
+  font-family: 'Kalam', sans-serif;
+}
+
+.overlay p {
+  margin: 0;
+  font-family: 'Nanum Pen Script', sans-serif;
+  font-size: 30px;
+}
+
+.video-render {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+}
+
+.fadein {
+  transition: opacity 0.5s;
+  opacity: 1;
 }

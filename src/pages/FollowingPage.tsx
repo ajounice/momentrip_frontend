@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Avatar from '../components/common/Avatar';
-import { TopNavigation } from '../components/common/Navigation';
 import FullSF from '../components/ShortForm/FullSF';
 
 const mockFollowUsersData = {
@@ -149,11 +148,11 @@ const mockShortFormListsData = {
     },
   ],
 };
+
 function FollowingPage() {
   return (
     <div className="px-4">
-      <TopNavigation />
-      <div className="mt-20">
+      <div className="my-20">
         {/* 팔로잉한 유저 리스트 */}
         <div className="overflow-x-auto">
           <div className="flex whitespace-nowrap">

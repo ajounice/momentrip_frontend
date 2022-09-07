@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import {
-  IButton,
-} from '../globalType';
-import { BottomNavigation, TopNavigation, VerticalNavigation } from "../components/common/Navigation";
+import { IButton } from '../globalType';
+import BottomNavigation from '../components/Navigation/BottomNavigation';
+import VerticalNavigation from '../components/Navigation/VerticalNavigation';
 import { ShortForm } from '../components/View/ShortForm';
 
 function HomePage() {
-  const defaultData:IButton = {
+  const defaultData: IButton = {
     text: '팔로우',
     buttonType: 'submit',
     styleType: 'full',
@@ -18,13 +17,13 @@ function HomePage() {
 
   const [follow, setFollow] = useState<IButton>(defaultData);
   // eslint-disable-next-line no-undef,max-len,no-unused-vars
-  const onClickHandler:React.MouseEventHandler<HTMLButtonElement> = (event :React.MouseEvent<HTMLButtonElement>) => {
+  const onClickHandler: React.MouseEventHandler<HTMLButtonElement> = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
     if (follow.text === '팔로잉') {
       setFollow(defaultData);
     } else {
-      const prop:IButton = defaultData;
+      const prop: IButton = defaultData;
       prop.text = '팔로잉';
       prop.styleType = 'line';
       setFollow(prop);
@@ -33,10 +32,8 @@ function HomePage() {
 
   return (
     <div className="home-page-container">
-      <TopNavigation />
-      <BottomNavigation color={'white'}/>
+      <BottomNavigation color={'white'} />
       <ShortForm />
-
     </div>
   );
 }
