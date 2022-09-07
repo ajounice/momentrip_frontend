@@ -34,7 +34,12 @@ function BottomNavigation({color}:IBottomNavigation) {
   return (
     <div className="bottom-nav-container">
       <RiInboxArchiveLine onClick={()=>{navigation('/wish')}} fill={color} className="icon" />
-      <RiVideoAddLine onClick={()=>{navigation('/upload')}} fill={color} className="icon" />
+      <div className={"upload-button"}>
+        <label htmlFor={'upload-file'}>
+          <RiVideoAddLine onClick={()=>{navigation('/upload')}} fill={color} className="icon" />
+        </label>
+        <input accept="video/*" type={'file'} id="upload-file"/>
+      </div>
       <RiUser3Line onClick={()=>{navigation('/mypage')}} fill={color} className="icon" />
     </div>
   );
@@ -175,7 +180,6 @@ const VerticalNavigation = function ({isSelectedInfo,setIsSelectedInfo,isSelecte
 function TopBar(
   {
     beforeButton,
-    beforeButtonOnClickEvent,
     leftText,
     leftTextType,
     centerText,
@@ -199,7 +203,12 @@ function TopBar(
       {/*  뒤로가기*/}
         {
           beforeButton
-          ?      <div onClick={beforeButtonOnClickEvent} className={"before-button-container"}>
+          ?      <div
+              onClick={()=>{
+                history.back();
+              }}
+              // onClick={beforeButtonOnClickEvent}
+              className={"before-button-container"}>
             <RiArrowLeftLine className={"icon"} />
           </div>
             :null
@@ -226,7 +235,7 @@ function TopBar(
           alarm
           ?        <div onClick={alarmOnClickEvent} className={"right-icon-container"} >
               <>
-                <RiNotification2Line className={"icon"}/>
+                <RiNotification2Line className={"alarm-icon"}/>
               </>
             </div>
             : null
