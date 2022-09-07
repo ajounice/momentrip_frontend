@@ -4,7 +4,7 @@ import BasicModal from '../../components/common/BasicModal';
 import Button from '../../components/Button/Button';
 
 import { useState } from 'react';
-const ButtonModalEx = () => {
+const ComModal = () => {
   const [alertModalOpen, setAlertModalOpen] = useState(false);
   const [confirmModalOpen, setConfirmModalOpen] = useState(false);
   const [basicModalOpen, setBasicModalOpen] = useState(false);
@@ -87,4 +87,4 @@ const ButtonModalEx = () => {
   );
 };
 
-export default ButtonModalEx;
+export default ComModal;
