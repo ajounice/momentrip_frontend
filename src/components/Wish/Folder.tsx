@@ -10,26 +10,24 @@ interface IFolder {
 const Folder = ({ label, id, thumbnail, link }: IFolder) => {
   return (
     <div className="">
-      <div className="bg-gray-100">
-        {thumbnail.length === 1 ? (
-          <div className="w-full relative after:pb-[100%] after:block">
-            <a href={link}>
+      <a href={'/wish?wish_id=' + id}>
+        <div className="bg-gray-100">
+          {thumbnail.length === 1 ? (
+            <div className="w-full relative after:pb-[100%] after:block">
               <img src={thumbnail[0]} className="w-full h-full object-cover absolute" />
-            </a>
-          </div>
-        ) : (
-          <div className="grid grid-rows-2 grid-cols-2">
-            {thumbnail.map(() => (
-              <div className="w-full relative after:pb-[100%] after:block">
-                <a href={link}>
+            </div>
+          ) : (
+            <div className="grid grid-rows-2 grid-cols-2">
+              {thumbnail.map(() => (
+                <div className="w-full relative after:pb-[100%] after:block">
                   <img src={thumbnail[0]} className="w-full h-full object-cover absolute" />
-                </a>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-      <div className="pt-2 pl-1 font-semibold">{label}</div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+        <div className="pt-2 pl-1 font-semibold">{label}</div>
+      </a>
     </div>
   );
 };

@@ -1,7 +1,13 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { Fragment } from 'react';
+
 import '../../styles/components/common/Navigation.css';
 import { useNavigate } from 'react-router-dom';
+import { Menu, Transition } from '@headlessui/react';
 
+function classNames(...classes: any) {
+  return classes.filter(Boolean).join(' ');
+}
 import {
   RiInboxArchiveLine,
   RiUser3Line,
@@ -17,6 +23,8 @@ import {
   RiMore2Fill,
 } from 'react-icons/ri';
 import { ITopBar, IVerticalNavigation } from '../../globalType';
+import WishDropDown from '../DropDown/WishDropDown';
+import MyPageDropDown from '../DropDown/MyPageDropDown';
 
 const defaultCurrent = {
   home: true,
@@ -42,8 +50,6 @@ function BottomNavigation({ color }: IBottomNavigation) {
         fill={color}
         className="icon"
       />
-      {/*<div className={(window.location.pathname === '/upload' && activeCSS === true) ? `upload-button active` : "upload-button"}>*/}
-      {/*<label htmlFor={'upload-file'}>*/}
       {/* TODO::click하면 모달 띄우는 방식으로 수정 */}
       <RiVideoAddLine
         onClick={() => {
@@ -52,9 +58,6 @@ function BottomNavigation({ color }: IBottomNavigation) {
         fill={color}
         className="icon"
       />
-      {/*</label>*/}
-      {/*<input accept="video/*" type={'file'} id="upload-file"/>*/}
-      {/*</div>*/}
       <RiUser3Line
         onClick={() => {
           navigation('/mypage');
@@ -177,35 +180,6 @@ const VerticalNavigation = function ({
       <RiListUnordered onClick={onClickInfo} className={'icon'} />
     </section>
   );
-
-  //
-  // const [like, setLike] = useState(false);
-  // const color ='white';
-  //
-  // return (
-  //   <div className="vertical-navigation-container">
-  //     {like ? (
-  //       <RiHeart3Fill
-  //         fill={color}
-  //         onClick={() => {
-  //           setLike(false);
-  //         }}
-  //         className="icon"
-  //       />
-  //     ) : (
-  //       <RiHeart3Line
-  //         fill={color}
-  //         onClick={() => {
-  //           setLike(true);
-  //         }}
-  //         className="icon"
-  //       />
-  //     )}
-  //     <RiQuestionAnswerLine fill={color} className="icon" />
-  //     <RiShareForwardFill fill={color} className="icon" />
-  //     <RiListUnordered fill={color} className="icon" />
-  //   </div>
-  // );
 };
 
 function TopBar({
@@ -219,7 +193,6 @@ function TopBar({
   checkButton,
   checkButtonOnClickEvent,
   dropdown,
-  dropdownList,
 }: ITopBar) {
   const [dropDown, setDropDown] = useState<boolean>(false);
   const navigation = useNavigate();
@@ -238,9 +211,10 @@ function TopBar({
   // 폴더 이름 변경 // server api
 
   // 기본적인 네비게이션바에서 접근 가능한페이지들은 뒤로가기 버튼 클릭시 홈으로 이동
-  const DefaultPathList = ['/home', '/following', '/search', '/upload', '/mypage', '/wish'];
+  const DefaultPathList = ['/home', '/following', '/search', '/upload'];
 
   return (
+    // <div className={beforeButton ? 'page-left-trans' : ''}>
     <div className={'top-bar-container-bg'}>
       <div className={'top-bar-inner-left-container'}>
         {/* 뒤로가기 / 왼쪽 텍스트 */}
@@ -290,37 +264,10 @@ function TopBar({
         ) : null}
 
         {/* 드롭다운 */}
-        {dropdown ? (
-          <div
-            onClick={() => {
-              setDropDown((prev) => !prev);
-            }}
-            className={'right-icon-container'}
-          >
-            <RiMore2Fill className={'icon'} />
-            {dropdownList !== undefined && dropDown ? (
-              <div className={'dropdown-container'}>
-                {dropdownList.map((item) => {
-                  return (
-                    <div
-                      className={'dropdown-list-item'}
-                      onClick={
-                        item === '프로필 편집'
-                          ? () => {
-                              navigation('/user/profile/setting');
-                            }
-                          : () => {
-                              alert(item);
-                            }
-                      }
-                    >
-                      {item}
-                    </div>
-                  );
-                })}
-              </div>
-            ) : null}
-          </div>
+        {dropdown === 'wish' ? (
+          <WishDropDown></WishDropDown>
+        ) : dropdown === 'mypage' ? (
+          <MyPageDropDown></MyPageDropDown>
         ) : null}
 
         {/* 체크 */}
@@ -331,6 +278,7 @@ function TopBar({
         ) : null}
       </div>
     </div>
+    // </div>
   );
 }
 

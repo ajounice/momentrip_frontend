@@ -11,16 +11,18 @@ function RenderingPage() {
       </div>
       <video className="video-render" src="img/render.mp4" muted autoPlay loop></video>
 
-      <div className={'login-container'}>
-        <img src={'img/renderImg.png'} alt={'background image'} className={'login-background-img'} />
-        <div className={'kakao-button-container'}>
-          <a href={KAKAO_AUTH_URL}>
-            <img
-              src={'img/kakao_login_medium_narrow.png'}
-              alt={'kakao login button'}
-              className={'kakao-login-button'}
-            />
-          </a>
+      <div className="fade-In">
+        <div className={'login-container'}>
+          <img src={'img/renderImg.png'} alt={'background image'} className={'login-background-img'} />
+          <div className={'kakao-button-container'}>
+            <a href={KAKAO_AUTH_URL}>
+              <img
+                src={'img/kakao_login_medium_narrow.png'}
+                alt={'kakao login button'}
+                className={'kakao-login-button'}
+              />
+            </a>
+          </div>
         </div>
       </div>
     </>

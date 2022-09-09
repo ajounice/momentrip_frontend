@@ -5,6 +5,9 @@ import { useNavigate } from 'react-router-dom';
 import { RiNotification2Line } from 'react-icons/ri';
 import { RiInboxArchiveLine, RiUser3Line, RiHomeHeartLine, RiVideoAddLine } from 'react-icons/ri';
 import { TopBar } from '../common/Navigation';
+import CustomModal from '../common/CustomModal';
+import ModalPage from '../common/ModalPage';
+import AlarmCard from '../Card/AlarmCard';
 
 const defaultCurrent = {
   home: true,
@@ -17,13 +20,17 @@ function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ');
 }
 
+const mockAlarmData = {};
+
 export default function TopNavigation({ color = 'white' }) {
   const [selected, setSelected] = useState({ text: '홈', color: 'white' });
+  const [paramId, setParamId] = useState('');
   // const [path, setPath] = useState<string>('');
   const navigation = useNavigate();
   useEffect(() => {
     console.log(window.location.pathname);
     console.log(TabNavList.indexOf(window.location.pathname));
+
     const path = window.location.pathname;
     path === '/'
       ? setSelected({ text: '', color: '' })
@@ -39,7 +46,11 @@ export default function TopNavigation({ color = 'white' }) {
       ? setSelected({ text: '마이페이지', color: 'black' })
       : path === '/upload'
       ? setSelected({ text: '업로드', color: 'black' })
+      : path === '/profile'
+      ? setSelected({ text: '프로필', color: 'black' })
       : null;
+    const params = new URLSearchParams(location.search).get('id');
+    setParamId(params !== null ? params : '');
   }, [window.location.pathname]);
 
   const userInfo = {
@@ -48,13 +59,16 @@ export default function TopNavigation({ color = 'white' }) {
   const TabNavList = ['/home', '/following', '/search'];
   const noLoginPageList = ['/login', '/'];
 
+  // const [alarmModalOpen, setAlarmModalOpen] = useState(false);
+  const [alarmOpen, setAlarmOpen] = useState(false);
+
   return (
     <>
       {TabNavList.indexOf(window.location.pathname) > -1 ? (
         <div className={selected.color === 'white' ? 'top-nav-container' : 'top-nav-container-bg'}>
           <>
             {/* 알림 아이콘 */}
-            <RiNotification2Line fill={selected.color} className="top-icon" />
+            <RiNotification2Line fill={selected.color} className="top-icon" onClick={() => setAlarmOpen(true)} />
             <div className={'top-nav-text-container style-home'}>
               {/* 팔로잉 */}
               <button
@@ -95,21 +109,16 @@ export default function TopNavigation({ color = 'white' }) {
         </div>
       ) : window.location.pathname === '/wish' ? (
         <TopBar
-          alarmOnClickEvent={() => {
-            alert('alarm');
-          }}
+          alarmOnClickEvent={() => setAlarmOpen(true)}
           centerText={'위시리스트'}
           centerTextType={'page'}
-          alarm={true}
-          beforeButton={true}
-          dropdown={true}
-          dropdownList={['편집']}
+          alarm={window.location.search ? false : true}
+          dropdown={window.location.search ? '' : 'wish'}
+          beforeButton={window.location.search ? true : false}
         />
       ) : window.location.pathname === '/upload' ? (
         <TopBar
-          alarmOnClickEvent={() => {
-            alert('alarm');
-          }}
+          alarmOnClickEvent={() => setAlarmOpen(true)}
           centerText={'업로드'}
           centerTextType={'page'}
           beforeButton={true}
@@ -120,17 +129,22 @@ export default function TopNavigation({ color = 'white' }) {
         />
       ) : window.location.pathname === '/mypage' ? (
         <TopBar
-          alarmOnClickEvent={() => {
-            alert('alarm');
-          }}
+          alarmOnClickEvent={() => setAlarmOpen(true)}
           centerText={userInfo.userName}
           centerTextType={'user'}
           alarm={true}
+          dropdown={'mypage'}
+          // dropdownList={['프로필 편집', '개인정보 설정', '설정']}
+        />
+      ) : window.location.pathname === '/profile' ? (
+        <TopBar
+          alarmOnClickEvent={() => setAlarmOpen(true)}
+          centerText={paramId}
           beforeButton={true}
-          dropdown={true}
-          dropdownList={['프로필 편집', '개인정보 설정', '설정']}
+          centerTextType={'user'}
         />
       ) : null}
+
       {noLoginPageList.indexOf(window.location.pathname) > -1 ? null : (
         <div className={selected.color === 'white' ? 'bottom-nav-container' : 'bottom-nav-container-bgwhite'}>
           {/* 위시 */}
@@ -178,6 +192,20 @@ export default function TopNavigation({ color = 'white' }) {
           />
         </div>
       )}
+      {/* 모달 영역 */}
+      <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
+        <ModalPage open={alarmOpen} setOpen={setAlarmOpen} size="full" title="알림">
+          <>
+            {mockAlarmData ? (
+              <div className="text-center mt-56">
+                <p className="mt-4 text-gray-900">새로운 알림이 없습니다. 😢</p>
+              </div>
+            ) : (
+              <AlarmCard></AlarmCard>
+            )}
+          </>
+        </ModalPage>
+      </div>
     </>
   );
 }

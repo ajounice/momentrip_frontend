@@ -1,3 +1,5 @@
+import { RiVideoLine, RiMapPinLine } from 'react-icons/ri';
+
 export interface IButton {
   tabs: string[];
   selected: string;
@@ -25,7 +27,19 @@ export default function Tab({ tabs, selected, onChangeButton }: IButton) {
                   'whitespace-nowrap py-4  border-b-2 w-full text-md',
                 )}
               >
-                {tab}
+                {tab === 'RiVideoLine' ? (
+                  <>
+                    <RiVideoLine className="m-auto w-6 h-6"></RiVideoLine>
+                    <span className="hidden">RiVideoLine</span>
+                  </>
+                ) : tab === 'RiMapPinLine' ? (
+                  <>
+                    <RiMapPinLine className="m-auto w-6 h-6"></RiMapPinLine>
+                    <span className="hidden">RiMapPinLine</span>
+                  </>
+                ) : (
+                  tab
+                )}
               </button>
             ))}
           </nav>
