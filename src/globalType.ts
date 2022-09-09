@@ -116,6 +116,5 @@ export interface ITopBar{
   checkButtonOnClickEvent? : React.MouseEventHandler<HTMLDivElement>;
 
   // dropdown menu bar
-  dropdown? : boolean;
-  dropdownList? : string[];
+  dropdown? : string;
 }

@@ -6,14 +6,14 @@ import './styles/pages/HomePage.css';
 import HomePage from './pages/HomePage';
 import FollowingPage from './pages/FollowingPage';
 import SearchPage from './pages/SearchPage';
-import MyPage from './pages/MyPage';
+import MyPage from './pages/mypage/MyPage';
 import WishPage from './pages/WishPage';
 import UploadShortFormPage from './pages/UploadShortFormPage';
 import LoginPage from './Login/page/LoginPage';
 import { Auth } from './Login/Auth';
 import RenderingPage from './pages/RenderingPage';
 import { INavProps } from './globalType';
-import UserProfileSetting from './User/UserProfileSetting';
+// import UserProfileSetting from './User/UserProfileSetting';
 // import { Modal, CommentModal } from "./components/Modal";
 
 declare global {
@@ -61,10 +61,6 @@ function App() {
         </Route>
         <Route path="/auth/kakao/callback" element={<Auth />}>
           Auth
-        </Route>
-        // TODO
-        <Route path={'/user/profile/setting'} element={<UserProfileSetting />}>
-          UserProfileSetting
         </Route>
         {/* // TODO test 용 */}
         {/* <Route path={'/test'} element={<Modal />}>

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { IButton } from '../globalType';
-import BottomNavigation from '../components/Navigation/BottomNavigation';
 import VerticalNavigation from '../components/Navigation/VerticalNavigation';
 import { ShortForm } from '../components/View/ShortForm';
 
@@ -32,7 +31,6 @@ function HomePage() {
 
   return (
     <div className="home-page-container">
-      <BottomNavigation color={'white'} />
       <ShortForm />
     </div>
   );

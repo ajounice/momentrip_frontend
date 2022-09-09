@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Avatar from '../components/common/Avatar';
 import Folder from '../components/Wish/Folder';
+import InnerTab from '../components/common/InnerTab';
 
 const mockFolderListData = {
   Folders: [
@@ -37,19 +38,42 @@ const mockFolderListData = {
 };
 
 function WishPage() {
+  const tabs = ['RiVideoLine', 'RiMapPinLine'];
+  const [selected, setSelected] = useState(tabs[0]);
+  const [params, setParams] = useState<string | null>();
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    setParams(params.get('wish_id'));
+  }, []);
+
   return (
     <div className="px-4">
       <div className="my-20">
-        {/* title */}
-        <div>
-          {/* TODO 탑 네비게이션에서 텍스트받도록 수정 */}
-          {/* TODO 알림 아이콘 대신 + 버튼 */}
-          <div className="grid grid-cols-2 gap-2">
-            {mockFolderListData.Folders.map((data, i) => (
-              <Folder label={data.label} id={data.id} thumbnail={data.thumbnail} link={data.link}></Folder>
-            ))}
-          </div>
-        </div>
+        {params ? (
+          <>
+            {/* wish inner page  */}
+            <InnerTab
+              tabs={tabs}
+              selected={selected}
+              onChangeButton={(e) => setSelected(e.currentTarget.textContent)}
+              // onChangeButton={(e) => console.log(e.currentTarget.textContent)}
+            ></InnerTab>
+            {selected === tabs[0] ? <>shortform</> : selected === tabs[1] ? <>tourInfo</> : <>aa</>}{' '}
+          </>
+        ) : (
+          <>
+            {/* wish main page */}
+            <div>
+              {/* TODO 탑 네비게이션에서 텍스트받도록 수정 */}
+              <div className="grid grid-cols-2 gap-2">
+                {mockFolderListData.Folders.map((data, i) => (
+                  <Folder label={data.label} id={data.id} thumbnail={data.thumbnail} link={data.link}></Folder>
+                ))}
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
