@@ -137,50 +137,50 @@ const TopNavigation = function () {
   );
 };
 
-const VerticalNavigation = function ({
-  isSelectedInfo,
-  setIsSelectedInfo,
-  isSelectedHeart,
-  setIsSelectedHeart,
-  isSelectComment,
-  setIsSelectComment,
-  isClickedShare,
-  setIsClickedShare,
-}: IVerticalNavigation) {
-  // Props
-  // 해당 숏폼을 좋아요 눌렀는지
-  // 해당 숏폼에 대한 정보
-  // 해당 숏폼에 달린 댓글 정보
-
-  const onClickShare = useCallback(() => {
-    setIsClickedShare(!isClickedShare);
-  }, [isClickedShare]);
-
-  const onClickHeart = useCallback(() => {
-    setIsSelectedHeart(!isSelectedHeart);
-  }, [isSelectedHeart]);
-
-  const onClickComment = useCallback(() => {
-    setIsSelectComment(true);
-  }, [isSelectComment]);
-
-  const onClickInfo = useCallback(() => {
-    setIsSelectedInfo(!isSelectedInfo);
-  }, [isSelectedInfo]);
-
-  return (
-    <section className={'vertical-navigation-container'}>
-      {isSelectedHeart ? (
-        <RiHeart3Fill onClick={onClickHeart} className={'icon'} />
-      ) : (
-        <RiHeart3Line onClick={onClickHeart} className={'icon'} />
-      )}
-      <RiQuestionAnswerLine onClick={onClickComment} className={'icon'} />
-      <RiShareForwardLine onClick={onClickShare} className={'icon'} />
-      <RiListUnordered onClick={onClickInfo} className={'icon'} />
-    </section>
-  );
-};
+// const VerticalNavigation = function ({
+//   viewComment,
+//   viewShare,
+//   viewTourInfo,
+//   setViewComment,
+//   setIsHeart,
+//   setViewShare,
+//   setViewTourInfo,
+//   isHeart
+// }: IVerticalNavigation) {
+//   // Props
+//   // 해당 숏폼을 좋아요 눌렀는지
+//   // 해당 숏폼에 대한 정보
+//   // 해당 숏폼에 달린 댓글 정보
+//
+//   const onClickShare = useCallback(() => {
+//     setViewShare(!viewShare);
+//   }, [viewShare]);
+//
+//   const onClickHeart = useCallback(() => {
+//     setIsHeart(!isHeart);
+//   }, [isHeart]);
+//
+//   const onClickComment = useCallback(() => {
+//     setViewComment(true);
+//   }, [viewComment]);
+//
+//   const onClickInfo = useCallback(() => {
+//     setViewTourInfo(!viewTourInfo);
+//   }, [viewTourInfo]);
+//
+//   return (
+//     <section className={'vertical-navigation-container'}>
+//       {isHeart ? (
+//         <RiHeart3Fill onClick={onClickHeart} className={'icon'} />
+//       ) : (
+//         <RiHeart3Line onClick={onClickHeart} className={'icon'} />
+//       )}
+//       <RiQuestionAnswerLine onClick={onClickComment} className={'icon'} />
+//       <RiShareForwardLine onClick={onClickShare} className={'icon'} />
+//       <RiListUnordered onClick={onClickInfo} className={'icon'} />
+//     </section>
+//   );
+// };
 
 function TopBar({
   beforeButton,
@@ -282,4 +282,4 @@ function TopBar({
   );
 }
 
-export { TopBar, BottomNavigation, TopNavigation, VerticalNavigation };
+export { TopBar, BottomNavigation, TopNavigation };

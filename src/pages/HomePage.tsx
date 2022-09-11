@@ -15,6 +15,7 @@ function HomePage() {
   };
 
   const [follow, setFollow] = useState<IButton>(defaultData);
+
   // eslint-disable-next-line no-undef,max-len,no-unused-vars
   const onClickHandler: React.MouseEventHandler<HTMLButtonElement> = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -33,6 +34,7 @@ function HomePage() {
     <div className="home-page-container">
       <ShortForm />
     </div>
+
   );
 }
 

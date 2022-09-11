@@ -3,14 +3,14 @@ import { RiHeart3Line, RiQuestionAnswerLine, RiShareForwardLine, RiListUnordered
 import { IVerticalNavigation } from '../../globalType';
 
 export default function VerticalNavigation({
-  isSelectedInfo,
-  setIsSelectedInfo,
-  isSelectedHeart,
-  setIsSelectedHeart,
-  isSelectComment,
-  setIsSelectComment,
-  isClickedShare,
-  setIsClickedShare,
+  viewTourInfo,
+  viewShare,
+  viewComment,
+  setViewTourInfo,
+  setViewShare,
+  setViewComment,
+  setIsHeart,
+  isHeart
 }: IVerticalNavigation) {
   // Props
   // 해당 숏폼을 좋아요 눌렀는지
@@ -18,60 +18,32 @@ export default function VerticalNavigation({
   // 해당 숏폼에 달린 댓글 정보
 
   const onClickShare = useCallback(() => {
-    setIsClickedShare(!isClickedShare);
-  }, [isClickedShare]);
+    setViewShare((prev)=>!prev);
+  }, [viewShare]);
 
   const onClickHeart = useCallback(() => {
-    setIsSelectedHeart(!isSelectedHeart);
-  }, [isSelectedHeart]);
+    setIsHeart((prev)=>!prev);
+  }, [isHeart]);
 
   const onClickComment = useCallback(() => {
-    setIsSelectComment(true);
-  }, [isSelectComment]);
+    setViewComment((prev)=>!prev);
+  }, [viewComment]);
 
   const onClickInfo = useCallback(() => {
-    setIsSelectedInfo(!isSelectedInfo);
-  }, [isSelectedInfo]);
+    setViewTourInfo((prev)=>!prev);
+  }, [viewTourInfo]);
 
   return (
     <section className={'vertical-navigation-container'}>
-      {isSelectedHeart ? (
-        <RiHeart3Fill onClick={onClickHeart} className={'icon'} />
+      {isHeart ? (
+        <RiHeart3Fill color={"white"}  onClick={onClickHeart} className={'icon'} />
       ) : (
-        <RiHeart3Line onClick={onClickHeart} className={'icon'} />
+        <RiHeart3Line color={"white"}  onClick={onClickHeart} className={'icon'} />
       )}
-      <RiQuestionAnswerLine onClick={onClickComment} className={'icon'} />
-      <RiShareForwardLine onClick={onClickShare} className={'icon'} />
-      <RiListUnordered onClick={onClickInfo} className={'icon'} />
+      <RiQuestionAnswerLine color={"white"} onClick={onClickComment} className={'icon'} />
+      <RiShareForwardLine color={"white"}  onClick={onClickShare} className={'icon'} />
+      <RiListUnordered color={"white"}  onClick={onClickInfo} className={'icon'} />
     </section>
   );
 
-  //
-  // const [like, setLike] = useState(false);
-  // const color ='white';
-  //
-  // return (
-  //   <div className="vertical-navigation-container">
-  //     {like ? (
-  //       <RiHeart3Fill
-  //         fill={color}
-  //         onClick={() => {
-  //           setLike(false);
-  //         }}
-  //         className="icon"
-  //       />
-  //     ) : (
-  //       <RiHeart3Line
-  //         fill={color}
-  //         onClick={() => {
-  //           setLike(true);
-  //         }}
-  //         className="icon"
-  //       />
-  //     )}
-  //     <RiQuestionAnswerLine fill={color} className="icon" />
-  //     <RiShareForwardFill fill={color} className="icon" />
-  //     <RiListUnordered fill={color} className="icon" />
-  //   </div>
-  // );
 }

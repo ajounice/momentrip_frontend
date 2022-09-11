@@ -141,7 +141,7 @@
 
 /* vertical navigation */
 .vertical-navigation-container {
-  z-index: 999;
+  z-index: 998;
 
   width: 32px;
   height: 216px;

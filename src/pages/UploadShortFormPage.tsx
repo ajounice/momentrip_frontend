@@ -109,9 +109,10 @@ function UploadShortFormPage() {
               설명
             </label>
             <textarea
-              className={'upload-page-introduction-textarea'}
-              id={'introduction'}
-              placeholder={'텍스트를 입력하세요'}
+              className={"upload-page-introduction-textarea"}
+              id={"introduction"}
+              placeholder={"텍스트를 입력하세요"}
+              onChange={(e)=>{setIntroduction(e.currentTarget.value)}}
               onClick={(e) => {
                 setIntroduction(e.currentTarget.value);
               }}

@@ -64,17 +64,17 @@ interface ITourInfo{
 }
 
 export interface IVerticalNavigation {
-  isSelectComment : boolean;
-  setIsSelectComment : Dispatch<SetStateAction<boolean>>;
+  viewComment : boolean;
+  setViewComment : Dispatch<SetStateAction<boolean>>;
 
-  isClickedShare : boolean;
-  setIsClickedShare : Dispatch<SetStateAction<boolean>>;
+  viewShare : boolean;
+  setViewShare : Dispatch<SetStateAction<boolean>>;
 
-  isSelectedHeart : boolean;
-  setIsSelectedHeart : Dispatch<SetStateAction<boolean>>;
+  isHeart : boolean;
+  setIsHeart : Dispatch<SetStateAction<boolean>>;
 
-  isSelectedInfo : boolean;
-  setIsSelectedInfo : Dispatch<SetStateAction<boolean>>;
+  viewTourInfo : boolean;
+  setViewTourInfo : Dispatch<SetStateAction<boolean>>;
 }
 
 export interface IShortFormVideo{

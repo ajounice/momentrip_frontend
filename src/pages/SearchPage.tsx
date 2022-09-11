@@ -72,6 +72,11 @@ const SearchPage = () => {
     setTabSelected(tabs[0]);
   }, [searchKeyword]);
 
+  useEffect(()=>{
+    console.log("/search");
+  },[]);
+
+
   return (
     <div className="px-4">
       {/* SearchBar */}
@@ -111,6 +116,7 @@ const SearchPage = () => {
               selected={tabSelected}
               onChangeButton={(e) => setTabSelected(e.currentTarget.textContent)}
             ></InnerTab>
+
             {tabSelected === tabs[0] ? (
               <>{searchKeyword}에 대한 게시물 검색결과</>
             ) : (
