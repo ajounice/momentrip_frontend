@@ -45,6 +45,7 @@
 .tour-info-img-container{
     width : 100px;
     height : 100px;
+    position: relative;
 }
 
 .tour-info-img{
@@ -67,6 +68,7 @@
 
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
 
     margin-left : 12px;
 }
@@ -122,11 +124,33 @@
 
 /* tour info 관련 short form */
 .tour-info-short-form-section{
-    width : 100%;
-    height : 340px;
+    width : auto;
+    height : 320px;
+    overflow-x: scroll;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 
-    background-color: #98d05c;
+    border-bottom : 2px solid var(--gray-300);
 }
+
+.tour-info-short-form-inner-container{
+    width : 90%;
+    height : 320px;
+
+    overflow-x : scroll;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.tour-info-full-sf-container{
+    min-width : 200px;
+    padding : 5px;
+
+}
+
 
 .tour-info-short-form-list-container{
     height : 340px;
@@ -162,5 +186,9 @@
     width : 90%;
     height : 300px;
 
-    background-color: red;
+    background-color: pink;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
