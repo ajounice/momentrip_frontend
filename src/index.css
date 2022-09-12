@@ -341,3 +341,12 @@ code {
   transition: opacity 0.5s;
   opacity: 1;
 }
+
+.close-icon{
+  width : 30px;
+  height : 30px;
+
+  position: absolute;
+  right : 0;
+  margin : 5px;
+}

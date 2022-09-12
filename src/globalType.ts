@@ -64,17 +64,11 @@ interface ITourInfo{
 }
 
 export interface IVerticalNavigation {
-  isSelectComment : boolean;
-  setIsSelectComment : Dispatch<SetStateAction<boolean>>;
-
-  isClickedShare : boolean;
-  setIsClickedShare : Dispatch<SetStateAction<boolean>>;
-
-  isSelectedHeart : boolean;
-  setIsSelectedHeart : Dispatch<SetStateAction<boolean>>;
-
-  isSelectedInfo : boolean;
-  setIsSelectedInfo : Dispatch<SetStateAction<boolean>>;
+  setViewComment : Dispatch<SetStateAction<boolean>>;
+  setViewShare : Dispatch<SetStateAction<boolean>>;
+  isHeart : boolean;
+  setIsHeart : Dispatch<SetStateAction<boolean>>;
+  setViewTourInfo : Dispatch<SetStateAction<boolean>>;
 }
 
 export interface IShortFormVideo{
@@ -83,6 +77,13 @@ export interface IShortFormVideo{
   videoStop : boolean;
   // videoUploader :
   videoTitle : string;
+
+  // modal 띄우기 위한 props
+  setViewShare : Dispatch<SetStateAction<boolean>>;
+  setViewComment : Dispatch<SetStateAction<boolean>>;
+  setViewTourInfo : Dispatch<SetStateAction<boolean>>;
+  setIsHeart :  Dispatch<SetStateAction<boolean>>;
+  isHeart : boolean;
 }
 
 // nav props

@@ -1,6 +1,7 @@
 .short-form-container {
   width: 100%;
   height: 100vh;
+  z-index:997;
   background-color: var(--black);
 }
 
@@ -11,4 +12,16 @@
 .swiper-container {
   width: 100vw;
   height: 100vh;
+}
+
+.short-form-touch-event-auto{
+  object-fit: cover;
+  touch-action: pan-y;
+  overflow: auto;
+}
+
+.short-form-touch-event-none{
+  object-fit: cover;
+  touch-action: none;
+  overflow: hidden;
 }

@@ -1,9 +1,13 @@
-import React from 'react';
-// import { KAKAO_AUTH_URL } from '../OAuth';
+import React, { useEffect } from "react";
+import { KAKAO_AUTH_URL } from '../OAuth';
 import '../../styles/Login/LoginPage.css';
 
 function LoginPage() {
-  const KAKAO_AUTH_URL = "KAKAO_AUTH_URL";
+  // const KAKAO_AUTH_URL = "KAKAO_AUTH_URL";
+
+  useEffect(()=>{
+    console.log(KAKAO_AUTH_URL);
+  },[]);
 
   return (
     <div className={'login-container'}>
