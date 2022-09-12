@@ -79,7 +79,7 @@ function MyPage() {
         {/* Post Section */}
         <div className="grid grid-cols-2 gap-1">
           {mockShortFormListsData.shortForm.map((data) => (
-            <FullSF src={data.src} href={data.href} shortFormId={data.shortFormId} likeCount={data.likeCount}></FullSF>
+            <FullSF src={data.src} href={data.href} shortFormId={data.shortFormId} likeCount={data.likeCount}/>
           ))}
         </div>
       </div>

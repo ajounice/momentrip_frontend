@@ -1,4 +1,5 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
+
 import '../../../styles/components/Modal/Vertical/Comment.css';
 import { RiCloseFill } from "react-icons/ri";
 
@@ -111,24 +112,78 @@ interface IComment{
   setViewComment : Dispatch<SetStateAction<boolean>>;
 }
 
+
 function Comment({setViewComment}:IComment){
+
+  const [ comment, setComment ] = useState<string>('');
+  const [ dummyComment, setDummyComment ] = useState(dummyCommentData);
+
+  const inputRef = useRef(null);
+
+  useEffect(()=>{
+    console.log("setDummyComment : ",dummyComment);
+  },[dummyComment]);
+
+  const addCommentEvent = ( e : React.KeyboardEvent) =>{
+    // 최신순 정렬로 보여줄 것
+    console.log(e.key);
+    if(e.key === 'Enter'){
+      console.log("e.key === 'Enter");
+      // 나중에 사용할 예정
+     const date = new Date();
+     const tmp = dummyComment;
+      tmp.push({
+        name : "연지애옹",
+        comment : comment,
+        date : "2022-09-12",
+        userId : 1,
+        imagePath : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIbS6Zi73YIIERf4lT4417820eaxJUHniE-w&usqp=CAU'
+      });
+      console.log("dummyComment : ",dummyComment);
+      if(inputRef !== null){
+        console.log("inputRef!==null) : ",inputRef!==null);
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        inputRef.current.reset();
+        console.log("inputRef : ",inputRef);
+        setDummyComment(tmp);
+        console.log("inputRef!==null) : ",inputRef!==null);
+      }
+    }
+  }
+
   return(
     <div className={'comment-modal-container'}>
       <div className={'comment-modal-top-nav'}>
         <span className={'comment-modal-top-nav-text'}>댓글</span>
+        <span className={'comment-modal-top-nav-text'}>{dummyComment.length}</span>
+
         <div className={'comment-modal-close-icon-container'} onClick={()=>{setViewComment(false)}}>
           <RiCloseFill className={'close-icon'} size={30} />
         </div>
       </div>
       <div className={'comment-item-list-outer-container'}>
         <div className={'comment-item-list-inner-container'}>
-          {
-            dummyCommentData.map((item)=>{
-              return(
-                <CommentItem name={item.name} comment={item.comment} date={item.date} userId={item.userId} imagePath={item.imagePath} />
-              )
-            })
-          }
+          <div className={'comment-item-register-comment-container'}>
+              <div className={'comment-item-img-container'}>
+                <img className={'comment-item-img'} src={dummyCommentData[0].imagePath} alt={'user profile'} />
+              </div>
+            <div className={'comment-item-text-container'}>
+
+              <div className={'comment-item-comment-container'}>
+                <input ref={inputRef} onKeyPress={addCommentEvent} onChange={(e)=>{setComment(e.currentTarget.value)}} className={'comment-modal-input'} placeholder={"댓글 추가..."} />
+              </div>
+            </div>
+          </div>
+          <div>
+            {
+              dummyComment.map((item)=>{
+                return(
+                  <CommentItem name={item.name} comment={item.comment} date={item.date} userId={item.userId} imagePath={item.imagePath} />
+                )
+              })
+            }
+          </div>
         </div>
       </div>
     </div>

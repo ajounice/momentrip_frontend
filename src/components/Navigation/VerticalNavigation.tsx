@@ -1,11 +1,8 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from "react";
 import { RiHeart3Line, RiQuestionAnswerLine, RiShareForwardLine, RiListUnordered, RiHeart3Fill } from 'react-icons/ri';
 import { IVerticalNavigation } from '../../globalType';
 
 export default function VerticalNavigation({
-  viewTourInfo,
-  viewShare,
-  viewComment,
   setViewTourInfo,
   setViewShare,
   setViewComment,
@@ -17,21 +14,25 @@ export default function VerticalNavigation({
   // 해당 숏폼에 대한 정보
   // 해당 숏폼에 달린 댓글 정보
 
-  const onClickShare = useCallback(() => {
-    setViewShare((prev)=>!prev);
-  }, [viewShare]);
+  const onClickShare = ()=> {
+    setViewShare((prev) => !prev);
+  }
 
-  const onClickHeart = useCallback(() => {
+  const onClickHeart = ()=>{
     setIsHeart((prev)=>!prev);
-  }, [isHeart]);
+  }
 
-  const onClickComment = useCallback(() => {
+  const onClickComment =()=>{
     setViewComment((prev)=>!prev);
-  }, [viewComment]);
+  }
 
-  const onClickInfo = useCallback(() => {
+  const onClickInfo = ()=>{
     setViewTourInfo((prev)=>!prev);
-  }, [viewTourInfo]);
+  }
+
+  useEffect(()=>{
+    console.log("isHeart : ",isHeart);
+  },[isHeart])
 
   return (
     <section className={'vertical-navigation-container'}>

@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import 'swiper/css';
 import '../../styles/components/View/ShortForm.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { A11y, Navigation, Pagination, Scrollbar } from 'swiper';
-import VerticalNavigation from '../Navigation/VerticalNavigation';
 import ShortFormVideo from './ShortFormVideo';
+import ShareModalPage from "../Modal/Vertical/BottomModalPage";
+import Share from "../Modal/Vertical/Share";
+import Comment from '../Modal/Vertical/Comment';
+import TourInfo from "../Modal/Vertical/TourInfo";
 
 // export interface IShortFormVideo{
 //   videoUrl : string;
@@ -48,12 +51,42 @@ const mockShortFormVideoData = {
   ],
 };
 
+
+// export interface IVerticalState{
+//   like : boolean;
+//
+//   shortFormId : number;
+//   commentView : boolean;
+//
+//   shareView : boolean;
+//   shareLink : string;
+//
+//   tourInfoView : boolean;
+// }
+
 function ShortForm() {
   const [currentVideoIndex, setCurrentVideoIndex] = useState<number>(0);
+
+  // share modal
+  const [ viewShare, setViewShare ] = useState(false);
+  // comment modal
+  const [ viewComment, setViewComment ] = useState(false);
+  // tour info modal
+  const [ viewTourInfo, setViewTourInfo ] = useState(false);
+  // video like
+  const [ like, setLike ] = useState(false);
 
   useEffect(() => {
     console.log('current Index : ', currentVideoIndex);
   }, [currentVideoIndex]);
+
+  useEffect(()=>{
+    console.log("viewShare ",viewShare);
+    console.log("viewComment ",viewComment);
+    console.log("viewTourInfo ",viewTourInfo);
+    console.log("like ",like);
+  },[viewShare,viewComment,viewTourInfo,like])
+
 
   // touch -> 재생 멈춤/실행
   // vertical swiper -> 숏폼 next/before
@@ -68,8 +101,9 @@ function ShortForm() {
   //        loop="" src="blob:https://m.youtube.com/b60ecc3e-b394-43e1-9c1c-88d21d3a7c17"></video>
 
   return (
-    <div className="short-form-container">
+    <div id={"short-form"} className="short-form-container">
       <Swiper
+        id={"swiper"}
         className="swiper-container"
         modules={[Navigation, Pagination, Scrollbar, A11y]}
         direction="vertical"
@@ -100,6 +134,11 @@ function ShortForm() {
         {mockShortFormVideoData.Video.map((data) => (
           <SwiperSlide className="short-form">
             <ShortFormVideo
+              isHeart={like}
+              setIsHeart={setLike}
+              setViewComment={setViewComment}
+              setViewShare={setViewShare}
+              setViewTourInfo={setViewTourInfo}
               videoUrl={data.videoUrl}
               videoHidden={data.videoHidden}
               videoStop={data.videoStop}
@@ -108,6 +147,28 @@ function ShortForm() {
           </SwiperSlide>
         ))}
       </Swiper>
+      <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
+        {/* comment, tour info ModalPage 유사한 새로운 component 생성 */}
+        {/*<ModalPage open={verticalState.commentView} setOpen={(state)=>{{...verticalState}, commentView : state}>*/}
+        {/*  <Comment></Comment>*/}
+        {/*  }*/}
+        {/*</ModalPage>*/}
+
+        {/* tour info */}
+        <ShareModalPage open={viewTourInfo} setOpen={setViewTourInfo}>
+          <TourInfo setViewTourInfo={setViewTourInfo}/>
+        </ShareModalPage>
+
+         {/* comment */}
+        <ShareModalPage open={viewComment} setOpen={setViewComment}>
+          <Comment setViewComment={setViewComment}/>
+        </ShareModalPage>
+
+         {/* share */}
+        <ShareModalPage open={viewShare} setOpen={setViewShare}>
+          <Share setViewShare={setViewShare} />
+        </ShareModalPage>
+      </div>
 
     </div>
   );
