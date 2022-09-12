@@ -24,6 +24,7 @@ import { PrivateRoute } from './components/WithProtected.route';
 import Profile from './pages/Profile';
 import SettingPage from './pages/mypage/SettingPage';
 import ProfileSettingPage from './pages/mypage/ProfileSettingPage';
+import TourInfoPage from './pages/TourInfoInfo';
 
 const root = ReactDOM.createRoot(
   // eslint-disable-next-line no-undef
@@ -53,6 +54,7 @@ root.render(
           <Route path="/upload" element={<UploadShortFormPage />} />
           <Route path="/alarm" element={<AlarmPage />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/tourinfo" element={<TourInfoPage />} />
 
           {/* required admin */}
           <Route path="/com-avatar" element={<ComAvatar />} />

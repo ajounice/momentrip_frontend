@@ -4,6 +4,7 @@ import TagList from '../components/Search/TagList';
 import ThumbnailList from '../components/Search/ThumbnailList';
 import InnerTab from '../components/common/InnerTab';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const dummy_data = [
   {
@@ -63,7 +64,13 @@ const dummy_thumbnail_data = [
 ];
 
 const SearchPage = () => {
+  const navigation = useNavigate();
+
   const [searchKeyword, setSearchKeyword] = useState('');
+  useEffect(() => {
+    const params = new URLSearchParams(location.search).get('keyword');
+    setSearchKeyword(params !== null ? params : '');
+  }, [new URLSearchParams(location.search).get('keyword')]);
 
   const tabs = ['게시물', '계정'];
   const [tabSelected, setTabSelected] = useState(tabs[0]);
@@ -88,7 +95,11 @@ const SearchPage = () => {
             {/* TODO SearchBar에서 엔터치면 값 전달되서 after로 넘어가게 구현 */}
 
             <p className="mt-4 text-md font-bold">인기태그</p>
-            <TagList itemList={dummy_data} setKeyword={setSearchKeyword} />
+            <TagList
+              itemList={dummy_data}
+              setKeyword={setSearchKeyword}
+              onHandler={(value: string) => navigation('/search?keyword=' + value)}
+            />
             <div className="">
               <p className="mt-14 text-lg font-bold">#실패없는 호캉스 여행지 ✅</p>
             </div>

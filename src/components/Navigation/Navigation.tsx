@@ -9,6 +9,8 @@ import CustomModal from '../common/CustomModal';
 import ModalPage from '../common/ModalPage';
 import AlarmCard from '../Card/AlarmCard';
 
+import Input from '../common/Input';
+import Button from '../Button/Button';
 const defaultCurrent = {
   home: true,
   search: false,
@@ -26,6 +28,14 @@ export default function TopNavigation({ color = 'white' }) {
   const [selected, setSelected] = useState({ text: '홈', color: 'white' });
   const [paramId, setParamId] = useState('');
   // const [path, setPath] = useState<string>('');
+
+  const [addFolderOpen, setAddFolderOpen] = useState(false);
+  async function addFolderRequest() {
+    const name = document.getElementById('folderName');
+    // TODO 서버에 폴더 추가 요청 후 새로고침
+    location.reload();
+  }
+
   const navigation = useNavigate();
   useEffect(() => {
     console.log(window.location.pathname);
@@ -108,14 +118,26 @@ export default function TopNavigation({ color = 'white' }) {
           </>
         </div>
       ) : window.location.pathname === '/wish' ? (
-        <TopBar
-          alarmOnClickEvent={() => setAlarmOpen(true)}
-          centerText={'위시리스트'}
-          centerTextType={'page'}
-          alarm={window.location.search ? false : true}
-          dropdown={window.location.search ? '' : 'wish'}
-          beforeButton={window.location.search ? true : false}
-        />
+        window.location.search ? (
+          <TopBar
+            alarmOnClickEvent={() => setAlarmOpen(true)}
+            centerText={'폴더 아이디에 따른 폴더이름'}
+            centerTextType={'page'}
+            dropdown={'wish'}
+            beforeButton={true}
+          />
+        ) : (
+          <TopBar
+            alarmOnClickEvent={() => setAlarmOpen(true)}
+            centerText={'위시리스트'}
+            centerTextType={'page'}
+            beforeButton={false}
+            plusButton={true}
+            plusButtonOnClickEvent={() => {
+              setAddFolderOpen(true);
+            }}
+          />
+        )
       ) : window.location.pathname === '/upload' ? (
         <TopBar
           alarmOnClickEvent={() => setAlarmOpen(true)}
@@ -194,6 +216,7 @@ export default function TopNavigation({ color = 'white' }) {
       )}
       {/* 모달 영역 */}
       <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
+        {/* 알림창 */}
         <ModalPage open={alarmOpen} setOpen={setAlarmOpen} size="full" title="알림">
           <>
             {mockAlarmData ? (
@@ -204,6 +227,22 @@ export default function TopNavigation({ color = 'white' }) {
               <AlarmCard></AlarmCard>
             )}
           </>
+        </ModalPage>
+        {/* wish - add folder */}
+
+        <ModalPage open={addFolderOpen} setOpen={setAddFolderOpen} size="mini" title="폴더 추가">
+          <div className="my-8">
+            <Input
+              label="폴더 이름"
+              type="text"
+              id="folderName"
+              disabled={false}
+              placeholder="폴더 이름을 입력하세요"
+            ></Input>
+            <div className="my-2">
+              <Button title="확인" handleClick={addFolderRequest}></Button>
+            </div>
+          </div>
         </ModalPage>
       </div>
     </>
