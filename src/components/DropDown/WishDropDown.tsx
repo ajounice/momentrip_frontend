@@ -8,6 +8,8 @@ import ModalPage from '../common/ModalPage';
 import Input from '../common/Input';
 import Button from '../Button/Button';
 import { useForm } from 'react-hook-form';
+import BasicModal from '../common/BasicModal';
+import CustomModal from '../common/CustomModal';
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ');
@@ -25,6 +27,20 @@ const WishDropDown = () => {
     mode: 'onSubmit',
   });
   const [addFolderOpen, setAddFolderOpen] = useState(false);
+  const [deleteFolderOpen, setDeleteFolderOpen] = useState(false);
+  const [editFolderNameOpen, setEditFolderNameOpen] = useState(false);
+
+  function deleteFolderHandler() {
+    const id = new URLSearchParams(location.search).get('wish_id');
+    console.log(id);
+    // TODO folder 삭제 요청 후 /wish 페이지로 보내기
+  }
+
+  function editFolderNameRequest() {
+    const name = document.getElementById('folderName');
+    // TODO 폴더이름 변경 후 새로고침
+    location.reload();
+  }
   return (
     <>
       <Menu as="div" className="relative inline-block text-left">
@@ -52,9 +68,22 @@ const WishDropDown = () => {
                       active ? 'bg-gray-100 text-black' : 'text-gray-700',
                       'block px-4 py-2 text-base w-full text-left',
                     )}
-                    onClick={() => setAddFolderOpen(true)}
+                    onClick={() => setDeleteFolderOpen(true)}
                   >
-                    폴더 추가
+                    폴더 삭제
+                  </button>
+                )}
+              </Menu.Item>
+              <Menu.Item>
+                {({ active }) => (
+                  <button
+                    className={classNames(
+                      active ? 'bg-gray-100 text-black' : 'text-gray-700',
+                      'block px-4 py-2 text-base w-full text-left',
+                    )}
+                    onClick={() => setEditFolderNameOpen(true)}
+                  >
+                    폴더 이름 변경
                   </button>
                 )}
               </Menu.Item>
@@ -64,21 +93,31 @@ const WishDropDown = () => {
       </Menu>
       {/* 모달 영역 */}
       <div className="relative overflow-y-auto overflow-x-hidden">
-        <ModalPage open={addFolderOpen} setOpen={setAddFolderOpen} size="mini" title="폴더 추가">
+        <CustomModal open={editFolderNameOpen} setOpen={setEditFolderNameOpen} title="폴더 이름 변경" size="lg">
           <div className="my-8">
             <Input
-              label="폴더 이름"
+              // label="폴더 이름"
               type="text"
               id="folderName"
               disabled={false}
-              placeholder="Label이 있는 경우"
-              register={register('folderName')}
+              placeholder="폴더 이름을 입력하세요"
+              defaultValue={''}
             ></Input>
-            <div className="my-2">
-              <Button title="확인" handleClick={() => console.log(watch('folderName'))}></Button>
+            <div className="my-2 flex gap-2">
+              <Button title="취소" handleClick={() => setEditFolderNameOpen(false)}></Button>
+              <Button title="확인" handleClick={editFolderNameRequest}></Button>
             </div>
           </div>
-        </ModalPage>
+        </CustomModal>
+        <BasicModal
+          open={deleteFolderOpen}
+          setOpen={setDeleteFolderOpen}
+          type="confirm"
+          title="폴더를 삭제하시겠습니까?"
+          ok="Yes"
+          cancel="Cancel"
+          okAction={deleteFolderHandler}
+        ></BasicModal>
       </div>
     </>
   );

@@ -117,4 +117,7 @@ export interface ITopBar{
 
   // dropdown menu bar
   dropdown? : string;
+
+  plusButton? : boolean;
+  plusButtonOnClickEvent? : React.MouseEventHandler<HTMLDivElement>;
 }

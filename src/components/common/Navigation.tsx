@@ -21,6 +21,7 @@ import {
   RiArrowLeftLine,
   RiCheckFill,
   RiMore2Fill,
+  RiAddFill,
 } from 'react-icons/ri';
 import { ITopBar, IVerticalNavigation } from '../../globalType';
 import WishDropDown from '../DropDown/WishDropDown';
@@ -193,6 +194,8 @@ function TopBar({
   checkButton,
   checkButtonOnClickEvent,
   dropdown,
+  plusButton,
+  plusButtonOnClickEvent,
 }: ITopBar) {
   const [dropDown, setDropDown] = useState<boolean>(false);
   const navigation = useNavigate();
@@ -274,6 +277,13 @@ function TopBar({
         {checkButton ? (
           <div onClick={checkButtonOnClickEvent} className={'right-icon-container'}>
             <RiCheckFill className={'icon'} />
+          </div>
+        ) : null}
+
+        {/* 추가 버튼 */}
+        {plusButton ? (
+          <div onClick={plusButtonOnClickEvent} className={'right-icon-container'}>
+            <RiAddFill className={'icon'} />
           </div>
         ) : null}
       </div>

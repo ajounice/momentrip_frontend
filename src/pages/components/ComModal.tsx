@@ -57,8 +57,17 @@ const ComModal = () => {
             <div className="px-5 py-4">
               <div className="text-sm">
                 <div className="font-medium text-slate-800 mb-3">
-                  custom modal 예시 입니다~ children 요소는 알아서 component화 잘해서 사용하기~ custom modal 예시
-                  입니다~
+                  custom modal 예시 입니다~ children 요소는 알아서 component화 잘해서 사용하기~ custom modal 예시 custom
+                  입니다~ children 요소는 알아서 component화 잘해서 사용하기~ custom modal 예시 custom modal 예시
+                  입니다~ children 요소는 알아서 component화 잘해서 사용하기~ custom modal 예시 custom modal 예시
+                  입니다~ children 요소는 알아서 component화 잘해서 사용하기~ custom modal 예시 custom modal 예시
+                  입니다~ children 요소는 알아서 component화 잘해서 사용하기~ custom modal 예시 custom modal 예시
+                  입니다~ children 요소는 알아서 component화 잘해서 사용하기~ custom modal 예시 custom modal 예시
+                  입니다~ children 요소는 알아서 component화 잘해서 사용하기~ custom modal 예시 custom modal 예시
+                  입니다~ children 요소는 알아서 component화 잘해서 사용하기~ custom modal 예시 custom modal 예시
+                  입니다~ children 요소는 알아서 component화 잘해서 사용하기~ custom modal 예시 custom modal 예시
+                  입니다~ children 요소는 알아서 component화 잘해서 사용하기~ custom modal 예시 custom modal 예시
+                  입니다~ children 요소는 알아서 component화 잘해서 사용하기~ custom modal 예시 입니다~
                 </div>
               </div>
               <div className="flex flex-wrap items-center mb-2"></div>
