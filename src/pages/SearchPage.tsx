@@ -97,7 +97,7 @@ const SearchPage = () => {
             <p className="mt-4 text-md font-bold">인기태그</p>
             <TagList
               itemList={dummy_data}
-              setKeyword={setSearchKeyword}
+              // setKeyword={setSearchKeyword}
               onHandler={(value: string) => navigation('/search?keyword=' + value)}
             />
             <div className="">

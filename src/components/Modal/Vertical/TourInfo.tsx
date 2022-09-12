@@ -1,11 +1,10 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import '../../../styles/components/Modal/Vertical/TourInfo.css';
 import { RiBookmarkFill, RiBookmarkLine, RiCloseFill } from "react-icons/ri";
-import Tag from "../../common/Tag";
 import FullSF from "../../ShortForm/FullSF";
 import TagList from "../../Search/TagList";
-import TabItem from "../../Search/TagItem";
 import { Link, useNavigate } from "react-router-dom";
+import { MapComponent } from "../../common/MapComponent";
 
 const dummyTourInfoData = {
     id : 0,
@@ -64,8 +63,8 @@ const dummyTourInfoData = {
       },
     ],
     kakaoLocation : {
-      latitude : 32.1231451,
-      longitude : 127.12321515
+      latitude : 35.07021105359145,
+      longitude : 129.01883229743348
     },
   };
 
@@ -74,6 +73,8 @@ interface ITourInfo{
 }
 
 function TourInfo({setViewTourInfo}:ITourInfo){
+
+  const navigation = useNavigate();
 
   useEffect(()=>{
     console.log("/search");
@@ -90,12 +91,11 @@ function TourInfo({setViewTourInfo}:ITourInfo){
         <section className={'tour-info-section'}>
         {/* tour info */}
           <div className={'tour-info-img-n-text-container'}>
-
             <div className={'tour-info-img-container'}>
               {
                 dummyTourInfoData.bookmark
                   // 나중에 서버랑 연결할때 onClick 넣어주면 될 듯
-                  ? <RiBookmarkLine className={'book-mark-icon'}/>
+                  ? <RiBookmarkLine className={'book-mark-icon'} />
                   : <RiBookmarkFill className={'book-mark-icon'} />
               }
               <img className={'tour-info-img'} src={dummyTourInfoData.imagePath} alt={'tour info image'}/>
@@ -117,26 +117,21 @@ function TourInfo({setViewTourInfo}:ITourInfo){
           {/*      </Link>*/}
           {/*    ))}*/}
           {/*  </div>*/}
+            <TagList itemList={dummyTourInfoData.hashtags} onHandler={(value:string)=>navigation('/search?keyword='+value)}/>
           </div>
 
         </section>
 
         <section className={'tour-info-short-form-section'}>
-          {/*  관련 숏폼 */}
-          <div className={'tour-info-short-form-list-container'} >
-            {/* TODO : CSS 수정 및 유저 프로필 추가*/}
-
+          <div className={'tour-info-short-form-inner-container'}>
             {
-              dummyTourInfoData.shortForms.map((item)=> {
+              dummyTourInfoData.shortForms.map((item)=>{
                 return(
-                <div className={'tour-info-short-form-container'}>
+                <div className={'tour-info-full-sf-container'}>
                   <FullSF
-                    shortFormId={item.shortId}
-                    src={item.profile}
-                    href={item.thumbnail}
-                  />
-                </div>
-                )
+                    src={'https://png.pngtree.com/thumb_back/fh260/png-vector/20200530/ourmid/pngtree-beach-png-image_2215226.jpg'}
+                    shortFormId={1} href={'https://png.pngtree.com/thumb_back/fh260/png-vector/20200530/ourmid/pngtree-beach-png-image_2215226.jpg'} />
+                </div>)
               })
             }
           </div>
@@ -145,7 +140,10 @@ function TourInfo({setViewTourInfo}:ITourInfo){
         <section className={'kakao-api-map-section'}>
         {/* kako api map */}
           <div className={'kakao-map-api-container'}>
-
+              <MapComponent
+                latitude={dummyTourInfoData.kakaoLocation.latitude}
+                longitude={dummyTourInfoData.kakaoLocation.longitude}
+              />
           </div>
         </section>
       </div>

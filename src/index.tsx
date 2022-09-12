@@ -1,5 +1,5 @@
 import './input.css';
-import React from 'react';
+import React, { useEffect } from "react";
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -30,6 +30,12 @@ const root = ReactDOM.createRoot(
   // eslint-disable-next-line no-undef
   document.getElementById('root') as HTMLElement,
 );
+
+declare global {
+  interface Window {
+    kakao: any;
+  }
+}
 
 root.render(
   <React.StrictMode>

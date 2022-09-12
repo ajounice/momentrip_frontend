@@ -3,11 +3,11 @@ import TabItem from './TagItem';
 
 const TabList = ({
   itemList,
-  setKeyword,
+  // setKeyword,
   onHandler,
 }: {
   itemList: any[];
-  setKeyword: React.Dispatch<SetStateAction<string>>;
+  // setKeyword: React.Dispatch<SetStateAction<string>>;
   onHandler?: any;
 }) => {
   return (
