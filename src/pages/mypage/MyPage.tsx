@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../../styles/pages/MyPage.css';
 import Avatar from '../../components/common/Avatar';
 import FullSF from '../../components/ShortForm/FullSF';
@@ -11,7 +11,89 @@ const userInfo = {
   profileMessage: '🧸여행을 좋아하는 컴순이🧸',
   followers: 10,
   following: 20,
+  badge: 'mountain',
 };
+interface IBadgeList {
+  [key: string]: { badge: string; text: string; color: string; afterColor: string };
+}
+const badgeList: IBadgeList = {
+  mountain: {
+    badge: '🌳',
+    text: '산',
+    color: 'bg-green-200',
+    afterColor: 'after:border-b-green-200',
+  },
+  sea: {
+    badge: '🌊',
+    text: '바다',
+    color: 'bg-blue-200',
+    afterColor: 'after:border-b-blue-200',
+  },
+  hotel: {
+    badge: '🏨',
+    text: '숙소',
+    color: 'bg-violet-200',
+    afterColor: 'after:border-b-violet-200',
+  },
+  festival: {
+    badge: '🎪',
+    text: '축제',
+    color: 'bg-red-200',
+    afterColor: 'after:border-b-ed-200',
+  },
+  camping: {
+    badge: '⛺',
+    text: '캠핑',
+    color: 'bg-indigo-200',
+    afterColor: 'after:border-b-indigo-200',
+  },
+  night: {
+    badge: '🌃',
+    text: '야경',
+    color: 'bg-yellow-200',
+    afterColor: 'after:border-b-yellow-200',
+  },
+  activity: {
+    badge: '🚴‍♂️',
+    text: '액티비티',
+    color: 'bg-coral-200',
+    afterColor: 'after:border-b-coral-200',
+  },
+};
+function classNames(...classes: any) {
+  return classes.filter(Boolean).join(' ');
+}
+const mockBadgeDataTotal = 40;
+const mockBadgeData = [
+  {
+    name: 'mountain',
+    value: 22,
+  },
+  {
+    name: 'sea',
+    value: 10,
+  },
+  {
+    name: 'hotel',
+    value: 4,
+  },
+  {
+    name: 'festival',
+    value: 2,
+  },
+  {
+    name: 'camping',
+    value: 2,
+  },
+  {
+    name: 'night',
+    value: 0,
+  },
+  {
+    name: 'activity',
+    value: 0,
+  },
+];
 
 const mockShortFormListsData = {
   shortForm: [
@@ -59,13 +141,52 @@ const mockShortFormListsData = {
 };
 
 function MyPage() {
+  useEffect(() => {
+    for (let i = 0; i < mockBadgeData.length; i++) {
+      const element: HTMLElement | null = document.getElementById('progress_' + mockBadgeData[i].name);
+      if (element) {
+        element.style.width = Math.floor((mockBadgeData[i].value / mockBadgeDataTotal) * 100) + '%';
+
+        if (i === 0) {
+          element.style.borderTopLeftRadius = '9999px';
+          element.style.borderBottomLeftRadius = '9999px';
+        } else if (i === mockBadgeData.length - 1 || mockBadgeData[i + 1].value === 0) {
+          element.style.borderTopRightRadius = '9999px';
+          element.style.borderBottomRightRadius = '9999px';
+        }
+      }
+    }
+  }, []);
   return (
     <div className="px-4">
       <div className="my-20">
         {/* User Section */}
-        <Avatar size={'lg'} nickname={userInfo.userId} src={userInfo.src} />
+        <Avatar size={'lg'} nickname={userInfo.userId} src={userInfo.src} badge={userInfo.badge} />
         <div className="text-center pt-2">{userInfo.profileMessage}</div>
-        <div className="grid grid-cols-2 text-center my-6">
+        {/* 프로그래스바 */}
+        <div className="w-full  h-2.5 mt-7 flex">
+          {mockBadgeData.map(
+            (data, i) =>
+              (data.value / mockBadgeDataTotal) * 100 != 0 && (
+                <>
+                  <div id={'progress_' + data.name} className={`h-2.5 ${badgeList[data.name].color}`}>
+                    {i === 0 && (
+                      <span
+                        className={`top-8 w-full relative ${
+                          badgeList[data.name].color
+                        } rounded-xl mx-1 px-3 py-1 after:absolute after:top-0 after:w-0 after:h-0 after:border-solid after:border-transparent ${
+                          badgeList[data.name].afterColor
+                        } after:border-t-0 after:-ml-20 after:-mt-2.5 after:border-[10px]`}
+                      >
+                        {badgeList[data.name].text + ' 정복자! ' + badgeList[data.name].badge}
+                      </span>
+                    )}
+                  </div>
+                </>
+              ),
+          )}
+        </div>
+        <div className="grid grid-cols-2 text-center mt-16 mb-7">
           <div>
             <p>{userInfo.followers}</p>
             <p>팔로워</p>
@@ -75,11 +196,10 @@ function MyPage() {
             <p>팔로잉</p>
           </div>
         </div>
-
         {/* Post Section */}
         <div className="grid grid-cols-2 gap-1">
           {mockShortFormListsData.shortForm.map((data) => (
-            <FullSF src={data.src} href={data.href} shortFormId={data.shortFormId} likeCount={data.likeCount}/>
+            <FullSF src={data.src} href={data.href} shortFormId={data.shortFormId} likeCount={data.likeCount} />
           ))}
         </div>
       </div>
