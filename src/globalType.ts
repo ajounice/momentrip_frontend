@@ -64,6 +64,8 @@ interface ITourInfo{
 }
 
 export interface IVerticalNavigation {
+  isBookMark : boolean;
+  setIsBookMark :Dispatch<SetStateAction<boolean>>;
   setViewComment : Dispatch<SetStateAction<boolean>>;
   setViewShare : Dispatch<SetStateAction<boolean>>;
   isHeart : boolean;
@@ -84,6 +86,8 @@ export interface IShortFormVideo{
   setViewTourInfo : Dispatch<SetStateAction<boolean>>;
   setIsHeart :  Dispatch<SetStateAction<boolean>>;
   isHeart : boolean;
+  setIsBookMark :  Dispatch<SetStateAction<boolean>>;
+  isBookMark : boolean;
 }
 
 // nav props

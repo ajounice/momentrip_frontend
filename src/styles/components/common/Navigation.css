@@ -300,3 +300,9 @@
 .dropdown-list-item:hover {
   background-color: var(--gray-300);
 }
+
+.vertical-navigation-container{
+  width : 54px;
+  height : 270px;
+  margin-bottom :35px;
+}
