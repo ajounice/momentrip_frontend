@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/pages/UploadPage.css';
-import { BottomNavigation, TopBar } from '../components/common/Navigation';
 import { RiMapPinLine } from 'react-icons/ri';
+import UploadPageDropDown from "../components/DropDown/UploadPageDropDonw";
 
 // 태그 파싱 함수
 function ParseTag(hashtags: string): string[] {
@@ -48,25 +48,9 @@ function UploadShortFormPage() {
   const [click, setClick] = useState<boolean>(false);
   const [hidden, setHidden] = useState<boolean>(false);
 
-  useEffect(() => {
-    console.log('click');
-    if (document.activeElement !== null) {
-      console.log(document.activeElement.id);
-      if (
-        document.activeElement.id === 'location' ||
-        document.activeElement.id === 'tag' ||
-        document.activeElement.id === 'introduction'
-      ) {
-        setHidden(true);
-      } else {
-        setHidden(false);
-      }
-    } else {
-      setHidden(false);
-    }
-
-    console.log(tag);
-  }, [document.activeElement]);
+  // category state
+  const [category, setCategory ] = useState('카테고리를 선택해주세요');
+  const [ categoryListView, setCategoryListView ] = useState(false);
 
   return (
     <div
@@ -129,6 +113,22 @@ function UploadShortFormPage() {
               <input type={'text'} id={'location'} className={'upload-page-location-input'} />
             </div>
             {/*https://react-kakao-maps-sdk.jaeseokim.dev/docs/sample/library/keywordBasic/*/}
+          </div>
+
+          <div>
+          {/* 카테고리 입력하는  */}
+            <div className={"upload-page-category-outer-container"}>
+              <label>카테고리</label>
+
+              <div placeholder={"카테고리를 선택해주세요"} onClick={()=>{setCategoryListView(true)}} className={"upload-page-category-container"}>
+                {category}
+              </div>
+            </div>
+            {
+              categoryListView
+              ? <UploadPageDropDown setCategoryList={setCategoryListView} setCategory={setCategory} dropDownList={["산","바다/계곡","호캉스/호텔","축제","캠핑","야경","액티비티","박물관/역사","해외 여행","쇼핑"]}/>
+              : null
+            }
           </div>
         </section>
       </div>
