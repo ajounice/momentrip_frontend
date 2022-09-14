@@ -13,6 +13,7 @@ import LoginPage from './Login/page/LoginPage';
 import { Auth } from './Login/Auth';
 import RenderingPage from './pages/RenderingPage';
 import { INavProps } from './globalType';
+import ProfileSettingPage from './pages/mypage/ProfileSettingPage';
 // import UserProfileSetting from './User/UserProfileSetting';
 // import { Modal, CommentModal } from "./components/Modal";
 
