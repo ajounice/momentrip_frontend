@@ -75,6 +75,8 @@ function ShortForm() {
   const [ viewTourInfo, setViewTourInfo ] = useState(false);
   // video like
   const [ like, setLike ] = useState(false);
+  // video book mark
+  const [ isBookMark, setIsBookMark ] = useState(false);
 
   useEffect(() => {
     console.log('current Index : ', currentVideoIndex);
@@ -134,6 +136,8 @@ function ShortForm() {
         {mockShortFormVideoData.Video.map((data) => (
           <SwiperSlide className="short-form">
             <ShortFormVideo
+              isBookMark={isBookMark}
+              setIsBookMark={setIsBookMark}
               isHeart={like}
               setIsHeart={setLike}
               setViewComment={setViewComment}

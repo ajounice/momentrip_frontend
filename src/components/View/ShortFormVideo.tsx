@@ -53,6 +53,8 @@ function ShortFormVideo(videoProps: IShortFormVideo) {
 
       {/* 인스타 릴스나 유튜브 숏츠보면 영상이랑 vertical navigation이 같이 swipe되어서 ShortFormVideo에 넣음.*/}
       <VerticalNavigation
+        setIsBookMark={videoProps.setIsBookMark}
+        isBookMark={videoProps.isBookMark}
         setViewComment={videoProps.setViewComment}
         setViewShare={videoProps.setViewShare}
         isHeart={videoProps.isHeart}

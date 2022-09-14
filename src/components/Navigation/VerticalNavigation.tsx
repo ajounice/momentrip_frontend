@@ -1,13 +1,23 @@
 import React, { useCallback, useEffect } from "react";
-import { RiHeart3Line, RiQuestionAnswerLine, RiShareForwardLine, RiListUnordered, RiHeart3Fill } from 'react-icons/ri';
+import {
+  RiHeart3Line,
+  RiQuestionAnswerLine,
+  RiShareForwardLine,
+  RiListUnordered,
+  RiHeart3Fill,
+  RiBookmarkLine, RiBookmarkFill
+} from "react-icons/ri";
 import { IVerticalNavigation } from '../../globalType';
+import '../../styles/components/common/Navigation.css';
 
 export default function VerticalNavigation({
   setViewTourInfo,
   setViewShare,
   setViewComment,
   setIsHeart,
-  isHeart
+  isHeart,
+  isBookMark,
+  setIsBookMark,
 }: IVerticalNavigation) {
   // Props
   // 해당 숏폼을 좋아요 눌렀는지
@@ -41,6 +51,11 @@ export default function VerticalNavigation({
       ) : (
         <RiHeart3Line color={"white"}  onClick={onClickHeart} className={'icon'} />
       )}
+      {
+        isBookMark ?
+          <RiBookmarkFill color={'white'} className={'icon'} onClick={()=>{setIsBookMark(false)}}/>
+          : <RiBookmarkLine color={'white'}  className={'icon'} onClick={()=>{setIsBookMark(true)}}/>
+      }
       <RiQuestionAnswerLine color={"white"} onClick={onClickComment} className={'icon'} />
       <RiShareForwardLine color={"white"}  onClick={onClickShare} className={'icon'} />
       <RiListUnordered color={"white"}  onClick={onClickInfo} className={'icon'} />
