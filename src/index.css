@@ -262,14 +262,14 @@ code {
   color: white;
   display: flex;
   align-items: center;
-  justify-content: center;
+  /* justify-content: ; */
   flex-direction: column;
 }
 
 .overlay h1 {
   font-size: 58px;
   letter-spacing: 0px;
-  margin: 0 0 5px;
+  margin: 200px 0 5px;
   font-family: 'Kalam', sans-serif;
 }
 
@@ -342,11 +342,11 @@ code {
   opacity: 1;
 }
 
-.close-icon{
-  width : 30px;
-  height : 30px;
+.close-icon {
+  width: 30px;
+  height: 30px;
 
   position: absolute;
-  right : 0;
-  margin : 5px;
+  right: 0;
+  margin: 5px;
 }
