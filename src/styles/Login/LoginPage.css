@@ -10,7 +10,7 @@
 
 .kakao-button-container {
   width: 100vw;
-  height: 40vh;
+  top: 280px;
 
   position: absolute;
   bottom: 70px;
@@ -24,38 +24,41 @@
   z-index: 900;
 }
 
-.local-login-container{
-  width : 60vw;
-  height : 19vh;
-  z-index : 999;
+.local-login-container {
+  width: 200px;
+  z-index: 999;
   /*margin-bottom : 10px;*/
+  margin: auto;
+  text-align: center;
 }
 
-.local-login-button{
-  width : 60vw;
-  height : 55px;
-  margin-top : 10px;
+.local-login-button {
+  width: 190px;
+  height: 45px;
+  margin-top: 10px;
   border-radius: 10px;
 
-  font-weight: 600;
-  font-size: 1.2rem;
-  color : white;
+  margin-bottom: 10px;
+
+  font-weight: 400;
+  font-size: 1rem;
+  color: white;
   background-color: var(--primary);
 }
 
-.kakao-login-button{
-  width : 60vw;
-  height : 55px;
-  margin-bottom : 10px;
+.kakao-login-button {
+  width: 190px;
+  height: 45px;
+  margin: auto;
 }
 
-.local-register-button{
-  color : white;
-  font-size: 1.2rem;
-  font-weight: 600;
+.local-register-button {
+  color: white;
+  font-size: 1rem;
+  font-weight: 400;
+  margin-top: 30px;
 }
 
 /* .kakao-login-button{
     z-index: 999;
 } */
-
