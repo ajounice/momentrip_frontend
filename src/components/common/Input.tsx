@@ -1,5 +1,5 @@
 import { UseFormRegisterReturn } from 'react-hook-form';
-import React from 'react';
+import React, { Dispatch, SetStateAction } from "react";
 
 interface IInput {
   type: string; // text, password
@@ -10,6 +10,7 @@ interface IInput {
   placeholder: string;
   errorMessage?: any;
   defaultValue?: string;
+  onChangeEventHandler?: Dispatch<SetStateAction<any>>;
 }
 // valid나 error msg 둘 중 하나만 필요
 
@@ -22,6 +23,8 @@ export default function Input({
   placeholder = '',
   errorMessage,
   defaultValue = '',
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onChangeEventHandler  = ()=>{}, // input 값 바뀌는 함수가 없어서 추가함.
 }: IInput) {
   return (
     <div>
@@ -40,6 +43,7 @@ export default function Input({
             {...register}
             disabled={disabled}
             defaultValue={defaultValue}
+            onChange={onChangeEventHandler}
           />
           {errorMessage && <span className="text-red-600 text-sm font-medium">{errorMessage}</span>}
         </div>
@@ -52,6 +56,7 @@ export default function Input({
             placeholder={placeholder}
             disabled={disabled}
             defaultValue={defaultValue}
+            onChange={onChangeEventHandler}
           />
           {/* {errorMessage && <span className="text-red-600 text-sm font-medium">{errorMessage}</span>}
           {validMessage && <span className="text-red-600 text-sm font-medium">{validMessage}</span>} */}

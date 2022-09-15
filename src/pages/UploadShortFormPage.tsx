@@ -52,6 +52,10 @@ function UploadShortFormPage() {
   const [category, setCategory ] = useState('카테고리를 선택해주세요');
   const [ categoryListView, setCategoryListView ] = useState(false);
 
+  const onClickCategory =()=>{
+    setCategoryListView(true);
+  }
+
   return (
     <div
       onClick={() => {
@@ -120,13 +124,14 @@ function UploadShortFormPage() {
             <div className={"upload-page-category-outer-container"}>
               <label>카테고리</label>
 
-              <div placeholder={"카테고리를 선택해주세요"} onClick={()=>{setCategoryListView(true)}} className={"upload-page-category-container"}>
+                <div placeholder={"카테고리를 선택해주세요"} onClick={onClickCategory}
+                     className={"upload-page-category-container"}>
                 {category}
               </div>
             </div>
             {
               categoryListView
-              ? <UploadPageDropDown setCategoryList={setCategoryListView} setCategory={setCategory} dropDownList={["산","바다/계곡","호캉스/호텔","축제","캠핑","야경","액티비티","박물관/역사","해외 여행","쇼핑"]}/>
+                ? <UploadPageDropDown setCategoryList={setCategoryListView} setCategory={setCategory} dropDownList={["산","바다/계곡","호캉스/호텔","축제","캠핑","야경","액티비티","박물관/역사","해외 여행","쇼핑"]}/>
               : null
             }
           </div>

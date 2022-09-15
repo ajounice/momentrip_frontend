@@ -150,6 +150,7 @@ const mockShortFormListsData = {
 };
 
 function FollowingPage() {
+  console.log("following page");
   return (
     <div className="px-4">
       <div className="my-20">
@@ -162,15 +163,15 @@ function FollowingPage() {
                   {data.userName.length > 5 ? (
                     <div className="w-20">
                       <Avatar
-                        size="md"
-                        src={data.src}
-                        nickname={data.userName.substring(0, 5) + '..'}
-                        biz={data.biz}
-                      ></Avatar>
+  size="md"
+  src={data.src}
+  nickname={data.userName.substring(0, 5) + ".."}
+  biz={data.biz}
+  />
                     </div>
                   ) : (
                     <div className="w-20">
-                      <Avatar size="md" src={data.src} nickname={data.userName} biz={data.biz}></Avatar>
+                      <Avatar size="md" src={data.src} nickname={data.userName} biz={data.biz}/>
                     </div>
                   )}
                 </>
@@ -179,17 +180,17 @@ function FollowingPage() {
           </div>
         </div>
         {/* 구분선 */}
-        <hr className="my-4 border-gray-700"></hr>
+        <hr className="my-4 border-gray-700"/>
         {/* TODO 숏폼과 아바타 합쳐진 컴포넌트 추가 */}
         <div className="grid grid-cols-2 gap-1">
           {mockShortFormListsData.shortForm.map((data) => (
             <FullSF
-              src={data.src}
-              href={data.href}
-              shortFormId={data.shortFormId}
-              likeCount={data.likeCount}
-              innerAvatar={data.innerAvatar}
-            ></FullSF>
+  src={data.src}
+  href={data.href}
+  shortFormId={data.shortFormId}
+  likeCount={data.likeCount}
+  innerAvatar={data.innerAvatar}
+  />
           ))}
         </div>
       </div>

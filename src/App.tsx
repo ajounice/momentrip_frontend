@@ -14,6 +14,7 @@ import { Auth } from './Login/Auth';
 import RenderingPage from './pages/RenderingPage';
 import { INavProps } from './globalType';
 import ProfileSettingPage from './pages/mypage/ProfileSettingPage';
+import SignUpPage from "./pages/SignUpPage";
 // import UserProfileSetting from './User/UserProfileSetting';
 // import { Modal, CommentModal } from "./components/Modal";
 
@@ -38,6 +39,9 @@ function App() {
       <Routes>
         <Route path="/" element={<RenderingPage />}>
           Rendering Page
+        </Route>
+        <Route path="/signup" element={<SignUpPage />}>
+          SignUp Page
         </Route>
         <Route path="/home" element={<HomePage />}>
           Home

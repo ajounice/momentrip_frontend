@@ -17,7 +17,6 @@ import ComSF from './pages/components/ComSF';
 import ComInput from './pages/components/ComInput';
 import ComModal from './pages/components/ComModal';
 import UploadShortFormPage from './pages/UploadShortFormPage';
-import LoginPage from './Login/page/LoginPage';
 import { Auth } from './Login/Auth';
 import TopNavigation from './components/Navigation/Navigation';
 import { PrivateRoute } from './components/WithProtected.route';
