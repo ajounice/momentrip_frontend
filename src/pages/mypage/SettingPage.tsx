@@ -3,6 +3,7 @@ import '../../styles/pages/mypage/Setting.css';
 import { TopBar } from "../../components/common/Navigation";
 import AlertModal from "../../components/common/AlertModal";
 import Input from "../../components/common/Input";
+import axios from "axios";
 
 function ChangePasswordModal(){
   return(
@@ -13,7 +14,7 @@ qwe
 }
 
 const SettingPage = () => {
-  const [ alert, setAlert ] = useState({
+  const [ Alert, setAlert ] = useState({
     quit : false,
     password : false,
   });
@@ -23,10 +24,23 @@ const SettingPage = () => {
   useEffect(()=>{
     if(quit){
       // 서버에 api 요청
+      axios.delete(`{SERVER_URL}/users/{userNickName}/quit`,{
+        headers:{
+          Authorization : "toekn"
+        }
+      })
+        .then((res)=>{
+          if(res.status==200){
+            alert("탈퇴성공");
+          }
+        })
+        .catch((err)=>{
+          alert("탈퇴에 실패하였습니다.");
+        })
    }
   },[quit])
 
-  if(alert.password){
+  if(Alert.password){
     return(
       <div className={'change-password-container'}>
         <TopBar beforeButton={true} centerText={"비밀번호 설정"} centerTextType={"page"} />
@@ -45,13 +59,13 @@ const SettingPage = () => {
 
   return <div className={'setting-page-container'}>
     {
-      alert.quit
+      Alert.quit
       ? <AlertModal okButton={true} okButtonEvent={()=>{setQuit(true)}} closeEvent={()=>{setAlert({quit:false, password: false})} } close={true} TitleText={"탈퇴하시겠습니까?"} subText={"삭제된 데이터는 복구가 불가능 합니다."} />
         : null
     }
 
     {
-      alert.password
+      Alert.password
       ? <ChangePasswordModal />
         :null
     }
