@@ -13,6 +13,7 @@ type colorType = {
 
 const colors: colorType = {
   primary: 'bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500',
+  primaryB: 'bg-white border-indigo-600 hover:bg-gray-200 focus:ring-indigo-500 text-black',
   black: 'bg-gray-900 hover:bg-gray-700 focus:ring-gray-500',
 };
 export default function Button({

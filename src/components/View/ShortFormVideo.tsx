@@ -1,12 +1,11 @@
 import ReactPlayer from 'react-player';
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import { IShortFormVideo } from '../../globalType';
-import VerticalNavigation from "../Navigation/VerticalNavigation";
-
+import VerticalNavigation from '../Navigation/VerticalNavigation';
 
 function ShortFormVideo(videoProps: IShortFormVideo) {
   // 모달이 올라와 있을 때 배경 부분이 스크롤되는 것을 막기 위한 state
-  const [ touchEvent , setTouchEvent ] = useState(false);
+  const [touchEvent, setTouchEvent] = useState(false);
 
   // // 댓글 모달
   // const [ viewComment, setViewComment ] = useState<boolean>(false);

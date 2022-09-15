@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import 'swiper/css';
 import '../../styles/components/View/ShortForm.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { A11y, Navigation, Pagination, Scrollbar } from 'swiper';
 import ShortFormVideo from './ShortFormVideo';
-import ShareModalPage from "../Modal/Vertical/BottomModalPage";
-import Share from "../Modal/Vertical/Share";
+import ShareModalPage from '../Modal/Vertical/BottomModalPage';
+import Share from '../Modal/Vertical/Share';
 import Comment from '../Modal/Vertical/Comment';
-import TourInfo from "../Modal/Vertical/TourInfo";
+import TourInfo from '../Modal/Vertical/TourInfo';
 
 // export interface IShortFormVideo{
 //   videoUrl : string;
@@ -51,7 +51,6 @@ const mockShortFormVideoData = {
   ],
 };
 
-
 // export interface IVerticalState{
 //   like : boolean;
 //
@@ -68,27 +67,26 @@ function ShortForm() {
   const [currentVideoIndex, setCurrentVideoIndex] = useState<number>(0);
 
   // share modal
-  const [ viewShare, setViewShare ] = useState(false);
+  const [viewShare, setViewShare] = useState(false);
   // comment modal
-  const [ viewComment, setViewComment ] = useState(false);
+  const [viewComment, setViewComment] = useState(false);
   // tour info modal
-  const [ viewTourInfo, setViewTourInfo ] = useState(false);
+  const [viewTourInfo, setViewTourInfo] = useState(false);
   // video like
-  const [ like, setLike ] = useState(false);
+  const [like, setLike] = useState(false);
   // video book mark
-  const [ isBookMark, setIsBookMark ] = useState(false);
+  const [isBookMark, setIsBookMark] = useState(false);
 
   useEffect(() => {
     console.log('current Index : ', currentVideoIndex);
   }, [currentVideoIndex]);
 
-  useEffect(()=>{
-    console.log("viewShare ",viewShare);
-    console.log("viewComment ",viewComment);
-    console.log("viewTourInfo ",viewTourInfo);
-    console.log("like ",like);
-  },[viewShare,viewComment,viewTourInfo,like])
-
+  useEffect(() => {
+    console.log('viewShare ', viewShare);
+    console.log('viewComment ', viewComment);
+    console.log('viewTourInfo ', viewTourInfo);
+    console.log('like ', like);
+  }, [viewShare, viewComment, viewTourInfo, like]);
 
   // touch -> 재생 멈춤/실행
   // vertical swiper -> 숏폼 next/before
@@ -103,9 +101,9 @@ function ShortForm() {
   //        loop="" src="blob:https://m.youtube.com/b60ecc3e-b394-43e1-9c1c-88d21d3a7c17"></video>
 
   return (
-    <div id={"short-form"} className="short-form-container">
+    <div id={'short-form'} className="short-form-container">
       <Swiper
-        id={"swiper"}
+        id={'swiper'}
         className="swiper-container"
         modules={[Navigation, Pagination, Scrollbar, A11y]}
         direction="vertical"
@@ -160,20 +158,19 @@ function ShortForm() {
 
         {/* tour info */}
         <ShareModalPage open={viewTourInfo} setOpen={setViewTourInfo}>
-          <TourInfo setViewTourInfo={setViewTourInfo}/>
+          <TourInfo setViewTourInfo={setViewTourInfo} />
         </ShareModalPage>
 
-         {/* comment */}
+        {/* comment */}
         <ShareModalPage open={viewComment} setOpen={setViewComment}>
-          <Comment setViewComment={setViewComment}/>
+          <Comment setViewComment={setViewComment} />
         </ShareModalPage>
 
-         {/* share */}
-        <ShareModalPage open={viewShare} setOpen={setViewShare}>
+        {/* share */}
+        {/* <ShareModalPage open={viewShare} setOpen={setViewShare}>
           <Share setViewShare={setViewShare} />
-        </ShareModalPage>
+        </ShareModalPage> */}
       </div>
-
     </div>
   );
 }
