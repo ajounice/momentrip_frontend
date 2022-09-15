@@ -9,6 +9,7 @@ import {
 } from "react-icons/ri";
 import { IVerticalNavigation } from '../../globalType';
 import '../../styles/components/common/Navigation.css';
+import axios from "axios";
 
 export default function VerticalNavigation({
   setViewTourInfo,
@@ -18,6 +19,7 @@ export default function VerticalNavigation({
   isHeart,
   isBookMark,
   setIsBookMark,
+  setCommentData,
 }: IVerticalNavigation) {
   // Props
   // 해당 숏폼을 좋아요 눌렀는지
@@ -29,10 +31,32 @@ export default function VerticalNavigation({
   }
 
   const onClickHeart = ()=>{
-    setIsHeart((prev)=>!prev);
+    axios.get(`{SERVER_URL}/forms/{form-id}/like`,
+      {
+        headers:{
+          Authorization :'token'
+        }
+      })
+      .then((res)=>{
+        if(res.status === 200){
+          setIsHeart((prev)=>!prev);
+        }
+      })
+      .catch(()=>{
+        alert("server error")
+        })
   }
 
   const onClickComment =()=>{
+    axios.get(`{SERVER_URL}/forms/{form_id}/comments`)
+      .then((res)=>{
+        if(res.status===200){
+          setCommentData(res.data.data);
+        }
+      })
+      .catch((err)=>{
+        alert(err);
+      })
     setViewComment((prev)=>!prev);
   }
 

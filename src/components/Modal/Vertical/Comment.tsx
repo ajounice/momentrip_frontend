@@ -2,6 +2,7 @@ import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from "re
 
 import '../../../styles/components/Modal/Vertical/Comment.css';
 import { RiCloseFill } from "react-icons/ri";
+import { CommentType } from "../../../globalType";
 
 // dummy data
 const dummyCommentData = [
@@ -110,10 +111,11 @@ function CommentItem({name,comment,date,userId,imagePath}:ICommentItem){
 
 interface IComment{
   setViewComment : Dispatch<SetStateAction<boolean>>;
+  commentList : CommentType[];
 }
 
 
-function Comment({setViewComment}:IComment){
+function Comment({setViewComment,commentList}:IComment){
 
   const [ comment, setComment ] = useState<string>('');
   const [ dummyComment, setDummyComment ] = useState(dummyCommentData);
@@ -178,6 +180,7 @@ function Comment({setViewComment}:IComment){
           <div>
             {
               dummyComment.map((item)=>{
+              // commentList.map((item)=>{
                 return(
                   <CommentItem name={item.name} comment={item.comment} date={item.date} userId={item.userId} imagePath={item.imagePath} />
                 )

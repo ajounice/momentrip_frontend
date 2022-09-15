@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
 import { RiDriveFill } from 'react-icons/ri';
 import { Link, useNavigate } from 'react-router-dom';
 import Input from '../components/common/Input';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 function RenderingPage() {
   const KAKAO_AUTH_URL = 'KAKAO_AUTH_URL';
@@ -16,10 +17,31 @@ function RenderingPage() {
     console.log(localPW);
   }, [localID, localPW]);
 
-  const onClickLocalLoginButton = () => {
+  const onClickKakaoLoginButton = () => {
     // 서버에 로그인 요청 보내고 토큰 받아와야함.
     // 토큰 localstroge에 저장
-  };
+    axios.get(`{SERVER_URL}/auth/kakao`)
+      .then((res)=>{console.log(res)})
+      .catch((err)=>{console.log(err)});
+  }
+
+  const onClickLocalLoginButton = () =>{
+
+    const data = new FormData();
+    data.append('email',localID);
+    data.append('password',localPW);
+
+    axios.post(`{SERVER_URL}/login`,data)
+      .then((res)=>{
+        if(res.status===200){
+          // TODO: 나중에 서버 연결하고 나서 로직 수정
+          console.log(res.data.data);
+        }
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
+  }
 
   return (
     <>
