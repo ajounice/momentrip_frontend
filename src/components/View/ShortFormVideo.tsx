@@ -59,6 +59,7 @@ function ShortFormVideo(videoProps: IShortFormVideo) {
         isHeart={videoProps.isHeart}
         setIsHeart={videoProps.setIsHeart}
         setViewTourInfo={videoProps.setViewTourInfo}
+        setCommentData={videoProps.setComment}
       />
     </>
   );

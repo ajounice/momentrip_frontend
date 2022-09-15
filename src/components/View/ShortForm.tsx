@@ -7,7 +7,8 @@ import ShortFormVideo from './ShortFormVideo';
 import ShareModalPage from '../Modal/Vertical/BottomModalPage';
 import Share from '../Modal/Vertical/Share';
 import Comment from '../Modal/Vertical/Comment';
-import TourInfo from '../Modal/Vertical/TourInfo';
+import TourInfo from "../Modal/Vertical/TourInfo";
+import { CommentType } from "../../globalType";
 
 // export interface IShortFormVideo{
 //   videoUrl : string;
@@ -69,7 +70,9 @@ function ShortForm() {
   // share modal
   const [viewShare, setViewShare] = useState(false);
   // comment modal
-  const [viewComment, setViewComment] = useState(false);
+  const [ viewComment, setViewComment ] = useState(false);
+  const [ commentData, setCommentData] = useState<CommentType[]>([]);
+
   // tour info modal
   const [viewTourInfo, setViewTourInfo] = useState(false);
   // video like
@@ -134,6 +137,7 @@ function ShortForm() {
         {mockShortFormVideoData.Video.map((data) => (
           <SwiperSlide className="short-form">
             <ShortFormVideo
+              setComment={setCommentData}
               isBookMark={isBookMark}
               setIsBookMark={setIsBookMark}
               isHeart={like}
@@ -163,7 +167,7 @@ function ShortForm() {
 
         {/* comment */}
         <ShareModalPage open={viewComment} setOpen={setViewComment}>
-          <Comment setViewComment={setViewComment} />
+          <Comment commentList={commentData} setViewComment={setViewComment}/>
         </ShareModalPage>
 
         {/* share */}

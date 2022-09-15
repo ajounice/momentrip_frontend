@@ -5,6 +5,13 @@ export type StyleType = 'line' | 'full';
 export type ButtonType = 'button' | 'submit' | 'reset';
 export type FontWeight = 'light' | 'normal' | 'bold';
 
+// Short Form 댓글 가져오기
+export interface CommentType{
+  nickName : string;
+  date : string;
+  comment : string;
+}
+
 /* Button Interface */
 export interface IButton{
   text: string;
@@ -71,6 +78,7 @@ export interface IVerticalNavigation {
   isHeart : boolean;
   setIsHeart : Dispatch<SetStateAction<boolean>>;
   setViewTourInfo : Dispatch<SetStateAction<boolean>>;
+  setCommentData : Dispatch<SetStateAction<CommentType[]>>;
 }
 
 export interface IShortFormVideo{
@@ -88,6 +96,9 @@ export interface IShortFormVideo{
   isHeart : boolean;
   setIsBookMark :  Dispatch<SetStateAction<boolean>>;
   isBookMark : boolean;
+
+  // 해당 숏폼의 comment 값을 설정하기 위한 setState
+  setComment : Dispatch<SetStateAction<CommentType[]>>;
 }
 
 // nav props
@@ -126,3 +137,5 @@ export interface ITopBar{
   plusButton? : boolean;
   plusButtonOnClickEvent? : React.MouseEventHandler<HTMLDivElement>;
 }
+
+
