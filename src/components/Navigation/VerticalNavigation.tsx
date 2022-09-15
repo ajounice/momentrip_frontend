@@ -121,30 +121,30 @@ export default function VerticalNavigation({
         <RiShareForwardLine color={'white'} onClick={onClickShare} className={'icon'} />
         <RiListUnordered color={'white'} onClick={onClickInfo} className={'icon'} />
       </section>
-      <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
-        <CustomModal open={shareModalOpen} setOpen={setShareModalOpen} title="공유하기">
-          <>
-            <div className="m-8"> </div>
-            <div className="flex gap-2">
-              <Button title="닫기" handleClick={() => setShareModalOpen(false)} color="primaryB"></Button>
-              <CopyToClipboard text={getShareLink()} onCopy={clickCopy}>
-                <button
-                  className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 disabled:bg-gray-300`}
-                >
-                  링크 복사하기
-                </button>
-              </CopyToClipboard>
-            </div>
-          </>
-        </CustomModal>
-        <BasicModal
-          open={okCopyModalOpen}
-          setOpen={() => setOkCopyModalOpen(false)}
-          title="링크가 복사되었습니다"
-          type="alert"
-          ok="닫기"
-        ></BasicModal>
-      </div>
+      {/* <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden"> */}
+      <CustomModal open={shareModalOpen} setOpen={setShareModalOpen} title="공유하기">
+        <>
+          <div className="m-8"> </div>
+          <div className="flex gap-2">
+            <Button title="닫기" handleClick={() => setShareModalOpen(false)} color="primaryB"></Button>
+            <CopyToClipboard text={getShareLink()} onCopy={clickCopy}>
+              <button
+                className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 disabled:bg-gray-300`}
+              >
+                링크 복사하기
+              </button>
+            </CopyToClipboard>
+          </div>
+        </>
+      </CustomModal>
+      <BasicModal
+        open={okCopyModalOpen}
+        setOpen={() => setOkCopyModalOpen(false)}
+        title="링크가 복사되었습니다"
+        type="alert"
+        ok="닫기"
+      ></BasicModal>
+      {/* </div> */}
     </>
   );
 }
