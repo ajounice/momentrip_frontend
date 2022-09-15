@@ -25,7 +25,7 @@ const fullSF = ({ src, href, likeCount, shortFormId, innerAvatar }: IShortForm) 
       </a>
       {innerAvatar && (
         <div className="absolute bottom-3 w-7 left-2 flex flex-col justify-center items-center">
-          <Avatar size="sm" src={innerAvatar.src}></Avatar>
+          <Avatar size="sm" src={innerAvatar.src}/>
         </div>
       )}
       {likeCount ? (

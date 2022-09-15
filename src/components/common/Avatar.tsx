@@ -81,7 +81,7 @@ export default function Avatar({ size = 'sm', src, nickname, biz = false, badge 
         <div className={`flex text-center text-md min-w-max`}>
           <img className={`rounded-full object-cover ${sizes[size]}  m-auto`} src={src} />
           <div className={`flex w-full ${maginSizes[size]}`}>
-            {biz && <BsFillPatchCheckFill className="fill-gray-400 inline-block"></BsFillPatchCheckFill>}
+            {biz && <BsFillPatchCheckFill className="fill-gray-400 inline-block"/>}
           </div>
         </div>
       ) : (
@@ -90,8 +90,8 @@ export default function Avatar({ size = 'sm', src, nickname, biz = false, badge 
           <img className={`rounded-full object-cover ${sizes[size]}  m-auto`} src={src} />
           <div className={`w-full ${maginSizes[size]} flex justify-center mt-1 text-base`}>
             {nickname}
-            {biz && <BsFillPatchCheckFill className="fill-gray-400 inline-block"></BsFillPatchCheckFill>}
-            {badge ? (
+            {biz && <BsFillPatchCheckFill className="fill-gray-400 inline-block"/>}
+            {badge? (
               <div className={`ml-1 rounded-lg ${badgeList[badge].color} w-5 h-5`}>{badgeList[badge].badge}</div>
             ) : null}
           </div>

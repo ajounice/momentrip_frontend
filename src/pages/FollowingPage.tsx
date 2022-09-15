@@ -154,7 +154,7 @@ function FollowingPage() {
   return (
     <div className="px-4">
       <div className="my-20">
-        {/* 팔로잉한 유저 리스트 */}
+      {/*  /!* 팔로잉한 유저 리스트 *!/*/}
         <div className="overflow-x-auto">
           <div className="flex whitespace-nowrap">
             {mockFollowUsersData.user.map((data) => (
@@ -163,15 +163,16 @@ function FollowingPage() {
                   {data.userName.length > 5 ? (
                     <div className="w-20">
                       <Avatar
-  size="md"
-  src={data.src}
-  nickname={data.userName.substring(0, 5) + ".."}
-  biz={data.biz}
-  />
+                        badge ={"festival"}
+                        size="md"
+                        src={data.src}
+                        nickname={data.userName.substring(0, 5) + ".."}
+                        biz={data.biz}
+                        />
                     </div>
                   ) : (
                     <div className="w-20">
-                      <Avatar size="md" src={data.src} nickname={data.userName} biz={data.biz}/>
+                      <Avatar badge={'night'} size="md" src={data.src} nickname={data.userName} biz={data.biz}/>
                     </div>
                   )}
                 </>
@@ -179,19 +180,20 @@ function FollowingPage() {
             ))}
           </div>
         </div>
-        {/* 구분선 */}
+      {/*  /!* 구분선 *!/*/}
         <hr className="my-4 border-gray-700"/>
-        {/* TODO 숏폼과 아바타 합쳐진 컴포넌트 추가 */}
+      {/*  /!* TODO 숏폼과 아바타 합쳐진 컴포넌트 추가 *!/*/}
         <div className="grid grid-cols-2 gap-1">
-          {mockShortFormListsData.shortForm.map((data) => (
-            <FullSF
-  src={data.src}
-  href={data.href}
-  shortFormId={data.shortFormId}
-  likeCount={data.likeCount}
-  innerAvatar={data.innerAvatar}
-  />
-          ))}
+          {/*{mockShortFormListsData.shortForm.map((data) => {*/}
+          {/*  return (*/}
+          {/*    <FullSF*/}
+          {/*      src={data.src}*/}
+          {/*      href={data.href}*/}
+          {/*      shortFormId={data.shortFormId}*/}
+          {/*      likeCount={data.likeCount}*/}
+          {/*      innerAvatar={data.innerAvatar}*/}
+          {/*    />)*/}
+          {/*})}*/}
         </div>
       </div>
     </div>
