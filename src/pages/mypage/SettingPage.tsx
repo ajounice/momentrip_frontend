@@ -29,7 +29,7 @@ const SettingPage = () => {
   if(alert.password){
     return(
       <div className={'change-password-container'}>
-        <TopBar beforeButton={true} centerText={"비밀번호 재설정"} centerTextType={"page"} />
+        <TopBar beforeButton={true} centerText={"비밀번호 설정"} centerTextType={"page"} />
         <div className={'password-change-inner-container'}>
           <div className={'password-change-input-container'}>
             <Input label={"현재 비밀번호"} type={"password"} id={"currentPW"} disabled={false} placeholder={"현재 비밀번호를 입력하세요"}/>
