@@ -2,6 +2,7 @@ import ReactPlayer from 'react-player';
 import React, { useEffect, useState } from 'react';
 import { IShortFormVideo } from '../../globalType';
 import VerticalNavigation from '../Navigation/VerticalNavigation';
+import ProfileInSF from "../common/ProfileInSF";
 
 function ShortFormVideo(videoProps: IShortFormVideo) {
   // 모달이 올라와 있을 때 배경 부분이 스크롤되는 것을 막기 위한 state
@@ -47,7 +48,7 @@ function ShortFormVideo(videoProps: IShortFormVideo) {
           console.log('play');
         }}
       />
-
+      <ProfileInSF />
       {/*setViewShare((prev)=>!prev)*/}
 
       {/* 인스타 릴스나 유튜브 숏츠보면 영상이랑 vertical navigation이 같이 swipe되어서 ShortFormVideo에 넣음.*/}

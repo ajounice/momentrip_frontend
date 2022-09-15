@@ -9,6 +9,7 @@ import Share from '../Modal/Vertical/Share';
 import Comment from '../Modal/Vertical/Comment';
 import TourInfo from "../Modal/Vertical/TourInfo";
 import { CommentType } from "../../globalType";
+import ProfileInSF from "../common/ProfileInSF";
 
 // export interface IShortFormVideo{
 //   videoUrl : string;
@@ -150,6 +151,7 @@ function ShortForm() {
               videoStop={data.videoStop}
               videoTitle={data.videoTitle}
             />
+            <ProfileInSF />
           </SwiperSlide>
         ))}
       </Swiper>
