@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import Avatar from '../components/common/Avatar';
 import Folder from '../components/Wish/Folder';
 import InnerTab from '../components/common/InnerTab';
+import { SERVER_API } from "../config";
+import axios from "axios";
+import { WishFolder } from "../globalType";
 
 const mockFolderListData = {
   Folders: [
@@ -42,6 +45,29 @@ function WishPage() {
   const [selected, setSelected] = useState(tabs[0]);
   const [params, setParams] = useState<string | null>();
 
+  // 한번만 마운트 되게
+  const [ mount, setMount ] = useState<number>(0);
+
+  const [ wishList, setWishList] = useState<WishFolder[]>([]);
+
+  useEffect(()=>{
+    if(mount === 0 ){
+      setMount(1);
+    }
+    else{
+      axios.get(`${SERVER_API}/wishlists`,{
+        headers : {
+          Authorization: `Bearer ${localStorage.getItem('Token')}`,
+        }
+      })
+        .then((res)=>{
+          if(res.status===200){
+            setWishList(res.data.data);
+          }
+        })
+    }
+  },[mount]);
+
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     setParams(params.get('wish_id'));
@@ -70,6 +96,12 @@ function WishPage() {
                 {mockFolderListData.Folders.map((data, i) => (
                   <Folder label={data.label} id={data.id} thumbnail={data.thumbnail} link={data.link}></Folder>
                 ))}
+                {/* FIXME: 위시리스트 섬네일 받아오게 수정되면 수정*/}
+                {/*{*/}
+                {/*  wishList.map((folder)=>{*/}
+                {/*    <Folder label={folder.name} id={folder.id} thumbnail={""} />*/}
+                {/*  })*/}
+                {/*}*/}
               </div>
             </div>
           </>
