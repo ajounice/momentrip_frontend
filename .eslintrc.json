@@ -1,0 +1,19 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  }, // js 환경
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true // jsx 활성화 여부
+    },
+    "ecmaVersion": 12, //ecma 버전
+    "sourceType": "module"
+  },
+  "plugins": ["@typescript-eslint"] //확장 라이브러리
+}

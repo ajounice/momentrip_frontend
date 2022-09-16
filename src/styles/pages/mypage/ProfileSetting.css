@@ -1,0 +1,54 @@
+.profile-setting-page-container{
+    width : 100vw;
+    height : 100vh;
+}
+
+.profile-setting-page-top-bar-container{
+    width : 100%;
+    height : 74px;
+}
+
+.profile-setting-page-inner-container{
+    width : 100%;
+    height : calc(100% - 74px);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /*justify-content: center;*/
+}
+
+.profile-setting-image-container{
+    width : 100%;
+    height : 160px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-setting-img{
+    width : 110px;
+    height : 110px;
+    border-radius: 50%;
+    border : 1px solid var(--gray-500);
+    margin-bottom : 8px;
+}
+
+.profile-setting-user-ingo-container{
+    width : 90%;
+    height : 300px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.business-account-change{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+
+    color: #0057FF;
+}

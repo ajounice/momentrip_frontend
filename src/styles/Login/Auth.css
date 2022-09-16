@@ -1,0 +1,28 @@
+.text{
+    color : black;
+    font-size : 1.2rem;
+
+    word-break:break-all;
+    margin : 1rem;
+}
+
+.container h1{
+    font-size : 3rem;
+    margin-bottom : 1rem;
+}
+
+.container{
+    width : 100vw;
+    height : 100vh;
+
+    background-color : var(--blue-300);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.container{
+    background-color: white;
+}

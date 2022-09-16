@@ -1,0 +1,64 @@
+.login-container {
+  width: 100vw;
+  height: 100vh;
+}
+
+.login-background-img {
+  width: 100vw;
+  height: 100vh;
+}
+
+.kakao-button-container {
+  width: 100vw;
+  top: 280px;
+
+  position: absolute;
+  bottom: 70px;
+  right: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 900;
+}
+
+.local-login-container {
+  width: 200px;
+  z-index: 999;
+  /*margin-bottom : 10px;*/
+  margin: auto;
+  text-align: center;
+}
+
+.local-login-button {
+  width: 190px;
+  height: 45px;
+  margin-top: 10px;
+  border-radius: 10px;
+
+  margin-bottom: 10px;
+
+  font-weight: 400;
+  font-size: 1rem;
+  color: white;
+  background-color: var(--primary);
+}
+
+.kakao-login-button {
+  width: 190px;
+  height: 45px;
+  margin: auto;
+}
+
+.local-register-button {
+  color: white;
+  font-size: 1rem;
+  font-weight: 400;
+  margin-top: 30px;
+}
+
+/* .kakao-login-button{
+    z-index: 999;
+} */

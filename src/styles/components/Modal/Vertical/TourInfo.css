@@ -1,0 +1,194 @@
+.tour-info-modal-container{
+    width : 100vw;
+    height : 70vh;
+
+    z-index: 999;
+
+    position: absolute;
+    bottom : 0;
+
+    overflow-y :scroll;
+
+    background-color: white;
+}
+
+.tour-info-modal-top-nav{
+    width : 100%;
+    height : 40px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.tour-info-modal-close-info-container{
+    width : 40px;
+    height : 100%;
+}
+
+.tour-info-modal-under-container{
+    width : 100%;
+
+    overflow-y: scroll;
+    height : calc(100% - 40px);
+}
+
+/* tour info */
+.tour-info-section{
+    width : 100%;
+    height : 160px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tour-info-img-container{
+    width : 100px;
+    height : 100px;
+    position: relative;
+}
+
+.tour-info-img{
+    width : 100px;
+    height : 100px;
+    border-radius: 15px;
+}
+
+.tour-info-img-n-text-container{
+    width : 90%;
+    height : 120px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.tour-info-text-container{
+    height : 100px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    margin-left : 12px;
+}
+
+.tour-info-location-name{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+
+    color: var(--gray-300);
+    margin-bottom : 8px;
+}
+
+.tour-info-tour-name{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 19px;
+
+    color: black;
+    margin-bottom : 8px;
+}
+
+.tour-info-price{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+
+    color: black;
+}
+
+/* bookmark */
+.book-mark-icon{
+    width : 30px;
+    height : 30px;
+
+    position: absolute;
+}
+
+.tour-info-tag-container{
+    width : 90%;
+    height : 80px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    border-bottom : 1px solid var(--gray-200);
+}
+
+.tour-info-tag{
+    margin :3px;
+}
+
+/* tour info 관련 short form */
+.tour-info-short-form-section{
+    width : auto;
+    height : 320px;
+    overflow-x: scroll;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    border-bottom : 2px solid var(--gray-300);
+}
+
+.tour-info-short-form-inner-container{
+    width : 90%;
+    height : 320px;
+
+    overflow-x : scroll;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.tour-info-full-sf-container{
+    min-width : 200px;
+    padding : 5px;
+
+}
+
+
+.tour-info-short-form-list-container{
+    height : 340px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    background-color: #63a5f1;
+    overflow-x: scroll;
+}
+
+.tour-info-short-form-container{
+    width : 180px;
+    height :300px;
+
+    margin-left : 30px;
+}
+
+/* kakao api map */
+.kakao-api-map-section{
+    width : 100%;
+    height : 300px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #cadefd;
+}
+
+.kakao-map-api-container{
+    width : 90%;
+    height : 300px;
+
+    background-color: pink;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -1,19 +1,38 @@
-import React, { useState } from 'react';
-import Tag from '../components/common/Tag';
-import FollowButton from '../components/Button/FollowButton';
-import { BottomNavigation, TopNavigation } from '../components/common/Navigation';
+import React, { useEffect, useState } from 'react';
+import { IButton } from '../globalType';
+import VerticalNavigation from '../components/Navigation/VerticalNavigation';
+import { ShortForm } from '../components/View/ShortForm';
 
 function HomePage() {
-  const [follow, setFollow] = useState<boolean>(true);
+  const defaultData: IButton = {
+    text: '팔로우',
+    buttonType: 'submit',
+    styleType: 'full',
+    color: 'red',
+    size: 'sm',
+    fontWeight: 'normal',
+    disabled: true,
+  };
+
+  const [follow, setFollow] = useState<IButton>(defaultData);
+
+  // eslint-disable-next-line no-undef,max-len,no-unused-vars
+  const onClickHandler: React.MouseEventHandler<HTMLButtonElement> = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+
+    if (follow.text === '팔로잉') {
+      setFollow(defaultData);
+    } else {
+      const prop: IButton = defaultData;
+      prop.text = '팔로잉';
+      prop.styleType = 'line';
+      setFollow(prop);
+    }
+  };
 
   return (
     <div className="home-page-container">
-      <TopNavigation />
-      Home
-      <Tag tag="Home" />
-      <FollowButton follow={follow} setFollow={setFollow} />
-
-      <BottomNavigation />
+      <ShortForm />
     </div>
   );
 }
