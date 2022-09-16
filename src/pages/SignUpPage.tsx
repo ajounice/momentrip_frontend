@@ -3,6 +3,7 @@ import '../styles/pages/Signup.css';
 import Input from "../components/common/Input";
 import axios from "axios";
 import { TopBar } from "../components/common/Navigation";
+import { SERVER_API } from "../config";
 
 function SignUpPage(){
   const [ id, setID ] = useState('');
@@ -22,31 +23,35 @@ function SignUpPage(){
   const onClickSignUp = () => {
     let flag = false;
 
-    axios.get(`{SERVER_URL}/users/${id}/duplicate`)
+    axios.get(`${SERVER_API}/users/${id}/duplicate`)
       .then((res)=>{
         if(res.status === 200){
           flag = true;
         }
+        console.log("`${SERVER_API}/users/${id}/duplicate` : ",res);
       })
-      .catch(()=>{
+      .catch((err)=>{
+        console.log("`${SERVER_API}/users/${id}/duplicate` : ",err);
         flag = false;
       });
 
 
     if(flag){
-      axios.post(`{SERVRE_URL}/auth/signup`,{
+      axios.post(`${SERVER_API}/auth/signup`,{
         email : id,
         password : pw,
       })
         .then((res)=>{
           if(res.status===200){
             // TODO : 백엔드 연결 후 로직 수정
+            console.log("`${SERVER_API}/auth/signup` : ",res.data.data);
+
             alert("로그인 성공");
           }
         })
         .catch((err)=>{
           // TODO : 백엔드 연결 후 로직 수정
-          console.log(err);
+          console.log("${SERVER_API}/auth/signup",err);
           alert("로그인 실패");
         })
     }else{
