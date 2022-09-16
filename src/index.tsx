@@ -36,6 +36,8 @@ declare global {
   }
 }
 
+
+
 root.render(
   <React.StrictMode>
     <BrowserRouter>
