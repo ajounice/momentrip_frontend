@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IButton } from '../globalType';
 import VerticalNavigation from '../components/Navigation/VerticalNavigation';
 import { ShortForm } from '../components/View/ShortForm';
@@ -34,7 +34,6 @@ function HomePage() {
     <div className="home-page-container">
       <ShortForm />
     </div>
-
   );
 }
 

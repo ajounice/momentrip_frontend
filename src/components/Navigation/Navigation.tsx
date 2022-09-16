@@ -38,8 +38,8 @@ export default function TopNavigation({ color = 'white' }) {
 
   const navigation = useNavigate();
   useEffect(() => {
-    console.log(window.location.pathname);
-    console.log(TabNavList.indexOf(window.location.pathname));
+    // console.log(window.location.pathname);
+    // console.log(TabNavList.indexOf(window.location.pathname));
 
     const path = window.location.pathname;
     path === '/'
