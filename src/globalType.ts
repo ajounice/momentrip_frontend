@@ -78,6 +78,7 @@ export interface IVerticalNavigation {
   setIsHeart : Dispatch<SetStateAction<boolean>>;
   setViewTourInfo : Dispatch<SetStateAction<boolean>>;
   setCommentData : Dispatch<SetStateAction<CommentType[]>>;
+
 }
 
 export interface IShortFormVideo{
@@ -136,4 +137,18 @@ export interface ITopBar{
   plusButtonOnClickEvent? : React.MouseEventHandler<HTMLDivElement>;
 }
 
+{/* FIXME: 위시리스트 섬네일 받아오게 수정되면 수정*/}
+// 위시리스트 폼
+export interface WishForm{
+  id : number;
+  type: "FORM"|"TOUR";
+  targetId : number;
+}
 
+{/* FIXME: 위시리스트 섬네일 받아오게 수정되면 수정*/}
+// 위시리스트 폴더
+export interface WishFolder{
+  id : number;
+  name:string;
+  wishlists : WishForm[];
+}

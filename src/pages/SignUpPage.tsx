@@ -13,7 +13,8 @@ function SignUpPage(){
   const [ duplicate, setDuplicate ] = useState(false);
 
   useEffect(()=>{
-    if( id.length > 4  && pw.length > 8 && pw2.length > 8 && pw === pw2){
+    const reg = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/gm;
+    if( reg.test(id) && pw.length > 8 && pw2.length > 8 && pw === pw2){
       setButtonActive(true);
     }
     else{

@@ -1,12 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
 import '../../styles/pages/mypage/ProfileSetting.css';
 import { TopBar } from "../components/common/Navigation";
 import Input from "../components/common/Input";
 import Avatar from "../components/common/Avatar";
 
-const rexId = '';
 
 const ProfileSettingPage = () => {
+  const [ id, setId ] =useState('');
+  const [ name, setName ] = useState('');
+  const [ introduction, setIntroduction] = useState('');
+
+  const [ profileImgSrc, setProfileImgSrc ] = useState('');
+  const [ profileImgData, setProfileImgData ] = useState('');
+
+  const [ biz, setBiz ] = useState(false);
+
+  // 한번만 마운트 하기 위한 state
+  const [ mount, setMount ] = useState(0);
+
+  useEffect(()=>{
+    if(mount === 0){
+      setMount(1);
+    }
+    else{
+    //  TODO: 사용자 기존 프로필 정보 받아오기
+    }
+  },[mount])
+
   return(
     <div className={'profile-setting-page-container'}>
       <div className={'profile-setting-page-top-bar-container'}>
@@ -35,7 +55,7 @@ const ProfileSettingPage = () => {
           <Input label={"이름"} type={"text"} id={"name"} disabled={false} placeholder={"텍스트를 입력해주세요."}/>
           {/**/}
           <Input label={"소개"} type={"text"} id={"introduction"} disabled={false} placeholder={"텍스트를 입력해주세요."}/>
-          <span className={'business-account-change'}>비지니스 계정으로 전환</span>
+          <span className={'business-account-change'}>{!biz ? "비지니스 계정으로 전환" : "일반 계정으로 전환"}</span>
         </div>
       </div>
     </div>

@@ -4,6 +4,7 @@ import { TopBar } from "../../components/common/Navigation";
 import AlertModal from "../../components/common/AlertModal";
 import Input from "../../components/common/Input";
 import axios from "axios";
+import { SERVER_API } from "../../config";
 
 function ChangePasswordModal(){
   return(
@@ -24,9 +25,9 @@ const SettingPage = () => {
   useEffect(()=>{
     if(quit){
       // 서버에 api 요청
-      axios.delete(`{SERVER_URL}/users/{userNickName}/quit`,{
+      axios.delete(`${SERVER_API}/users/{userNickName}/quit`,{
         headers:{
-          Authorization : "toekn"
+          Authorization: `Bearer ${localStorage.getItem('Token')}`,
         }
       })
         .then((res)=>{
