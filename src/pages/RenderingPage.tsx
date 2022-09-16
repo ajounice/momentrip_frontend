@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Input from '../components/common/Input';
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { SERVER_API } from "../config";
 
 function RenderingPage() {
   const KAKAO_AUTH_URL = 'KAKAO_AUTH_URL';
@@ -20,7 +21,7 @@ function RenderingPage() {
   const onClickKakaoLoginButton = () => {
     // 서버에 로그인 요청 보내고 토큰 받아와야함.
     // 토큰 localstroge에 저장
-    axios.get(`{SERVER_URL}/auth/kakao`)
+    axios.get(`${SERVER_API}/auth/kakao`)
       .then((res)=>{console.log(res)})
       .catch((err)=>{console.log(err)});
   }
@@ -31,7 +32,7 @@ function RenderingPage() {
     data.append('email',localID);
     data.append('password',localPW);
 
-    axios.post(`{SERVER_URL}/login`,data)
+    axios.post(`${SERVER_API}/auth/login`,data)
       .then((res)=>{
         if(res.status===200){
           // TODO: 나중에 서버 연결하고 나서 로직 수정
