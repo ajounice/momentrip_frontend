@@ -74,7 +74,6 @@ export interface IVerticalNavigation {
   isBookMark : boolean;
   setIsBookMark :Dispatch<SetStateAction<boolean>>;
   setViewComment : Dispatch<SetStateAction<boolean>>;
-  setViewShare : Dispatch<SetStateAction<boolean>>;
   isHeart : boolean;
   setIsHeart : Dispatch<SetStateAction<boolean>>;
   setViewTourInfo : Dispatch<SetStateAction<boolean>>;
@@ -86,10 +85,9 @@ export interface IShortFormVideo{
   videoHidden : boolean; // 보여줄지 안보여줄지
   videoStop : boolean;
   // videoUploader :
-  videoTitle : string;
+  videoTitle : string | null;
 
   // modal 띄우기 위한 props
-  setViewShare : Dispatch<SetStateAction<boolean>>;
   setViewComment : Dispatch<SetStateAction<boolean>>;
   setViewTourInfo : Dispatch<SetStateAction<boolean>>;
   setIsHeart :  Dispatch<SetStateAction<boolean>>;

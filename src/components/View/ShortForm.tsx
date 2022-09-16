@@ -1,69 +1,61 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+
 import 'swiper/css';
 import '../../styles/components/View/ShortForm.css';
+
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { A11y, Navigation, Pagination, Scrollbar } from 'swiper';
+
 import ShortFormVideo from './ShortFormVideo';
 import ShareModalPage from '../Modal/Vertical/BottomModalPage';
-import Share from '../Modal/Vertical/Share';
 import Comment from '../Modal/Vertical/Comment';
-import TourInfo from "../Modal/Vertical/TourInfo";
-import { CommentType } from "../../globalType";
-import ProfileInSF from "../common/ProfileInSF";
+import TourInfo from '../Modal/Vertical/TourInfo';
+import ProfileInSF from '../common/ProfileInSF';
 
-// export interface IShortFormVideo{
-//   videoUrl : string;
-//   videoHidden : boolean; // 보여줄지 안보여줄지
-//   videoStop : boolean;
-//   // videoUploader :
-//   videoTitle : string;
-// }
+import { CommentType } from '../../globalType';
 
-// const defaultVideoProps = {
-//   videoHidden: false,
-//   videoStop: true,
-// };
+interface IGetFormsData {
+  id: number;
+  content: string;
+  title: string | null;
+  thumbnail: string;
+  video: string;
+  viewCount: number;
+}
+interface IFormsData extends IGetFormsData {
+  videoHidden: boolean;
+  videoStop: boolean;
+}
 
 const mockShortFormVideoData = {
   Video: [
     {
-      videoUrl: 'video/s1.mp4',
+      video: 'video/s1.mp4',
       videoHidden: true,
       videoStop: false,
-      videoTitle: '첫 번째 비디오',
+      title: '첫 번째 비디오',
     },
     {
-      videoUrl: 'video/s2.mp4',
+      video: 'video/s2.mp4',
       videoHidden: false,
       videoStop: true,
-      videoTitle: '두본째 비디오',
+      title: '두본째 비디오',
     },
     {
-      videoUrl: 'video/s3.mp4',
+      video: 'video/s3.mp4',
       videoHidden: false,
       videoStop: true,
-      videoTitle: '두본째 비디오',
+      title: '두본째 비디오',
     },
     {
-      videoUrl: 'video/s4.mp4',
+      video: 'video/s4.mp4',
       videoHidden: false,
       videoStop: true,
-      videoTitle: '두본째 비디오',
+      title: '두본째 비디오',
     },
   ],
 };
-
-// export interface IVerticalState{
-//   like : boolean;
-//
-//   shortFormId : number;
-//   commentView : boolean;
-//
-//   shareView : boolean;
-//   shareLink : string;
-//
-//   tourInfoView : boolean;
-// }
 
 function ShortForm() {
   const [currentVideoIndex, setCurrentVideoIndex] = useState<number>(0);
@@ -71,8 +63,8 @@ function ShortForm() {
   // share modal
   const [viewShare, setViewShare] = useState(false);
   // comment modal
-  const [ viewComment, setViewComment ] = useState(false);
-  const [ commentData, setCommentData] = useState<CommentType[]>([]);
+  const [viewComment, setViewComment] = useState(false);
+  const [commentData, setCommentData] = useState<CommentType[]>([]);
 
   // tour info modal
   const [viewTourInfo, setViewTourInfo] = useState(false);
@@ -81,28 +73,53 @@ function ShortForm() {
   // video book mark
   const [isBookMark, setIsBookMark] = useState(false);
 
+  const [formsData, setFormsData] = useState<IFormsData[]>([
+    {
+      id: -1,
+      content: '',
+      title: '',
+      thumbnail: '',
+      video: '',
+      viewCount: 0,
+      videoHidden: false,
+      videoStop: true,
+    },
+  ]);
+
   useEffect(() => {
     console.log('current Index : ', currentVideoIndex);
   }, [currentVideoIndex]);
 
+  /* ===== 서버 연동 ===== */
+
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const axios = require('axios');
+  const instance = axios.create({
+    baseURL: 'http://test.heroforyou.space/api',
+    timeout: 3000,
+  });
+
   useEffect(() => {
-    console.log('viewShare ', viewShare);
-    console.log('viewComment ', viewComment);
-    console.log('viewTourInfo ', viewTourInfo);
-    console.log('like ', like);
-  }, [viewShare, viewComment, viewTourInfo, like]);
-
-  // touch -> 재생 멈춤/실행
-  // vertical swiper -> 숏폼 next/before
-  // 처음에 10개 비디오 프리로딩 ( 첫 영상 + 9개 )
-  // 인덱스 10부터 다시 9개 프리로딩
-  // props hidden = false/true로 보여주는거
-
-  // <video tabIndex="-1" className="video-stream html5-main-video" webkit-playsinline=""
-  //        playsInline="" x-webkit-airplay="allow" controlsList="nodownload"
-  // eslint-disable-next-line max-len
-  //        style="width: 504px; height: 896px; left: -45px; top: 0px;" title="가짜광기 눈빛 vs 찐광기 눈빛 ㅋㅋㅋㅋㅋ"
-  //        loop="" src="blob:https://m.youtube.com/b60ecc3e-b394-43e1-9c1c-88d21d3a7c17"></video>
+    async function getForms() {
+      try {
+        const response = await instance.get('/forms');
+        if (response.status === 200) {
+          const tmpData: Array<any> = response.data;
+          tmpData.map((data, i) =>
+            i === 0
+              ? (tmpData[i] = { ...data, videoHidden: true, videoStop: false })
+              : (tmpData[i] = { ...data, videoHidden: false, videoStop: true }),
+          );
+          setFormsData(response.data);
+        }
+        return null;
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    getForms();
+    // console.log(formsData);
+  }, []);
 
   return (
     <div id={'short-form'} className="short-form-container">
@@ -119,23 +136,7 @@ function ShortForm() {
           setCurrentVideoIndex(swiper.activeIndex);
         }}
       >
-        {/* <SwiperSlide className="short-form">
-          <ShortFormVideo
-            videoUrl="https://s3-us-west-2.amazonaws.com/s.cdpn.io/485050/movie.ogg"
-            videoHidden
-            videoStop={false}
-            videoTitle="첫 번째 비디오"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <ShortFormVideo
-            videoUrl="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-            videoHidden={false}
-            videoStop
-            videoTitle="두본째 비ㅣㄷ오"
-          />
-        </SwiperSlide> */}
-        {mockShortFormVideoData.Video.map((data) => (
+        {formsData.map((data) => (
           <SwiperSlide className="short-form">
             <ShortFormVideo
               setComment={setCommentData}
@@ -144,12 +145,11 @@ function ShortForm() {
               isHeart={like}
               setIsHeart={setLike}
               setViewComment={setViewComment}
-              setViewShare={setViewShare}
               setViewTourInfo={setViewTourInfo}
-              videoUrl={data.videoUrl}
+              videoUrl={data.video}
               videoHidden={data.videoHidden}
               videoStop={data.videoStop}
-              videoTitle={data.videoTitle}
+              videoTitle={data.title}
             />
             <ProfileInSF />
           </SwiperSlide>
@@ -169,13 +169,8 @@ function ShortForm() {
 
         {/* comment */}
         <ShareModalPage open={viewComment} setOpen={setViewComment}>
-          <Comment commentList={commentData} setViewComment={setViewComment}/>
+          <Comment commentList={commentData} setViewComment={setViewComment} />
         </ShareModalPage>
-
-        {/* share */}
-        {/* <ShareModalPage open={viewShare} setOpen={setViewShare}>
-          <Share setViewShare={setViewShare} />
-        </ShareModalPage> */}
       </div>
     </div>
   );

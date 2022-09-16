@@ -2,7 +2,7 @@ import ReactPlayer from 'react-player';
 import React, { useEffect, useState } from 'react';
 import { IShortFormVideo } from '../../globalType';
 import VerticalNavigation from '../Navigation/VerticalNavigation';
-import ProfileInSF from "../common/ProfileInSF";
+import ProfileInSF from '../common/ProfileInSF';
 
 function ShortFormVideo(videoProps: IShortFormVideo) {
   // 모달이 올라와 있을 때 배경 부분이 스크롤되는 것을 막기 위한 state
@@ -56,7 +56,6 @@ function ShortFormVideo(videoProps: IShortFormVideo) {
         setIsBookMark={videoProps.setIsBookMark}
         isBookMark={videoProps.isBookMark}
         setViewComment={videoProps.setViewComment}
-        setViewShare={videoProps.setViewShare}
         isHeart={videoProps.isHeart}
         setIsHeart={videoProps.setIsHeart}
         setViewTourInfo={videoProps.setViewTourInfo}

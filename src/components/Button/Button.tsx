@@ -30,7 +30,7 @@ export default function Button({
         type={type}
         disabled={disabled}
         onClick={handleClick}
-        className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 ${colors[color]} disabled:bg-gray-300`}
+        className={`w-full flex justify-center py-2 px-4 border rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 ${colors[color]} disabled:bg-gray-300`}
       >
         {title}
       </button>
