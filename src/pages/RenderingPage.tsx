@@ -35,8 +35,8 @@ function RenderingPage() {
     axios.post(`${SERVER_API}/auth/login`,data)
       .then((res)=>{
         if(res.status===200){
-          // TODO: 나중에 서버 연결하고 나서 로직 수정
-          console.log(res.data.data);
+          localStorage.setItem('Token',res.data.data);
+          window.location.assign('/home');
         }
       })
       .catch((err)=>{
@@ -62,7 +62,7 @@ function RenderingPage() {
               type={'text'}
               id={'id'}
               disabled={false}
-              placeholder={'ID'}
+              placeholder={'Email'}
             />
             <Input
               onChangeEventHandler={(e) => {

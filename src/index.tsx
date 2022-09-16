@@ -24,6 +24,7 @@ import Profile from './pages/Profile';
 import SettingPage from './pages/mypage/SettingPage';
 import ProfileSettingPage from './pages/mypage/ProfileSettingPage';
 import TourInfoPage from './pages/TourInfoInfo';
+import AdditionalInfo from "./pages/mypage/AdditionalInfo";
 
 const root = ReactDOM.createRoot(
   // eslint-disable-next-line no-undef
@@ -47,6 +48,7 @@ root.render(
           Rendering Page
         </Route>
         <Route path="/auth/kakao/callback" element={<Auth />} />
+        <Route path="/add/data" element={<AdditionalInfo/>} />
 
         {/* required login */}
         <Route path="/" element={<PrivateRoute />}>
