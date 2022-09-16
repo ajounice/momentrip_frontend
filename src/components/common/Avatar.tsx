@@ -72,7 +72,7 @@ export default function Avatar({ size = 'sm', src, nickname, biz = false, badge 
     /* TODO 이미지가 세로로 긴 경우 가로 크기가 작은 부모 안에서 아바타 비율이 찌그러지는 현상 수정 필요 */
   }
   // nicknameDir 'r'의 경우 xs와 sm에서만 사용합니다.
-  console.log(badgeList[badge].badge);
+  // console.log(badgeList[badge].badge);
   return (
     <>
       {!nickname ? (
@@ -81,7 +81,7 @@ export default function Avatar({ size = 'sm', src, nickname, biz = false, badge 
         <div className={`flex text-center text-md min-w-max`}>
           <img className={`rounded-full object-cover ${sizes[size]}  m-auto`} src={src} />
           <div className={`flex w-full ${maginSizes[size]}`}>
-            {biz && <BsFillPatchCheckFill className="fill-gray-400 inline-block"/>}
+            {biz && <BsFillPatchCheckFill className="fill-gray-400 inline-block" />}
           </div>
         </div>
       ) : (
@@ -90,8 +90,8 @@ export default function Avatar({ size = 'sm', src, nickname, biz = false, badge 
           <img className={`rounded-full object-cover ${sizes[size]}  m-auto`} src={src} />
           <div className={`w-full ${maginSizes[size]} flex justify-center mt-1 text-base`}>
             {nickname}
-            {biz && <BsFillPatchCheckFill className="fill-gray-400 inline-block"/>}
-            {badge? (
+            {biz && <BsFillPatchCheckFill className="fill-gray-400 inline-block" />}
+            {badge ? (
               <div className={`ml-1 rounded-lg ${badgeList[badge].color} w-5 h-5`}>{badgeList[badge].badge}</div>
             ) : null}
           </div>
