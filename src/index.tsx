@@ -1,5 +1,5 @@
 import './input.css';
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -24,15 +24,23 @@ import Profile from './pages/Profile';
 import SettingPage from './pages/mypage/SettingPage';
 import ProfileSettingPage from './pages/mypage/ProfileSettingPage';
 import TourInfoPage from './pages/TourInfoInfo';
-import AdditionalInfo from "./pages/mypage/AdditionalInfo";
-import FollowPage from "./pages/mypage/FollowPage";
-import WishForm from "./pages/wish/WishForm";
-import WishTour from "./pages/wish/WishTour";
+import AdditionalInfo from './pages/mypage/AdditionalInfo';
+import FollowPage from './pages/mypage/FollowPage';
+import WishForm from './pages/wish/WishForm';
+import WishTour from './pages/wish/WishTour';
+import SignUpPage from './pages/SignUpPage';
+import LoginPage from './Login/page/LoginPage';
+import RenderingPage from './pages/RenderingPage';
 
 const root = ReactDOM.createRoot(
   // eslint-disable-next-line no-undef
   document.getElementById('root') as HTMLElement,
 );
+
+// const [accessToken, setAccessToken] = useState<string | null>();
+// useEffect(() => {
+
+// }, []);
 
 declare global {
   interface Window {
@@ -40,21 +48,17 @@ declare global {
   }
 }
 
-
-
 root.render(
   <React.StrictMode>
     <BrowserRouter>
       <TopNavigation />
       <Routes>
-        <Route path="/" element={<App />}>
-          Rendering Page
-        </Route>
+        <Route path="/" element={<RenderingPage />}></Route>
         <Route path="/auth/kakao/callback" element={<Auth />} />
-        <Route path="/add/data" element={<AdditionalInfo/>} />
-
+        <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/login" element={<LoginPage />}></Route>
         {/* required login */}
-        <Route path="/" element={<PrivateRoute />}>
+        <Route path="/" element={<PrivateRoute isAuth={window.localStorage.getItem('Token') ? true : false} />}>
           <Route path="/home" element={<HomePage />} />
 
           <Route path="/following" element={<FollowingPage />} />
@@ -65,6 +69,7 @@ root.render(
           <Route path="/mypage/follow" element={<FollowPage />} />
           <Route path="/wish" element={<WishPage />} />
           <Route path="/upload" element={<UploadShortFormPage />} />
+          <Route path="/add/data" element={<AdditionalInfo />} />
           <Route path="/alarm" element={<AlarmPage />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/tourinfo" element={<TourInfoPage />} />
@@ -77,7 +82,7 @@ root.render(
           <Route path="/com-input" element={<ComInput />} />
           <Route path="/com-sf" element={<ComSF />} />
           <Route path="/com-modal" element={<ComModal />} />
-          <Route path="/*" element={<App />} />
+          {/* <Route path="/*" element={<App />} /> */}
         </Route>
       </Routes>
     </BrowserRouter>

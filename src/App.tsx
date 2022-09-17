@@ -14,7 +14,7 @@ import { Auth } from './Login/Auth';
 import RenderingPage from './pages/RenderingPage';
 import { INavProps } from './globalType';
 import ProfileSettingPage from './pages/mypage/ProfileSettingPage';
-import SignUpPage from "./pages/SignUpPage";
+import SignUpPage from './pages/SignUpPage';
 // import UserProfileSetting from './User/UserProfileSetting';
 // import { Modal, CommentModal } from "./components/Modal";
 
@@ -36,7 +36,7 @@ function App() {
 
   return (
     <>
-      <Routes>
+      {/* <Routes>
         <Route path="/" element={<RenderingPage />}>
           Rendering Page
         </Route>
@@ -67,11 +67,8 @@ function App() {
         <Route path="/auth/kakao/callback" element={<Auth />}>
           Auth
         </Route>
-        {/* // TODO test 용 */}
-        {/* <Route path={'/test'} element={<Modal />}>
-          test
-        </Route> */}
       </Routes>
+  */}
     </>
   );
 }

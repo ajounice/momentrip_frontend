@@ -1,5 +1,5 @@
-import React from 'react';
-
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 interface IFolder {
   label?: string;
   id: number;
@@ -8,6 +8,8 @@ interface IFolder {
 }
 
 const Folder = ({ label, id, thumbnail, link }: IFolder) => {
+  /* ===== 서버 연동 ===== */
+
   return (
     <div className="">
       <a href={'/wish?wish_id=' + id}>
@@ -15,6 +17,10 @@ const Folder = ({ label, id, thumbnail, link }: IFolder) => {
           {thumbnail.length === 1 ? (
             <div className="w-full relative after:pb-[100%] after:block">
               <img src={thumbnail[0]} className="w-full h-full object-cover absolute" />
+            </div>
+          ) : thumbnail.length === 0 ? (
+            <div className="w-full relative after:pb-[100%] after:block">
+              <div className="w-full h-full absolute" />
             </div>
           ) : (
             <div className="grid grid-rows-2 grid-cols-2">
