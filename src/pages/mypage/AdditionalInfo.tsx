@@ -17,26 +17,62 @@ function AdditionalInfo(){
   // 추가 정보 입력 완료
   const onClickSubmit = (e:any) => {
     if( id !== '' && name !== ''){
-      axios.patch(`${SERVER_API}/users`, {
-        "nickname" : id,
-        "name":name,
-        "intro":introduction,
-      },
-        {
-          headers : {
+      if(profileImgSrc !== ''){
+        axios.patch(`${SERVER_API}/users/my/edit/image`,
+          profileImgData,{
+          headers:{
             Authorization: `Bearer ${localStorage.getItem('Token')}`,
           }
-        })
+          })
+          .then((res)=>{
+            setProfileImgSrc(res.data.data);
+          })
+          .catch((err)=>{
+            alert("프로필 이미지 수정에서 오류 발생");
+          })
+      }
+
+      // nickname 중복 확인하기
+      axios({
+        url : `${SERVER_API}/users/nickname/duplicate`,
+        method :"get",
+        data : {
+          "nickname" : id
+        },
+        headers : {
+          Authorization: `Bearer ${localStorage.getItem('Token')}`,
+        }
+      })
         .then((res)=>{
-          if(res.status === 200){
-            // TODO :수정해야함
-            alert("첫 로그인 후 프로필 설정 성공");
+          if(res.status === 200 && res.data.data === false){
+            // 닉네임 중복이 아니라면 프로필 수정 요청
+            axios.patch(`${SERVER_API}/users/my`, {
+                "nickname" : id,
+                "name":name,
+                "intro":introduction,
+              },
+              {
+                headers : {
+                  Authorization: `Bearer ${localStorage.getItem('Token')}`,
+                }
+              })
+              .then((res)=>{
+                if(res.status === 200){
+                  alert("프로필 설정 성공");
+                  window.location.assign('/home');
+                }
+              })
+              .catch((err)=>{
+                alert("프로필 설정 오류");
+              })
+          }
+          else if(res.data.data === true){
+            alert("중복된 닉네임 입니다.");
           }
         })
         .catch((err)=>{
-          alert("오류");
+          alert("닉네임 중복 검사 실패");
         })
-      //TODO: 프로필 사진 요청 보내기
     }
     else{
       alert("필수 정보를 다 입력해주세요.");
