@@ -187,11 +187,15 @@ function MyPage() {
           )}
         </div>
         <div className="grid grid-cols-2 text-center mt-16 mb-7">
-          <div>
+          <div onClick={()=>{
+            window.location.assign('/mypage/follow?type=follower');
+          }}>
             <p>{userInfo.followers}</p>
             <p>팔로워</p>
           </div>
-          <div>
+          <div onClick={()=>{
+            window.location.assign('/mypage/follow?type=follow');
+          }}>
             <p>{userInfo.following}</p>
             <p>팔로잉</p>
           </div>
