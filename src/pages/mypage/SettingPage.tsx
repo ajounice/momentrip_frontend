@@ -9,7 +9,7 @@ import { SERVER_API } from "../../config";
 function ChangePasswordModal(){
   return(
     <div className={'password-change-modal-container'}>
-qwe
+        qwe
     </div>
   )
 }
