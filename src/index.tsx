@@ -26,6 +26,8 @@ import ProfileSettingPage from './pages/mypage/ProfileSettingPage';
 import TourInfoPage from './pages/TourInfoInfo';
 import AdditionalInfo from "./pages/mypage/AdditionalInfo";
 import FollowPage from "./pages/mypage/FollowPage";
+import WishForm from "./pages/wish/WishForm";
+import WishTour from "./pages/wish/WishTour";
 
 const root = ReactDOM.createRoot(
   // eslint-disable-next-line no-undef
@@ -66,6 +68,8 @@ root.render(
           <Route path="/alarm" element={<AlarmPage />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/tourinfo" element={<TourInfoPage />} />
+          <Route path={'/wishlist/:folderId/form/:formId'} element={<WishForm />} />
+          <Route path={'/wishlist/:folderId/tour/:formId'} element={<WishTour />} />
 
           {/* required admin */}
           <Route path="/com-avatar" element={<ComAvatar />} />

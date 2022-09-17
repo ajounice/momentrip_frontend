@@ -1,0 +1,67 @@
+.wish-tour-container{
+    width : 100vw;
+    height : 100vh;
+
+    overflow-y: scroll;
+}
+
+.wish-tour-inner-container{
+    width : 100vw;
+    height : calc(100% - 75px);
+
+    margin-top : 75px;
+
+    overflow-y: scroll;
+}
+
+.tour-info-image-container{
+    width : 100vw;
+    height : 250px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-bottom : 1px solid var(--gray-200);
+}
+
+.tour-info-tag-price-container{
+    width : 100vw;
+    height : 70px;
+
+    padding : 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-bottom : 1px solid var(--gray-200);
+
+}
+
+.price-span{
+    font-size : 20px;
+}
+
+.tour-info-tag-list{
+    width : 100%;
+    height :auto;
+
+    padding : 10px;
+    border-bottom : 1px solid var(--gray-200);
+}
+
+.tour-info-image{
+    width : 70vw;
+    height : 200px;
+    max-width : 300px;
+    border-radius: 20px;
+}
+
+.tour-info-map-container{
+    margin-top : 20px;
+
+    padding : 20px;
+
+    width : 100vw;
+    height : 100vw;
+}
