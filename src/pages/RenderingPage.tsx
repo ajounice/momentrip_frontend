@@ -1,9 +1,9 @@
 import { RiDriveFill } from 'react-icons/ri';
 import { Link, useNavigate } from 'react-router-dom';
 import Input from '../components/common/Input';
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { SERVER_API } from "../config";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { SERVER_API } from '../config';
 
 function RenderingPage() {
   const KAKAO_AUTH_URL = 'KAKAO_AUTH_URL';
@@ -21,28 +21,36 @@ function RenderingPage() {
   const onClickKakaoLoginButton = () => {
     // 서버에 로그인 요청 보내고 토큰 받아와야함.
     // 토큰 localstroge에 저장
-    axios.get(`${SERVER_API}/auth/kakao`)
-      .then((res)=>{console.log(res)})
-      .catch((err)=>{console.log(err)});
-  }
+    axios
+      .get(`${SERVER_API}/auth/kakao`)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-  const onClickLocalLoginButton = () =>{
+  const onClickLocalLoginButton = () => {
+    const data = {
+      email: localID,
+      password: localPW,
+    };
 
-    const data = new FormData();
-    data.append('email',localID);
-    data.append('password',localPW);
-
-    axios.post(`${SERVER_API}/auth/login`,data)
-      .then((res)=>{
-        if(res.status===200){
-          localStorage.setItem('Token',res.data.data);
+    axios
+      .post(`${SERVER_API}/auth/login`, data)
+      .then((res) => {
+        if (res.status === 201) {
+          // 201 created
+          localStorage.setItem('Token', res.data.accessToken);
           window.location.assign('/home');
         }
+        console.log(res.status);
       })
-      .catch((err)=>{
+      .catch((err) => {
         console.log(err);
-      })
-  }
+      });
+  };
 
   return (
     <>
