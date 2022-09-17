@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useInterval } from 'react-use';
 
 import 'swiper/css';
 import '../../styles/components/View/ShortForm.css';
@@ -73,6 +74,8 @@ function ShortForm() {
   // video book mark
   const [isBookMark, setIsBookMark] = useState(false);
 
+  const [accessToken, setAccessToken] = useState<string | null>();
+
   const [formsData, setFormsData] = useState<IFormsData[]>([
     {
       id: -1,
@@ -99,10 +102,19 @@ function ShortForm() {
     timeout: 3000,
   });
 
+  function sleep(ms: number) {
+    return new Promise((r) => setTimeout(r, ms));
+  }
+
   useEffect(() => {
     async function getForms() {
       try {
-        const response = await instance.get('/forms');
+        const response = await instance.get('/forms', {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+
         if (response.status === 200) {
           const tmpData: Array<any> = response.data;
           tmpData.map((data, i) =>
@@ -117,8 +129,13 @@ function ShortForm() {
         console.error(error);
       }
     }
+
     getForms();
     // console.log(formsData);
+  }, [accessToken]);
+
+  useEffect(() => {
+    setAccessToken(window.localStorage.getItem('Token'));
   }, []);
 
   return (
