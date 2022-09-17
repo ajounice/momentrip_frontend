@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import '../../styles/pages/mypage/Follow.css';
 import { TopBar } from "../../components/common/Navigation";
 import Follow from "../../components/Card/Follow";
@@ -9,6 +9,16 @@ function FollowPage(){
     follower : true,
     follow : false,
   });
+
+  useEffect(()=>{
+    const query = window.location.href.slice(window.location.href.search('=')+1);
+    if(query === 'follow'){
+      setCurrentTab({
+        follower : false,
+        follow : true,
+      });
+    }
+  },[]);
 
   return(
     <div className={'follow-following-page-container'}>
@@ -26,24 +36,16 @@ function FollowPage(){
       </div>
 
       <div className={'follow-following-inner-container'}>
-          <Follower />
-          <Follow />
-          <Follower />
-          <Follow />
-          <Follower />
-          <Follow />
-          <Follower />
-          <Follow />
-          <Follower />
-          <Follow />
-          <Follower />
-          <Follow />
-          <Follower />
-          <Follow />
-          <Follower />
-          <Follow />
-          <Follower />
-          <Follow />
+        {
+          currentTab.follower
+          ? <Follower />
+            : null
+        }
+        {
+          currentTab.follow
+          ? <Follow />
+            :null
+        }
       </div>
     </div>
   );
