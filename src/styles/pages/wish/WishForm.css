@@ -1,0 +1,7 @@
+.wish-form-container{
+    width : 100vw;
+    height : 100%;
+
+    /*margin-top :50px;*/
+    background-color: var(--gray-400);
+}
