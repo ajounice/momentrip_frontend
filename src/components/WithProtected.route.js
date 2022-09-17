@@ -27,9 +27,8 @@ export const WithProtectedRoute = ({ element: Component, ...rest }) => {
   );
 };
 
-export const PrivateRoute = () =>{
-  // TODO BE로 auth 체크
-  const auth = true;
+export const PrivateRoute = ({isAuth}) =>{
+  const auth = isAuth;
   // const auth = null;
 
   // 로그인 성공 시 자식 요소 반환, 아니면 login 페이지로 이동

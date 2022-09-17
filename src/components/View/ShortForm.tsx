@@ -101,11 +101,6 @@ function ShortForm() {
     baseURL: 'http://test.heroforyou.space/api',
     timeout: 3000,
   });
-
-  function sleep(ms: number) {
-    return new Promise((r) => setTimeout(r, ms));
-  }
-
   useEffect(() => {
     async function getForms() {
       try {

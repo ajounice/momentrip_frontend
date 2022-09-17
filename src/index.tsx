@@ -1,5 +1,5 @@
 import './input.css';
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -24,23 +24,26 @@ import Profile from './pages/Profile';
 import SettingPage from './pages/mypage/SettingPage';
 import ProfileSettingPage from './pages/mypage/ProfileSettingPage';
 import TourInfoPage from './pages/TourInfoInfo';
-import AdditionalInfo from "./pages/mypage/AdditionalInfo";
-import FollowPage from "./pages/mypage/FollowPage";
-import WishForm from "./pages/wish/WishForm";
-import WishTour from "./pages/wish/WishTour";
+import AdditionalInfo from './pages/mypage/AdditionalInfo';
+import FollowPage from './pages/mypage/FollowPage';
+import WishForm from './pages/wish/WishForm';
+import WishTour from './pages/wish/WishTour';
 
 const root = ReactDOM.createRoot(
   // eslint-disable-next-line no-undef
   document.getElementById('root') as HTMLElement,
 );
 
+// const [accessToken, setAccessToken] = useState<string | null>();
+// useEffect(() => {
+
+// }, []);
+
 declare global {
   interface Window {
     kakao: any;
   }
 }
-
-
 
 root.render(
   <React.StrictMode>
@@ -51,10 +54,10 @@ root.render(
           Rendering Page
         </Route>
         <Route path="/auth/kakao/callback" element={<Auth />} />
-        <Route path="/add/data" element={<AdditionalInfo/>} />
+        <Route path="/add/data" element={<AdditionalInfo />} />
 
         {/* required login */}
-        <Route path="/" element={<PrivateRoute />}>
+        <Route path="/" element={<PrivateRoute isAuth={window.localStorage.getItem('Token') ? true : false} />}>
           <Route path="/home" element={<HomePage />} />
 
           <Route path="/following" element={<FollowingPage />} />

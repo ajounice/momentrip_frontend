@@ -2,7 +2,7 @@ import React, { MouseEventHandler, useEffect, useState } from 'react';
 import '../../styles/components/common/Navigation.css';
 import { useNavigate } from 'react-router-dom';
 
-import { RiNotification2Line } from 'react-icons/ri';
+import { RiNotification2Line, RiRegisteredFill } from 'react-icons/ri';
 import { RiInboxArchiveLine, RiUser3Line, RiHomeHeartLine, RiVideoAddLine } from 'react-icons/ri';
 import { TopBar } from '../common/Navigation';
 import CustomModal from '../common/CustomModal';
@@ -11,6 +11,9 @@ import AlarmCard from '../Card/AlarmCard';
 
 import Input from '../common/Input';
 import Button from '../Button/Button';
+import axios from 'axios';
+import { SERVER_API } from '../../config';
+import { useForm } from 'react-hook-form';
 const defaultCurrent = {
   home: true,
   search: false,
@@ -27,14 +30,44 @@ const mockAlarmData = {};
 export default function TopNavigation({ color = 'white' }) {
   const [selected, setSelected] = useState({ text: '홈', color: 'white' });
   const [paramId, setParamId] = useState('');
-  // const [path, setPath] = useState<string>('');
-
+  const {
+    register,
+    watch,
+    setValue,
+    formState: { errors, isSubmitted },
+    getValues,
+    handleSubmit,
+  } = useForm({});
+  const [path, setPath] = useState<string>('');
+  const [accessToken, setAccessToken] = useState<string | null>();
   const [addFolderOpen, setAddFolderOpen] = useState(false);
   async function addFolderRequest() {
-    const name = document.getElementById('folderName');
-    // TODO 서버에 폴더 추가 요청 후 새로고침
+    await axios
+      .post(
+        `${SERVER_API}/wishlists/new`,
+        {
+          name: watch('wishFolderName'),
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        },
+      )
+      .then((res) => {
+        if (res.status === 200) {
+          console.log('success');
+        }
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     location.reload();
   }
+  useEffect(() => {
+    setAccessToken(window.localStorage.getItem('Token'));
+  }, []);
 
   const navigation = useNavigate();
   useEffect(() => {
@@ -64,7 +97,7 @@ export default function TopNavigation({ color = 'white' }) {
   }, [window.location.pathname]);
 
   const userInfo = {
-    userName: '수연',
+    userName: 'test',
   };
   const TabNavList = ['/home', '/following', '/search'];
   const noLoginPageList = ['/login', '/'];
@@ -121,7 +154,7 @@ export default function TopNavigation({ color = 'white' }) {
         window.location.search ? (
           <TopBar
             alarmOnClickEvent={() => setAlarmOpen(true)}
-            centerText={'폴더 아이디에 따른 폴더이름'}
+            centerText={''}
             centerTextType={'page'}
             dropdown={'wish'}
             beforeButton={true}
@@ -238,6 +271,7 @@ export default function TopNavigation({ color = 'white' }) {
               id="folderName"
               disabled={false}
               placeholder="폴더 이름을 입력하세요"
+              register={register('wishFolderName')}
             ></Input>
             <div className="my-2">
               <Button title="확인" handleClick={addFolderRequest}></Button>

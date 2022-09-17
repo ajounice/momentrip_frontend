@@ -20,6 +20,8 @@ import CustomModal from '../common/CustomModal';
 import SquareSF from '../ShortForm/SquareSF';
 import ModalPage from '../common/ModalPage';
 import Input from '../common/Input';
+import { SERVER_API } from '../../config';
+import { useForm } from 'react-hook-form';
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ');
@@ -38,45 +40,84 @@ export default function VerticalNavigation({
   // 해당 숏폼에 대한 정보
   // 해당 숏폼에 달린 댓글 정보
 
+  const [shareModalOpen, setShareModalOpen] = useState(false);
   const onClickShare = () => {
     setShareModalOpen(true);
   };
-
+  const {
+    register,
+    watch,
+    setValue,
+    formState: { errors, isSubmitted },
+    getValues,
+    handleSubmit,
+  } = useForm({});
+  const [accessToken, setAccessToken] = useState<string | null>();
+  const [addFolderOpen, setAddFolderOpen] = useState(false);
+  const instance = axios.create({
+    baseURL: 'http://test.heroforyou.space/api',
+    timeout: 3000,
+  });
+  // TODO 수정 필요
   const onClickHeart = () => {
-    axios
-      .get(`{SERVER_URL}/forms/{form-id}/like`, {
-        headers: {
-          Authorization: 'token',
-        },
-      })
-      .then((res) => {
-        if (res.status === 200) {
-          setIsHeart((prev) => !prev);
-        }
-      })
-      .catch(() => {
-        alert('server error');
-      });
+    // instance
+    //   .get(`{SERVER_URL}/forms/{form-id}/like`, {
+    //     headers: {
+    //       Authorization: 'token',
+    //     },
+    //   })
+    //   .then((res) => {
+    //     if (res.status === 200) {
+    //       setIsHeart((prev) => !prev);
+    //     }
+    //   })
+    //   .catch(() => {
+    //     alert('server error');
+    //   });
   };
 
-  // const [wishlist, setWishlist] = useState()
-  const [wishlist, setWishlist] = useState(['호텔', '바다', '부산여행', '아무거나']);
+  interface IWish {
+    id: number;
+    name: string;
+    wishlists: [];
+  }
+  const [wishlist, setWishlist] = useState<IWish[]>();
+  // const [wishlist, setWishlist] = useState(['호텔', '바다', '부산여행', '아무거나']);
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+
   useEffect(() => {
-    setWishlist;
-  }, []);
+    async function getWishs() {
+      try {
+        const response = await instance.get('/wishlists', {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+
+        if (response.status === 200) {
+          setWishlist(response.data);
+          console.log(response.data);
+        }
+        return null;
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    getWishs();
+  }, [accessToken]);
 
   const onClickComment = () => {
-    axios
-      .get(`{SERVER_URL}/forms/{form_id}/comments`)
-      .then((res) => {
-        if (res.status === 200) {
-          setCommentData(res.data.data);
-        }
-      })
-      .catch((err) => {
-        alert(err);
-      });
-    setViewComment((prev) => !prev);
+    // instance
+    //   .get(`{SERVER_URL}/forms/{form_id}/comments`)
+    //   .then((res) => {
+    //     if (res.status === 200) {
+    //       setCommentData(res.data.data);
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     alert(err);
+    //   });
+    // setViewComment((prev) => !prev);
   };
 
   const onClickInfo = () => {
@@ -112,7 +153,6 @@ export default function VerticalNavigation({
   const [okModalOpen, setOkModalOpen] = useState(false);
   const [okModalMessage, setOkModalMessage] = useState('완료되었습니다');
   const [bookmarkModalOpen, setBookmarkModalOpen] = useState(false);
-  const [addFolderOpen, setAddFolderOpen] = useState(false);
 
   useEffect(() => {
     console.log('isHeart : ', isHeart);
@@ -144,7 +184,33 @@ export default function VerticalNavigation({
     return colorItems[Math.floor(Math.random() * colorItems.length)];
   }
 
-  const [shareModalOpen, setShareModalOpen] = useState(false);
+  async function addFolderRequest() {
+    await instance
+      .post(
+        `${SERVER_API}/wishlists/new`,
+        {
+          name: watch('wishFolderName'),
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        },
+      )
+      .then((res) => {
+        if (res.status === 200) {
+          console.log('success');
+        }
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    location.reload();
+  }
+  useEffect(() => {
+    setAccessToken(window.localStorage.getItem('Token'));
+  }, []);
   return (
     <>
       <section className={'vertical-navigation-container'}>
@@ -176,7 +242,7 @@ export default function VerticalNavigation({
           className={'icon'}
           onClick={() => {
             // setIsBookMark(true);
-            wishlist.length !== 0 ? setBookmarkModalOpen(true) : setAddFolderOpen(true);
+            wishlist !== undefined ? setBookmarkModalOpen(true) : setAddFolderOpen(true);
           }}
         />
         <RiQuestionAnswerLine color={'white'} onClick={onClickComment} className={'icon'} />
@@ -209,7 +275,7 @@ export default function VerticalNavigation({
       <CustomModal open={bookmarkModalOpen} setOpen={setBookmarkModalOpen} title="위시리스트 저장">
         <>
           <ul role="list" className="mt-3 grid grid-cols-2 gap-5">
-            {wishlist.map((data, i) => (
+            {wishlist?.map((data, i) => (
               <li key={i} className="col-span-1 flex rounded-md shadow-md">
                 <div
                   className={classNames(
@@ -217,12 +283,12 @@ export default function VerticalNavigation({
                     'flex-shrink-0 flex items-center justify-center w-10 text-white text-sm font-medium rounded-l-md',
                   )}
                 >
-                  {data[0]}
+                  {data.name[0]}
                 </div>
                 <div className="flex flex-1 items-center justify-between truncate rounded-r-md border-t border-r border-b border-gray-300 bg-white">
                   <div className="flex-1 truncate px-2 py-2 text-sm">
                     <button className="font-medium text-gray-900 hover:text-gray-600" onClick={() => clickWish(i)}>
-                      {data}
+                      {data.name}
                     </button>
                   </div>
                 </div>
@@ -239,9 +305,10 @@ export default function VerticalNavigation({
             id="folderName"
             disabled={false}
             placeholder="폴더 이름을 입력하세요"
+            register={register('wishFolderName')}
           ></Input>
           <div className="my-2">
-            <Button title="확인" handleClick={() => firstWishRequest()}></Button>
+            <Button title="확인" handleClick={addFolderRequest}></Button>
           </div>
         </div>
       </ModalPage>
