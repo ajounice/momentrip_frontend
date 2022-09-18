@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from "react";
 import '../../styles/pages/MyPage.css';
 import Avatar from '../../components/common/Avatar';
 import FullSF from '../../components/ShortForm/FullSF';
+import axios from "axios";
+import { SERVER_API } from "../../config";
 
 // 서버에서 가져온 정보
 const userInfo = {
@@ -140,7 +142,23 @@ const mockShortFormListsData = {
   ],
 };
 
+interface MyInfo{
+  id : number;
+  email : string;
+  nickname : string;
+  password : null;
+  name : string;
+  intro : string;
+  type : boolean;
+  image : string;
+}
+
 function MyPage() {
+  const [ myInfo, setMyIfo ] = useState<MyInfo|null>(null);
+  const [ mount, setMount ] = useState(0);
+  const [accessToken, setAccessToken] = useState<string | null>();
+
+
   useEffect(() => {
     for (let i = 0; i < mockBadgeData.length; i++) {
       const element: HTMLElement | null = document.getElementById('progress_' + mockBadgeData[i].name);
@@ -157,6 +175,29 @@ function MyPage() {
       }
     }
   }, []);
+
+  useEffect(()=>{
+    if(mount === 0) {
+      setAccessToken(window.localStorage.getItem('Token'));
+      setMount(1);
+      console.log(mount);
+    }
+    else{
+      console.log(mount);
+      axios.get(`${SERVER_API}/users`,{
+        headers : {
+          Authorization: `Bearer ${accessToken}`,
+        }
+      })
+        .then((res)=>{
+          console.log(res);
+          if(res.status === 200){
+
+          }
+        })
+    }
+  },[mount]);
+
   return (
     <div className="px-4">
       <div className="my-20">

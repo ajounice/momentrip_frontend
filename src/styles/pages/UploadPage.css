@@ -20,6 +20,15 @@
 
 .upload-page-file-thumbnail{
     border-radius: 15px;
+    width : 150px;
+    height : 150px;
+
+    object-fit: cover;
+
+    border : 1px solid var(--gray-200);
+
+    overflow-x: hidden;
+    word-break: break-all;
 }
 
 .upload-page-sf-info-container{

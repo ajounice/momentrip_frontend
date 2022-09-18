@@ -1,4 +1,3 @@
-import { RiDriveFill } from 'react-icons/ri';
 import { Link, useNavigate } from 'react-router-dom';
 import Input from '../components/common/Input';
 import React, { useEffect, useState } from 'react';
@@ -45,7 +44,6 @@ function RenderingPage() {
           localStorage.setItem('Token', res.data.accessToken);
           window.location.assign('/home');
         }
-        console.log(res.status);
       })
       .catch((err) => {
         console.log(err);
