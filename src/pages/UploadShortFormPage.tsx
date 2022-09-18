@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import '../styles/pages/UploadPage.css';
 import { RiMapPinLine } from 'react-icons/ri';
 import UploadPageDropDown from "../components/DropDown/UploadPageDropDonw";
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import VideoThumbnail from 'react-video-thumbnail';
 
 // 태그 파싱 함수
 function ParseTag(hashtags: string): string[] {
@@ -48,6 +51,9 @@ function UploadShortFormPage() {
   const [click, setClick] = useState<boolean>(false);
   const [hidden, setHidden] = useState<boolean>(false);
 
+  const [ imgSrc, setImgSrc ] = useState('');
+  const [ imgData, setImgData ] = useState('');
+
   // category state
   const [category, setCategory ] = useState('카테고리를 선택해주세요');
   const [ categoryListView, setCategoryListView ] = useState(false);
@@ -55,6 +61,30 @@ function UploadShortFormPage() {
   const onClickCategory =()=>{
     setCategoryListView(true);
   }
+
+  useEffect(()=>{
+    console.log(imgSrc);
+  },[imgSrc]);
+
+  const onClickShortForm = (e : any) => {
+    console.log("e : ",e.target.src);
+    console.log(e.target.files[0]);
+
+    if (e.target.files.length > 0) {
+      const objectUrl = URL.createObjectURL(e.target.files[0]);
+      console.log(typeof objectUrl);
+      // setImgSrc(objectUrl);
+      e.target.src = objectUrl;
+      setImgData(e.target.files[0]);
+      console.log("objectUrl : ",objectUrl);
+
+      return () => URL.revokeObjectURL(objectUrl);
+      // URL.revokeObjectURL(objectUrl);
+    }
+    setImgSrc('/images/defaultImg.png');
+    setImgData(e.target.files[0]);
+  }
+
 
   return (
     <div
@@ -65,13 +95,25 @@ function UploadShortFormPage() {
     >
       <div className="mt-20">
         <section className={'upload-page-file-thumbnail-container'}>
-          <img
-            alt={'short form thumbnail'}
-            className={'upload-page-file-thumbnail'}
-            src={'https://picsum.photos/200'}
-            width={150}
-            height={150}
-          />
+          <label htmlFor={'file-upload'}>
+            {/*<div className={'upload-page-file-thumbnail'} style={{backgroundImage:imgSrc}}>*/}
+              <video
+                autoPlay
+                loop
+                className={'upload-page-file-thumbnail'}
+                // src={imgSrc}
+                id={"videoThumbnail"}
+                // alt={'short form thumbnail'}
+                width={150}
+                height={150}
+              >
+                <source src={imgSrc} type={"video"} />
+              </video>
+            {/*</div>*/}
+            <input
+              // accept = "video/*"
+              id="file-upload" style={{ display: 'none' }} type="file" onChange={onClickShortForm} />
+          </label>
           {/* 업로드된 영상 썸네일 */}
         </section>
 
