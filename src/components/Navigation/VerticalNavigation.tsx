@@ -31,9 +31,11 @@ export default function VerticalNavigation({
   setViewComment,
   setIsHeart,
   isHeart,
+  setCurrentSfId,
   isBookMark,
   setIsBookMark,
   setCommentData,
+  shortFormId,
 }: IVerticalNavigation) {
   // Props
   // 해당 숏폼을 좋아요 눌렀는지
@@ -58,22 +60,35 @@ export default function VerticalNavigation({
     baseURL: 'http://test.heroforyou.space/api',
     timeout: 3000,
   });
+
+  useEffect(()=>{
+    console.log("setCurrentSfId : ", shortFormId);
+    setCurrentSfId(shortFormId);
+  },[])
+
+
+  useEffect(()=>{
+    console.log(isHeart);
+  },[isHeart]);
+
   // TODO 수정 필요
   const onClickHeart = () => {
     // instance
-    //   .get(`{SERVER_URL}/forms/{form-id}/like`, {
-    //     headers: {
-    //       Authorization: 'token',
-    //     },
-    //   })
-    //   .then((res) => {
-    //     if (res.status === 200) {
-    //       setIsHeart((prev) => !prev);
-    //     }
-    //   })
-    //   .catch(() => {
-    //     alert('server error');
-    //   });
+      axios({
+        method: 'post',
+        url: `${SERVER_API}/forms/${shortFormId}/like`,
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        }
+      })
+      .then((res) => {
+        if (res.status === 201) {
+          setIsHeart((prev) => !prev);
+        }
+      })
+      .catch(() => {
+        alert('server error');
+      });
   };
 
   interface IWish {
@@ -117,7 +132,7 @@ export default function VerticalNavigation({
     //   .catch((err) => {
     //     alert(err);
     //   });
-    // setViewComment((prev) => !prev);
+    setViewComment((prev) => !prev);
   };
 
   const onClickInfo = () => {
@@ -211,6 +226,7 @@ export default function VerticalNavigation({
   useEffect(() => {
     setAccessToken(window.localStorage.getItem('Token'));
   }, []);
+
   return (
     <>
       <section className={'vertical-navigation-container'}>

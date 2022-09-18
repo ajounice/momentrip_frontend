@@ -5,6 +5,9 @@ import UploadPageDropDown from "../components/DropDown/UploadPageDropDonw";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import VideoThumbnail from 'react-video-thumbnail';
+import { TopBar } from "../components/common/Navigation";
+import axios from "axios";
+import { SERVER_API } from "../config";
 
 // 태그 파싱 함수
 function ParseTag(hashtags: string): string[] {
@@ -51,8 +54,13 @@ function UploadShortFormPage() {
   const [click, setClick] = useState<boolean>(false);
   const [hidden, setHidden] = useState<boolean>(false);
 
+  const [ location, setLocation ] = useState('');
+
   const [ imgSrc, setImgSrc ] = useState('');
   const [ imgData, setImgData ] = useState('');
+
+
+  const [accessToken, setAccessToken] = useState<string | null>();
 
   // category state
   const [category, setCategory ] = useState('카테고리를 선택해주세요');
@@ -66,17 +74,27 @@ function UploadShortFormPage() {
     console.log(imgSrc);
   },[imgSrc]);
 
-  const onClickShortForm = (e : any) => {
-    console.log("e : ",e.target.src);
-    console.log(e.target.files[0]);
+  useEffect(()=>{
+    setAccessToken(window.localStorage.getItem('Token'));
+  },[]);
 
+  const onClickShortForm = (e : any) => {
     if (e.target.files.length > 0) {
       const objectUrl = URL.createObjectURL(e.target.files[0]);
-      console.log(typeof objectUrl);
       // setImgSrc(objectUrl);
-      e.target.src = objectUrl;
+
+      console.log(e.target.files[0].name);
+      const fileName = document.getElementById('fileName') as HTMLDivElement;
+      fileName.innerText = e.target.files[0].name;
+
+      // const a = document.getElementById('source') as HTMLSourceElement;
+      // a.src = objectUrl;
+      // a.load();
+      // a.onloadeddata = function(){
+      //   a.play();
+      // }
+
       setImgData(e.target.files[0]);
-      console.log("objectUrl : ",objectUrl);
 
       return () => URL.revokeObjectURL(objectUrl);
       // URL.revokeObjectURL(objectUrl);
@@ -85,6 +103,42 @@ function UploadShortFormPage() {
     setImgData(e.target.files[0]);
   }
 
+  const onClickUpload = (e:any) => {
+    const data = new FormData();
+
+    if(category ==='카테고리를 선택해주세요'){
+      alert("카테고리를 선택해주세요.");
+      return;
+    }
+
+    if(imgData === '') {
+      alert("동영상을 업로드해주세요.");
+      return;
+    }
+
+    const tagList = ParseTag(tag);
+    tagList.push("*"+category);
+
+    data.append('tag', tagList.toString());
+    data.append('video',imgData);
+    data.append('site',location);
+
+    axios({
+      method:"post",
+      url:`${SERVER_API}/forms`,
+      headers : {
+        Authorization: `Bearer ${accessToken}`,
+      },
+      data : data,
+    })
+      .then((res)=>{
+        console.log(res);
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
+
+  }
 
   return (
     <div
@@ -93,25 +147,19 @@ function UploadShortFormPage() {
       }}
       className="upload-page-container"
     >
+      <TopBar beforeButton={true} centerText={"업로드"} centerTextType={"page"} checkButton={true} checkButtonOnClickEvent={onClickUpload}/>
       <div className="mt-20">
         <section className={'upload-page-file-thumbnail-container'}>
           <label htmlFor={'file-upload'}>
-            {/*<div className={'upload-page-file-thumbnail'} style={{backgroundImage:imgSrc}}>*/}
-              <video
-                autoPlay
-                loop
-                className={'upload-page-file-thumbnail'}
-                // src={imgSrc}
-                id={"videoThumbnail"}
-                // alt={'short form thumbnail'}
-                width={150}
-                height={150}
-              >
-                <source src={imgSrc} type={"video"} />
-              </video>
-            {/*</div>*/}
+            <div id={'fileName'} className={'upload-page-file-thumbnail'}>
+            {/*<video autoPlay loop  width={"470"} height={"470"} controls >*/}
+            {/*  /!*<source src={'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'}/>*!/*/}
+            {/*  <source id={'source'} />*/}
+            {/*</video>*/}
+            {/*  <img src={'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'}/>*/}
+            </div>
             <input
-              // accept = "video/*"
+              accept = "video/*"
               id="file-upload" style={{ display: 'none' }} type="file" onChange={onClickShortForm} />
           </label>
           {/* 업로드된 영상 썸네일 */}
@@ -156,7 +204,7 @@ function UploadShortFormPage() {
             <div className={'upload-page-add-location-inner-container'}>
               <RiMapPinLine className={'upload-page-location-icon'} />
 
-              <input type={'text'} id={'location'} className={'upload-page-location-input'} />
+              <input type={'text'} id={'location'} onChange={(e)=>{setLocation(e.currentTarget.value)}} className={'upload-page-location-input'} />
             </div>
             {/*https://react-kakao-maps-sdk.jaeseokim.dev/docs/sample/library/keywordBasic/*/}
           </div>

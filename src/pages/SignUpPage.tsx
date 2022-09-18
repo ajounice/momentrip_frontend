@@ -13,8 +13,9 @@ function SignUpPage(){
   const [ duplicate, setDuplicate ] = useState(false);
 
   useEffect(()=>{
-    const reg = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/gm;
-    if( reg.test(id) && pw.length > 8 && pw2.length > 8 && pw === pw2){
+    const reg = /^[a-zA-Z0-9]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/gm;
+
+    if( reg.test(id) && pw.length >= 8 && pw2.length >= 8 && pw === pw2){
       setButtonActive(true);
     }
     else{
@@ -24,10 +25,11 @@ function SignUpPage(){
 
   const onClickDuplicate = () => {
     console.log("onClickDuplicate");
+
     // TODO:ID 중복확인
     axios.get(`${SERVER_API}/users/${id}/duplicate`)
       .then((res)=>{
-        if(res.status === 200){
+        if(res.status === 201){
           setDuplicate(true);
         }
       })
@@ -44,7 +46,7 @@ function SignUpPage(){
         password : pw,
       })
         .then((res)=>{
-          if(res.status===200){
+          if(res.status===201){
             alert('회원가입 성공');
             window.location.assign('/');
           }
@@ -63,8 +65,9 @@ function SignUpPage(){
             <Input onChangeEventHandler={(e)=>{setID(e.currentTarget.value)}} label={"Email"} type={"text"} id={"id"} disabled={false} placeholder={"Email을 입력해주세요."} />
             <Input onChangeEventHandler={(e)=>{setPW(e.currentTarget.value)}} label={"PW"} type={"password"} id={"pw"} disabled={false} placeholder={"PW를 입력해주세요."} />
             <Input onChangeEventHandler={(e)=>{setPW2(e.currentTarget.value)}} label={"PW Check"} type={"password"} id={"pw2"} disabled={false} placeholder={"PW를 입력해주세요."} />
-            <button onClick={duplicate ?  ()=>{console.log()}: onClickDuplicate } className={duplicate ?"active-submit-button" :  "submit-button"}>ID 중복확인</button>
-            <button onClick={buttonActive && duplicate ? onClickSignUp : ()=>{console.log()}} className={buttonActive ?"active-submit-button" :  "submit-button"}>완료</button>
+            <span className={pw === pw2 ? 'pw-pw2-correct' : 'pw-pw2-incorrect'}>{pw === pw2  ? "비밀번호가 일치합니다." : "비밀번호가 일치하지 않습니다."}</span>
+            {/*<button onClick={duplicate ?  ()=>{console.log()}: onClickDuplicate } className={duplicate ?"active-submit-button" :  "submit-button"}>ID 중복확인</button>*/}
+            <button onClick={buttonActive ? onClickSignUp : ()=>{console.log()}} className={buttonActive ?"active-submit-button" :  "submit-button"}>완료</button>
           </div>
       </div>
     </div>

@@ -1,22 +1,43 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import '../../styles/components/common/ProfileInSF.css';
 import Avatar from "./Avatar";
 
-function ProfileInSF(){
+
+export interface IUserInfoInSF{
+  email : string;
+  id : number;
+  image : string;
+  intro : string;
+  name : string;
+  nickname : string;
+  password : string;
+  type : boolean;
+}
+
+interface IProfileSF{
+  user : IUserInfoInSF;
+}
+
+// { image, type, nickname, name, intro, email, password, id}:IUserInfoInSF
+function ProfileInSF({user}:IProfileSF){
   const [ follow, setFollow ] = useState(false);
 
   const onClickFollow = () => {
     setFollow((prev)=>!prev)
   }
 
+  useEffect(()=>{
+    console.log("ProfileSF : ",user);
+  },[]);
+
   return(
     <div className={'profile-in-sf-container'}>
       <div className={'profile-container'}>
         <Avatar
-          src={"https://picsum.photos/200"}
-          nickname={"바다냥이"}
+          src={user !== null && user.image !== '' ? user.image : '/img/profile_default.png'}
+          nickname={user !== null ? user.nickname : "유저"}
           size={'md'}
-          biz={true}
+          biz={user !== null ? user.type : false}
           badge={"night"}
         />
       </div>
