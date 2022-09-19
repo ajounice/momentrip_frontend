@@ -97,7 +97,7 @@ export default function TopNavigation({ color = 'white' }) {
   }, [window.location.pathname]);
 
   const userInfo = {
-    userName: 'test',
+    userName: '',
   };
   const TabNavList = ['/home', '/following', '/search'];
   const noLoginPageList = ['/login', '/'];

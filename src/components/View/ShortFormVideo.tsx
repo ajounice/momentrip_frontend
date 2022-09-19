@@ -1,11 +1,11 @@
 import ReactPlayer from 'react-player';
 import React, { useEffect, useState } from 'react';
-import { CommentType, IShortFormVideo } from "../../globalType";
+import { CommentType, IShortFormVideo } from '../../globalType';
 import VerticalNavigation from '../Navigation/VerticalNavigation';
 import ProfileInSF from '../common/ProfileInSF';
-import ShareModalPage from "../Modal/Vertical/BottomModalPage";
-import TourInfo from "../Modal/Vertical/TourInfo";
-import Comment from "../Modal/Vertical/Comment";
+import ShareModalPage from '../Modal/Vertical/BottomModalPage';
+import TourInfo from '../Modal/Vertical/TourInfo';
+import Comment from '../Modal/Vertical/Comment';
 
 function ShortFormVideo(videoProps: IShortFormVideo) {
   // 모달이 올라와 있을 때 배경 부분이 스크롤되는 것을 막기 위한 state
@@ -14,7 +14,7 @@ function ShortFormVideo(videoProps: IShortFormVideo) {
   const [viewComment, setViewComment] = useState(false);
   const [commentData, setCommentData] = useState<CommentType[]>([]);
 
-  const [ commentList , setCommentList ] = useState<CommentType[][]>([]);
+  const [commentList, setCommentList] = useState<CommentType[][]>([]);
 
   // tour info modal
   const [viewTourInfo, setViewTourInfo] = useState(false);
@@ -22,7 +22,6 @@ function ShortFormVideo(videoProps: IShortFormVideo) {
   const [like, setLike] = useState(false);
   // video book mark
   const [isBookMark, setIsBookMark] = useState(false);
-
 
   // // 댓글 모달
   // const [ viewComment, setViewComment ] = useState<boolean>(false);
@@ -64,7 +63,7 @@ function ShortFormVideo(videoProps: IShortFormVideo) {
           console.log('play');
         }}
       />
-      <ProfileInSF user={videoProps.user}/>
+      <ProfileInSF user={videoProps.user} />
       {/*setViewShare((prev)=>!prev)*/}
 
       <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
@@ -81,7 +80,12 @@ function ShortFormVideo(videoProps: IShortFormVideo) {
 
         {/* comment */}
         <ShareModalPage open={viewComment} setOpen={setViewComment}>
-          <Comment shortFormId={videoProps.shortFormId} user={videoProps.user} commentList={commentList} setViewComment={setViewComment} />
+          <Comment
+            shortFormId={videoProps.shortFormId}
+            user={videoProps.user}
+            commentList={commentList}
+            setViewComment={setViewComment}
+          />
         </ShareModalPage>
       </div>
 
