@@ -35,7 +35,8 @@ export default function VerticalNavigation({
   isBookMark,
   setIsBookMark,
   setCommentData,
-  shortFormId,
+  currentVideoIndex = 0,
+  shortFormId = 0,
 }: IVerticalNavigation) {
   // Props
   // 해당 숏폼을 좋아요 눌렀는지
@@ -61,26 +62,25 @@ export default function VerticalNavigation({
     timeout: 3000,
   });
 
-  useEffect(()=>{
-    console.log("setCurrentSfId : ", shortFormId);
+  useEffect(() => {
+    console.log('setCurrentSfId : ', shortFormId);
     setCurrentSfId(shortFormId);
-  },[])
+  }, []);
 
-
-  useEffect(()=>{
+  useEffect(() => {
     console.log(isHeart);
-  },[isHeart]);
+  }, [isHeart]);
 
   // TODO 수정 필요
   const onClickHeart = () => {
     // instance
-      axios({
-        method: 'post',
-        url: `${SERVER_API}/forms/${shortFormId}/like`,
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        }
-      })
+    axios({
+      method: 'post',
+      url: `${SERVER_API}/forms/${shortFormId}/like`,
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
       .then((res) => {
         if (res.status === 201) {
           setIsHeart((prev) => !prev);
@@ -145,9 +145,31 @@ export default function VerticalNavigation({
     setOkModalMessage('복사가 완료되었습니다');
   };
 
-  function clickWish(folderId: number) {
+  async function clickWish(folderId: number) {
     setBookmarkModalOpen(false);
-    console.log(folderId);
+    await instance
+      .put(
+        `${SERVER_API}/wishlists/${folderId}`,
+        {
+          type: 'FORM',
+          targetId: currentVideoIndex + 1,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        },
+      )
+      .then((res) => {
+        if (res.status === 200) {
+          console.log('success');
+        }
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    location.reload();
   }
   const navigation = useNavigate();
   const getShareLink = () => {

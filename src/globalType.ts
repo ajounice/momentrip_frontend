@@ -80,7 +80,8 @@ export interface IVerticalNavigation {
   setIsHeart : Dispatch<SetStateAction<boolean>>;
   setViewTourInfo : Dispatch<SetStateAction<boolean>>;
   setCommentData : Dispatch<SetStateAction<CommentType[]>>;
-  shortFormId : number;
+  currentVideoIndex?: number;
+  shortFormId ?: number;
 }
 
 export interface IShortFormVideo{
@@ -100,6 +101,7 @@ export interface IShortFormVideo{
   isHeart : boolean;
   setIsBookMark :  Dispatch<SetStateAction<boolean>>;
   isBookMark : boolean;
+  currentVideoIndex?: number;
 
   // 해당 숏폼의 comment 값을 설정하기 위한 setState
   setComment : Dispatch<SetStateAction<CommentType[]>>;
