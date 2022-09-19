@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Fragment } from 'react';
 
 import { Menu, Transition } from '@headlessui/react';
-import { RiMore2Fill } from 'react-icons/ri';
+import { RiFileUploadLine, RiMore2Fill } from 'react-icons/ri';
 import ModalPage from '../common/ModalPage';
 import Input from '../common/Input';
 import Button from '../Button/Button';
@@ -32,8 +32,26 @@ const WishDropDown = () => {
 
   function deleteFolderHandler() {
     const id = new URLSearchParams(location.search).get('wish_id');
-    console.log(id);
-    // TODO folder 삭제 요청 후 /wish 페이지로 보내기
+
+    async function getData() {
+      try {
+        const res = await instance.delete('/wishlists/' + id, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+
+        if (res.status === 200) {
+          history.back();
+        }
+        console.log(res);
+        return null;
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    getData();
   }
 
   function editFolderNameRequest() {
@@ -41,6 +59,19 @@ const WishDropDown = () => {
     // TODO 폴더이름 변경 후 새로고침
     location.reload();
   }
+  const [accessToken, setAccessToken] = useState<string | null>();
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const axios = require('axios');
+  const instance = axios.create({
+    baseURL: 'http://test.heroforyou.space/api',
+    timeout: 3000,
+  });
+  useEffect(() => {
+    // const params = new URLSearchParams(location.search);
+    // setParams(params.get('wish_id'));
+    setAccessToken(window.localStorage.getItem('Token'));
+  }, []);
+
   return (
     <>
       <Menu as="div" className="relative inline-block text-left">
@@ -74,7 +105,7 @@ const WishDropDown = () => {
                   </button>
                 )}
               </Menu.Item>
-              <Menu.Item>
+              {/* <Menu.Item>
                 {({ active }) => (
                   <button
                     className={classNames(
@@ -86,7 +117,7 @@ const WishDropDown = () => {
                     폴더 이름 변경
                   </button>
                 )}
-              </Menu.Item>
+              </Menu.Item> */}
             </div>
           </Menu.Items>
         </Transition>
