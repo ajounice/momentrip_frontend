@@ -1,12 +1,27 @@
 import ReactPlayer from 'react-player';
 import React, { useEffect, useState } from 'react';
-import { IShortFormVideo } from '../../globalType';
+import { CommentType, IShortFormVideo } from '../../globalType';
 import VerticalNavigation from '../Navigation/VerticalNavigation';
 import ProfileInSF from '../common/ProfileInSF';
+import ShareModalPage from '../Modal/Vertical/BottomModalPage';
+import TourInfo from '../Modal/Vertical/TourInfo';
+import Comment from '../Modal/Vertical/Comment';
 
 function ShortFormVideo(videoProps: IShortFormVideo) {
   // 모달이 올라와 있을 때 배경 부분이 스크롤되는 것을 막기 위한 state
   const [touchEvent, setTouchEvent] = useState(false);
+
+  const [viewComment, setViewComment] = useState(false);
+  const [commentData, setCommentData] = useState<CommentType[]>([]);
+
+  const [commentList, setCommentList] = useState<CommentType[][]>([]);
+
+  // tour info modal
+  const [viewTourInfo, setViewTourInfo] = useState(false);
+  // video like
+  const [like, setLike] = useState(false);
+  // video book mark
+  const [isBookMark, setIsBookMark] = useState(false);
 
   // // 댓글 모달
   // const [ viewComment, setViewComment ] = useState<boolean>(false);
@@ -48,19 +63,43 @@ function ShortFormVideo(videoProps: IShortFormVideo) {
           console.log('play');
         }}
       />
-      <ProfileInSF />
+      <ProfileInSF user={videoProps.user} />
       {/*setViewShare((prev)=>!prev)*/}
+
+      <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
+        {/* comment, tour info ModalPage 유사한 새로운 component 생성 */}
+        {/*<ModalPage open={verticalState.commentView} setOpen={(state)=>{{...verticalState}, commentView : state}>*/}
+        {/*  <Comment></Comment>*/}
+        {/*  }*/}
+        {/*</ModalPage>*/}
+
+        {/* tour info */}
+        <ShareModalPage open={viewTourInfo} setOpen={setViewTourInfo}>
+          <TourInfo setViewTourInfo={setViewTourInfo} />
+        </ShareModalPage>
+
+        {/* comment */}
+        <ShareModalPage open={viewComment} setOpen={setViewComment}>
+          <Comment
+            shortFormId={videoProps.shortFormId}
+            user={videoProps.user}
+            commentList={commentList}
+            setViewComment={setViewComment}
+          />
+        </ShareModalPage>
+      </div>
 
       {/* 인스타 릴스나 유튜브 숏츠보면 영상이랑 vertical navigation이 같이 swipe되어서 ShortFormVideo에 넣음.*/}
       <VerticalNavigation
+        setCurrentSfId={videoProps.setCurrentSfId}
+        shortFormId={videoProps.shortFormId}
         setIsBookMark={videoProps.setIsBookMark}
         isBookMark={videoProps.isBookMark}
-        setViewComment={videoProps.setViewComment}
+        setViewComment={setViewComment}
         isHeart={videoProps.isHeart}
         setIsHeart={videoProps.setIsHeart}
-        setViewTourInfo={videoProps.setViewTourInfo}
+        setViewTourInfo={setViewTourInfo}
         setCommentData={videoProps.setComment}
-        currentVideoIndex={videoProps.currentVideoIndex}
       />
     </>
   );

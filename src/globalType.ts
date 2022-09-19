@@ -1,4 +1,5 @@
 import React, { Dispatch, SetStateAction } from "react";
+import { IUserInfoInSF } from "./components/common/ProfileInSF";
 
 export type Size = 'sm' | 'md' | 'lg';
 export type StyleType = 'line' | 'full';
@@ -7,9 +8,9 @@ export type FontWeight = 'light' | 'normal' | 'bold';
 
 // Short Form 댓글 가져오기
 export interface CommentType{
-  nickName : string;
-  date : string;
-  comment : string;
+  id : number;
+  content : string;
+  user : IUserInfoInSF;
 }
 
 /* Button Interface */
@@ -71,6 +72,7 @@ interface ITourInfo{
 }
 
 export interface IVerticalNavigation {
+  setCurrentSfId:Dispatch<SetStateAction<number>>;
   isBookMark : boolean;
   setIsBookMark :Dispatch<SetStateAction<boolean>>;
   setViewComment : Dispatch<SetStateAction<boolean>>;
@@ -78,15 +80,19 @@ export interface IVerticalNavigation {
   setIsHeart : Dispatch<SetStateAction<boolean>>;
   setViewTourInfo : Dispatch<SetStateAction<boolean>>;
   setCommentData : Dispatch<SetStateAction<CommentType[]>>;
-  currentVideoIndex: number;
+  currentVideoIndex?: number;
+  shortFormId ?: number;
 }
 
 export interface IShortFormVideo{
+  setCurrentSfId:Dispatch<SetStateAction<number>>;
   videoUrl : string;
   videoHidden : boolean; // 보여줄지 안보여줄지
   videoStop : boolean;
   // videoUploader :
   videoTitle : string | null;
+
+  shortFormId : number;
 
   // modal 띄우기 위한 props
   setViewComment : Dispatch<SetStateAction<boolean>>;
@@ -95,10 +101,12 @@ export interface IShortFormVideo{
   isHeart : boolean;
   setIsBookMark :  Dispatch<SetStateAction<boolean>>;
   isBookMark : boolean;
-  currentVideoIndex: number;
+  currentVideoIndex?: number;
 
   // 해당 숏폼의 comment 값을 설정하기 위한 setState
   setComment : Dispatch<SetStateAction<CommentType[]>>;
+
+  user : IUserInfoInSF;
 }
 
 // nav props
