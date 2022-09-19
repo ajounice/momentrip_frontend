@@ -44,9 +44,10 @@ function RenderingPage() {
           localStorage.setItem('Token', res.data.accessToken);
           window.location.assign('/home');
         }
-      })
+     })
       .catch((err) => {
         console.log(err);
+        alert("이메일 또는 비밀번호를 잘못입력하였습니다.");
       });
   };
 
