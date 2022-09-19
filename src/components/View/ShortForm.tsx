@@ -76,6 +76,7 @@ function ShortForm() {
 
   useEffect(() => {
     console.log('current Index : ', currentVideoIndex);
+    // console.log(formsData);
   }, [currentVideoIndex]);
 
   /* ===== 서버 연동 ===== */

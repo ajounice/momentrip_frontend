@@ -24,11 +24,13 @@ const Folder = ({ label, id, thumbnail, link }: IFolder) => {
             </div>
           ) : (
             <div className="grid grid-rows-2 grid-cols-2">
-              {thumbnail.map(() => (
-                <div className="w-full relative after:pb-[100%] after:block">
-                  <img src={thumbnail[0]} className="w-full h-full object-cover absolute" />
-                </div>
-              ))}
+              {thumbnail.map((data, i) =>
+                i < 4 ? (
+                  <div className="w-full relative after:pb-[100%] after:block">
+                    <img src={thumbnail[0]} className="w-full h-full object-cover absolute" />
+                  </div>
+                ) : null,
+              )}
             </div>
           )}
         </div>

@@ -1,74 +1,116 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import '../styles/pages/Signup.css';
-import Input from "../components/common/Input";
-import axios from "axios";
-import { TopBar } from "../components/common/Navigation";
-import { SERVER_API } from "../config";
+import Input from '../components/common/Input';
+import axios from 'axios';
+import { TopBar } from '../components/common/Navigation';
+import { SERVER_API } from '../config';
 
-function SignUpPage(){
-  const [ id, setID ] = useState('');
-  const [ pw, setPW ] = useState('');
-  const [ pw2, setPW2 ] = useState('');
-  const [ buttonActive , setButtonActive ] = useState(false);
-  const [ duplicate, setDuplicate ] = useState(false);
+function SignUpPage() {
+  const [id, setID] = useState('');
+  const [pw, setPW] = useState('');
+  const [pw2, setPW2] = useState('');
+  const [buttonActive, setButtonActive] = useState(false);
+  const [duplicate, setDuplicate] = useState(false);
 
-  useEffect(()=>{
+  useEffect(() => {
     const reg = /^[a-zA-Z0-9]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/gm;
 
-    if( reg.test(id) && pw.length >= 8 && pw2.length >= 8 && pw === pw2){
+    if (reg.test(id) && pw.length >= 8 && pw2.length >= 8 && pw === pw2) {
       setButtonActive(true);
-    }
-    else{
+    } else {
       setButtonActive(false);
     }
-  },[id,pw,pw2])
+  }, [id, pw, pw2]);
 
   const onClickDuplicate = () => {
-    console.log("onClickDuplicate");
+    console.log('onClickDuplicate');
 
     // TODO:ID 중복확인
-    axios.get(`${SERVER_API}/users/${id}/duplicate`)
-      .then((res)=>{
-        if(res.status === 201){
+    axios
+      .get(`${SERVER_API}/users/${id}/duplicate`)
+      .then((res) => {
+        if (res.status === 201) {
           setDuplicate(true);
         }
       })
-      .catch((err)=>{
-          alert('중복된 ID입니다.');
+      .catch((err) => {
+        alert('중복된 ID입니다.');
       });
-  }
-
+  };
 
   const onClickSignUp = () => {
     // TODO: SIGNUP API
-      axios.post(`${SERVER_API}/auth/signup`,{
-        email : id,
-        password : pw,
+    axios
+      .post(`${SERVER_API}/auth/signup`, {
+        email: id,
+        password: pw,
       })
-        .then((res)=>{
-          if(res.status===201){
-            alert('회원가입 성공');
-            window.location.assign('/');
-          }
-        })
-        .catch((err)=>{
-          // TODO : 백엔드 연결 후 로직 수정
-          alert("로그인 실패");
-        })
-  }
+      .then((res) => {
+        if (res.status === 201) {
+          alert('회원가입 성공');
+          window.location.assign('/');
+        }
+      })
+      .catch((err) => {
+        // TODO : 백엔드 연결 후 로직 수정
+        alert('회원가입 실패');
+      });
+  };
 
-  return(
+  return (
     <div className={'signup-container'}>
       <div className={'signup-inner-container'}>
-        <TopBar beforeButton={true} centerText={"회원가입"} centerTextType={"page"} />
-          <div className={'signup-input-container'}>
-            <Input onChangeEventHandler={(e)=>{setID(e.currentTarget.value)}} label={"Email"} type={"text"} id={"id"} disabled={false} placeholder={"Email을 입력해주세요."} />
-            <Input onChangeEventHandler={(e)=>{setPW(e.currentTarget.value)}} label={"PW"} type={"password"} id={"pw"} disabled={false} placeholder={"PW를 입력해주세요."} />
-            <Input onChangeEventHandler={(e)=>{setPW2(e.currentTarget.value)}} label={"PW Check"} type={"password"} id={"pw2"} disabled={false} placeholder={"PW를 입력해주세요."} />
-            <span className={pw === pw2 ? 'pw-pw2-correct' : 'pw-pw2-incorrect'}>{pw === pw2  ? "비밀번호가 일치합니다." : "비밀번호가 일치하지 않습니다."}</span>
-            {/*<button onClick={duplicate ?  ()=>{console.log()}: onClickDuplicate } className={duplicate ?"active-submit-button" :  "submit-button"}>ID 중복확인</button>*/}
-            <button onClick={buttonActive ? onClickSignUp : ()=>{console.log()}} className={buttonActive ?"active-submit-button" :  "submit-button"}>완료</button>
-          </div>
+        <TopBar beforeButton={true} centerText={'회원가입'} centerTextType={'page'} />
+        <div className={'signup-input-container'}>
+          <Input
+            onChangeEventHandler={(e) => {
+              setID(e.currentTarget.value);
+            }}
+            label={'Email'}
+            type={'text'}
+            id={'id'}
+            disabled={false}
+            placeholder={'Email을 입력해주세요.'}
+          />
+          <Input
+            onChangeEventHandler={(e) => {
+              setPW(e.currentTarget.value);
+            }}
+            label={'PW'}
+            type={'password'}
+            id={'pw'}
+            disabled={false}
+            placeholder={'8글자 이상의 대/소문자 알파벳과 숫자로 입력해주세요.'}
+          />
+          <Input
+            onChangeEventHandler={(e) => {
+              setPW2(e.currentTarget.value);
+            }}
+            label={'PW Check'}
+            type={'password'}
+            id={'pw2'}
+            disabled={false}
+            placeholder={'Password 확인'}
+          />
+          {pw2 !== '' && (
+            <span className={pw === pw2 ? 'pw-pw2-correct' : 'pw-pw2-incorrect'}>
+              {pw === pw2 ? '비밀번호가 일치합니다.' : '비밀번호가 일치하지 않습니다.'}
+            </span>
+          )}
+          {/*<button onClick={duplicate ?  ()=>{console.log()}: onClickDuplicate } className={duplicate ?"active-submit-button" :  "submit-button"}>ID 중복확인</button>*/}
+          <button
+            onClick={
+              buttonActive
+                ? onClickSignUp
+                : () => {
+                    alert('이메일과 비밀번호 형식을 확인해주세요');
+                  }
+            }
+            className={buttonActive ? 'active-submit-button' : 'submit-button'}
+          >
+            완료
+          </button>
+        </div>
       </div>
     </div>
   );

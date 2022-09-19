@@ -67,13 +67,7 @@ const badgeList: IBadgeList = {
   },
 };
 /* Avatar : src에 user profile 썸네일 링크 필요*/
-export default function Avatar({
-  size = 'sm',
-  src = '/img/profile_default.png',
-  nickname,
-  biz = false,
-  badge = '',
-}: IAvatar) {
+export default function Avatar({ size = 'sm', src, nickname, biz = false, badge = '' }: IAvatar) {
   {
     /* TODO 이미지가 세로로 긴 경우 가로 크기가 작은 부모 안에서 아바타 비율이 찌그러지는 현상 수정 필요 */
   }
@@ -82,7 +76,7 @@ export default function Avatar({
   return (
     <>
       {!nickname ? (
-        <img className={`object-cover rounded-full ${sizes[size]}`} src={src} />
+        <img className={`object-cover rounded-full ${sizes[size]}`} src={src ? src : '/img/profile_default.png'} />
       ) : size === 'sm' || size === 'xs' ? (
         <div className={`flex text-center text-md min-w-max`}>
           <img className={`rounded-full object-cover ${sizes[size]}  m-auto`} src={src} />

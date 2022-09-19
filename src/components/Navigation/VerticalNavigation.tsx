@@ -145,14 +145,14 @@ export default function VerticalNavigation({
     setOkModalMessage('복사가 완료되었습니다');
   };
 
-  async function clickWish(folderId: number) {
+  async function clickWish(folderId: number, formId: number) {
     setBookmarkModalOpen(false);
     await instance
-      .put(
+      .post(
         `${SERVER_API}/wishlists/${folderId}`,
         {
           type: 'FORM',
-          targetId: currentVideoIndex + 1,
+          targetId: formId,
         },
         {
           headers: {
@@ -161,7 +161,7 @@ export default function VerticalNavigation({
         },
       )
       .then((res) => {
-        if (res.status === 200) {
+        if (res.status === 201) {
           console.log('success');
         }
         console.log(res);
@@ -169,7 +169,9 @@ export default function VerticalNavigation({
       .catch((err) => {
         console.log(err);
       });
-    location.reload();
+    console.log(folderId);
+    console.log(formId);
+    // location.reload();
   }
   const navigation = useNavigate();
   const getShareLink = () => {
@@ -325,7 +327,10 @@ export default function VerticalNavigation({
                 </div>
                 <div className="flex flex-1 items-center justify-between truncate rounded-r-md border-t border-r border-b border-gray-300 bg-white">
                   <div className="flex-1 truncate px-2 py-2 text-sm">
-                    <button className="font-medium text-gray-900 hover:text-gray-600" onClick={() => clickWish(i)}>
+                    <button
+                      className="font-medium text-gray-900 hover:text-gray-600"
+                      onClick={() => clickWish(data.id, shortFormId)}
+                    >
                       {data.name}
                     </button>
                   </div>

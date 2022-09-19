@@ -5,12 +5,19 @@ import Folder from '../components/Wish/Folder';
 import InnerTab from '../components/common/InnerTab';
 import { SERVER_API } from '../config';
 import axios from 'axios';
-import { WishFolder } from '../globalType';
+import { WishFolder, WishForm } from '../globalType';
+
+interface IEFolder {
+  name: string;
+  id: number;
+  wishlists: WishFolder[];
+  thumbnail: string[];
+}
 
 interface IFolder {
   name: string;
   id: number;
-  wishlists: any;
+  wishlists: WishForm[];
 }
 // const mockFolderListData = {
 //   Folders: [
@@ -75,7 +82,8 @@ function WishPage() {
 
   /* ===== 서버 연동 ===== */
   const [accessToken, setAccessToken] = useState<string | null>();
-  const [folders, setFolders] = useState([]);
+  const [folders, setFolders] = useState<IFolder[]>();
+  const [tmpFolders, setTmpFolders] = useState<IFolder[]>();
 
   useEffect(() => {
     // const params = new URLSearchParams(location.search);
@@ -92,15 +100,15 @@ function WishPage() {
   useEffect(() => {
     async function getData() {
       try {
-        const response = await instance.get('/wishlists', {
+        const wishRes = await instance.get('/wishlists', {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
         });
 
-        if (response.status === 200) {
-          setFolders(response.data);
-          console.log(response.data);
+        if (wishRes.status === 200) {
+          setFolders(wishRes.data);
+          console.log(wishRes.data);
         }
         return null;
       } catch (error) {
@@ -109,16 +117,14 @@ function WishPage() {
     }
 
     getData();
+    // tmpFolders.map((data) => data.wishlists);
     // console.log(formsData);
   }, [accessToken]);
 
   useEffect(() => {
-    const searchParams = new URLSearchParams(location.search);
-    setParams(searchParams.get('wish_id'));
-
-    console.log('aaa');
     async function getData() {
       try {
+        setParams(searchParams.get('wish_id'));
         const response = await instance.get('/wishlists/' + params, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -133,7 +139,8 @@ function WishPage() {
         console.error(error);
       }
     }
-    getData();
+    const searchParams = new URLSearchParams(location.search);
+    searchParams.get('wish_id') ? getData() : null;
   }, [new URLSearchParams(location.search).get('wish_id')]);
 
   return (
@@ -155,17 +162,18 @@ function WishPage() {
           <>
             {/* wish main page */}
             <div>
-              {/* TODO 탑 네비게이션에서 텍스트받도록 수정 */}
               <div className="grid grid-cols-2 gap-2">
-                {folders.map((data: IFolder, i) => (
-                  <Folder label={data.name} id={data.id} thumbnail={data.wishlists}></Folder>
-                ))}
+                {folders !== undefined &&
+                  folders.map((data: IFolder, i) => (
+                    // <Folder label={data.name} id={data.id} thumbnail={data.wishlists}></Folder>
+                    <Folder label={data.name} id={data.id} thumbnail={[]}></Folder>
+                  ))}
                 {/* FIXME: 위시리스트 섬네일 받아오게 수정되면 수정*/}
-                {/*{*/}
-                {/*  wishList.map((folder)=>{*/}
-                {/*    <Folder label={folder.name} id={folder.id} thumbnail={""} />*/}
-                {/*  })*/}
-                {/*}*/}
+                {/* {
+                wishList.map((folder)=>
+                <Folder label={folder.name} id={folder.id} thumbnail={""} />
+                })
+                } */}
               </div>
             </div>
           </>
