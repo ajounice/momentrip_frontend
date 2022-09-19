@@ -152,7 +152,7 @@ export default function VerticalNavigation({
         `${SERVER_API}/wishlists/${folderId}`,
         {
           type: 'FORM',
-          targetId: currentVideoIndex,
+          targetId: currentVideoIndex + 1,
         },
         {
           headers: {

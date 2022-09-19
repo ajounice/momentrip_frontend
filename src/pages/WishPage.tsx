@@ -78,8 +78,8 @@ function WishPage() {
   const [folders, setFolders] = useState([]);
 
   useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    setParams(params.get('wish_id'));
+    // const params = new URLSearchParams(location.search);
+    // setParams(params.get('wish_id'));
     setAccessToken(window.localStorage.getItem('Token'));
   }, []);
 
@@ -112,6 +112,30 @@ function WishPage() {
     // console.log(formsData);
   }, [accessToken]);
 
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    setParams(searchParams.get('wish_id'));
+
+    console.log('aaa');
+    async function getData() {
+      try {
+        const response = await instance.get('/wishlists/' + params, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+
+        if (response.status === 200) {
+          console.log(response.data);
+        }
+        return null;
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    getData();
+  }, [new URLSearchParams(location.search).get('wish_id')]);
+
   return (
     <div className="px-4">
       <div className="my-20">
@@ -124,7 +148,8 @@ function WishPage() {
               onChangeButton={(e) => setSelected(e.currentTarget.textContent)}
               // onChangeButton={(e) => console.log(e.currentTarget.textContent)}
             ></InnerTab>
-            {selected === tabs[0] ? <>shortform</> : selected === tabs[1] ? <>tourInfo</> : <>aa</>}{' '}
+            {/* {selected === tabs[0] ? <>{params}</> : selected === tabs[1] ? <>{params}</> : <>aa</>}{' '} */}
+            {selected === tabs[0] ? <></> : selected === tabs[1] ? <></> : <>aa</>}{' '}
           </>
         ) : (
           <>

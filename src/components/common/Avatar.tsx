@@ -2,7 +2,7 @@ import { BsFillPatchCheckFill } from 'react-icons/bs';
 
 export interface IAvatar {
   size?: string;
-  src: string;
+  src?: string;
   nickname?: string;
   biz?: boolean;
   badge?: string;
@@ -67,7 +67,13 @@ const badgeList: IBadgeList = {
   },
 };
 /* Avatar : src에 user profile 썸네일 링크 필요*/
-export default function Avatar({ size = 'sm', src, nickname, biz = false, badge = '' }: IAvatar) {
+export default function Avatar({
+  size = 'sm',
+  src = '/img/profile_default.png',
+  nickname,
+  biz = false,
+  badge = '',
+}: IAvatar) {
   {
     /* TODO 이미지가 세로로 긴 경우 가로 크기가 작은 부모 안에서 아바타 비율이 찌그러지는 현상 수정 필요 */
   }

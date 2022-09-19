@@ -1,19 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import '../../styles/pages/MyPage.css';
 import Avatar from '../../components/common/Avatar';
 import FullSF from '../../components/ShortForm/FullSF';
-import axios from "axios";
-import { SERVER_API } from "../../config";
+import axios from 'axios';
+import { SERVER_API } from '../../config';
 
 // 서버에서 가져온 정보
+// const userInfo = {
+//   userId: '',
+//   userName: '',
+//   src: '',
+//   profileMessage: '',
+//   followers: 0,
+//   following: 0,
+//   badge: 'mountain',
+// };
 const userInfo = {
-  userId: 'suy.ii',
-  userName: '수연',
-  src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHfLcI-dXmEcLctBrV_2u4c6rFmi23Rzo76w&usqp=CAU',
-  profileMessage: '🧸여행을 좋아하는 컴순이🧸',
-  followers: 10,
-  following: 20,
-  badge: 'mountain',
+  userId: '',
+  userName: '',
+  profileMessage: '',
+  followers: 0,
+  following: 0,
+  src: '',
+  badge: '',
 };
 interface IBadgeList {
   [key: string]: { badge: string; text: string; color: string; afterColor: string };
@@ -66,26 +75,57 @@ function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ');
 }
 const mockBadgeDataTotal = 40;
+// const mockBadgeData = [
+//   {
+//     name: 'mountain',
+//     value: 22,
+//   },
+//   {
+//     name: 'sea',
+//     value: 10,
+//   },
+//   {
+//     name: 'hotel',
+//     value: 4,
+//   },
+//   {
+//     name: 'festival',
+//     value: 2,
+//   },
+//   {
+//     name: 'camping',
+//     value: 2,
+//   },
+//   {
+//     name: 'night',
+//     value: 0,
+//   },
+//   {
+//     name: 'activity',
+//     value: 0,
+//   },
+// ];
+
 const mockBadgeData = [
   {
     name: 'mountain',
-    value: 22,
+    value: 0,
   },
   {
     name: 'sea',
-    value: 10,
+    value: 0,
   },
   {
     name: 'hotel',
-    value: 4,
+    value: 0,
   },
   {
     name: 'festival',
-    value: 2,
+    value: 0,
   },
   {
     name: 'camping',
-    value: 2,
+    value: 0,
   },
   {
     name: 'night',
@@ -142,22 +182,21 @@ const mockShortFormListsData = {
   ],
 };
 
-interface MyInfo{
-  id : number;
-  email : string;
-  nickname : string;
-  password : null;
-  name : string;
-  intro : string;
-  type : boolean;
-  image : string;
+interface MyInfo {
+  id: number;
+  email: string;
+  nickname: string;
+  password: null;
+  name: string;
+  intro: string;
+  type: boolean;
+  image: string;
 }
 
 function MyPage() {
-  const [ myInfo, setMyIfo ] = useState<MyInfo|null>(null);
-  const [ mount, setMount ] = useState(0);
+  const [myInfo, setMyIfo] = useState<MyInfo | null>(null);
+  const [mount, setMount] = useState(0);
   const [accessToken, setAccessToken] = useState<string | null>();
-
 
   useEffect(() => {
     for (let i = 0; i < mockBadgeData.length; i++) {
@@ -176,36 +215,41 @@ function MyPage() {
     }
   }, []);
 
-  useEffect(()=>{
-    if(mount === 0) {
+  useEffect(() => {
+    if (mount === 0) {
       setAccessToken(window.localStorage.getItem('Token'));
       setMount(1);
       console.log(mount);
-    }
-    else{
+    } else {
       console.log(mount);
-      axios.get(`${SERVER_API}/users`,{
-        headers : {
-          Authorization: `Bearer ${accessToken}`,
-        }
-      })
-        .then((res)=>{
-          console.log(res);
-          if(res.status === 200){
-
-          }
+      axios
+        .get(`${SERVER_API}/users`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
         })
+        .then((res) => {
+          console.log(res);
+          if (res.status === 200) {
+          }
+        });
     }
-  },[mount]);
+  }, [mount]);
 
   return (
     <div className="px-4">
       <div className="my-20">
         {/* User Section */}
-        <Avatar size={'lg'} nickname={userInfo.userId} src={userInfo.src} badge={userInfo.badge} />
+        <div className="grid justify-center">
+          {userInfo.src ? (
+            <Avatar size={'lg'} nickname={''} src={userInfo.src} />
+          ) : (
+            <Avatar size={'lg'} nickname={userInfo.userId} badge={userInfo.badge} />
+          )}
+        </div>
         <div className="text-center pt-2">{userInfo.profileMessage}</div>
         {/* 프로그래스바 */}
-        <div className="w-full  h-2.5 mt-7 flex">
+        <div className="w-full  h-2.5 mt-7 flex rounded-full bg-gray-300">
           {mockBadgeData.map(
             (data, i) =>
               (data.value / mockBadgeDataTotal) * 100 != 0 && (
@@ -226,26 +270,31 @@ function MyPage() {
                 </>
               ),
           )}
+          <div className="mt-7 mx-auto text-xs">열심히 활동하고 취향 뱃지를 달아보세요!</div>
         </div>
         <div className="grid grid-cols-2 text-center mt-16 mb-7">
-          <div onClick={()=>{
-            window.location.assign('/mypage/follow?type=follower');
-          }}>
+          <div
+            onClick={() => {
+              window.location.assign('/mypage/follow?type=follower');
+            }}
+          >
             <p>{userInfo.followers}</p>
             <p>팔로워</p>
           </div>
-          <div onClick={()=>{
-            window.location.assign('/mypage/follow?type=follow');
-          }}>
+          <div
+            onClick={() => {
+              window.location.assign('/mypage/follow?type=follow');
+            }}
+          >
             <p>{userInfo.following}</p>
             <p>팔로잉</p>
           </div>
         </div>
         {/* Post Section */}
         <div className="grid grid-cols-2 gap-1">
-          {mockShortFormListsData.shortForm.map((data) => (
+          {/* {mockShortFormListsData.shortForm.map((data) => (
             <FullSF src={data.src} href={data.href} shortFormId={data.shortFormId} likeCount={data.likeCount} />
-          ))}
+          ))} */}
         </div>
       </div>
     </div>

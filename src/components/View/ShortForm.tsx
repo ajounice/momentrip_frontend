@@ -12,10 +12,10 @@ import ShortFormVideo from './ShortFormVideo';
 import ShareModalPage from '../Modal/Vertical/BottomModalPage';
 import Comment from '../Modal/Vertical/Comment';
 import TourInfo from '../Modal/Vertical/TourInfo';
-import ProfileInSF, { IUserInfoInSF } from "../common/ProfileInSF";
+import ProfileInSF, { IUserInfoInSF } from '../common/ProfileInSF';
 
 import { CommentType } from '../../globalType';
-import { SERVER_API } from "../../config";
+import { SERVER_API } from '../../config';
 
 interface IGetFormsData {
   id: number;
@@ -28,37 +28,8 @@ interface IGetFormsData {
 interface IFormsData extends IGetFormsData {
   videoHidden: boolean;
   videoStop: boolean;
-  user : IUserInfoInSF;
+  user: IUserInfoInSF;
 }
-
-const mockShortFormVideoData = {
-  Video: [
-    {
-      video: 'video/s1.mp4',
-      videoHidden: true,
-      videoStop: false,
-      title: '첫 번째 비디오',
-    },
-    {
-      video: 'video/s2.mp4',
-      videoHidden: false,
-      videoStop: true,
-      title: '두본째 비디오',
-    },
-    {
-      video: 'video/s3.mp4',
-      videoHidden: false,
-      videoStop: true,
-      title: '두본째 비디오',
-    },
-    {
-      video: 'video/s4.mp4',
-      videoHidden: false,
-      videoStop: true,
-      title: '두본째 비디오',
-    },
-  ],
-};
 
 function ShortForm() {
   const [currentVideoIndex, setCurrentVideoIndex] = useState<number>(0);
@@ -69,7 +40,7 @@ function ShortForm() {
   const [viewComment, setViewComment] = useState(false);
   const [commentData, setCommentData] = useState<CommentType[]>([]);
 
-  const [ commentList , setCommentList ] = useState<CommentType[][]>([]);
+  const [commentList, setCommentList] = useState<CommentType[][]>([]);
 
   // tour info modal
   const [viewTourInfo, setViewTourInfo] = useState(false);
@@ -79,8 +50,6 @@ function ShortForm() {
   const [isBookMark, setIsBookMark] = useState(false);
 
   const [accessToken, setAccessToken] = useState<string | null>();
-
-  const [ currentSfId, setCurrentSfId] = useState(0);
 
   const [formsData, setFormsData] = useState<IFormsData[]>([
     {
@@ -92,19 +61,18 @@ function ShortForm() {
       viewCount: 0,
       videoHidden: false,
       videoStop: true,
-      user : {
-        id : 0,
-        email : '',
-        image : '',
-        intro : '',
-        name : '',
-        nickname : '',
-        password : '',
-        type : false,
-      }
+      user: {
+        id: 0,
+        email: '',
+        image: '',
+        intro: '',
+        name: '',
+        nickname: '',
+        password: '',
+        type: false,
+      },
     },
   ]);
-
 
   useEffect(() => {
     console.log('current Index : ', currentVideoIndex);
@@ -126,7 +94,7 @@ function ShortForm() {
             Authorization: `Bearer ${accessToken}`,
           },
         });
-        console.log(response.data);
+
         if (response.status === 200) {
           const tmpData: Array<any> = response.data;
           tmpData.map((data, i) =>
@@ -150,32 +118,32 @@ function ShortForm() {
     setAccessToken(window.localStorage.getItem('Token'));
   }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     const tmp: any[] = [];
-    formsData.forEach((item)=>{
-      console.log("item.id : ",item.id);
+    formsData.forEach((item) => {
+      console.log('item.id : ', item.id);
       const itemID = item.id;
-      axios(
-        {
-          method:"get",
-          url:`${SERVER_API}/forms/${itemID}/comments`,
-          headers : {
-            Authorization: `Bearer ${accessToken}`,
-          }
-        }
-      ).then((res:any)=>{
-        if(res.status === 200){
-          console.log(res.data);
-          tmp.push(res.data);
-        }
-      }).catch((err:any)=>{
-        console.log(err);
+      axios({
+        method: 'get',
+        url: `${SERVER_API}/forms/${itemID}/comments`,
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
       })
-    })
+        .then((res: any) => {
+          if (res.status === 200) {
+            console.log(res.data);
+            tmp.push(res.data);
+          }
+        })
+        .catch((err: any) => {
+          console.log(err);
+        });
+    });
 
     setCommentList(tmp);
-
-  },[formsData]);
+  }, [formsData]);
+  const [currentSfId, setCurrentSfId] = useState(0);
 
   return (
     <div id={'short-form'} className="short-form-container">
@@ -192,10 +160,9 @@ function ShortForm() {
           setCurrentVideoIndex(swiper.activeIndex);
         }}
       >
-        {formsData.map((data,index) => (
+        {formsData.map((data, index) => (
           <SwiperSlide className="short-form">
             <ShortFormVideo
-              shortFormId={data.id}
               setComment={setCommentData}
               isBookMark={isBookMark}
               setIsBookMark={setIsBookMark}
@@ -207,35 +174,31 @@ function ShortForm() {
               videoHidden={data.videoHidden}
               videoStop={data.videoStop}
               videoTitle={data.title}
-<<<<<<< HEAD
-              currentVideoIndex={currentVideoIndex}
-=======
               user={data.user}
               setCurrentSfId={setCurrentSfId}
->>>>>>> dev
+              currentVideoIndex={index}
+              shortFormId={data.id}
             />
-
-            {/*<div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">*/}
-            {/*  /!* comment, tour info ModalPage 유사한 새로운 component 생성 *!/*/}
-            {/*  /!*<ModalPage open={verticalState.commentView} setOpen={(state)=>{{...verticalState}, commentView : state}>*!/*/}
-            {/*  /!*  <Comment></Comment>*!/*/}
-            {/*  /!*  }*!/*/}
-            {/*  /!*</ModalPage>*!/*/}
-
-            {/*  /!* tour info *!/*/}
-            {/*  <ShareModalPage open={viewTourInfo} setOpen={setViewTourInfo}>*/}
-            {/*    <TourInfo setViewTourInfo={setViewTourInfo} />*/}
-            {/*  </ShareModalPage>*/}
-
-            {/*  /!* comment *!/*/}
-            {/*  <ShareModalPage open={viewComment} setOpen={setViewComment}>*/}
-            {/*    <Comment index={index} shortFormId={data.id} user={data.user} commentList={commentList} setViewComment={setViewComment} />*/}
-            {/*  </ShareModalPage>*/}
-            {/*</div>*/}
-            {/*id={user.id} email={user.email} password={user.password} intro={user.intro} type={user.type} nickname={user.nickname} image={user.image} name={user.name}*/}
           </SwiperSlide>
         ))}
       </Swiper>
+      {/* <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden"> */}
+      {/* comment, tour info ModalPage 유사한 새로운 component 생성 */}
+      {/*<ModalPage open={verticalState.commentView} setOpen={(state)=>{{...verticalState}, commentView : state}>*/}
+      {/*  <Comment></Comment>*/}
+      {/*  }*/}
+      {/*</ModalPage>*/}
+
+      {/* tour info */}
+      {/* <ShareModalPage open={viewTourInfo} setOpen={setViewTourInfo}>
+          <TourInfo setViewTourInfo={setViewTourInfo} />
+        </ShareModalPage> */}
+
+      {/* comment */}
+      {/* <ShareModalPage open={viewComment} setOpen={setViewComment}>
+          <Comment commentList={commentData} setViewComment={setViewComment} />
+        </ShareModalPage>
+      </div> */}
     </div>
   );
 }
