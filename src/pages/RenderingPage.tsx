@@ -44,7 +44,7 @@ function RenderingPage() {
           localStorage.setItem('Token', res.data.accessToken);
           window.location.assign('/home');
         }
-      })
+     })
       .catch((err) => {
         console.log(err);
       });
