@@ -109,7 +109,7 @@ function ShortForm() {
             Authorization: `Bearer ${accessToken}`,
           },
         });
-
+        console.log(response.data);
         if (response.status === 200) {
           const tmpData: Array<any> = response.data;
           tmpData.map((data, i) =>
@@ -162,6 +162,7 @@ function ShortForm() {
               videoHidden={data.videoHidden}
               videoStop={data.videoStop}
               videoTitle={data.title}
+              currentVideoIndex={currentVideoIndex}
             />
             <ProfileInSF />
           </SwiperSlide>

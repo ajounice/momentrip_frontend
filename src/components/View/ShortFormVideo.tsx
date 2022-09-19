@@ -7,7 +7,6 @@ import ProfileInSF from '../common/ProfileInSF';
 function ShortFormVideo(videoProps: IShortFormVideo) {
   // 모달이 올라와 있을 때 배경 부분이 스크롤되는 것을 막기 위한 state
   const [touchEvent, setTouchEvent] = useState(false);
-  
 
   // // 댓글 모달
   // const [ viewComment, setViewComment ] = useState<boolean>(false);
@@ -61,6 +60,7 @@ function ShortFormVideo(videoProps: IShortFormVideo) {
         setIsHeart={videoProps.setIsHeart}
         setViewTourInfo={videoProps.setViewTourInfo}
         setCommentData={videoProps.setComment}
+        currentVideoIndex={videoProps.currentVideoIndex}
       />
     </>
   );

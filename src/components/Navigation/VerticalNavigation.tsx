@@ -34,6 +34,7 @@ export default function VerticalNavigation({
   isBookMark,
   setIsBookMark,
   setCommentData,
+  currentVideoIndex,
 }: IVerticalNavigation) {
   // Props
   // 해당 숏폼을 좋아요 눌렀는지
@@ -130,9 +131,31 @@ export default function VerticalNavigation({
     setOkModalMessage('복사가 완료되었습니다');
   };
 
-  function clickWish(folderId: number) {
+  async function clickWish(folderId: number) {
     setBookmarkModalOpen(false);
-    console.log(folderId);
+    await instance
+      .put(
+        `${SERVER_API}/wishlists/${folderId}`,
+        {
+          type: 'FORM',
+          targetId: currentVideoIndex,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        },
+      )
+      .then((res) => {
+        if (res.status === 200) {
+          console.log('success');
+        }
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    location.reload();
   }
   const navigation = useNavigate();
   const getShareLink = () => {
