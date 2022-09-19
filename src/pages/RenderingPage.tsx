@@ -47,6 +47,7 @@ function RenderingPage() {
      })
       .catch((err) => {
         console.log(err);
+        alert("이메일 또는 비밀번호를 잘못입력하였습니다.");
       });
   };
 

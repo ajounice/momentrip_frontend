@@ -4,6 +4,7 @@ import Avatar from '../../components/common/Avatar';
 import FullSF from '../../components/ShortForm/FullSF';
 import axios from 'axios';
 import { SERVER_API } from '../../config';
+import { TopBar } from "../../components/common/Navigation";
 
 // 서버에서 가져온 정보
 // const userInfo = {
@@ -182,21 +183,31 @@ const mockShortFormListsData = {
   ],
 };
 
-interface MyInfo {
-  id: number;
-  email: string;
-  nickname: string;
-  password: null;
-  name: string;
-  intro: string;
-  type: boolean;
-  image: string;
+export interface MyInfo{
+  id : number;
+  email : string;
+  nickname : string;
+  password : null;
+  name : string;
+  intro : string;
+  type : boolean;
+  image : string;
 }
 
 function MyPage() {
-  const [myInfo, setMyIfo] = useState<MyInfo | null>(null);
-  const [mount, setMount] = useState(0);
+  const [ myInfo, setMyIfo ] = useState<MyInfo>({
+    id : 0,
+    email : '',
+    nickname : '',
+    password : null,
+    name : '',
+    intro : '',
+    type : false,
+    image : '',
+  });
+  const [ mount, setMount ] = useState(0);
   const [accessToken, setAccessToken] = useState<string | null>();
+  const [alarmOpen, setAlarmOpen] = useState(false);
 
   useEffect(() => {
     for (let i = 0; i < mockBadgeData.length; i++) {
@@ -219,24 +230,33 @@ function MyPage() {
     if (mount === 0) {
       setAccessToken(window.localStorage.getItem('Token'));
       setMount(1);
+    }
+    else{
       console.log(mount);
-    } else {
-      console.log(mount);
-      axios
-        .get(`${SERVER_API}/users`, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        })
-        .then((res) => {
-          console.log(res);
-          if (res.status === 200) {
+      axios.get(`${SERVER_API}/users/my`,{
+        headers : {
+          Authorization: `Bearer ${accessToken}`,
+        }
+      })
+        .then((res)=>{
+          if(res.status === 200){
+            setMyIfo(res.data);
           }
         });
     }
   }, [mount]);
 
   return (
+    <div>
+      <TopBar
+        beforeButton={true}
+        alarmOnClickEvent={() => setAlarmOpen(true)}
+        centerText={myInfo.name}
+        centerTextType={'user'}
+        alarm={true}
+        dropdown={'mypage'}
+        // dropdownList={['프로필 편집', '개인정보 설정', '설정']}
+      />
     <div className="px-4">
       <div className="my-20">
         {/* User Section */}
@@ -244,10 +264,12 @@ function MyPage() {
           {userInfo.src ? (
             <Avatar size={'lg'} nickname={''} src={userInfo.src} />
           ) : (
-            <Avatar size={'lg'} nickname={userInfo.userId} badge={userInfo.badge} />
+            <Avatar src={myInfo.image} biz={myInfo.type} size={'lg'} nickname={myInfo.nickname} badge={userInfo.badge} />
           )}
         </div>
         <div className="text-center pt-2">{userInfo.profileMessage}</div>
+        {/*<Avatar size={'lg'} biz={myInfo.type} nickname={myInfo.nickname} src={myInfo.image} badge={userInfo.badge} />*/}
+        <div className="text-center pt-2">{myInfo.intro}</div>
         {/* 프로그래스바 */}
         <div className="w-full  h-2.5 mt-7 flex rounded-full bg-gray-300">
           {mockBadgeData.map(
@@ -297,6 +319,7 @@ function MyPage() {
           ))} */}
         </div>
       </div>
+    </div>
     </div>
   );
 }
