@@ -79,9 +79,6 @@ const SearchPage = () => {
     setTabSelected(tabs[0]);
   }, [searchKeyword]);
 
-  useEffect(() => {
-    console.log('/search');
-  }, []);
 
   return (
     <div className="px-4">

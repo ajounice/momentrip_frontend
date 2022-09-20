@@ -28,9 +28,6 @@ function SignUpPage() {
   }, [id, pw, pw2]);
 
   const onClickDuplicate = () => {
-    console.log('onClickDuplicate');
-    console.log(id);
-
     // TODO:ID 중복확인
     axios({
       method :"post",

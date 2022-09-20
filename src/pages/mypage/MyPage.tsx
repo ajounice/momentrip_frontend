@@ -236,7 +236,6 @@ function MyPage() {
       setAccessToken(window.localStorage.getItem('Token'));
       setMount(1);
     } else {
-      console.log(mount);
       axios
         .get(`${SERVER_API}/users/my`, {
           headers: {
@@ -261,7 +260,6 @@ function MyPage() {
       }
     })
       .then((res)=>{
-        console.log(res);
         setFollow({
           ...follow,
           followers : res.data.length,
@@ -280,7 +278,6 @@ function MyPage() {
       }
     })
       .then((res)=>{
-        console.log(res);
         setFollow({
           ...follow,
           followings : res.data.length,

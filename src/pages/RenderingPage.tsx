@@ -12,10 +12,6 @@ function RenderingPage() {
 
   const navigation = useNavigate();
 
-  useEffect(() => {
-    console.log(localID);
-    console.log(localPW);
-  }, [localID, localPW]);
 
   const onClickKakaoLoginButton = () => {
     // 서버에 로그인 요청 보내고 토큰 받아와야함.
@@ -23,7 +19,7 @@ function RenderingPage() {
     axios
       .get(`${SERVER_API}/auth/kakao`)
       .then((res) => {
-        console.log(res);
+        console.log();
       })
       .catch((err) => {
         console.log(err);

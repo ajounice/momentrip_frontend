@@ -70,7 +70,7 @@ function ProfileInSF({user,followState}:IProfileSF){
         },
       })
         .then((res)=>{
-          console.log(res);
+          console.log();
         })
         .catch((err)=>{
           console.log(err);
@@ -87,7 +87,7 @@ function ProfileInSF({user,followState}:IProfileSF){
         },
       })
         .then((res)=>{
-          console.log(res);
+          console.log();
         })
         .catch((err)=>{
           console.log(err);

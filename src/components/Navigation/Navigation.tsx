@@ -54,11 +54,8 @@ export default function TopNavigation({ color = 'white' }) {
           },
         },
       )
-      .then((res) => {
-        if (res.status === 200) {
-          console.log('success');
-        }
-        console.log(res);
+      .then(() => {
+        console.log();
       })
       .catch((err) => {
         console.log(err);

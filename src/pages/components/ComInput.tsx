@@ -29,8 +29,7 @@ const ComInput = () => {
     // defaultValues: mockData as IFormType,
   });
   const onSubmit = async (data: any) => {
-    console.log(data);
-    console.log('서버에 전송하여 저장');
+    console.log();
   };
 
   const onError = () => {

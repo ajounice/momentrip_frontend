@@ -63,12 +63,11 @@ export default function VerticalNavigation({
   });
 
   useEffect(() => {
-    console.log('setCurrentSfId : ', shortFormId);
     setCurrentSfId(shortFormId);
   }, []);
 
   useEffect(() => {
-    console.log(isHeart);
+    console.log();
   }, [isHeart]);
 
   // TODO 수정 필요
@@ -111,7 +110,6 @@ export default function VerticalNavigation({
 
         if (response.status === 200) {
           setWishlist(response.data);
-          console.log(response.data);
         }
         return null;
       } catch (error) {
@@ -160,17 +158,13 @@ export default function VerticalNavigation({
           },
         },
       )
-      .then((res) => {
-        if (res.status === 201) {
-          console.log('success');
-        }
-        console.log(res);
+      .then(() => {
+        console.log();
       })
       .catch((err) => {
         console.log(err);
       });
-    console.log(folderId);
-    console.log(formId);
+
     // location.reload();
   }
   const navigation = useNavigate();
@@ -184,7 +178,8 @@ export default function VerticalNavigation({
     const name = document.getElementById('folderName');
     // TODO 서버에 폴더 추가 요청 후 새로고침
     // TODO 해당 폴더에 위시 추가
-    console.log(name);
+
+
     setAddFolderOpen(false);
   }
 
@@ -194,7 +189,7 @@ export default function VerticalNavigation({
   const [bookmarkModalOpen, setBookmarkModalOpen] = useState(false);
 
   useEffect(() => {
-    console.log('isHeart : ', isHeart);
+    console.log();
   }, [isHeart]);
 
   const colorItems = [
@@ -237,10 +232,7 @@ export default function VerticalNavigation({
         },
       )
       .then((res) => {
-        if (res.status === 200) {
-          console.log('success');
-        }
-        console.log(res);
+        console.log();
       })
       .catch((err) => {
         console.log(err);

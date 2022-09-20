@@ -44,7 +44,6 @@ const WishDropDown = () => {
         if (res.status === 200) {
           history.back();
         }
-        console.log(res);
         return null;
       } catch (error) {
         console.error(error);
