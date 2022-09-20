@@ -25,18 +25,11 @@ function ShortFormVideo(videoProps: IShortFormVideo) {
   // video book mark
   const [isBookMark, setIsBookMark] = useState(false);
 
-  const [ currentUser, setCurrentUser ] = useState<IUserInfoInSF>({
-    email : '',
-    id : 0,
-    image : '',
-    intro : '',
-    name : '',
-    nickname : '',
-    password : '',
-    type : false,});
 
-  const [ followState,setFollowState ] = useState(false);
-  const [ currentUserFollowingList, setCurrentUserFollowingList ] = useState<IUserInfoInSF[]>([]);
+  useEffect(()=>{
+    // console.log("videoProps.follow : ",videoProps.follow);
+    console.log();
+  },[videoProps.follow])
 
   // // 댓글 모달
   // const [ viewComment, setViewComment ] = useState<boolean>(false);
@@ -64,67 +57,12 @@ function ShortFormVideo(videoProps: IShortFormVideo) {
   // },[viewComment,viewShare,viewTourInfo,isHeart]);
 
 
-  useEffect(()=>{
-    axios.get(`${SERVER_API}/users/my`,{
-      headers : {
-        Authorization: `Bearer ${localStorage.getItem('Token')}`,
-      }
-    }).then((res)=>{
-
-      setCurrentUser({
-        email : res.data.email,
-        id : res.data.id,
-        image : res.data.image,
-        intro : res.data.intro,
-        name : res.data.name,
-        nickname : res.data.nickname,
-        password : "",
-        type : false,
-      });
-    })
-      .catch((err)=>{
-        console.log(err);
-      })
-  },[]);
-
-  useEffect(()=>{
-    const nickname = currentUser.nickname;
-
-    if(nickname !== ''){
-      axios({
-        method:"get",
-        url : `${SERVER_API}/users/${nickname}/followings`,
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('Token')}`,
-        }
-      })
-        .then((res)=>{
-          setCurrentUserFollowingList(res.data);
-        })
-        .catch((err)=>{
-          console.log(err);
-        })
-    }
-
-
-  },[currentUser]);
-
-  useEffect(()=>{
-    currentUserFollowingList.forEach((user)=>{
-      if( user !== null && user.nickname !== null && user.nickname === videoProps.user.nickname ){
-        setFollowState(true);
-        return;
-      }
-    })
-  },[currentUserFollowingList]);
-
-
   return (
     <>
       <ReactPlayer
         width={window.innerWidth}
         height={window.innerHeight}
-        className={touchEvent === false ? `short-form-touch-event-none` : `short-form-touch-event-auto`}
+        className={!touchEvent ? `short-form-touch-event-none` : `short-form-touch-event-auto`}
         url={videoProps.videoUrl}
         muted
         playing
@@ -135,7 +73,7 @@ function ShortFormVideo(videoProps: IShortFormVideo) {
         }}
       />
 
-      <ProfileInSF followState={followState} user={videoProps.user} />
+      <ProfileInSF follow={videoProps.follow} setFollow={videoProps.setFollow} user={videoProps.user} />
       {/*setViewShare((prev)=>!prev)*/}
 
       <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">

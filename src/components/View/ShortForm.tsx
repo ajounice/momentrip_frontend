@@ -74,10 +74,14 @@ function ShortForm() {
     },
   ]);
 
+  const [ follow, setFollow ] = useState(1);
+
+
   useEffect(() => {
     console.log();
+    // console.log("follow number : ", follow);
     // console.log(formsData);
-  }, [currentVideoIndex]);
+  }, [currentVideoIndex,follow]);
 
   /* ===== 서버 연동 ===== */
 
@@ -155,13 +159,14 @@ function ShortForm() {
         scrollbar={{ draggable: true }}
         onSwiper={(swiper) => console.log(swiper)}
         onSlideChange={(swiper) => {
-
           setCurrentVideoIndex(swiper.activeIndex);
         }}
       >
         {formsData.map((data, index) => (
           <SwiperSlide className="short-form">
             <ShortFormVideo
+              follow={follow}
+              setFollow={setFollow}
               setComment={setCommentData}
               isBookMark={isBookMark}
               setIsBookMark={setIsBookMark}

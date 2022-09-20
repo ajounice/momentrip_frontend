@@ -260,6 +260,7 @@ function MyPage() {
       }
     })
       .then((res)=>{
+        console.log(res.data);
         setFollow({
           ...follow,
           followers : res.data.length,
@@ -268,7 +269,9 @@ function MyPage() {
       .catch((err)=>{
         console.log(err);
       })
+  },[myInfo]);
 
+  useEffect(()=>{
     // 팔로잉 리스트 조회
     axios({
       method:"get",
@@ -278,6 +281,7 @@ function MyPage() {
       }
     })
       .then((res)=>{
+        console.log(res.data);
         setFollow({
           ...follow,
           followings : res.data.length,

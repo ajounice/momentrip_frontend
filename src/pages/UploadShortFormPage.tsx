@@ -130,7 +130,7 @@ function UploadShortFormPage() {
       },
       data : data,
     })
-      .then(()=>{
+      .then((res)=>{
         alert("숏폼 업로드 성공");
         window.location.assign('/home');
       })

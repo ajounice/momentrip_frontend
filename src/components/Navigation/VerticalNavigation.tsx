@@ -99,25 +99,27 @@ export default function VerticalNavigation({
   // const [wishlist, setWishlist] = useState(['호텔', '바다', '부산여행', '아무거나']);
   // eslint-disable-next-line @typescript-eslint/no-var-requires
 
-  useEffect(() => {
-    async function getWishs() {
-      try {
-        const response = await instance.get('/wishlists', {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
 
-        if (response.status === 200) {
-          setWishlist(response.data);
-        }
-        return null;
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    getWishs();
-  }, [accessToken]);
+  // TODO wish api
+  // useEffect(() => {
+  //   async function getWishs() {
+  //     try {
+  //       const response = await instance.get('/wishlists', {
+  //         headers: {
+  //           Authorization: `Bearer ${accessToken}`,
+  //         },
+  //       });
+  //
+  //       if (response.status === 200) {
+  //         setWishlist(response.data);
+  //       }
+  //       return null;
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   }
+  //   getWishs();
+  // }, [accessToken]);
 
   const onClickComment = () => {
     // instance
