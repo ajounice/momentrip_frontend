@@ -2,10 +2,12 @@ import ReactPlayer from 'react-player';
 import React, { useEffect, useState } from 'react';
 import { CommentType, IShortFormVideo } from '../../globalType';
 import VerticalNavigation from '../Navigation/VerticalNavigation';
-import ProfileInSF from '../common/ProfileInSF';
+import ProfileInSF, { IUserInfoInSF } from "../common/ProfileInSF";
 import ShareModalPage from '../Modal/Vertical/BottomModalPage';
 import TourInfo from '../Modal/Vertical/TourInfo';
 import Comment from '../Modal/Vertical/Comment';
+import axios from "axios";
+import { SERVER_API } from "../../config";
 
 function ShortFormVideo(videoProps: IShortFormVideo) {
   // 모달이 올라와 있을 때 배경 부분이 스크롤되는 것을 막기 위한 state
@@ -22,6 +24,19 @@ function ShortFormVideo(videoProps: IShortFormVideo) {
   const [like, setLike] = useState(false);
   // video book mark
   const [isBookMark, setIsBookMark] = useState(false);
+
+  const [ currentUser, setCurrentUser ] = useState<IUserInfoInSF>({
+    email : '',
+    id : 0,
+    image : '',
+    intro : '',
+    name : '',
+    nickname : '',
+    password : '',
+    type : false,});
+
+  const [ followState,setFollowState ] = useState(false);
+  const [ currentUserFollowingList, setCurrentUserFollowingList ] = useState<IUserInfoInSF[]>([]);
 
   // // 댓글 모달
   // const [ viewComment, setViewComment ] = useState<boolean>(false);
@@ -48,6 +63,64 @@ function ShortFormVideo(videoProps: IShortFormVideo) {
   //
   // },[viewComment,viewShare,viewTourInfo,isHeart]);
 
+
+  useEffect(()=>{
+    axios.get(`${SERVER_API}/users/my`,{
+      headers : {
+        Authorization: `Bearer ${localStorage.getItem('Token')}`,
+      }
+    }).then((res)=>{
+      console.log("setCurrentUser(" , res.data);
+      setCurrentUser({
+        email : res.data.email,
+        id : res.data.id,
+        image : res.data.image,
+        intro : res.data.intro,
+        name : res.data.name,
+        nickname : res.data.nickname,
+        password : "",
+        type : false,
+      });
+    })
+      .catch((err)=>{
+        console.log(err);
+      })
+  },[]);
+
+  useEffect(()=>{
+    console.log("    currentUser.nickname   ", currentUser.nickname);
+    const nickname = currentUser.nickname;
+
+    if(nickname !== ''){
+      axios({
+        method:"get",
+        url : `${SERVER_API}/users/${nickname}/followings`,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('Token')}`,
+        }
+      })
+        .then((res)=>{
+          setCurrentUserFollowingList(res.data);
+          console.log(res.data);
+        })
+        .catch((err)=>{
+          console.log(err);
+        })
+    }
+
+
+  },[currentUser]);
+
+  useEffect(()=>{
+    currentUserFollowingList.forEach((user)=>{
+      if( user !== null && user.nickname !== null && user.nickname === videoProps.user.nickname ){
+        setFollowState(true);
+        return;
+      }
+    })
+  },[currentUserFollowingList]);
+
+
   return (
     <>
       <ReactPlayer
@@ -63,7 +136,8 @@ function ShortFormVideo(videoProps: IShortFormVideo) {
           console.log('play');
         }}
       />
-      <ProfileInSF user={videoProps.user} />
+
+      <ProfileInSF followState={followState} user={videoProps.user} />
       {/*setViewShare((prev)=>!prev)*/}
 
       <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">

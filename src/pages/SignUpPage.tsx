@@ -10,7 +10,12 @@ function SignUpPage() {
   const [pw, setPW] = useState('');
   const [pw2, setPW2] = useState('');
   const [buttonActive, setButtonActive] = useState(false);
-  const [duplicate, setDuplicate] = useState(false);
+  const [duplicate, setDuplicate] = useState(true);
+
+  useEffect(()=>{
+    console.log();
+  },[duplicate]);
+
 
   useEffect(() => {
     const reg = /^[a-zA-Z0-9]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/gm;
@@ -24,13 +29,23 @@ function SignUpPage() {
 
   const onClickDuplicate = () => {
     console.log('onClickDuplicate');
+    console.log(id);
 
     // TODO:ID 중복확인
-    axios
-      .get(`${SERVER_API}/users/${id}/duplicate`)
+    axios({
+      method :"post",
+      url :`${SERVER_API}/auth/email/duplicate`,
+      data : {
+        email : id
+      }
+    })
       .then((res) => {
-        if (res.status === 201) {
+        if(res.data){
+          alert("중복된 이메일입니다.");
           setDuplicate(true);
+        }
+        else{
+          setDuplicate(false);
         }
       })
       .catch((err) => {
@@ -57,6 +72,7 @@ function SignUpPage() {
       });
   };
 
+
   return (
     <div className={'signup-container'}>
       <div className={'signup-inner-container'}>
@@ -65,6 +81,10 @@ function SignUpPage() {
           <Input
             onChangeEventHandler={(e) => {
               setID(e.currentTarget.value);
+
+              if(duplicate){
+                setDuplicate(true);
+              }
             }}
             label={'Email'}
             type={'text'}
@@ -97,7 +117,7 @@ function SignUpPage() {
               {pw === pw2 ? '비밀번호가 일치합니다.' : '비밀번호가 일치하지 않습니다.'}
             </span>
           )}
-          {/*<button onClick={duplicate ?  ()=>{console.log()}: onClickDuplicate } className={duplicate ?"active-submit-button" :  "submit-button"}>ID 중복확인</button>*/}
+          <button onClick={onClickDuplicate } className={!duplicate ?"active-submit-button" :  "submit-button"}>ID 중복확인</button>
           <button
             onClick={
               buttonActive
