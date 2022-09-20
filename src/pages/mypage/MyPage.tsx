@@ -209,10 +209,8 @@ function MyPage() {
   const [accessToken, setAccessToken] = useState<string | null>();
   const [alarmOpen, setAlarmOpen] = useState(false);
 
-  const [ follow, setFollow ] = useState({
-    followers : 0,
-    followings : 0,
-  });
+  const [ follower, setFollower ] = useState(0);
+  const [ following, setFollowing ] = useState(0);
 
   useEffect(() => {
     for (let i = 0; i < mockBadgeData.length; i++) {
@@ -251,46 +249,39 @@ function MyPage() {
   }, [mount]);
 
   useEffect(()=>{
-    // 팔로워 리스트 조회
-    axios({
-      method:"get",
-      url : `${SERVER_API}/users/${myInfo.nickname}/followers`,
-      headers:{
-        Authorization: `Bearer ${accessToken}`,
-      }
-    })
-      .then((res)=>{
-        console.log(res.data);
-        setFollow({
-          ...follow,
-          followers : res.data.length,
-        });
+    const flag = false;
+
+      // 팔로워 리스트 조회
+      axios({
+        method:"get",
+        url : `${SERVER_API}/users/${myInfo.nickname}/followers`,
+        headers:{
+          Authorization: `Bearer ${accessToken}`,
+        }
       })
-      .catch((err)=>{
-        console.log(err);
-      })
+        .then((res)=>{
+          setFollower(res.data.length);
+          // 팔로잉 리스트 조회
+          axios({
+            method:"get",
+            url : `${SERVER_API}/users/${myInfo.nickname}/followings`,
+            headers:{
+              Authorization: `Bearer ${accessToken}`,
+            }
+          })
+            .then((res)=>{
+              setFollowing(res.data.length);
+            })
+            .catch((err)=>{
+              console.log(err);
+            })
+        })
+        .catch((err)=>{
+          console.log(err);
+        })
+
   },[myInfo]);
 
-  useEffect(()=>{
-    // 팔로잉 리스트 조회
-    axios({
-      method:"get",
-      url : `${SERVER_API}/users/${myInfo.nickname}/followings`,
-      headers:{
-        Authorization: `Bearer ${accessToken}`,
-      }
-    })
-      .then((res)=>{
-        console.log(res.data);
-        setFollow({
-          ...follow,
-          followings : res.data.length,
-        });
-      })
-      .catch((err)=>{
-        console.log(err);
-      })
-  },[myInfo]);
 
   return (
     <div>
@@ -352,7 +343,7 @@ function MyPage() {
                 window.location.assign('/mypage/follow?type=follower');
               }}
             >
-              <p>{follow.followers}</p>
+              <p>{follower}</p>
               <p>팔로워</p>
             </div>
             <div
@@ -360,7 +351,7 @@ function MyPage() {
                 window.location.assign('/mypage/follow?type=follow');
               }}
             >
-              <p>{follow.followings}</p>
+              <p>{following}</p>
               <p>팔로잉</p>
             </div>
           </div>
