@@ -75,7 +75,7 @@ function ShortForm() {
   ]);
 
   useEffect(() => {
-    console.log('current Index : ', currentVideoIndex);
+    console.log();
     // console.log(formsData);
   }, [currentVideoIndex]);
 
@@ -122,7 +122,6 @@ function ShortForm() {
   useEffect(() => {
     const tmp: any[] = [];
     formsData.forEach((item) => {
-      console.log('item.id : ', item.id);
       const itemID = item.id;
       axios({
         method: 'get',
@@ -156,7 +155,7 @@ function ShortForm() {
         scrollbar={{ draggable: true }}
         onSwiper={(swiper) => console.log(swiper)}
         onSlideChange={(swiper) => {
-          console.log('slide change');
+
           setCurrentVideoIndex(swiper.activeIndex);
         }}
       >

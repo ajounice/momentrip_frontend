@@ -67,12 +67,6 @@ const ProfileSettingPage = () => {
 
     const data = {};
 
-    console.log("onClickProfileSetting");
-    console.log("profileImgData : ", profileImgData);
-    console.log("data : ", data);
-    console.log(profileImgData !== '');
-    console.log(Object.keys(data).length);
-
     if (myInfo.name !== modiInfo.name) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
@@ -106,7 +100,6 @@ const ProfileSettingPage = () => {
           console.log(err);
         })
     } else if (profileImgData !== '' && Object.keys(data).length === 0) {
-      console.log("qwe");
       const form_data = new FormData();
       form_data.append('profile_image', profileImgData);
       axios.patch(`${SERVER_API}/users/my/edit/image`, form_data,

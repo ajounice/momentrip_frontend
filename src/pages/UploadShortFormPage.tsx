@@ -71,7 +71,7 @@ function UploadShortFormPage() {
   }
 
   useEffect(()=>{
-    console.log(imgSrc);
+    console.log();
   },[imgSrc]);
 
   useEffect(()=>{
@@ -83,7 +83,6 @@ function UploadShortFormPage() {
       const objectUrl = URL.createObjectURL(e.target.files[0]);
       // setImgSrc(objectUrl);
 
-      console.log(e.target.files[0].name);
       const fileName = document.getElementById('fileName') as HTMLDivElement;
       fileName.innerText = e.target.files[0].name;
 

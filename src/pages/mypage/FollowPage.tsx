@@ -11,7 +11,7 @@ function FollowPage() {
   });
 
   useEffect(()=>{
-    console.log("w");
+    console.log("");
   },[]);
 
   useEffect(() => {

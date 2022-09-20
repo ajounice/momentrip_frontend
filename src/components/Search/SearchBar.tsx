@@ -11,7 +11,6 @@ const handleOnKeyPress = (
   if (e.key === 'Enter') {
     // handleOnClick(e.target.value);
     setKeyword(e.target.value);
-    console.log(e.target.value);
   }
 };
 

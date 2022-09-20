@@ -70,7 +70,7 @@ function ShortFormVideo(videoProps: IShortFormVideo) {
         Authorization: `Bearer ${localStorage.getItem('Token')}`,
       }
     }).then((res)=>{
-      console.log("setCurrentUser(" , res.data);
+
       setCurrentUser({
         email : res.data.email,
         id : res.data.id,
@@ -88,7 +88,6 @@ function ShortFormVideo(videoProps: IShortFormVideo) {
   },[]);
 
   useEffect(()=>{
-    console.log("    currentUser.nickname   ", currentUser.nickname);
     const nickname = currentUser.nickname;
 
     if(nickname !== ''){
@@ -101,7 +100,6 @@ function ShortFormVideo(videoProps: IShortFormVideo) {
       })
         .then((res)=>{
           setCurrentUserFollowingList(res.data);
-          console.log(res.data);
         })
         .catch((err)=>{
           console.log(err);

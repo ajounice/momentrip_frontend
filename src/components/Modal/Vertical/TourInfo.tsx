@@ -96,11 +96,6 @@ interface ITourInfo {
 
 function TourInfo({ setViewTourInfo }: ITourInfo) {
   const navigation = useNavigate();
-
-  useEffect(() => {
-    console.log('/search');
-  }, []);
-
   return (
     <div className={'tour-info-modal-container'}>
       <div className={'tour-info-modal-top-nav'}>

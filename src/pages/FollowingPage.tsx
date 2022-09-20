@@ -150,7 +150,7 @@ import FullSF from '../components/ShortForm/FullSF';
 // };
 
 function FollowingPage() {
-  console.log('following page');
+
   return (
     <div className="px-4">
       <div className="my-20">

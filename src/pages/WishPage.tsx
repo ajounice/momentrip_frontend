@@ -108,7 +108,6 @@ function WishPage() {
 
         if (wishRes.status === 200) {
           setFolders(wishRes.data);
-          console.log(wishRes.data);
         }
         return null;
       } catch (error) {
@@ -132,7 +131,7 @@ function WishPage() {
         });
 
         if (response.status === 200) {
-          console.log(response.data);
+          console.log();
         }
         return null;
       } catch (error) {

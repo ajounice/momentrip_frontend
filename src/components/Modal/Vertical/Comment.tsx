@@ -62,7 +62,6 @@ function CommentItem({ setRefresh, token, currentUser, commentId, name, comment,
         },
       })
       .then((res) => {
-        console.log(res);
         setRefresh((prev) => !prev);
       })
       .catch((err) => {
@@ -160,7 +159,6 @@ function Comment({ setViewComment, commentList, user, shortFormId }: IComment) {
         },
       })
       .then((res) => {
-        console.log('users/me', res.data);
         setCurrentUser(res.data);
       })
       .catch((err) => {
@@ -169,7 +167,6 @@ function Comment({ setViewComment, commentList, user, shortFormId }: IComment) {
   }, [accessToken]);
 
   useEffect(() => {
-    console.log('refresh ', shortFormId);
     axios({
       method: 'get',
       url: `${SERVER_API}/forms/${shortFormId}/comments`,
@@ -179,7 +176,6 @@ function Comment({ setViewComment, commentList, user, shortFormId }: IComment) {
     })
       .then((res) => {
         if (res.status === 200) {
-          console.log(res.data);
           setComList(res.data);
         }
       })
@@ -190,9 +186,8 @@ function Comment({ setViewComment, commentList, user, shortFormId }: IComment) {
 
   const addCommentEvent = (e: React.KeyboardEvent) => {
     // 최신순 정렬로 보여줄 것
-    console.log(e.key);
+
     if (e.key === 'Enter') {
-      console.log("e.key === 'Enter");
       // 나중에 사용할 예정
 
       axios({
