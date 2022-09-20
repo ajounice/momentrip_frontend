@@ -6,6 +6,7 @@ import { CommentType } from '../../../globalType';
 import { IUserInfoInSF } from '../../common/ProfileInSF';
 import axios from 'axios';
 import { SERVER_API } from '../../../config';
+import { userInfo } from "os";
 
 interface ICommentItem {
   currentUser: number;
@@ -21,6 +22,38 @@ interface ICommentItem {
 
 // 댓글 아이템
 function CommentItem({ setRefresh, token, currentUser, commentId, name, comment, userId, imagePath }: ICommentItem) {
+  const [mount , setMount] = useState(0);
+  const [ me, setME ] = useState({
+    id : 0,
+    email : '',
+    nickname : '',
+    password : null,
+    name : '',
+    intro : '',
+    type : false,
+    image : '',
+  })
+
+  useEffect(() => {
+    if(mount ===0 ){
+      setMount(1);
+    }
+    else{
+      axios.get(`${SERVER_API}/users/my`,
+        {
+          headers:{
+            Authorization: `Bearer ${localStorage.getItem('Token')}`,
+          }
+        }
+      ).then((res)=>{
+        setME(res.data);
+      })
+        .catch((err)=>{
+          console.log(err);
+        })
+    }
+  }, [mount]);
+
   const onClickDelete = (e: any) => {
     axios
       .delete(`${SERVER_API}/forms/comments/${commentId}`, {
@@ -41,8 +74,15 @@ function CommentItem({ setRefresh, token, currentUser, commentId, name, comment,
     <div className={'comment-item-outer-container'}>
       <div className={'comment-item-inner-container'}>
         <div className={'comment-item-left'}>
-          <div className={'comment-item-img-container'}>
-            <img className={'comment-item-img'} src={imagePath} alt={'user profile'} />
+          <div onClick={()=>{
+            if( me.nickname === name ){
+              window.location.assign(`/mypage`);
+            }
+            else{
+              window.location.assign(`/profile/${name}`);
+            }
+          }} className={'comment-item-img-container'}>
+            <img className={'comment-item-img'} src={imagePath === null ? '/img/profile_default.png' :imagePath} alt={'user profile'} />
           </div>
           <div className={'comment-item-text-container'}>
             <div className={'comment-item-name-n-date-container'}>
@@ -97,7 +137,16 @@ function Comment({ setViewComment, commentList, user, shortFormId }: IComment) {
 
   const inputRef = useRef(null);
   const [accessToken, setAccessToken] = useState<string | null>(null);
-  const [currentUser, setCurrentUser] = useState(0);
+  const [currentUser, setCurrentUser] = useState<IUserInfoInSF>({
+    email : "",
+    id : 0,
+    image : "",
+    intro : "",
+    name : "",
+    nickname : "",
+    password : "",
+    type :false,
+  });
 
   useEffect(() => {
     setAccessToken(window.localStorage.getItem('Token'));
@@ -105,14 +154,14 @@ function Comment({ setViewComment, commentList, user, shortFormId }: IComment) {
 
   useEffect(() => {
     axios
-      .get(`${SERVER_API}/users/me`, {
+      .get(`${SERVER_API}/users/my`, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
       })
       .then((res) => {
         console.log('users/me', res.data);
-        setCurrentUser(res.data.id);
+        setCurrentUser(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -193,7 +242,7 @@ function Comment({ setViewComment, commentList, user, shortFormId }: IComment) {
             <div className={'comment-item-img-container'}>
               <img
                 className={'comment-item-img'}
-                src={user !== null && user.image !== '' ? user.image : '/img/profile_default.png'}
+                src={currentUser !== null && currentUser.image !== null ? currentUser.image : '/img/profile_default.png'}
                 alt={'user profile'}
               />
             </div>
@@ -221,7 +270,7 @@ function Comment({ setViewComment, commentList, user, shortFormId }: IComment) {
                       setRefresh={setRefresh}
                       token={accessToken}
                       commentId={item.id}
-                      currentUser={currentUser}
+                      currentUser={currentUser.id}
                       name={item.user.nickname}
                       comment={item.content}
                       userId={item.user.id}

@@ -209,6 +209,11 @@ function MyPage() {
   const [accessToken, setAccessToken] = useState<string | null>();
   const [alarmOpen, setAlarmOpen] = useState(false);
 
+  const [ follow, setFollow ] = useState({
+    followers : 0,
+    followings : 0,
+  });
+
   useEffect(() => {
     for (let i = 0; i < mockBadgeData.length; i++) {
       const element: HTMLElement | null = document.getElementById('progress_' + mockBadgeData[i].name);
@@ -246,6 +251,46 @@ function MyPage() {
     }
   }, [mount]);
 
+  useEffect(()=>{
+    // 팔로워 리스트 조회
+    axios({
+      method:"get",
+      url : `${SERVER_API}/users/${myInfo.nickname}/followers`,
+      headers:{
+        Authorization: `Bearer ${accessToken}`,
+      }
+    })
+      .then((res)=>{
+        console.log(res);
+        setFollow({
+          ...follow,
+          followers : res.data.length,
+        });
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
+
+    // 팔로잉 리스트 조회
+    axios({
+      method:"get",
+      url : `${SERVER_API}/users/${myInfo.nickname}/followings`,
+      headers:{
+        Authorization: `Bearer ${accessToken}`,
+      }
+    })
+      .then((res)=>{
+        console.log(res);
+        setFollow({
+          ...follow,
+          followings : res.data.length,
+        });
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
+  },[myInfo]);
+
   return (
     <div>
       <TopBar
@@ -265,7 +310,7 @@ function MyPage() {
               <Avatar size={'lg'} nickname={''} />
             ) : (
               <Avatar
-                src={myInfo.image}
+                src={myInfo.image === null ? '/img/profile_default.png':myInfo.image}
                 biz={myInfo.type}
                 size={'lg'}
                 nickname={myInfo.nickname}
@@ -306,7 +351,7 @@ function MyPage() {
                 window.location.assign('/mypage/follow?type=follower');
               }}
             >
-              <p>{userInfo.followers}</p>
+              <p>{follow.followers}</p>
               <p>팔로워</p>
             </div>
             <div
@@ -314,7 +359,7 @@ function MyPage() {
                 window.location.assign('/mypage/follow?type=follow');
               }}
             >
-              <p>{userInfo.following}</p>
+              <p>{follow.followings}</p>
               <p>팔로잉</p>
             </div>
           </div>

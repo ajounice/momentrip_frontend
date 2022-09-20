@@ -71,7 +71,7 @@ root.render(
           <Route path="/upload" element={<UploadShortFormPage />} />
           <Route path="/add/data" element={<AdditionalInfo />} />
           <Route path="/alarm" element={<AlarmPage />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/:nickname" element={<Profile />} />
           <Route path="/tourinfo" element={<TourInfoPage />} />
           <Route path={'/wishlist/:folderId/form/:formId'} element={<WishForm />} />
           <Route path={'/wishlist/:folderId/tour/:formId'} element={<WishTour />} />

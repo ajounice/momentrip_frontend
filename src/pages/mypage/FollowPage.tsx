@@ -10,6 +10,10 @@ function FollowPage() {
     follow: false,
   });
 
+  useEffect(()=>{
+    console.log("w");
+  },[]);
+
   useEffect(() => {
     const query = window.location.href.slice(window.location.href.search('=') + 1);
     if (query === 'follow') {

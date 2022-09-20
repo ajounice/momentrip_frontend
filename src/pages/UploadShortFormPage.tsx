@@ -117,7 +117,7 @@ function UploadShortFormPage() {
     }
 
     const tagList = ParseTag(tag);
-    tagList.push("*"+category);
+    tagList.push(category);
 
     data.append('tag', tagList.toString());
     data.append('video',imgData);
@@ -131,8 +131,9 @@ function UploadShortFormPage() {
       },
       data : data,
     })
-      .then((res)=>{
-        console.log(res);
+      .then(()=>{
+        alert("숏폼 업로드 성공");
+        window.location.assign('/home');
       })
       .catch((err)=>{
         console.log(err);
