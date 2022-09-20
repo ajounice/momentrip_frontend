@@ -38,6 +38,7 @@ function ProfileInSF({user,follow,setFollow}:IProfileSF){
   const [ followState, setFollowState ] = useState(false);
   const [ currentUserFollowingList, setCurrentUserFollowingList ] = useState<IUserInfoInSF[]>([]);
   const [ LocalStorage , setLocalStorage ] = useState<boolean | null>();
+  const [ key, setKey ] = useState('');
 
   useEffect(() => {
     setAccessToken(window.localStorage.getItem('Token'));
@@ -45,7 +46,7 @@ function ProfileInSF({user,follow,setFollow}:IProfileSF){
 
   useEffect(()=>{
     // console.log("ProfileSF follow : ",follow);
-    console.log();
+    console.log("localStorage.getItem(user.nickname) : ",localStorage.getItem(key));
   },[follow]);
 
   const [accessToken, setAccessToken] = useState<string | null>();
@@ -76,13 +77,18 @@ function ProfileInSF({user,follow,setFollow}:IProfileSF){
 
   useEffect(()=>{
     console.log("LocalStorage n: ",LocalStorage);
-    if(LocalStorage === null ){
-      setFollowState(false);
+
+  },[LocalStorage]);
+
+
+  useEffect(()=>{
+    if(user === null ){
+      console.log("");
     }
     else{
-      setFollowState(true);
+      setKey(user.nickname);
     }
-  },[LocalStorage]);
+  },[accessToken]);
 
   useEffect(()=>{
     axios({
@@ -100,50 +106,6 @@ function ProfileInSF({user,follow,setFollow}:IProfileSF){
       })
   },[accessToken]);
 
-
-  // useEffect(()=>{
-  //   axios.get(`${SERVER_API}/users/my`,{
-  //     headers : {
-  //       Authorization: `Bearer ${localStorage.getItem('Token')}`,
-  //     }
-  //   }).then((res)=>{
-  //
-  //     setCurrentUser({
-  //       email : res.data.email,
-  //       id : res.data.id,
-  //       image : res.data.image,
-  //       intro : res.data.intro,
-  //       name : res.data.name,
-  //       nickname : res.data.nickname,
-  //       password : "",
-  //       type : false,
-  //     });
-  //   })
-  //     .catch((err)=>{
-  //       console.log(err);
-  //     })
-  // },[]);
-
-  // useEffect(()=>{
-  //   const nickname = me.nickname;
-  //
-  //   axios({
-  //     method:"get",
-  //     url : `${SERVER_API}/users/${nickname}/followings`,
-  //     headers: {
-  //       Authorization: `Bearer ${localStorage.getItem('Token')}`,
-  //     }
-  //   })
-  //     .then((res)=>{
-  //       setCurrentUserFollowingList(res.data);
-  //       res.data.forEach((item:any)=>{
-  //         localStorage.setItem(`${item.nickname}`,item.nickname);
-  //       })
-  //     })
-  //     .catch((err)=>{
-  //       console.log(err);
-  //     })
-  // },[]);
 
   useEffect(()=>{
     // 현재 팔로우 중인 리스트 가져오기
@@ -178,13 +140,6 @@ function ProfileInSF({user,follow,setFollow}:IProfileSF){
             return;
           }
         }
-
-        // if( users !== null){
-        //   if(users.nickname !== null && users.nickname === user.nickname ){
-        //     setFollowState(true);
-        //     return;
-        //   }
-        // }
       })
     }
   },[currentUserFollowingList]);
@@ -248,8 +203,8 @@ function ProfileInSF({user,follow,setFollow}:IProfileSF){
       <div className={'follow-following-button-container'}>
         {
           user!==null && me.id === user.id ? null
-          :<button onClick={user !== null && localStorage.getItem(user.nickname) !== null  ? onClickUnFollow : onClickFollow} className={user !== null && localStorage.getItem(user.nickname) !== null  ? 'following-button' : 'follow-button'}
-                 type={'submit'}>{user !== null && localStorage.getItem(user.nickname) !== null && LocalStorage ? "팔로잉" : "팔로우"}</button>
+          :<button onClick={user !== null &&  localStorage.getItem(key) !== null ? onClickUnFollow : onClickFollow} className={user !== null && localStorage.getItem(key) !== null ? 'following-button' : 'follow-button'}
+                 type={'submit'}>{user !== null && localStorage.getItem(key) !== null  ? "팔로잉" : "팔로우"}</button>
 
         }
       </div>
