@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { IButton } from '../globalType';
-import VerticalNavigation from '../components/Navigation/VerticalNavigation';
 import { ShortForm } from '../components/View/ShortForm';
 import axios from "axios";
+import '../styles/pages/HomePage.css';
 import { SERVER_API } from "../config";
 
 function HomePage() {

@@ -107,6 +107,8 @@ export interface IShortFormVideo{
   setComment : Dispatch<SetStateAction<CommentType[]>>;
 
   user : IUserInfoInSF;
+  follow : number;
+  setFollow : Dispatch<SetStateAction<number>>;
 }
 
 // nav props
