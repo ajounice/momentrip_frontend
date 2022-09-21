@@ -18,6 +18,7 @@ interface IFolder {
   name: string;
   id: number;
   wishlists: WishForm[];
+  images: string[];
 }
 // const mockFolderListData = {
 //   Folders: [
@@ -83,7 +84,6 @@ function WishPage() {
   /* ===== 서버 연동 ===== */
   const [accessToken, setAccessToken] = useState<string | null>();
   const [folders, setFolders] = useState<IFolder[]>();
-  const [tmpFolders, setTmpFolders] = useState<IFolder[]>();
 
   useEffect(() => {
     // const params = new URLSearchParams(location.search);
@@ -165,7 +165,7 @@ function WishPage() {
                 {folders !== undefined &&
                   folders.map((data: IFolder, i) => (
                     // <Folder label={data.name} id={data.id} thumbnail={data.wishlists}></Folder>
-                    <Folder label={data.name} id={data.id} thumbnail={[]}></Folder>
+                    <Folder label={data.name} id={data.id} thumbnail={data.images}></Folder>
                   ))}
                 {/* FIXME: 위시리스트 섬네일 받아오게 수정되면 수정*/}
                 {/* {

@@ -99,27 +99,26 @@ export default function VerticalNavigation({
   // const [wishlist, setWishlist] = useState(['호텔', '바다', '부산여행', '아무거나']);
   // eslint-disable-next-line @typescript-eslint/no-var-requires
 
-
   // TODO wish api
-  // useEffect(() => {
-  //   async function getWishs() {
-  //     try {
-  //       const response = await instance.get('/wishlists', {
-  //         headers: {
-  //           Authorization: `Bearer ${accessToken}`,
-  //         },
-  //       });
-  //
-  //       if (response.status === 200) {
-  //         setWishlist(response.data);
-  //       }
-  //       return null;
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   }
-  //   getWishs();
-  // }, [accessToken]);
+  useEffect(() => {
+    async function getWishs() {
+      try {
+        const response = await instance.get('/wishlists', {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+
+        if (response.status === 200) {
+          setWishlist(response.data);
+        }
+        return null;
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    getWishs();
+  }, [accessToken]);
 
   const onClickComment = () => {
     // instance
@@ -180,7 +179,6 @@ export default function VerticalNavigation({
     const name = document.getElementById('folderName');
     // TODO 서버에 폴더 추가 요청 후 새로고침
     // TODO 해당 폴더에 위시 추가
-
 
     setAddFolderOpen(false);
   }

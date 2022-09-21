@@ -27,7 +27,7 @@ const Folder = ({ label, id, thumbnail, link }: IFolder) => {
               {thumbnail.map((data, i) =>
                 i < 4 ? (
                   <div className="w-full relative after:pb-[100%] after:block">
-                    <img src={thumbnail[0]} className="w-full h-full object-cover absolute" />
+                    <img src={data} className="w-full h-full object-cover absolute" />
                   </div>
                 ) : null,
               )}
