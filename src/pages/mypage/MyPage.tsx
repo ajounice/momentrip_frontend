@@ -5,6 +5,7 @@ import FullSF from '../../components/ShortForm/FullSF';
 import axios from 'axios';
 import { SERVER_API } from '../../config';
 import { TopBar } from '../../components/common/Navigation';
+import { Form } from "../../globalType";
 
 // 서버에서 가져온 정보
 // const userInfo = {
@@ -75,7 +76,7 @@ const badgeList: IBadgeList = {
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ');
 }
-const mockBadgeDataTotal = 40;
+const mockBadgeDataTotal = 4;
 // const mockBadgeData = [
 //   {
 //     name: 'mountain',
@@ -114,7 +115,7 @@ const mockBadgeData = [
   },
   {
     name: 'sea',
-    value: 0,
+    value: 4,
   },
   {
     name: 'hotel',
@@ -183,7 +184,13 @@ const mockShortFormListsData = {
   ],
 };
 
+interface IBadge{
+  name : "sea" | "hotel" | "festival" | "activity" | "night"|"camping"|"mountain";
+  value : number;
+}
+
 export interface MyInfo {
+  myBadgeList : IBadge[];
   id: number;
   email: string;
   nickname: string;
@@ -192,10 +199,13 @@ export interface MyInfo {
   intro: string;
   type: boolean;
   image: string;
+  // form : Form[];
 }
 
 function MyPage() {
+
   const [myInfo, setMyIfo] = useState<MyInfo>({
+    myBadgeList: [],
     id: 0,
     email: '',
     nickname: '',
@@ -204,7 +214,14 @@ function MyPage() {
     intro: '',
     type: false,
     image: '',
+    // form : [],
   });
+
+  const [myForm, setMyForm ] = useState<Form[]>([]);
+  const [ myBadgeList, setBadgeList ] = useState<IBadge[]>([]);
+  const [total, setTotal] = useState(0);
+
+
   const [mount, setMount] = useState(0);
   const [accessToken, setAccessToken] = useState<string | null>();
   const [alarmOpen, setAlarmOpen] = useState(false);
@@ -243,6 +260,16 @@ function MyPage() {
         .then((res) => {
           if (res.status === 200) {
             setMyIfo(res.data);
+
+            const arr = [];
+            for(let i = 0 ; i < res.data.badgeList ; i+=1 ){
+              if( res.data.badgeList[i].name !== "total"){
+                arr.push(res.data.badgeList[i]);
+              }
+            }
+            setBadgeList(arr);
+            setTotal(res.data.badgeList);
+            setMyForm(res.data.forms);
           }
         });
     }
@@ -283,6 +310,11 @@ function MyPage() {
   },[myInfo]);
 
 
+  useEffect(()=>{
+    console.log("myForm : ",myForm);
+  },[myForm]);
+
+
   return (
     <div>
       <TopBar
@@ -306,7 +338,7 @@ function MyPage() {
                 biz={myInfo.type}
                 size={'lg'}
                 nickname={myInfo.nickname}
-                badge={userInfo.badge}
+                badge={"sea"}
               />
             )}
           </div>
@@ -315,7 +347,8 @@ function MyPage() {
           <div className="text-center pt-2">{myInfo.intro}</div>
           {/* 프로그래스바 */}
           <div className="w-full  h-2.5 mt-7 flex rounded-full bg-gray-300 animate-pulse">
-            {mockBadgeData.map(
+            {
+              mockBadgeData.map(
               (data, i) =>
                 (data.value / mockBadgeDataTotal) * 100 != 0 && (
                   <>
@@ -334,8 +367,8 @@ function MyPage() {
                     </div>
                   </>
                 ),
-            )}
-            <div className="mt-7 mx-auto text-xs ">열심히 활동하고 취향 뱃지를 달아보세요!</div>
+            ) }
+            {/*<div className="mt-7 mx-auto text-xs ">열심히 활동하고 취향 뱃지를 달아보세요!</div>*/}
           </div>
           <div className="grid grid-cols-2 text-center mt-16 mb-7">
             <div
@@ -355,11 +388,16 @@ function MyPage() {
               <p>팔로잉</p>
             </div>
           </div>
+
           {/* Post Section */}
           <div className="grid grid-cols-2 gap-1">
-            {/* {mockShortFormListsData.shortForm.map((data) => (
-            <FullSF src={data.src} href={data.href} shortFormId={data.shortFormId} likeCount={data.likeCount} />
-          ))} */}
+             {/*like count 일단 view count */}
+            {
+              myForm
+                ?
+              myForm.map((data) =>
+              {return <FullSF src={data.thumbnail} href={data.thumbnail} shortFormId={data.id} likeCount={data.viewCount} />})
+            :null}
           </div>
         </div>
       </div>

@@ -163,3 +163,20 @@ export interface WishFolder{
   name:string;
   wishlists : WishForm[];
 }
+
+export interface Tag{
+  id : number;
+  name : string;
+}
+
+
+// forms
+export interface Form{
+  id : number;
+  content : string;
+  tags : Tag[];
+  thumbnail : string;
+  title : null | string;
+  video : string;
+  viewCount : number;
+}
