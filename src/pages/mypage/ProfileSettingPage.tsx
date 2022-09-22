@@ -27,6 +27,7 @@ const ProfileSettingPage = () => {
   const [ mount, setMount ] = useState(0);
   const [accessToken, setAccessToken] = useState<string | null>();
   const [ myInfo, setMyIfo ] = useState<MyInfo>({
+    myBadgeList:[],
     id : 0,
     email : '',
     nickname : '',
