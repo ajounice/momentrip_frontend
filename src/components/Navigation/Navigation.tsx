@@ -179,18 +179,17 @@ export default function TopNavigation({ color = 'white' }) {
             alert('check');
           }}
         />
-      )
-        // : window.location.pathname === '/mypage' ? (
-        // <TopBar
-        //   alarmOnClickEvent={() => setAlarmOpen(true)}
-        //   centerText={userInfo.userName}
-        //   centerTextType={'user'}
-        //   alarm={true}
-        //   dropdown={'mypage'}
-        //   // dropdownList={['프로필 편집', '개인정보 설정', '설정']}
-        // />
+      ) : // : window.location.pathname === '/mypage' ? (
+      // <TopBar
+      //   alarmOnClickEvent={() => setAlarmOpen(true)}
+      //   centerText={userInfo.userName}
+      //   centerTextType={'user'}
+      //   alarm={true}
+      //   dropdown={'mypage'}
+      //   // dropdownList={['프로필 편집', '개인정보 설정', '설정']}
+      // />
       // )
-        : window.location.pathname === '/profile' ? (
+      window.location.pathname === '/profile' ? (
         <TopBar
           alarmOnClickEvent={() => setAlarmOpen(true)}
           centerText={paramId}
