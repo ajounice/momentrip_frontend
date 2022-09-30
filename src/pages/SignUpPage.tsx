@@ -117,7 +117,7 @@ function SignUpPage() {
             <button onClick={onClickDuplicate} className={!duplicate ? 'active-submit-button' : 'submit-button'}>
               ID 중복확인
             </button>
-            <div className="mt-10 bg-white border-gray-300 border rounded-lg px-4 py-4">
+            <div className="mt-10 bg-white border-gray-300 border rounded-lg px-4 py-4 text-sm">
               <span className="font-semibold">개인정보의 수집 및 이용 동의서</span>
               <br /> - 모멘트립은 서비스를 위한 회원가입, 고지사항 전달 등을 위해 아래와 같이 개인정보를 수집 및
               이용합니다. 이용자가 제공한 모든 정보는 다음의 목적을 위해 활용하며, 하기 목적 이외의 용도로는 사용되지
@@ -139,7 +139,11 @@ function SignUpPage() {
                   <td className="">제15조 제1항</td>
                 </tr>
               </table>
-              2. 개인정보 보유 및 이용기간 <br />- 수집.이용 동의일로부터 개인정보의 수집.이용목적을 달성할 때까지{' '}
+              - 서비스 이용 시 회원님이 업로드한 데이터(비디오, 사진, 게시물, 댓글 등)에 대해서는 본 서비스에서 보관할
+              수 있으며, 원치않을 경우언제든지 삭제할 수 있습니다.
+              <br />
+              <br /> 2. 개인정보 보유 및 이용기간 <br />- 수집.이용 동의일로부터 개인정보의 수집.이용목적을 달성할
+              때까지 <br />
               <br />
               3. 동의거부관리 <br />- 귀하께서는 본 안내에 따른 개인정보 수집, 이용에 대하여 동의를 거부할 권리가
               있습니다. 다만, 귀하가 개인정보의 수집/이용에 동의를 거부하실 경우 서비스를 이용할 수 없음을 알려드립니다.
