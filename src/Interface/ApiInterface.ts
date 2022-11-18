@@ -1,5 +1,9 @@
 export type WishType = "TOUR" | "FORM";
 
+/**
+ * get
+ */
+
 export interface Login{
   accessToken : string;
 }
@@ -54,6 +58,8 @@ export interface Form{
   thumbnail : string;
   video : string;
   viewCount : number;
+  tags: Tag[];
+  user : MyInfo;
 }
 
 export interface SpecificForm{
@@ -87,3 +93,13 @@ export interface WishFolder{
   wishlists : Wish[];
 }
 
+/**
+ * set
+ */
+
+export interface SetSF{
+  content : string;
+  tag : Tag[];
+  site : string;
+  video : string;
+}
