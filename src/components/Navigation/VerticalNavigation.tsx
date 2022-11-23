@@ -192,32 +192,6 @@ export default function VerticalNavigation({
     console.log();
   }, [isHeart]);
 
-  const colorItems = [
-    'bg-stone-600',
-    'bg-red-600',
-    'bg-orange-600',
-    'bg-amber-600',
-    'bg-yellow-600',
-    'bg-lime-600',
-    'bg-green-600',
-    'bg-emerald-600',
-    'bg-teal-600',
-    'bg-cyan-600',
-    'bg-sky-600',
-    'bg-blue-600',
-    'bg-indigo-600',
-    'bg-violet-600',
-    'bg-purple-600',
-    'bg-fuchsia-600',
-    'bg-pink-600',
-    'bg-fuchsia-600',
-    'bg-pink-600',
-    'bg-rose-600',
-  ];
-  function randomColor() {
-    return colorItems[Math.floor(Math.random() * colorItems.length)];
-  }
-
   async function addFolderRequest() {
     await instance
       .post(
@@ -311,7 +285,7 @@ export default function VerticalNavigation({
               <li key={i} className="col-span-1 flex rounded-md shadow-md">
                 <div
                   className={classNames(
-                    randomColor(),
+                    "bg-indigo-600",
                     'flex-shrink-0 flex items-center justify-center w-10 text-white text-sm font-medium rounded-l-md',
                   )}
                 >
