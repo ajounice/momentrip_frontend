@@ -5,8 +5,7 @@ import { RiCloseFill } from 'react-icons/ri';
 import { CommentType } from '../../../globalType';
 import { IUserInfoInSF } from '../../common/ProfileInSF';
 import axios from 'axios';
-import { SERVER_API } from '../../../config';
-import { userInfo } from "os";
+import { userInfo } from 'os';
 
 interface ICommentItem {
   currentUser: number;
@@ -22,41 +21,40 @@ interface ICommentItem {
 
 // 댓글 아이템
 function CommentItem({ setRefresh, token, currentUser, commentId, name, comment, userId, imagePath }: ICommentItem) {
-  const [mount , setMount] = useState(0);
-  const [ me, setME ] = useState({
-    id : 0,
-    email : '',
-    nickname : '',
-    password : null,
-    name : '',
-    intro : '',
-    type : false,
-    image : '',
-  })
+  const [mount, setMount] = useState(0);
+  const [me, setME] = useState({
+    id: 0,
+    email: '',
+    nickname: '',
+    password: null,
+    name: '',
+    intro: '',
+    type: false,
+    image: '',
+  });
 
   useEffect(() => {
-    if(mount ===0 ){
+    if (mount === 0) {
       setMount(1);
-    }
-    else{
-      axios.get(`${SERVER_API}/users/my`,
-        {
-          headers:{
+    } else {
+      axios
+        .get(`${process.env.REACT_APP_API_URL}/users/my`, {
+          headers: {
             Authorization: `Bearer ${localStorage.getItem('Token')}`,
-          }
-        }
-      ).then((res)=>{
-        setME(res.data);
-      })
-        .catch((err)=>{
-          console.log(err);
+          },
         })
+        .then((res) => {
+          setME(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   }, [mount]);
 
   const onClickDelete = (e: any) => {
     axios
-      .delete(`${SERVER_API}/forms/comments/${commentId}`, {
+      .delete(`${process.env.REACT_APP_API_URL}/forms/comments/${commentId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -73,15 +71,21 @@ function CommentItem({ setRefresh, token, currentUser, commentId, name, comment,
     <div className={'comment-item-outer-container'}>
       <div className={'comment-item-inner-container'}>
         <div className={'comment-item-left'}>
-          <div onClick={()=>{
-            if( me.nickname === name ){
-              window.location.assign(`/mypage`);
-            }
-            else{
-              window.location.assign(`/profile/${name}`);
-            }
-          }} className={'comment-item-img-container'}>
-            <img className={'comment-item-img'} src={imagePath === null ? '/img/profile_default.png' :imagePath} alt={'user profile'} />
+          <div
+            onClick={() => {
+              if (me.nickname === name) {
+                window.location.assign(`/mypage`);
+              } else {
+                window.location.assign(`/profile/${name}`);
+              }
+            }}
+            className={'comment-item-img-container'}
+          >
+            <img
+              className={'comment-item-img'}
+              src={imagePath === null ? '/img/profile_default.png' : imagePath}
+              alt={'user profile'}
+            />
           </div>
           <div className={'comment-item-text-container'}>
             <div className={'comment-item-name-n-date-container'}>
@@ -137,14 +141,14 @@ function Comment({ setViewComment, commentList, user, shortFormId }: IComment) {
   const inputRef = useRef(null);
   const [accessToken, setAccessToken] = useState<string | null>(null);
   const [currentUser, setCurrentUser] = useState<IUserInfoInSF>({
-    email : "",
-    id : 0,
-    image : "",
-    intro : "",
-    name : "",
-    nickname : "",
-    password : "",
-    type :false,
+    email: '',
+    id: 0,
+    image: '',
+    intro: '',
+    name: '',
+    nickname: '',
+    password: '',
+    type: false,
   });
 
   useEffect(() => {
@@ -153,7 +157,7 @@ function Comment({ setViewComment, commentList, user, shortFormId }: IComment) {
 
   useEffect(() => {
     axios
-      .get(`${SERVER_API}/users/my`, {
+      .get(`${process.env.REACT_APP_API_URL}/users/my`, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
@@ -169,7 +173,7 @@ function Comment({ setViewComment, commentList, user, shortFormId }: IComment) {
   useEffect(() => {
     axios({
       method: 'get',
-      url: `${SERVER_API}/forms/${shortFormId}/comments`,
+      url: `${process.env.REACT_APP_API_URL}/forms/${shortFormId}/comments`,
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
@@ -192,7 +196,7 @@ function Comment({ setViewComment, commentList, user, shortFormId }: IComment) {
 
       axios({
         method: 'post',
-        url: `${SERVER_API}/forms/${shortFormId}/comments`,
+        url: `${process.env.REACT_APP_API_URL}/forms/${shortFormId}/comments`,
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
@@ -237,7 +241,9 @@ function Comment({ setViewComment, commentList, user, shortFormId }: IComment) {
             <div className={'comment-item-img-container'}>
               <img
                 className={'comment-item-img'}
-                src={currentUser !== null && currentUser.image !== null ? currentUser.image : '/img/profile_default.png'}
+                src={
+                  currentUser !== null && currentUser.image !== null ? currentUser.image : '/img/profile_default.png'
+                }
                 alt={'user profile'}
               />
             </div>

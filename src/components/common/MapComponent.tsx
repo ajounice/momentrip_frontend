@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { KAKAO_API_KEY } from "../../Login/OAuth";
+import React, { useEffect, useState } from 'react';
 
 export interface MapProps {
   latitude: number; // 위도22222
@@ -11,8 +10,7 @@ export function MapComponent({ latitude, longitude }: MapProps) {
     const mapScript = document.createElement('script');
     mapScript.async = true;
     // eslint-disable-next-line no-console
-    // console.log('kakao key : ', `${KAKAO_API_KEY}`);
-    mapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${KAKAO_API_KEY}&autoload=false`;
+    mapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.KAKAO_API_KEY}&autoload=false`;
     document.head.appendChild(mapScript);
     const onLoadKakaoMap = () => {
       window.kakao.maps.load(() => {
@@ -35,9 +33,12 @@ export function MapComponent({ latitude, longitude }: MapProps) {
   }, [latitude, longitude]);
 
   return (
-    <div id="map" style={{
-      width : "100%",
-      height : "100%",
-    }} />
+    <div
+      id="map"
+      style={{
+        width: '100%',
+        height: '100%',
+      }}
+    />
   );
 }

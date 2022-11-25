@@ -2,12 +2,10 @@ import ReactPlayer from 'react-player';
 import React, { useEffect, useState } from 'react';
 import { CommentType, IShortFormVideo } from '../../globalType';
 import VerticalNavigation from '../Navigation/VerticalNavigation';
-import ProfileInSF, { IUserInfoInSF } from "../common/ProfileInSF";
+import ProfileInSF, { IUserInfoInSF } from '../common/ProfileInSF';
 import ShareModalPage from '../Modal/Vertical/BottomModalPage';
 import TourInfo from '../Modal/Vertical/TourInfo';
 import Comment from '../Modal/Vertical/Comment';
-import axios from "axios";
-import { SERVER_API } from "../../config";
 
 function ShortFormVideo(videoProps: IShortFormVideo) {
   // 모달이 올라와 있을 때 배경 부분이 스크롤되는 것을 막기 위한 state
@@ -25,11 +23,10 @@ function ShortFormVideo(videoProps: IShortFormVideo) {
   // video book mark
   const [isBookMark, setIsBookMark] = useState(false);
 
-
-  useEffect(()=>{
+  useEffect(() => {
     // console.log("videoProps.follow : ",videoProps.follow);
     console.log();
-  },[videoProps.follow])
+  }, [videoProps.follow]);
 
   // // 댓글 모달
   // const [ viewComment, setViewComment ] = useState<boolean>(false);
@@ -55,7 +52,6 @@ function ShortFormVideo(videoProps: IShortFormVideo) {
   //   }
   //
   // },[viewComment,viewShare,viewTourInfo,isHeart]);
-
 
   return (
     <>

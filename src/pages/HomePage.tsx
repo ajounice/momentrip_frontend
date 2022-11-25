@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import { IButton } from '../globalType';
 import { ShortForm } from '../components/View/ShortForm';
-import axios from "axios";
+import axios from 'axios';
 import '../styles/pages/HomePage.css';
-import { SERVER_API } from "../config";
 
 function HomePage() {
   const defaultData: IButton = {
@@ -32,23 +31,22 @@ function HomePage() {
   //   }
   // };
 
-  useEffect(()=>{
-    axios.get(`${SERVER_API}/users/my`,
-      {
-        headers : {
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/users/my`, {
+        headers: {
           Authorization: `Bearer ${localStorage.getItem('Token')}`,
-        }
+        },
       })
-      .then((res)=>{
-
-        if(res.data.nickname === null){
+      .then((res) => {
+        if (res.data.nickname === null) {
           window.location.assign('/add/data');
         }
       })
-      .catch((err)=>{
+      .catch((err) => {
         console.log(err);
-      })
-  },[]);
+      });
+  }, []);
 
   return (
     <div className="home-page-container">

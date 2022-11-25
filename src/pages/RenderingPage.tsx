@@ -2,22 +2,18 @@ import { Link, useNavigate } from 'react-router-dom';
 import Input from '../components/common/Input';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { SERVER_API } from '../config';
 
 function RenderingPage() {
-  const KAKAO_AUTH_URL = 'KAKAO_AUTH_URL';
-
   const [localID, setLocalID] = useState<string>('');
   const [localPW, setLocalPW] = useState<string>('');
 
   const navigation = useNavigate();
 
-
   const onClickKakaoLoginButton = () => {
     // 서버에 로그인 요청 보내고 토큰 받아와야함.
     // 토큰 localstroge에 저장
     axios
-      .get(`${SERVER_API}/auth/kakao`)
+      .get(`${process.env.REACT_APP_API_URL}/auth/kakao`)
       .then((res) => {
         console.log();
       })
@@ -33,17 +29,17 @@ function RenderingPage() {
     };
 
     axios
-      .post(`${SERVER_API}/auth/login`, data)
+      .post(`${process.env.REACT_APP_API_URL}/auth/login`, data)
       .then((res) => {
         if (res.status === 201) {
           // 201 created
           localStorage.setItem('Token', res.data.accessToken);
           window.location.assign('/home');
         }
-     })
+      })
       .catch((err) => {
         console.log(err);
-        alert("이메일 또는 비밀번호를 잘못입력하였습니다.");
+        alert('이메일 또는 비밀번호를 잘못입력하였습니다.');
       });
   };
 
@@ -79,7 +75,7 @@ function RenderingPage() {
             <button onClick={onClickLocalLoginButton} className={'local-login-button'}>
               로그인
             </button>
-            <a href={KAKAO_AUTH_URL}>
+            <a href={`${process.env.KAKAO_AUTH_URL}`}>
               <img
                 src={'img/kakao_login_medium_narrow.png'}
                 alt={'kakao login button'}

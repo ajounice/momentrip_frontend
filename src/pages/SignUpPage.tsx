@@ -3,7 +3,6 @@ import '../styles/pages/Signup.css';
 import Input from '../components/common/Input';
 import axios from 'axios';
 import { TopBar } from '../components/common/Navigation';
-import { SERVER_API } from '../config';
 
 function SignUpPage() {
   const [id, setID] = useState('');
@@ -32,7 +31,7 @@ function SignUpPage() {
     // TODO:ID 중복확인
     axios({
       method: 'post',
-      url: `${SERVER_API}/auth/email/duplicate`,
+      url: `${process.env.REACT_APP_API_URL}/auth/email/duplicate`,
       data: {
         email: id,
       },
@@ -53,7 +52,7 @@ function SignUpPage() {
   const onClickSignUp = () => {
     // TODO: SIGNUP API
     axios
-      .post(`${SERVER_API}/auth/signup`, {
+      .post(`${process.env.REACT_APP_API_URL}/auth/signup`, {
         email: id,
         password: pw,
       })

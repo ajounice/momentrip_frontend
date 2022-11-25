@@ -20,7 +20,6 @@ import CustomModal from '../common/CustomModal';
 import SquareSF from '../ShortForm/SquareSF';
 import ModalPage from '../common/ModalPage';
 import Input from '../common/Input';
-import { SERVER_API } from '../../config';
 import { useForm } from 'react-hook-form';
 
 function classNames(...classes: any) {
@@ -75,7 +74,7 @@ export default function VerticalNavigation({
     // instance
     axios({
       method: 'post',
-      url: `${SERVER_API}/forms/${shortFormId}/like`,
+      url: `${process.env.REACT_APP_API_URL}/forms/${shortFormId}/like`,
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
@@ -148,7 +147,7 @@ export default function VerticalNavigation({
     setBookmarkModalOpen(false);
     await instance
       .post(
-        `${SERVER_API}/wishlists/${folderId}`,
+        `${process.env.REACT_APP_API_URL}/wishlists/${folderId}`,
         {
           type: 'FORM',
           targetId: formId,
@@ -221,7 +220,7 @@ export default function VerticalNavigation({
   async function addFolderRequest() {
     await instance
       .post(
-        `${SERVER_API}/wishlists/new`,
+        `${process.env.REACT_APP_API_URL}/wishlists/new`,
         {
           name: watch('wishFolderName'),
         },
