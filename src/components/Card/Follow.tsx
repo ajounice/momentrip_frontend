@@ -1,70 +1,76 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import Avatar from '../common/Avatar';
 import '../../styles/components/Card/Follow.css';
-import { IUserInfoInSF } from "../common/ProfileInSF";
-import axios from "axios";
-import { SERVER_API } from "../../config";
+import { IUserInfoInSF } from '../common/ProfileInSF';
+import axios from 'axios';
 
 interface IFollow {
-  following : IUserInfoInSF;
-  setDeps : Dispatch<SetStateAction<boolean>>;
+  following: IUserInfoInSF;
+  setDeps: Dispatch<SetStateAction<boolean>>;
 }
 
-function Follow({following, setDeps}:IFollow) {
-  const [ followState, setFollowState ] = useState(true);
-  useEffect(()=>{
+function Follow({ following, setDeps }: IFollow) {
+  const [followState, setFollowState] = useState(true);
+  useEffect(() => {
     console.log();
-  },[followState]);
+  }, [followState]);
 
   // 팔로우일때 클릭 api
-  const onClickFollow = () =>{
+  const onClickFollow = () => {
     const nickname = following.nickname;
     axios({
-      method : "post",
-      url : `${SERVER_API}/users/${nickname}/follow`,
-      headers:{
-        Authorization : `Bearer ${localStorage.getItem('Token')}`
-      }
+      method: 'post',
+      url: `${process.env.REACT_APP_API_URL}/users/${nickname}/follow`,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('Token')}`,
+      },
     })
-      .then(()=>{
-        setDeps((prev)=>!prev);
+      .then(() => {
+        setDeps((prev) => !prev);
         setFollowState(true);
       })
-      .catch((err)=>{
+      .catch((err) => {
         console.log(err);
-      })
-  }
-
+      });
+  };
 
   // 언팔로우일때 클릭하는 api
-  const onClickUnfollow = () =>{
+  const onClickUnfollow = () => {
     const nickname = following.nickname;
     axios({
-      method : "delete",
-      url : `${SERVER_API}/users/${nickname}/unfollow`,
-      headers:{
-        Authorization : `Bearer ${localStorage.getItem('Token')}`
-      }
+      method: 'delete',
+      url: `${process.env.REACT_APP_API_URL}/users/${nickname}/unfollow`,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('Token')}`,
+      },
     })
-      .then(()=>{
-        setDeps((prev)=>!prev);
+      .then(() => {
+        setDeps((prev) => !prev);
         setFollowState(false);
       })
-      .catch((err)=>{
+      .catch((err) => {
         console.log(err);
-      })
-  }
+      });
+  };
 
   return (
-    <div onClick={()=>{
-      window.location.assign(`/profile/${following.nickname}`)
-    }} className={'follow-card-container'}>
-       <div className={'follow-card-inner-container'}>
+    <div
+      onClick={() => {
+        window.location.assign(`/profile/${following.nickname}`);
+      }}
+      className={'follow-card-container'}
+    >
+      <div className={'follow-card-inner-container'}>
         <div className={'user-info-container'}>
-          <Avatar size={'md'} src={following.image!==null ? following.image :'/img/profile_default.png'} />
+          <Avatar size={'md'} src={following.image !== null ? following.image : '/img/profile_default.png'} />
           <span className={'user-nickName'}>{following.nickname}</span>
         </div>
-        <button onClick={followState? onClickUnfollow : onClickFollow} className={followState?'follow-page-follow-button' :'delete-button'}>{followState ? "팔로잉" : "팔로우"}</button>
+        <button
+          onClick={followState ? onClickUnfollow : onClickFollow}
+          className={followState ? 'follow-page-follow-button' : 'delete-button'}
+        >
+          {followState ? '팔로잉' : '팔로우'}
+        </button>
       </div>
     </div>
   );

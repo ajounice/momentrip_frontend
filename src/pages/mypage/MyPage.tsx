@@ -3,9 +3,8 @@ import '../../styles/pages/MyPage.css';
 import Avatar from '../../components/common/Avatar';
 import FullSF from '../../components/ShortForm/FullSF';
 import axios from 'axios';
-import { SERVER_API } from '../../config';
 import { TopBar } from '../../components/common/Navigation';
-import { Form } from "../../globalType";
+import { Form } from '../../globalType';
 
 // 서버에서 가져온 정보
 // const userInfo = {
@@ -184,13 +183,13 @@ const mockShortFormListsData = {
   ],
 };
 
-interface IBadge{
-  name : "sea" | "hotel" | "festival" | "activity" | "night"|"camping"|"mountain";
-  value : number;
+interface IBadge {
+  name: 'sea' | 'hotel' | 'festival' | 'activity' | 'night' | 'camping' | 'mountain';
+  value: number;
 }
 
 export interface MyInfo {
-  myBadgeList : IBadge[];
+  myBadgeList: IBadge[];
   id: number;
   email: string;
   nickname: string;
@@ -203,7 +202,6 @@ export interface MyInfo {
 }
 
 function MyPage() {
-
   const [myInfo, setMyIfo] = useState<MyInfo>({
     myBadgeList: [],
     id: 0,
@@ -217,17 +215,16 @@ function MyPage() {
     // form : [],
   });
 
-  const [myForm, setMyForm ] = useState<Form[]>([]);
-  const [ myBadgeList, setBadgeList ] = useState<IBadge[]>([]);
+  const [myForm, setMyForm] = useState<Form[]>([]);
+  const [myBadgeList, setBadgeList] = useState<IBadge[]>([]);
   const [total, setTotal] = useState(0);
-
 
   const [mount, setMount] = useState(0);
   const [accessToken, setAccessToken] = useState<string | null>();
   const [alarmOpen, setAlarmOpen] = useState(false);
 
-  const [ follower, setFollower ] = useState(0);
-  const [ following, setFollowing ] = useState(0);
+  const [follower, setFollower] = useState(0);
+  const [following, setFollowing] = useState(0);
 
   useEffect(() => {
     for (let i = 0; i < mockBadgeData.length; i++) {
@@ -252,7 +249,7 @@ function MyPage() {
       setMount(1);
     } else {
       axios
-        .get(`${SERVER_API}/users/my`, {
+        .get(`${process.env.REACT_APP_API_URL}/users/my`, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
@@ -262,8 +259,8 @@ function MyPage() {
             setMyIfo(res.data);
 
             const arr = [];
-            for(let i = 0 ; i < res.data.badgeList ; i+=1 ){
-              if( res.data.badgeList[i].name !== "total"){
+            for (let i = 0; i < res.data.badgeList; i += 1) {
+              if (res.data.badgeList[i].name !== 'total') {
                 arr.push(res.data.badgeList[i]);
               }
             }
@@ -275,45 +272,42 @@ function MyPage() {
     }
   }, [mount]);
 
-  useEffect(()=>{
+  useEffect(() => {
     const flag = false;
 
-      // 팔로워 리스트 조회
-      axios({
-        method:"get",
-        url : `${SERVER_API}/users/${myInfo.nickname}/followers`,
-        headers:{
-          Authorization: `Bearer ${accessToken}`,
-        }
-      })
-        .then((res)=>{
-          setFollower(res.data.length);
-          // 팔로잉 리스트 조회
-          axios({
-            method:"get",
-            url : `${SERVER_API}/users/${myInfo.nickname}/followings`,
-            headers:{
-              Authorization: `Bearer ${accessToken}`,
-            }
+    // 팔로워 리스트 조회
+    axios({
+      method: 'get',
+      url: `${process.env.REACT_APP_API_URL}/users/${myInfo.nickname}/followers`,
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+      .then((res) => {
+        setFollower(res.data.length);
+        // 팔로잉 리스트 조회
+        axios({
+          method: 'get',
+          url: `${process.env.REACT_APP_API_URL}/users/${myInfo.nickname}/followings`,
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+          .then((res) => {
+            setFollowing(res.data.length);
           })
-            .then((res)=>{
-              setFollowing(res.data.length);
-            })
-            .catch((err)=>{
-              console.log(err);
-            })
-        })
-        .catch((err)=>{
-          console.log(err);
-        })
+          .catch((err) => {
+            console.log(err);
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [myInfo]);
 
-  },[myInfo]);
-
-
-  useEffect(()=>{
-    console.log("myForm : ",myForm);
-  },[myForm]);
-
+  useEffect(() => {
+    console.log('myForm : ', myForm);
+  }, [myForm]);
 
   return (
     <div>
@@ -334,11 +328,11 @@ function MyPage() {
               <Avatar size={'lg'} nickname={''} />
             ) : (
               <Avatar
-                src={myInfo.image === null ? '/img/profile_default.png':myInfo.image}
+                src={myInfo.image === null ? '/img/profile_default.png' : myInfo.image}
                 biz={myInfo.type}
                 size={'lg'}
                 nickname={myInfo.nickname}
-                badge={"sea"}
+                badge={'sea'}
               />
             )}
           </div>
@@ -347,8 +341,7 @@ function MyPage() {
           <div className="text-center pt-2">{myInfo.intro}</div>
           {/* 프로그래스바 */}
           <div className="w-full  h-2.5 mt-7 flex rounded-full bg-gray-300 animate-pulse">
-            {
-              mockBadgeData.map(
+            {mockBadgeData.map(
               (data, i) =>
                 (data.value / mockBadgeDataTotal) * 100 != 0 && (
                   <>
@@ -367,7 +360,7 @@ function MyPage() {
                     </div>
                   </>
                 ),
-            ) }
+            )}
             {/*<div className="mt-7 mx-auto text-xs ">열심히 활동하고 취향 뱃지를 달아보세요!</div>*/}
           </div>
           <div className="grid grid-cols-2 text-center mt-16 mb-7">
@@ -391,13 +384,19 @@ function MyPage() {
 
           {/* Post Section */}
           <div className="grid grid-cols-2 gap-1">
-             {/*like count 일단 view count */}
-            {
-              myForm
-                ?
-              myForm.map((data) =>
-              {return <FullSF src={data.thumbnail} href={data.thumbnail} shortFormId={data.id} likeCount={data.viewCount} />})
-            :null}
+            {/*like count 일단 view count */}
+            {myForm
+              ? myForm.map((data) => {
+                  return (
+                    <FullSF
+                      src={data.thumbnail}
+                      href={data.thumbnail}
+                      shortFormId={data.id}
+                      likeCount={data.viewCount}
+                    />
+                  );
+                })
+              : null}
           </div>
         </div>
       </div>

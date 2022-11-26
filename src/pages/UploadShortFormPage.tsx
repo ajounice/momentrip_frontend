@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/pages/UploadPage.css';
 import { RiMapPinLine } from 'react-icons/ri';
-import UploadPageDropDown from "../components/DropDown/UploadPageDropDonw";
+import UploadPageDropDown from '../components/DropDown/UploadPageDropDonw';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import VideoThumbnail from 'react-video-thumbnail';
-import { TopBar } from "../components/common/Navigation";
-import axios from "axios";
-import { SERVER_API } from "../config";
+import { TopBar } from '../components/common/Navigation';
+import axios from 'axios';
 
 // 태그 파싱 함수
 function ParseTag(hashtags: string): string[] {
@@ -54,31 +53,30 @@ function UploadShortFormPage() {
   const [click, setClick] = useState<boolean>(false);
   const [hidden, setHidden] = useState<boolean>(false);
 
-  const [ location, setLocation ] = useState('');
+  const [location, setLocation] = useState('');
 
-  const [ imgSrc, setImgSrc ] = useState('');
-  const [ imgData, setImgData ] = useState('');
-
+  const [imgSrc, setImgSrc] = useState('');
+  const [imgData, setImgData] = useState('');
 
   const [accessToken, setAccessToken] = useState<string | null>();
 
   // category state
-  const [category, setCategory ] = useState('카테고리를 선택해주세요');
-  const [ categoryListView, setCategoryListView ] = useState(false);
+  const [category, setCategory] = useState('카테고리를 선택해주세요');
+  const [categoryListView, setCategoryListView] = useState(false);
 
-  const onClickCategory =()=>{
+  const onClickCategory = () => {
     setCategoryListView(true);
-  }
+  };
 
-  useEffect(()=>{
+  useEffect(() => {
     console.log();
-  },[imgSrc]);
+  }, [imgSrc]);
 
-  useEffect(()=>{
+  useEffect(() => {
     setAccessToken(window.localStorage.getItem('Token'));
-  },[]);
+  }, []);
 
-  const onClickShortForm = (e : any) => {
+  const onClickShortForm = (e: any) => {
     if (e.target.files.length > 0) {
       const objectUrl = URL.createObjectURL(e.target.files[0]);
       // setImgSrc(objectUrl);
@@ -100,18 +98,18 @@ function UploadShortFormPage() {
     }
     setImgSrc('/images/defaultImg.png');
     setImgData(e.target.files[0]);
-  }
+  };
 
-  const onClickUpload = (e:any) => {
+  const onClickUpload = (e: any) => {
     const data = new FormData();
 
-    if(category ==='카테고리를 선택해주세요'){
-      alert("카테고리를 선택해주세요.");
+    if (category === '카테고리를 선택해주세요') {
+      alert('카테고리를 선택해주세요.');
       return;
     }
 
-    if(imgData === '') {
-      alert("동영상을 업로드해주세요.");
+    if (imgData === '') {
+      alert('동영상을 업로드해주세요.');
       return;
     }
 
@@ -119,26 +117,25 @@ function UploadShortFormPage() {
     tagList.push(category);
 
     data.append('tag', tagList.toString());
-    data.append('video',imgData);
-    data.append('site',location);
+    data.append('video', imgData);
+    data.append('site', location);
 
     axios({
-      method:"post",
-      url:`${SERVER_API}/forms`,
-      headers : {
+      method: 'post',
+      url: `${process.env.REACT_APP_API_URL}/forms`,
+      headers: {
         Authorization: `Bearer ${accessToken}`,
       },
-      data : data,
+      data: data,
     })
-      .then((res)=>{
-        alert("숏폼 업로드 성공");
+      .then((res) => {
+        alert('숏폼 업로드 성공');
         window.location.assign('/home');
       })
-      .catch((err)=>{
+      .catch((err) => {
         console.log(err);
-      })
-
-  }
+      });
+  };
 
   return (
     <div
@@ -147,20 +144,30 @@ function UploadShortFormPage() {
       }}
       className="upload-page-container"
     >
-      <TopBar beforeButton={true} centerText={"업로드"} centerTextType={"page"} checkButton={true} checkButtonOnClickEvent={onClickUpload}/>
+      <TopBar
+        beforeButton={true}
+        centerText={'업로드'}
+        centerTextType={'page'}
+        checkButton={true}
+        checkButtonOnClickEvent={onClickUpload}
+      />
       <div className="mt-20">
         <section className={'upload-page-file-thumbnail-container'}>
           <label htmlFor={'file-upload'}>
             <div id={'fileName'} className={'upload-page-file-thumbnail'}>
-            {/*<video autoPlay loop  width={"470"} height={"470"} controls >*/}
-            {/*  /!*<source src={'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'}/>*!/*/}
-            {/*  <source id={'source'} />*/}
-            {/*</video>*/}
-            {/*  <img src={'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'}/>*/}
+              {/*<video autoPlay loop  width={"470"} height={"470"} controls >*/}
+              {/*  /!*<source src={'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'}/>*!/*/}
+              {/*  <source id={'source'} />*/}
+              {/*</video>*/}
+              {/*  <img src={'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'}/>*/}
             </div>
             <input
-              accept = "video/*"
-              id="file-upload" style={{ display: 'none' }} type="file" onChange={onClickShortForm} />
+              accept="video/*"
+              id="file-upload"
+              style={{ display: 'none' }}
+              type="file"
+              onChange={onClickShortForm}
+            />
           </label>
           {/* 업로드된 영상 썸네일 */}
         </section>
@@ -187,10 +194,12 @@ function UploadShortFormPage() {
               설명
             </label>
             <textarea
-              className={"upload-page-introduction-textarea"}
-              id={"introduction"}
-              placeholder={"텍스트를 입력하세요"}
-              onChange={(e)=>{setIntroduction(e.currentTarget.value)}}
+              className={'upload-page-introduction-textarea'}
+              id={'introduction'}
+              placeholder={'텍스트를 입력하세요'}
+              onChange={(e) => {
+                setIntroduction(e.currentTarget.value);
+              }}
               onClick={(e) => {
                 setIntroduction(e.currentTarget.value);
               }}
@@ -204,26 +213,49 @@ function UploadShortFormPage() {
             <div className={'upload-page-add-location-inner-container'}>
               <RiMapPinLine className={'upload-page-location-icon'} />
 
-              <input type={'text'} id={'location'} onChange={(e)=>{setLocation(e.currentTarget.value)}} className={'upload-page-location-input'} />
+              <input
+                type={'text'}
+                id={'location'}
+                onChange={(e) => {
+                  setLocation(e.currentTarget.value);
+                }}
+                className={'upload-page-location-input'}
+              />
             </div>
             {/*https://react-kakao-maps-sdk.jaeseokim.dev/docs/sample/library/keywordBasic/*/}
           </div>
 
           <div>
-          {/* 카테고리 입력하는  */}
-            <div className={"upload-page-category-outer-container"}>
+            {/* 카테고리 입력하는  */}
+            <div className={'upload-page-category-outer-container'}>
               <label>카테고리</label>
 
-                <div placeholder={"카테고리를 선택해주세요"} onClick={onClickCategory}
-                     className={"upload-page-category-container"}>
+              <div
+                placeholder={'카테고리를 선택해주세요'}
+                onClick={onClickCategory}
+                className={'upload-page-category-container'}
+              >
                 {category}
               </div>
             </div>
-            {
-              categoryListView
-                ? <UploadPageDropDown setCategoryList={setCategoryListView} setCategory={setCategory} dropDownList={["산","바다/계곡","호캉스/호텔","축제","캠핑","야경","액티비티","박물관/역사","해외 여행","쇼핑"]}/>
-              : null
-            }
+            {categoryListView ? (
+              <UploadPageDropDown
+                setCategoryList={setCategoryListView}
+                setCategory={setCategory}
+                dropDownList={[
+                  '산',
+                  '바다/계곡',
+                  '호캉스/호텔',
+                  '축제',
+                  '캠핑',
+                  '야경',
+                  '액티비티',
+                  '박물관/역사',
+                  '해외 여행',
+                  '쇼핑',
+                ]}
+              />
+            ) : null}
           </div>
         </section>
       </div>

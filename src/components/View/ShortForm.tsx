@@ -15,7 +15,6 @@ import TourInfo from '../Modal/Vertical/TourInfo';
 import ProfileInSF, { IUserInfoInSF } from '../common/ProfileInSF';
 
 import { CommentType } from '../../globalType';
-import { SERVER_API } from '../../config';
 
 interface IGetFormsData {
   id: number;
@@ -74,14 +73,13 @@ function ShortForm() {
     },
   ]);
 
-  const [ follow, setFollow ] = useState(1);
-
+  const [follow, setFollow] = useState(1);
 
   useEffect(() => {
     console.log();
     // console.log("follow number : ", follow);
     // console.log(formsData);
-  }, [currentVideoIndex,follow]);
+  }, [currentVideoIndex, follow]);
 
   /* ===== 서버 연동 ===== */
 
@@ -129,7 +127,7 @@ function ShortForm() {
       const itemID = item.id;
       axios({
         method: 'get',
-        url: `${SERVER_API}/forms/${itemID}/comments`,
+        url: `${process.env.REACT_APP_API_URL}/forms/${itemID}/comments`,
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },

@@ -12,7 +12,6 @@ import AlarmCard from '../Card/AlarmCard';
 import Input from '../common/Input';
 import Button from '../Button/Button';
 import axios from 'axios';
-import { SERVER_API } from '../../config';
 import { useForm } from 'react-hook-form';
 const defaultCurrent = {
   home: true,
@@ -44,7 +43,7 @@ export default function TopNavigation({ color = 'white' }) {
   async function addFolderRequest() {
     await axios
       .post(
-        `${SERVER_API}/wishlists/new`,
+        `${process.env.REACT_APP_API_URL}/wishlists/new`,
         {
           name: watch('wishFolderName'),
         },

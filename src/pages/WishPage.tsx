@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import Avatar from '../components/common/Avatar';
 import Folder from '../components/Wish/Folder';
 import InnerTab from '../components/common/InnerTab';
-import { SERVER_API } from '../config';
 import axios from 'axios';
 import { WishFolder, WishForm } from '../globalType';
 
@@ -68,7 +67,7 @@ function WishPage() {
   //     setMount(1);
   //   } else {
   //     axios
-  //       .get(`${SERVER_API}/wishlists`, {
+  //       .get(`${process.env.REACT_APP_API_URL}/wishlists`, {
   //         headers: {
   //           Authorization: `Bearer ${localStorage.getItem('Token')}`,
   //         },
