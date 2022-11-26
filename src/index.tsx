@@ -31,6 +31,7 @@ import WishTour from './pages/wish/WishTour';
 import SignUpPage from './pages/SignUpPage';
 import LoginPage from './Login/page/LoginPage';
 import RenderingPage from './pages/RenderingPage';
+import ChangePassword from "./pages/mypage/ChangePassword";
 
 const root = ReactDOM.createRoot(
   // eslint-disable-next-line no-undef
@@ -66,6 +67,7 @@ root.render(
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/mypage/profile-setting" element={<ProfileSettingPage />} />
           <Route path="/mypage/setting" element={<SettingPage />} />
+          <Route path="/mypage/setting/password" element={<ChangePassword />} />
           <Route path="/mypage/follow" element={<FollowPage />} />
           <Route path="/wish" element={<WishPage />} />
           <Route path="/upload" element={<UploadShortFormPage />} />
