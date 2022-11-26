@@ -6,14 +6,12 @@
 .additional-info-inner-container{
     width : 100vw;
     height : calc(100% - 75px);
-
     margin-top : 75px;
 }
 
 .profile-img-container{
     width : 100%;
     height : 145px;
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -30,7 +28,6 @@
 .additional-info-input-container{
     width : 100%;
     height : calc(100% - 145px);
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -40,7 +37,6 @@
 .additional-info-input-inner-container{
     width : 90%;
     height : 40%;
-
     display: flex;
     flex-direction: column;
     justify-content: space-around;

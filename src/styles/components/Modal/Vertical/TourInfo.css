@@ -1,15 +1,11 @@
 .tour-info-modal-container{
     width : 100vw;
     height : 70vh;
-
     z-index: 999;
-
     position: absolute;
     bottom : 0;
-
     overflow-y :scroll;
-
-    background-color: white;
+    background: var(--white);
 }
 
 .tour-info-modal-top-nav{
@@ -27,7 +23,6 @@
 
 .tour-info-modal-under-container{
     width : 100%;
-
     overflow-y: scroll;
     height : calc(100% - 40px);
 }
@@ -36,7 +31,6 @@
 .tour-info-section{
     width : 100%;
     height : 160px;
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -65,11 +59,9 @@
 
 .tour-info-text-container{
     height : 100px;
-
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-
     margin-left : 12px;
 }
 
@@ -77,7 +69,6 @@
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
-
     color: var(--gray-300);
     margin-bottom : 8px;
 }
@@ -86,8 +77,7 @@
     font-style: normal;
     font-weight: 400;
     font-size: 19px;
-
-    color: black;
+    color: var(--black);
     margin-bottom : 8px;
 }
 
@@ -95,26 +85,22 @@
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
-
-    color: black;
+    color: var(--black);
 }
 
 /* bookmark */
 .book-mark-icon{
     width : 30px;
     height : 30px;
-
     position: absolute;
 }
 
 .tour-info-tag-container{
     width : 90%;
     height : 80px;
-
     display: flex;
     flex-direction: row;
     align-items: center;
-
     border-bottom : 1px solid var(--gray-200);
 }
 
@@ -131,14 +117,12 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-
     border-bottom : 2px solid var(--gray-300);
 }
 
 .tour-info-short-form-inner-container{
     width : 90%;
     height : 320px;
-
     overflow-x : scroll;
     display: flex;
     flex-direction: row;
@@ -148,25 +132,20 @@
 .tour-info-full-sf-container{
     min-width : 200px;
     padding : 5px;
-
 }
-
 
 .tour-info-short-form-list-container{
     height : 340px;
-
     display: flex;
     flex-direction: row;
     align-items: center;
-
-    background-color: #63a5f1;
+    background: var(--blue-500);
     overflow-x: scroll;
 }
 
 .tour-info-short-form-container{
     width : 180px;
     height :300px;
-
     margin-left : 30px;
 }
 
@@ -174,20 +153,16 @@
 .kakao-api-map-section{
     width : 100%;
     height : 300px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
-    background-color: #cadefd;
+    background: var(--indigo-200);
 }
 
 .kakao-map-api-container{
     width : 90%;
     height : 300px;
-
     background-color: pink;
-
     display: flex;
     align-items: center;
     justify-content: center;

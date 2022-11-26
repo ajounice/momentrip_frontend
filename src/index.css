@@ -118,6 +118,10 @@ code {
   --indigo-900: #301c62;
 
   --follow-button: #606060;
+  --follow-card: #F5F5F5;
+  --modal: #F8F9FA;
+  --tag-line: #D1D5DB;
+  --primary: #603AAE;
 }
 
 .container {
