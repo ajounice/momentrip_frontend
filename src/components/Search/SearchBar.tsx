@@ -1,20 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-// const handleOnClick = (setKeyword) => {
-//   setKeyword()
-// };
+export default function SearchBar({searchHandler, keyword}:{searchHandler:(value:string)=>void, keyword:string}) {
+  const navigation = useNavigate();
 
-const handleOnKeyPress = (
-  e: React.KeyboardEvent<HTMLInputElement>,
-  setKeyword: React.Dispatch<React.SetStateAction<string>>,
-) => {
-  if (e.key === 'Enter') {
-    // handleOnClick(e.target.value);
-    setKeyword(e.target.value);
-  }
-};
+  const handleOnKeyPress = (
+    e: React.KeyboardEvent<HTMLInputElement>,
+  ) => {
+    if (e.key === 'Enter') {
+      if(e.target.value){
+        searchHandler(e.target.value)
+      }else{
+        navigation("/search");
+      }
+    }
+  };
 
-export default function SearchBar({ setKeyword }: { setKeyword: React.Dispatch<React.SetStateAction<string>> }) {
   return (
     <div>
       <div className="mt-2">
@@ -24,8 +25,8 @@ export default function SearchBar({ setKeyword }: { setKeyword: React.Dispatch<R
           id="search"
           className="pl-4 shadow-sm h-10 bg-gray-100 block w-full sm:text-sm border-gray-300 rounded-full" //TODO text indent
           placeholder="Search"
-          // onClick={handleOnClick}
-          onKeyPress={(e) => handleOnKeyPress(e, setKeyword)}
+          defaultValue={keyword}
+          onKeyPress={(e) => handleOnKeyPress(e)}
         />
       </div>
     </div>
