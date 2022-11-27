@@ -1,14 +1,10 @@
 /* Bottom Navigation CSS */
 .bottom-nav-container {
   z-index: 999;
-
   position: fixed;
   bottom: 0;
-
   width: 100%;
   height: 48px;
-
-  /*background-color: white;*/
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
@@ -17,20 +13,15 @@
 
 .bottom-nav-container-bgwhite {
   z-index: 999;
-
   position: fixed;
   bottom: 0;
-
   width: 100%;
   height: 48px;
-
-  /*background-color: white;*/
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
   justify-items: center;
-
-  background-color: white;
+  background: var(--white);
 }
 
 .bottom-icon {
@@ -51,72 +42,56 @@
 }
 
 .active {
-  background-color: white;
+  background: var(--white);
   border-radius: 50%;
 }
 
 /* Top Navigation CSS */
 .top-nav-container {
   z-index: 999;
-
   width: 100vw;
   height: 74px;
-
-  top: 0px;
-
+  top: 0;
   position: fixed;
-
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .top-nav-container-bg {
   z-index: 999;
-
   width: 100vw;
   height: 74px;
-
-  top: 0px;
-
+  top: 0;
   position: fixed;
-
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  background: var(--white);
 }
 
 .top-icon {
   width: 22px;
   height: 22px;
-
   position: fixed;
-
   right: 24px;
   top: 24px;
 }
 
 .top-nav-text-container {
-  /*padding : 12px;*/
-
   width: 160px;
   height: 30px;
-
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-
   font-size: 1.125rem;
 }
 
 .top-nav-text-container h1 {
   height: 30px;
   text-align: center;
-
   display: flex;
   align-items: center;
-  /*text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25), 0 4px 4px rgba(0, 0, 0, 0.25);*/
 }
 
 .style-home {
@@ -142,14 +117,11 @@
 /* vertical navigation */
 .vertical-navigation-container {
   z-index: 998;
-
   width: 32px;
   height: 216px;
-
   position: fixed;
   bottom: 82px;
   right: 14px;
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -157,13 +129,6 @@
 }
 
 /* Top Bar */
-.page-left-trans {
-  width: 100%;
-  height: 400px;
-  background-color: violet;
-  animation: moveToLeft 0.4s ease-in-out;
-  animation-delay: 5ms;
-}
 @keyframes moveToLeft {
   0% {
     transform: translateX(500px);
@@ -175,25 +140,20 @@
 
 .top-bar-container-bg {
   z-index: 999;
-
   width: 100vw;
   height: 74px;
-
-  top: 0px;
-
+  top: 0;
   position: fixed;
-
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: white;
+  background: var(--white);
 }
 
 .top-bar-inner-left-container {
   width: 33vw;
   height: 100%;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -202,7 +162,6 @@
 .top-bar-inner-center-container {
   width: 33vw;
   height: 100%;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -212,9 +171,7 @@
   font-style: normal;
   font-weight: 400;
   font-size: 20px;
-
-  color: #000000;
-
+  color: var(--black);
   text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 }
 
@@ -222,18 +179,15 @@
   font-style: normal;
   font-weight: 400;
   font-size: 20px;
-
   display: flex;
   align-items: center;
   text-align: center;
-
-  color: #000000;
+  color: var(--black);
 }
 
 .top-bar-inner-right-container {
   width: 33vw;
   height: 100%;
-
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -258,9 +212,7 @@
 .right-icon-container {
   min-width: 11vw;
   max-width: 50%;
-  /*width : 11vw;*/
   height: 100%;
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -268,7 +220,6 @@
 
 .alarm-icon {
   padding: 16px;
-
   width: 54px;
   height: 54px;
 }
@@ -277,11 +228,9 @@
   position: absolute;
   top: 20px;
   right: 20px;
-
   width: 135px;
   height: auto;
-
-  background: white;
+  background: var(--white);
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
 }
@@ -290,7 +239,6 @@
   width: 135px;
   height: 38px;
   border-radius: 5px;
-
   display: flex;
   align-items: center;
   justify-content: flex-start;

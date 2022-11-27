@@ -6,18 +6,16 @@
 .setting-page-inner-container{
     width : 100vw;
     height :150px;
-
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-
     padding : 30px;
     margin-top : 74px;
 }
 
 .hover-red-text{
-    color : black;
+    color : var(--black);
 }
 
 .hover-pointer{
@@ -25,9 +23,8 @@
 }
 
 .hover-red-text:hover{
-    color:red;
+    color: var(--red-700);
 }
-
 
 /* password chage modal*/
 .password-change-inner-container{
@@ -43,7 +40,6 @@
 .change-password-container{
     width : 100vw;
     height : 100vh;
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -57,7 +53,6 @@
 .password-change-input-container{
     width : 90%;
     height : 58%;
-
     margin-top : 10px;
     display: flex;
     flex-direction: column;

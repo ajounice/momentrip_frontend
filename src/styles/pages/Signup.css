@@ -22,43 +22,35 @@
   margin-top: 55px;
   display: flex;
   flex-direction: column;
-  /* justify-content: space-around; */
 }
 
 .submit-button {
   width: 100%;
   height: 45px;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   font-size: 1rem;
   font-weight: 600;
-
   margin-top: 10px;
-
   border: 1px solid var(--primary);
   border-radius: 10px;
-  background-color: white;
+  background: var(--white);
 }
 
 .active-submit-button {
   width: 100%;
   height: 45px;
-
   margin-top: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-
   font-size: 1rem;
   font-weight: 600;
-  color: white;
-
+  color: var(--white);
   border: 1px solid var(--primary);
   border-radius: 10px;
-  background-color: var(--primary);
+  background: var(--primary);
 }
 
 .pw-pw2-incorrect {
