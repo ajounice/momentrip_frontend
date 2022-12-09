@@ -57,7 +57,7 @@ export default function VerticalNavigation({
   const [accessToken, setAccessToken] = useState<string | null>();
   const [addFolderOpen, setAddFolderOpen] = useState(false);
   const instance = axios.create({
-    baseURL: 'http://test.heroforyou.space/api',
+    baseURL: `${process.env.REACT_APP_API_URL}`,
     timeout: 3000,
   });
 
