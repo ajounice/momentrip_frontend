@@ -52,11 +52,11 @@ function ShortForm() {
 
   const [formsData, setFormsData] = useState<IFormsData[]>([
     {
-      id: -1,
-      content: '',
-      title: '',
-      thumbnail: '',
-      video: '',
+      id: 0,
+      content: 'dummy1',
+      title: 'dummy1',
+      thumbnail: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg',
+      video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
       viewCount: 0,
       videoHidden: false,
       videoStop: true,
@@ -65,13 +65,36 @@ function ShortForm() {
         email: '',
         image: '',
         intro: '',
-        name: '',
-        nickname: '',
+        name: 'user1',
+        nickname: 'dummy user1',
         password: '',
         type: false,
       },
-    },
+    }
+    // {
+    //   id: -1,
+    //   content: '',
+    //   title: '',
+    //   thumbnail: '',
+    //   video: '',
+    //   viewCount: 0,
+    //   videoHidden: false,
+    //   videoStop: true,
+    //   user: {
+    //     id: 0,
+    //     email: '',
+    //     image: '',
+    //     intro: '',
+    //     name: '',
+    //     nickname: '',
+    //     password: '',
+    //     type: false,
+    //   },
+    // },
   ]);
+
+
+
 
   const [follow, setFollow] = useState(1);
 
@@ -86,36 +109,38 @@ function ShortForm() {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const axios = require('axios');
   const instance = axios.create({
-    baseURL: 'http://test.heroforyou.space/api',
+    baseURL: 'http://localhost:3000',
     timeout: 3000,
   });
-  useEffect(() => {
-    async function getForms() {
-      try {
-        const response = await instance.get('/forms', {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
 
-        if (response.status === 200) {
-          const tmpData: Array<any> = response.data;
-          tmpData.map((data, i) =>
-            i === 0
-              ? (tmpData[i] = { ...data, videoHidden: true, videoStop: false })
-              : (tmpData[i] = { ...data, videoHidden: false, videoStop: true }),
-          );
-          setFormsData(response.data);
-        }
-        return null;
-      } catch (error) {
-        console.error(error);
-      }
-    }
-
-    getForms();
-    // console.log(formsData);
-  }, [accessToken]);
+  /** dummy data 보여주기 위해 주석처리 **/
+  // useEffect(() => {
+  //   async function getForms() {
+  //     try {
+  //       const response = await instance.get('/forms', {
+  //         headers: {
+  //           Authorization: `Bearer ${accessToken}`,
+  //         },
+  //       });
+  //
+  //       if (response.status === 200) {
+  //         const tmpData: Array<any> = response.data;
+  //         tmpData.map((data, i) =>
+  //           i === 0
+  //             ? (tmpData[i] = { ...data, videoHidden: true, videoStop: false })
+  //             : (tmpData[i] = { ...data, videoHidden: false, videoStop: true }),
+  //         );
+  //         setFormsData(response.data);
+  //       }
+  //       return null;
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   }
+  //
+  //   getForms();
+  //   // console.log(formsData);
+  // }, [accessToken]);
 
   useEffect(() => {
     setAccessToken(window.localStorage.getItem('Token'));

@@ -35,8 +35,7 @@
 /* tour info */
 .tour-info-section{
     width : 100%;
-    height : 160px;
-
+    height : auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -103,19 +102,19 @@
 .book-mark-icon{
     width : 30px;
     height : 30px;
-
+    left: 3px;
+    top: -3px;
     position: absolute;
 }
 
 .tour-info-tag-container{
     width : 90%;
-    height : 80px;
-
+    height : 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
-
     border-bottom : 1px solid var(--gray-200);
+    padding-bottom: 10px;
 }
 
 .tour-info-tag{
@@ -154,19 +153,15 @@
 
 .tour-info-short-form-list-container{
     height : 340px;
-
     display: flex;
     flex-direction: row;
     align-items: center;
-
-    background-color: #63a5f1;
     overflow-x: scroll;
 }
 
 .tour-info-short-form-container{
     width : 180px;
     height :300px;
-
     margin-left : 30px;
 }
 
@@ -174,20 +169,15 @@
 .kakao-api-map-section{
     width : 100%;
     height : 300px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
-    background-color: #cadefd;
+    padding-top: 20px;
 }
 
 .kakao-map-api-container{
     width : 90%;
     height : 300px;
-
-    background-color: pink;
-
     display: flex;
     align-items: center;
     justify-content: center;
