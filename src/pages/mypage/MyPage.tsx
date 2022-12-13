@@ -276,7 +276,7 @@ function MyPage() {
     const flag = false;
 
     // 팔로워 리스트 조회
-    axios({
+    myInfo.nickname ? axios({
       method: 'get',
       url: `${process.env.REACT_APP_API_URL}/users/${myInfo.nickname}/followers`,
       headers: {
@@ -302,7 +302,8 @@ function MyPage() {
       })
       .catch((err) => {
         console.log(err);
-      });
+      })
+      : null
   }, [myInfo]);
 
   useEffect(() => {

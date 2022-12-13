@@ -86,7 +86,7 @@ function ShortForm() {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const axios = require('axios');
   const instance = axios.create({
-    baseURL: 'http://test.heroforyou.space/api',
+    baseURL: `${process.env.REACT_APP_API_URL}`,
     timeout: 3000,
   });
   useEffect(() => {

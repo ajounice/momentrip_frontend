@@ -160,7 +160,7 @@ function SignUpPage() {
                   }}
                 />
               </div>
-              <div className="ml-3 text-lg">
+              <div className="ml-2 text-sm mt-1.5">
                 <span id="comments-description" className="text-gray-800">
                   (필수)위 개인정보 수집 및 이용에 동의합니다.
                 </span>
