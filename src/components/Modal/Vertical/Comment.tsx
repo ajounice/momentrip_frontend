@@ -136,7 +136,51 @@ function Comment({ setViewComment, commentList, user, shortFormId }: IComment) {
   const [comment, setComment] = useState<string>('');
   const [refresh, setRefresh] = useState(false);
 
-  const [comList, setComList] = useState<CommentType[] | null>(null);
+  const [comList, setComList] = useState<CommentType[] | null>([
+    {
+      id : 1,
+      content : "감사합니당 !😊",
+      user : {
+        email: "string",
+        id: 1,
+        image: "/img/profile.png",
+        intro: "string",
+        name: "수연",
+        nickname: "수연",
+        password: "string",
+        type: true
+      }
+    },
+    {
+      id : 2,
+      content : "송도 케이블카 뷰가 짱 👍",
+      user : {
+        email: "string",
+        id: 1,
+        image: "/img/profile2.png",
+        intro: "string",
+        name: "바다냥이",
+        nickname: "바다냥이",
+        password: "string",
+        type: true
+      }
+    },
+    {
+      id : 0,
+      content : "바다가 반짝거려요 🐬",
+      user : {
+        email: "string",
+        id: 1,
+        image: "/img/profile3.png",
+        intro: "string",
+        name: "햄츄",
+        nickname: "햄츄",
+        password: "string",
+        type: true
+      }
+    },
+
+  ]);
 
   const inputRef = useRef(null);
   const [accessToken, setAccessToken] = useState<string | null>(null);
@@ -170,23 +214,23 @@ function Comment({ setViewComment, commentList, user, shortFormId }: IComment) {
       });
   }, [accessToken]);
 
-  useEffect(() => {
-    axios({
-      method: 'get',
-      url: `${process.env.REACT_APP_API_URL}/forms/${shortFormId}/comments`,
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    })
-      .then((res) => {
-        if (res.status === 200) {
-          setComList(res.data);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [accessToken, refresh]);
+  // useEffect(() => {
+  //   axios({
+  //     method: 'get',
+  //     url: `${process.env.REACT_APP_API_URL}/forms/${shortFormId}/comments`,
+  //     headers: {
+  //       Authorization: `Bearer ${accessToken}`,
+  //     },
+  //   })
+  //     .then((res) => {
+  //       if (res.status === 200) {
+  //         setComList(res.data);
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, [accessToken, refresh]);
 
   const addCommentEvent = (e: React.KeyboardEvent) => {
     // 최신순 정렬로 보여줄 것
@@ -242,7 +286,7 @@ function Comment({ setViewComment, commentList, user, shortFormId }: IComment) {
               <img
                 className={'comment-item-img'}
                 src={
-                  currentUser !== null && currentUser.image !== null ? currentUser.image : '/img/profile_default.png'
+                  currentUser !== null && currentUser.image !== null ? currentUser.image : '/img/profile.png'
                 }
                 alt={'user profile'}
               />

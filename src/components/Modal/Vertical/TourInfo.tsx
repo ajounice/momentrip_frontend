@@ -109,7 +109,7 @@ function TourInfo({ setViewTourInfo }: ITourInfo) {
         </div>
       </div>
       <div className={'tour-info-modal-under-container'}>
-        {1 ? (
+        { 0 ? (
           <div>등록된 정보가 없습니다.</div>
         ) : (
           <>

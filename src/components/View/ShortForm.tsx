@@ -52,21 +52,21 @@ function ShortForm() {
 
   const [formsData, setFormsData] = useState<IFormsData[]>([
     {
-      id: -1,
+      id: 0,
       content: '',
       title: '',
       thumbnail: '',
-      video: '',
+      video: '/video/송도.mp4',
       viewCount: 0,
       videoHidden: false,
       videoStop: true,
       user: {
         id: 0,
-        email: '',
-        image: '',
+        email: 'tndus0504',
+        image: '/img/profile.png',
         intro: '',
-        name: '',
-        nickname: '',
+        name: '수연',
+        nickname: '수연',
         password: '',
         type: false,
       },
@@ -86,36 +86,36 @@ function ShortForm() {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const axios = require('axios');
   const instance = axios.create({
-    baseURL: `${process.env.REACT_APP_API_URL}`,
+    baseURL: 'http://test.heroforyou.space/api',
     timeout: 3000,
   });
-  useEffect(() => {
-    async function getForms() {
-      try {
-        const response = await instance.get('/forms', {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
-
-        if (response.status === 200) {
-          const tmpData: Array<any> = response.data;
-          tmpData.map((data, i) =>
-            i === 0
-              ? (tmpData[i] = { ...data, videoHidden: true, videoStop: false })
-              : (tmpData[i] = { ...data, videoHidden: false, videoStop: true }),
-          );
-          setFormsData(response.data);
-        }
-        return null;
-      } catch (error) {
-        console.error(error);
-      }
-    }
-
-    getForms();
-    // console.log(formsData);
-  }, [accessToken]);
+  // useEffect(() => {
+  //   async function getForms() {
+  //     try {
+  //       const response = await instance.get('/forms', {
+  //         headers: {
+  //           Authorization: `Bearer ${accessToken}`,
+  //         },
+  //       });
+  //
+  //       if (response.status === 200) {
+  //         const tmpData: Array<any> = response.data;
+  //         tmpData.map((data, i) =>
+  //           i === 0
+  //             ? (tmpData[i] = { ...data, videoHidden: true, videoStop: false })
+  //             : (tmpData[i] = { ...data, videoHidden: false, videoStop: true }),
+  //         );
+  //         setFormsData(response.data);
+  //       }
+  //       return null;
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   }
+  //
+  //   getForms();
+  //   // console.log(formsData);
+  // }, [accessToken]);
 
   useEffect(() => {
     setAccessToken(window.localStorage.getItem('Token'));
