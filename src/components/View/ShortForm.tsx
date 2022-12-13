@@ -52,21 +52,20 @@ function ShortForm() {
 
   const [formsData, setFormsData] = useState<IFormsData[]>([
     {
-      id: 0,
-      content: 'dummy1',
-      title: 'dummy1',
-      thumbnail: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg',
-      video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+      content: '',
+      title: '',
+      thumbnail: '',
+      video: '/video/송도.mp4',
       viewCount: 0,
       videoHidden: false,
       videoStop: true,
       user: {
         id: 0,
-        email: '',
-        image: '',
+        email: 'tndus0504',
+        image: '/img/profile.png',
         intro: '',
-        name: 'user1',
-        nickname: 'dummy user1',
+        name: '수연',
+        nickname: '수연',
         password: '',
         type: false,
       },
@@ -109,7 +108,7 @@ function ShortForm() {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const axios = require('axios');
   const instance = axios.create({
-    baseURL: `${process.env.REACT_APP_API_URL}`,
+    baseURL: 'http://test.heroforyou.space/api',
     timeout: 3000,
   });
 
