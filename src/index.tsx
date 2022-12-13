@@ -31,6 +31,7 @@ import WishTour from './pages/wish/WishTour';
 import SignUpPage from './pages/SignUpPage';
 import LoginPage from './Login/page/LoginPage';
 import RenderingPage from './pages/RenderingPage';
+
 import ChangePasswordPage from './pages/mypage/ChangePasswordPage';
 
 const root = ReactDOM.createRoot(
