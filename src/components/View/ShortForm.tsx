@@ -52,7 +52,6 @@ function ShortForm() {
 
   const [formsData, setFormsData] = useState<IFormsData[]>([
     {
-      id: 0,
       content: '',
       title: '',
       thumbnail: '',
@@ -70,8 +69,31 @@ function ShortForm() {
         password: '',
         type: false,
       },
-    },
+    }
+    // {
+    //   id: -1,
+    //   content: '',
+    //   title: '',
+    //   thumbnail: '',
+    //   video: '',
+    //   viewCount: 0,
+    //   videoHidden: false,
+    //   videoStop: true,
+    //   user: {
+    //     id: 0,
+    //     email: '',
+    //     image: '',
+    //     intro: '',
+    //     name: '',
+    //     nickname: '',
+    //     password: '',
+    //     type: false,
+    //   },
+    // },
   ]);
+
+
+
 
   const [follow, setFollow] = useState(1);
 
@@ -89,6 +111,8 @@ function ShortForm() {
     baseURL: 'http://test.heroforyou.space/api',
     timeout: 3000,
   });
+
+  /** dummy data 보여주기 위해 주석처리 **/
   // useEffect(() => {
   //   async function getForms() {
   //     try {
