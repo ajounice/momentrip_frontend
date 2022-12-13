@@ -52,6 +52,7 @@ function ShortForm() {
 
   const [formsData, setFormsData] = useState<IFormsData[]>([
     {
+      id: 0,
       content: '',
       title: '',
       thumbnail: '',
