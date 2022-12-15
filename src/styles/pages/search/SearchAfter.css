@@ -1,0 +1,21 @@
+.search-keyword {
+    margin: 10px 0;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.thumbnail-grid-container {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+    overflow: scroll;
+}
+
+.search-result-container {
+    width: 100%;
+    height: 100%;
+    overflow-y: hidden;
+}

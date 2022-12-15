@@ -1,5 +1,6 @@
 import React from 'react';
 import TagList from './TagList';
+import ThumbnailList from "./ThumbnailList";
 
 const dummy_data = [
   {
@@ -39,24 +40,61 @@ const dummy_data = [
   },
 ];
 
+// const dummy_thumbnail_data = [
+//   {
+//     src: 'https://blog.kakaocdn.net/dn/RS1O8/btqEwRYEgAG/SI0UZck2vAg7NAy4ZybGFk/img.png',
+//     href: 'https://blog.kakaocdn.net/dn/RS1O8/btqEwRYEgAG/SI0UZck2vAg7NAy4ZybGFk/img.png',
+//   },
+//   {
+//     src: 'https://blog.kakaocdn.net/dn/RS1O8/btqEwRYEgAG/SI0UZck2vAg7NAy4ZybGFk/img.png',
+//     href: 'https://blog.kakaocdn.net/dn/RS1O8/btqEwRYEgAG/SI0UZck2vAg7NAy4ZybGFk/img.png',
+//   },
+//   {
+//     src: 'https://blog.kakaocdn.net/dn/RS1O8/btqEwRYEgAG/SI0UZck2vAg7NAy4ZybGFk/img.png',
+//     href: 'https://blog.kakaocdn.net/dn/RS1O8/btqEwRYEgAG/SI0UZck2vAg7NAy4ZybGFk/img.png',
+//   },
+//   {
+//     src: 'https://blog.kakaocdn.net/dn/RS1O8/btqEwRYEgAG/SI0UZck2vAg7NAy4ZybGFk/img.png',
+//     href: 'https://blog.kakaocdn.net/dn/RS1O8/btqEwRYEgAG/SI0UZck2vAg7NAy4ZybGFk/img.png',
+//   },
+// ];
+
 const dummy_thumbnail_data = [
   {
-    src: 'https://blog.kakaocdn.net/dn/RS1O8/btqEwRYEgAG/SI0UZck2vAg7NAy4ZybGFk/img.png',
+    src: '/img/thumbnail2.jpeg',
     href: 'https://blog.kakaocdn.net/dn/RS1O8/btqEwRYEgAG/SI0UZck2vAg7NAy4ZybGFk/img.png',
+    likeCount: 100,
   },
   {
-    src: 'https://blog.kakaocdn.net/dn/RS1O8/btqEwRYEgAG/SI0UZck2vAg7NAy4ZybGFk/img.png',
+    src: '/img/thumbnail3.png',
     href: 'https://blog.kakaocdn.net/dn/RS1O8/btqEwRYEgAG/SI0UZck2vAg7NAy4ZybGFk/img.png',
+    likeCount: 23,
   },
   {
-    src: 'https://blog.kakaocdn.net/dn/RS1O8/btqEwRYEgAG/SI0UZck2vAg7NAy4ZybGFk/img.png',
+    src: '/img/thumbnail4.png',
     href: 'https://blog.kakaocdn.net/dn/RS1O8/btqEwRYEgAG/SI0UZck2vAg7NAy4ZybGFk/img.png',
-  },
-  {
-    src: 'https://blog.kakaocdn.net/dn/RS1O8/btqEwRYEgAG/SI0UZck2vAg7NAy4ZybGFk/img.png',
-    href: 'https://blog.kakaocdn.net/dn/RS1O8/btqEwRYEgAG/SI0UZck2vAg7NAy4ZybGFk/img.png',
+    likeCount: 154,
   },
 ];
+
+const dummy_thumbnail_data2 = [
+  {
+    src: '/img/thumbnail5.png',
+    href: 'https://blog.kakaocdn.net/dn/RS1O8/btqEwRYEgAG/SI0UZck2vAg7NAy4ZybGFk/img.png',
+    likeCount: 10234,
+  },
+  {
+    src: '/img/thumbnail6.jpeg',
+    href: 'https://blog.kakaocdn.net/dn/RS1O8/btqEwRYEgAG/SI0UZck2vAg7NAy4ZybGFk/img.png',
+    likeCount: 1923,
+  },
+  {
+    src: '/img/thumbnail7.jpeg',
+    href: 'https://blog.kakaocdn.net/dn/RS1O8/btqEwRYEgAG/SI0UZck2vAg7NAy4ZybGFk/img.png',
+    likeCount: 183,
+  },
+];
+
 const SearchBefore = ({searchHandler}:{searchHandler:(value:string)=>void}) => {
   return (
     <div>
@@ -67,23 +105,25 @@ const SearchBefore = ({searchHandler}:{searchHandler:(value:string)=>void}) => {
         onHandler={(value: string) => searchHandler(value)}
       />
 
-      {/* <div className="">
-        <p className="mt-14 text-lg font-bold">#실패없는 호캉스 여행지 ✅</p>
+      <div className="">
+        <p className="mt-8 text-lg font-bold">#실패없는 호캉스 여행지 ✅</p>
       </div>
-      <ThumbnailList DataThumbnailList={dummy_thumbnail_data} /> */}
+      <ThumbnailList DataThumbnailList={dummy_thumbnail_data} />
       {/* Popular Feed */}
-      {/* <div className="">
-        <p className="mt-14 text-lg font-bold">#지금 핫한 여름 바다 🌊</p>
+      <div className="">
+        <p className="mt-8 text-lg font-bold">#지금 핫한 여름 바다 🌊</p>
       </div>
-      <ThumbnailList DataThumbnailList={dummy_thumbnail_data} /> */}
-      {/* <div className="">
-        <p className="mt-14 text-lg font-bold">#속초 핫플 모음.zip 🏄‍♂️</p>
+      <ThumbnailList DataThumbnailList={dummy_thumbnail_data2} />
+      {/* Popular Feed */}
+      <div className="">
+        <p className="mt-8 text-lg font-bold">#속초 핫플 모음.zip 🏄‍♂️</p>
       </div>
-      <ThumbnailList DataThumbnailList={dummy_thumbnail_data} /> */}
-      {/* <div className="">
-        <p className="mt-14 text-lg font-bold">#한적하고 조용한 숙소 모아보기 🍃</p>
+      <ThumbnailList DataThumbnailList={dummy_thumbnail_data} />
+      {/* Popular Feed */}
+      <div className="">
+        <p className="mt-8 text-lg font-bold">#한적하고 조용한 숙소 모아보기 🍃</p>
       </div>
-      <ThumbnailList DataThumbnailList={dummy_thumbnail_data} /> */}
+      <ThumbnailList DataThumbnailList={dummy_thumbnail_data} />
     </div>
   );
 };
