@@ -273,11 +273,12 @@ export default function TopNavigation({ color = 'white' }) {
           <>
             {mockAlarmData ? (
                 <div className="my-8">
-                  {
-                    mockAlarmData.map( d => {
-                      return <AlarmCard type={d.type} date={d.date} content={d.content} />
-                    })
-                  }
+                  <p className="mt-4 text-gray-900">새로운 알림이 없습니다. 😢</p>
+                  {/*{*/}
+                  {/*  mockAlarmData.map( d => {*/}
+                  {/*    return <AlarmCard type={d.type} date={d.date} content={d.content} />*/}
+                  {/*  })*/}
+                  {/*}*/}
                 </div>
             ) : (
               <div className="text-center mt-56">
