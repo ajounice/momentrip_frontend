@@ -148,26 +148,26 @@ function ShortForm() {
 
   useEffect(() => {
     const tmp: any[] = [];
-    formsData.forEach((item) => {
-      const itemID = item.id;
-      axios({
-        method: 'get',
-        url: `${process.env.REACT_APP_API_URL}/forms/${itemID}/comments`,
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      })
-        .then((res: any) => {
-          if (res.status === 200) {
-            tmp.push(res.data);
-          }
-        })
-        .catch((err: any) => {
-          console.log(err);
-        });
-    });
-
-    setCommentList(tmp);
+    // formsData.forEach((item) => {
+    //   const itemID = item.id;
+    //   axios({
+    //     method: 'get',
+    //     url: `${process.env.REACT_APP_API_URL}/forms/${itemID}/comments`,
+    //     headers: {
+    //       Authorization: `Bearer ${accessToken}`,
+    //     },
+    //   })
+    //     .then((res: any) => {
+    //       if (res.status === 200) {
+    //         tmp.push(res.data);
+    //       }
+    //     })
+    //     .catch((err: any) => {
+    //       console.log(err);
+    //     });
+    // });
+    //
+    // setCommentList(tmp);
   }, [formsData]);
   const [currentSfId, setCurrentSfId] = useState(0);
 

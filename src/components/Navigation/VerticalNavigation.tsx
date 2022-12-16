@@ -100,23 +100,23 @@ export default function VerticalNavigation({
 
   // TODO wish api
   useEffect(() => {
-    async function getWishs() {
-      try {
-        const response = await instance.get('/wishlists', {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
-
-        if (response.status === 200) {
-          setWishlist(response.data);
-        }
-        return null;
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    getWishs();
+    // async function getWishs() {
+    //   try {
+    //     const response = await instance.get('/wishlists', {
+    //       headers: {
+    //         Authorization: `Bearer ${accessToken}`,
+    //       },
+    //     });
+    //
+    //     if (response.status === 200) {
+    //       setWishlist(response.data);
+    //     }
+    //     return null;
+    //   } catch (error) {
+    //     console.error(error);
+    //   }
+    // }
+    // getWishs();
   }, [accessToken]);
 
   const onClickComment = () => {
