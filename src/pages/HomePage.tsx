@@ -39,8 +39,12 @@ function HomePage() {
         },
       })
       .then((res) => {
+        console.log("/users/my in Home");
         if (res.data.nickname === null) {
           window.location.assign('/add/data');
+        }
+        else {
+          window.sessionStorage.setItem('user', JSON.stringify(res.data));
         }
       })
       .catch((err) => {
