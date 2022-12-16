@@ -43,9 +43,31 @@ const dummy_thumbnail_data2 = [
   },
 ];
 
+/* TODO: API 수정되면 바꿀 것 */
+export interface ISearchUser {
+  email: string;
+  id : number;
+  image: string;
+  intro: string;
+  name: string;
+  nickname: string;
+  password: string;
+  type: boolean;
+}
+
+export interface ISearchResult {
+  user: ISearchUser[],
+  form: [],
+}
+
 const SearchPage = () => {
   const navigation = useNavigate();
   const [searchKeyword, setSearchKeyword] = useState('');
+
+  const [ searchResult, setSearchResult ] = useState<ISearchResult>({
+    'user' : [],
+    'form' : [],
+  });
 
   useEffect(() => {
     const params = new URLSearchParams(location.search).get('keyword');
@@ -61,10 +83,10 @@ const SearchPage = () => {
     <div className="px-4">
       {/* SearchBar */}
       <div className="mt-20 h-full">
-        <SearchBar searchHandler={searchHandler} keyword={searchKeyword} />
+        <SearchBar searchHandler={searchHandler} keyword={searchKeyword} searchResult={searchResult} setSearchResult={setSearchResult}/>
       </div>
       {/* Search Contents */}
-      {searchKeyword ? <SearchAfter keyword={searchKeyword}></SearchAfter> : <SearchBefore searchHandler={searchHandler}></SearchBefore>}
+      {searchKeyword ? <SearchAfter searchResult={searchResult} keyword={searchKeyword}></SearchAfter> : <SearchBefore searchHandler={searchHandler}></SearchBefore>}
 
 
       {/* 검색하기 전 */}

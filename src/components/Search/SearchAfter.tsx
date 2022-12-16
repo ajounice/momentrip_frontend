@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import InnerTab from '../common/InnerTab';
+import { ISearchResult } from "../../pages/search/SearchPage";
 
-const SearchAfter = ({keyword}:{keyword:string}) => {
+const SearchAfter = ({keyword, searchResult}:{keyword:string, searchResult: ISearchResult}) => {
   // TODO: keyword 검색 내용을 요청하는 api
 
   const tabs = ['게시물', '계정'];
@@ -16,9 +17,18 @@ const SearchAfter = ({keyword}:{keyword:string}) => {
       ></InnerTab>
 
       {tabSelected === tabs[0] ? (
-        <>{keyword}에 대한 게시물 검색결과</>
+        <div>
+          <>{keyword}에 대한 게시물 검색결과</>
+        </div>
       ) : (
-        <>{keyword}에 대한 계정 검색 결과</>
+        <div>
+          <>{keyword}에 대한 계정 검색 결과</>
+          {
+            searchResult['user'].map( d => {
+              return <h1>{d.name}</h1>
+            })
+          }
+        </div>
       )}
     </div>
   );
