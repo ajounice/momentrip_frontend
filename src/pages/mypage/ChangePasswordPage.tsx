@@ -3,9 +3,6 @@ import Input from "../../components/common/Input";
 import React, { useEffect, useState } from "react";
 import '../../styles/pages/mypage/Setting.css';
 import axios from "axios";
-import AlertModal from "../../components/common/AlertModal";
-import CustomModal from "../../components/common/CustomModal";
-import Button from "../../components/Button/Button";
 import BasicModal from "../../components/common/BasicModal";
 import { useNavigate } from "react-router-dom";
 
