@@ -52,11 +52,15 @@
 
 .password-change-input-container{
     width : 90%;
-    height : 58%;
+    height : 70%;
     margin-top : 10px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+
+.input-div {
+    height: 80px;
 }
 
 .password-change-button{
