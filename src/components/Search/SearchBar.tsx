@@ -5,6 +5,24 @@ import axios from "axios";
 export default function SearchBar({searchHandler, keyword, searchResult}:{searchHandler:(value:string)=>void, keyword:string, searchResult: object[]}) {
   const navigation = useNavigate();
 
+  // useEffect(() => {
+  //   if(keyword !== '') {
+  //     axios({
+  //       method: 'get',
+  //       url: `${process.env.REACT_APP_API_URL}search?type=user&tag=${keyword}`,
+  //       headers: {
+  //         Authorization: `Bearer ${window.localStorage.getItem('Token')}`,
+  //       },
+  //     })
+  //       .then((res) => {
+  //         console.log(res);
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //       })
+  //   }
+  // }, [keyword])
+
   const handleOnKeyPress = (
     e: React.KeyboardEvent<HTMLInputElement>,
   ) => {
