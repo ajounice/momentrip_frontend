@@ -13,6 +13,7 @@ import Input from '../common/Input';
 import Button from '../Button/Button';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
+import AlarmPage from "../../pages/AlarmPage";
 const defaultCurrent = {
   home: true,
   search: false,
@@ -24,7 +25,28 @@ function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ');
 }
 
-const mockAlarmData = {};
+const mockAlarmData = [
+  {
+    'type': '⭐️',
+    'date': '12분 전',
+    'content': '채옹님이 팔로우 하였습니다.',
+  },
+  {
+    'type': '❤️',
+    'date': '20분 전',
+    'content': '채옹님이 게시물을 좋아합니다.',
+  },
+  {
+    'type': '❤️',
+    'date': '25분 전',
+    'content': '치즈님이 게시물을 좋아합니다.',
+  },
+  {
+    'type': '❤️',
+    'date': '1시간 전',
+    'content': '인주님이 게시물을 좋아합니다.',
+  }
+];
 
 export default function TopNavigation({ color = 'white' }) {
   const [selected, setSelected] = useState({ text: '홈', color: 'white' });
@@ -250,11 +272,18 @@ export default function TopNavigation({ color = 'white' }) {
         <ModalPage open={alarmOpen} setOpen={setAlarmOpen} size="full" title="알림">
           <>
             {mockAlarmData ? (
+                <div className="my-8">
+                  <p className="mt-4 text-gray-900">새로운 알림이 없습니다. 😢</p>
+                  {/*{*/}
+                  {/*  mockAlarmData.map( d => {*/}
+                  {/*    return <AlarmCard type={d.type} date={d.date} content={d.content} />*/}
+                  {/*  })*/}
+                  {/*}*/}
+                </div>
+            ) : (
               <div className="text-center mt-56">
                 <p className="mt-4 text-gray-900">새로운 알림이 없습니다. 😢</p>
               </div>
-            ) : (
-              <AlarmCard></AlarmCard>
             )}
           </>
         </ModalPage>
