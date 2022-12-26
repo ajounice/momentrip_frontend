@@ -4,7 +4,7 @@ import { TopBar } from '../../components/common/Navigation';
 import Follow from '../../components/Card/Follow';
 import Follower from '../../components/Card/Follower';
 import axios from 'axios';
-import follower from '../../components/Card/Follower';
+import {IUserInfoInSF} from '../../components/common/ProfileInSF'
 
 function FollowPage() {
   const [currentTab, setCurrentTab] = useState({
@@ -42,20 +42,20 @@ function FollowPage() {
     })
       .then((res) => {
         setFollowers(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
-        axios({
-          method: 'get',
-          url: `${process.env.REACT_APP_API_URL}/users/my/followings`,
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('Token')}`,
-          },
-        })
-          .then((res) => {
-            setFollowings(res.data);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+    axios({
+      method: 'get',
+      url: `${process.env.REACT_APP_API_URL}/users/my/followings`,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('Token')}`,
+      },
+    })
+      .then((res) => {
+        setFollowings(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -63,8 +63,8 @@ function FollowPage() {
   }, [currentTab, deps]);
 
   useEffect(() => {
-    console.log();
-  }, [Followers, Followings]);
+    console.log(Followers.length);
+  }, []);
 
   return (
     <div className={'follow-following-page-container'}>

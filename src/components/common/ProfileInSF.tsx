@@ -4,14 +4,14 @@ import Avatar from './Avatar';
 import axios from 'axios';
 
 export interface IUserInfoInSF {
-  email: string;
   id: number;
-  image: string;
-  intro: string;
-  name: string;
+  email: string;
   nickname: string;
   password: string;
+  name: string;
+  intro: string;
   type: boolean;
+  image: string;
 }
 
 interface IProfileSF {

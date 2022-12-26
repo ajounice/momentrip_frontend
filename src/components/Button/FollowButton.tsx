@@ -21,8 +21,6 @@ function FollowButton({ follow, setFollow }: FollowProps) {
       setButtonText('팔로우');
     }
   };
-  // useEffect(() => {
-  // }, [follow]);
 
   return (
     <button className={buttonCss} onClick={onClickFollow} type="button">

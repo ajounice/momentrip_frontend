@@ -202,7 +202,6 @@ function MyPage() {
     intro: '',
     type: false,
     image: '',
-    // form : [],
   });
 
   const [myForm, setMyForm] = useState<Form[]>([]);
@@ -267,23 +266,23 @@ function MyPage() {
     // 팔로워 리스트 조회
     myInfo.nickname ? axios({
       method: 'get',
-      url: `${process.env.REACT_APP_API_URL}/users/${myInfo.nickname}/followers`,
+      url: `${process.env.REACT_APP_API_URL}/users/my/followers`,
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
     })
       .then((res) => {
-        setFollower(res.data.length);
+        setFollower(res.data.list.length);
         // 팔로잉 리스트 조회
         axios({
           method: 'get',
-          url: `${process.env.REACT_APP_API_URL}/users/${myInfo.nickname}/followings`,
+          url: `${process.env.REACT_APP_API_URL}/users/my/followings`,
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
         })
           .then((res) => {
-            setFollowing(res.data.length);
+            setFollowing(res.data.list.length);
           })
           .catch((err) => {
             console.log(err);
@@ -307,7 +306,6 @@ function MyPage() {
         centerTextType={'user'}
         alarm={false}
         dropdown={'mypage'}
-        // dropdownList={['프로필 편집', '개인정보 설정', '설정']}
       />
       <div className="px-4">
         <div className="my-20">
@@ -326,7 +324,6 @@ function MyPage() {
             )}
           </div>
           <div className="text-center pt-2">{userInfo.profileMessage}</div>
-          {/*<Avatar size={'lg'} biz={myInfo.type} nickname={myInfo.nickname} src={myInfo.image} badge={userInfo.badge} />*/}
           <div className="text-center pt-2">{myInfo.intro}</div>
           {/* 프로그래스바 */}
           <div className="w-full  h-2.5 mt-7 flex rounded-full bg-gray-300 animate-pulse">
