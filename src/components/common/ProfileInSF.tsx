@@ -18,10 +18,11 @@ interface IProfileSF {
   user: IUserInfoInSF;
   follow: number;
   setFollow: Dispatch<SetStateAction<number>>;
+  moveUserProfile?: any;
 }
 
 // { image, type, nickname, name, intro, email, password, id}:IUserInfoInSF
-function ProfileInSF({ user, follow, setFollow }: IProfileSF) {
+function ProfileInSF({ user, follow, setFollow, moveUserProfile}: IProfileSF) {
   // const [ follow, setFollow ] = useState(false);
   // const [ currentUser, setCurrentUser ] = useState<IUserInfoInSF>({
   //   email : '',
@@ -181,7 +182,7 @@ function ProfileInSF({ user, follow, setFollow }: IProfileSF) {
 
   return (
     <div className={'profile-in-sf-container'}>
-      <div className={'profile-container'}>
+      <div className={'profile-container'} onClick={moveUserProfile}>
         <Avatar
           src={user !== null && user.image !== '' ? user.image : '/img/profile_default.png'}
           nickname={user !== null ? user.nickname : '유저'}
