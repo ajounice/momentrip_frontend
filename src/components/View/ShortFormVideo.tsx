@@ -69,7 +69,9 @@ function ShortFormVideo(videoProps: IShortFormVideo) {
         }}
       />
 
-      <ProfileInSF follow={videoProps.follow} setFollow={videoProps.setFollow} user={videoProps.user} />
+      <ProfileInSF follow={videoProps.follow} setFollow={videoProps.setFollow} user={videoProps.user} moveUserProfile={() => {
+        window.location.assign(`/profile/${videoProps.user.nickname}`);
+      }} />
       {/*setViewShare((prev)=>!prev)*/}
 
       <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">

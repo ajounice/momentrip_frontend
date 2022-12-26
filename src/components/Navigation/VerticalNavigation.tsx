@@ -85,7 +85,7 @@ export default function VerticalNavigation({
         }
       })
       .catch(() => {
-        alert('server error');
+        alert('일시적인 오류로 인해 처리할 수 없습니다.');
       });
   };
 
