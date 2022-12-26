@@ -90,6 +90,7 @@ function SignUpPage() {
               disabled={false}
               placeholder={'Email을 입력해주세요.'}
             />
+            {/* placeholder 변경*/}
             <Input
               onChangeEventHandler={(e) => {
                 setPW(e.currentTarget.value);
@@ -98,7 +99,7 @@ function SignUpPage() {
               type={'password'}
               id={'pw'}
               disabled={false}
-              placeholder={'8글자 이상의 대/소문자 알파벳과 숫자로 입력해주세요.'}
+              placeholder={'Password'}
             />
             <Input
               onChangeEventHandler={(e) => {
@@ -110,6 +111,8 @@ function SignUpPage() {
               disabled={false}
               placeholder={'Password 확인'}
             />
+            {/* 8글자 이상 비밀번호 입력해야하는 placeholder 일반 string으로 등록*/}
+            <div>8글자 이상의 대/소문자 알파벳과 숫자로 입력해주세요.</div>
             {pw2 !== '' && (
               <span className={pw === pw2 ? 'pw-pw2-correct' : 'pw-pw2-incorrect'}>
                 {pw === pw2 ? '비밀번호가 일치합니다.' : '비밀번호가 일치하지 않습니다.'}
@@ -156,14 +159,18 @@ function SignUpPage() {
                   aria-describedby="comments-description"
                   name="comments"
                   type="checkbox"
+                  checked={isAgreement}
                   className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                   onClick={(e) => {
-                    setIsAgreement(e.currentTarget.checked);
+                    setIsAgreement((prev) => !prev);
                   }}
                 />
               </div>
               <div className="ml-2 text-sm mt-1.5">
-                <span id="comments-description" className="text-gray-800">
+                {/* string click 시 checkbox 반영 되도록 변경*/}
+                <span id="comments-description" className="text-gray-800" onClick={() => {
+                  setIsAgreement((prev) => !prev);
+                }} >
                   (필수)위 개인정보 수집 및 이용에 동의합니다.
                 </span>
               </div>
@@ -175,11 +182,11 @@ function SignUpPage() {
                   ? isAgreement
                     ? onClickSignUp
                     : () => {
-                        alert('개인정보 이용 및 수집에 동의해주세요');
-                      }
-                  : () => {
-                      alert('이메일과 비밀번호 형식을 확인해주세요');
+                      alert('개인정보 이용 및 수집에 동의해주세요');
                     }
+                  : () => {
+                    alert('이메일과 비밀번호 형식을 확인해주세요');
+                  }
               }
               className={buttonActive ? 'active-submit-button' : 'submit-button'}
             >
