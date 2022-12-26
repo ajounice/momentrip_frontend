@@ -66,37 +66,6 @@ function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ');
 }
 const mockBadgeDataTotal = 4;
-// const mockBadgeData = [
-//   {
-//     name: 'mountain',
-//     value: 22,
-//   },
-//   {
-//     name: 'sea',
-//     value: 10,
-//   },
-//   {
-//     name: 'hotel',
-//     value: 4,
-//   },
-//   {
-//     name: 'festival',
-//     value: 2,
-//   },
-//   {
-//     name: 'camping',
-//     value: 2,
-//   },
-//   {
-//     name: 'night',
-//     value: 0,
-//   },
-//   {
-//     name: 'activity',
-//     value: 0,
-//   },
-// ];
-
 const mockBadgeData = [
   {
     name: 'mountain',
@@ -104,7 +73,7 @@ const mockBadgeData = [
   },
   {
     name: 'sea',
-    value: 4,
+    value: 0,
   },
   {
     name: 'hotel',
@@ -188,7 +157,6 @@ export interface MyInfo {
   intro: string;
   type: boolean;
   image: string;
-  // form : Form[];
 }
 
 function MyPage() {
@@ -270,7 +238,7 @@ function MyPage() {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
-    })
+  })
       .then((res) => {
         setFollower(res.data.list.length);
         // 팔로잉 리스트 조회
@@ -319,7 +287,7 @@ function MyPage() {
                 biz={myInfo.type}
                 size={'lg'}
                 nickname={myInfo.nickname}
-                badge={'sea'}
+                badge={undefined} // TODO badge api 적용 안됨
               />
             )}
           </div>
@@ -347,7 +315,7 @@ function MyPage() {
                   </>
                 ),
             )}
-            {/*<div className="mt-7 mx-auto text-xs ">열심히 활동하고 취향 뱃지를 달아보세요!</div>*/}
+            <div className="mt-7 mx-auto text-xs ">열심히 활동하고 취향 뱃지를 달아보세요!</div>
           </div>
           <div className="grid grid-cols-2 text-center mt-16 mb-7">
             <div

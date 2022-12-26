@@ -24,62 +24,8 @@ interface IUserInfo {
   nickname: string;
   type: boolean;
 }
-// const mockUserInfo: IUserInfo = {
-//   userId: 'other',
-//   userName: '다른사람',
-//   src: 'https://thumb.zumst.com/400x250/https://static.news.zumst.com/images/58/2020/03/27/e3124f5ec4cf4df18e162ba591a5f24a.jpg',
-//   profileMessage: '뷰맛집만 돌아다니는 다른사람',
-//   followers: 120,
-//   following: 230,
-// };
-
-const mockShortFormListsData = {
-  shortForm: [
-    {
-      userId: 1,
-      shortFormId: 1,
-      src: 'https://blog.kakaocdn.net/dn/RS1O8/btqEwRYEgAG/SI0UZck2vAg7NAy4ZybGFk/img.png',
-      href: 'https://blog.kakaocdn.net/dn/RS1O8/btqEwRYEgAG/SI0UZck2vAg7NAy4ZybGFk/img.png',
-      likeCount: 12,
-      innerAvatar: {
-        src: 'https://mblogthumb-phinf.pstatic.net/MjAxOTA3MTRfMTUw/MDAxNTYzMTEyNjcwNzIy.fE7H6I1cLHlImgwlfFK6iSafnnIscZ9Hp-lIbWPtDV4g.UP4blzQP-WlF4XqHZZBn0p7HMbsqF064zo5mSWtzl2sg.JPEG.studygir/tejuTyY_(17).jpg?type=w800',
-      },
-    },
-    {
-      userId: 1,
-      shortFormId: 1,
-      src: 'https://png.pngtree.com/thumb_back/fh260/png-vector/20200530/ourmid/pngtree-beach-png-image_2215226.jpg',
-      href: 'https://png.pngtree.com/thumb_back/fh260/png-vector/20200530/ourmid/pngtree-beach-png-image_2215226.jpg',
-      likeCount: 12,
-      innerAvatar: {
-        src: 'https://mblogthumb-phinf.pstatic.net/MjAxOTA3MTRfMTUw/MDAxNTYzMTEyNjcwNzIy.fE7H6I1cLHlImgwlfFK6iSafnnIscZ9Hp-lIbWPtDV4g.UP4blzQP-WlF4XqHZZBn0p7HMbsqF064zo5mSWtzl2sg.JPEG.studygir/tejuTyY_(17).jpg?type=w800',
-      },
-    },
-    {
-      userId: 1,
-      shortFormId: 1,
-      src: 'https://blog.kakaocdn.net/dn/RS1O8/btqEwRYEgAG/SI0UZck2vAg7NAy4ZybGFk/img.png',
-      href: 'https://blog.kakaocdn.net/dn/RS1O8/btqEwRYEgAG/SI0UZck2vAg7NAy4ZybGFk/img.png',
-      likeCount: 12,
-      innerAvatar: {
-        src: 'https://mblogthumb-phinf.pstatic.net/MjAxOTA3MTRfMTUw/MDAxNTYzMTEyNjcwNzIy.fE7H6I1cLHlImgwlfFK6iSafnnIscZ9Hp-lIbWPtDV4g.UP4blzQP-WlF4XqHZZBn0p7HMbsqF064zo5mSWtzl2sg.JPEG.studygir/tejuTyY_(17).jpg?type=w800',
-      },
-    },
-    {
-      userId: 1,
-      shortFormId: 1,
-      src: 'https://png.pngtree.com/thumb_back/fh260/png-vector/20200530/ourmid/pngtree-beach-png-image_2215226.jpg',
-      href: 'https://png.pngtree.com/thumb_back/fh260/png-vector/20200530/ourmid/pngtree-beach-png-image_2215226.jpg',
-      likeCount: 12,
-      innerAvatar: {
-        src: 'https://mblogthumb-phinf.pstatic.net/MjAxOTA3MTRfMTUw/MDAxNTYzMTEyNjcwNzIy.fE7H6I1cLHlImgwlfFK6iSafnnIscZ9Hp-lIbWPtDV4g.UP4blzQP-WlF4XqHZZBn0p7HMbsqF064zo5mSWtzl2sg.JPEG.studygir/tejuTyY_(17).jpg?type=w800',
-      },
-    },
-  ],
-};
 
 const Profile = () => {
-  // const [userId, setUserId] = useState<string | null>('');
   const [userInfo, setUserInfo] = useState<IUserInfo>({
     email: '',
     badgeList: [],
