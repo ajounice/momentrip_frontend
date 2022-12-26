@@ -120,18 +120,18 @@ function ProfileInSF({ user, follow, setFollow }: IProfileSF) {
 
   useEffect(() => {
     if (currentUserFollowingList.length !== 0) {
-      currentUserFollowingList.forEach((users) => {
-        // console.log(user);
-        if (user !== null && users !== null) {
-          localStorage.setItem(users.nickname, users.nickname);
-
-          if (user.nickname === users.nickname) {
-            setLocalStorage(true);
-            setFollowState(true);
-            return;
-          }
-        }
-      });
+      // currentUserFollowingList.forEach((users) => {
+      //   // console.log(user);
+      //   if (user !== null && users !== null) {
+      //     localStorage.setItem(users.nickname, users.nickname);
+      //
+      //     if (user.nickname === users.nickname) {
+      //       setLocalStorage(true);
+      //       setFollowState(true);
+      //       return;
+      //     }
+      //   }
+      // });
     }
   }, [currentUserFollowingList]);
 

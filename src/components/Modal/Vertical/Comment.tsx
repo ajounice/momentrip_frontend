@@ -33,25 +33,6 @@ function CommentItem({ setRefresh, token, currentUser, commentId, name, comment,
     image: '',
   });
 
-  useEffect(() => {
-    if (mount === 0) {
-      setMount(1);
-    } else {
-      axios
-        .get(`${process.env.REACT_APP_API_URL}/users/my`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('Token')}`,
-          },
-        })
-        .then((res) => {
-          setME(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  }, [mount]);
-
   const onClickDelete = (e: any) => {
     axios
       .delete(`${process.env.REACT_APP_API_URL}/forms/comments/${commentId}`, {
@@ -238,30 +219,31 @@ function Comment({ setViewComment, commentList, user, shortFormId }: IComment) {
     if (e.key === 'Enter') {
       // 나중에 사용할 예정
 
-      axios({
-        method: 'post',
-        url: `${process.env.REACT_APP_API_URL}/forms/${shortFormId}/comments`,
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-        data: {
-          content: comment,
-        },
-      })
-        .then(() => {
-          // setComList(res.data);
-          setRefresh((prev) => !prev);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-
-      if (inputRef !== null) {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        document.getElementById('commentInput').value = '';
+    //   axios({
+    //     method: 'post',
+    //     url: `${process.env.REACT_APP_API_URL}/forms/${shortFormId}/comments`,
+    //     headers: {
+    //       Authorization: `Bearer ${accessToken}`,
+    //     },
+    //     data: {
+    //       content: comment,
+    //     },
+    //   })
+    //     .then(() => {
+    //       // setComList(res.data);
+    //       setRefresh((prev) => !prev);
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
+    //
+    //   if (inputRef !== null) {
+    //     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //     // @ts-ignore
+    //     document.getElementById('commentInput').value = '';
+    //   }
+    // }
       }
-    }
   };
 
   return (
