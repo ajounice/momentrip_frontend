@@ -113,6 +113,19 @@ interface ICommentItemList {
   };
 }
 
+export interface IUserInfoInCM {
+  email: string;
+  id: number;
+  image: string;
+  intro: string;
+  name: string;
+  nickname: string;
+  password: string;
+  type: boolean;
+  badgeList: any[]; // users/my response에 맞춰서 추가 하기 위해 수정
+  forms: any[]; // users/my response에 맞춰서 추가 하기 위해 수정
+}
+
 function Comment({ setViewComment, commentList, user, shortFormId }: IComment) {
   const [comment, setComment] = useState<string>('');
   const [refresh, setRefresh] = useState(false);
@@ -160,12 +173,11 @@ function Comment({ setViewComment, commentList, user, shortFormId }: IComment) {
         type: true
       }
     },
-
   ]);
 
   const inputRef = useRef(null);
   const [accessToken, setAccessToken] = useState<string | null>(null);
-  const [currentUser, setCurrentUser] = useState<IUserInfoInSF>({
+  const [currentUser, setCurrentUser] = useState<IUserInfoInCM>({
     email: '',
     id: 0,
     image: '',
@@ -174,6 +186,8 @@ function Comment({ setViewComment, commentList, user, shortFormId }: IComment) {
     nickname: '',
     password: '',
     type: false,
+    badgeList: [],
+    forms: [],
   });
 
   useEffect(() => {
@@ -188,6 +202,7 @@ function Comment({ setViewComment, commentList, user, shortFormId }: IComment) {
         },
       })
       .then((res) => {
+        console.log(res);
         setCurrentUser(res.data);
       })
       .catch((err) => {
@@ -219,32 +234,32 @@ function Comment({ setViewComment, commentList, user, shortFormId }: IComment) {
     if (e.key === 'Enter') {
       // 나중에 사용할 예정
 
-    //   axios({
-    //     method: 'post',
-    //     url: `${process.env.REACT_APP_API_URL}/forms/${shortFormId}/comments`,
-    //     headers: {
-    //       Authorization: `Bearer ${accessToken}`,
-    //     },
-    //     data: {
-    //       content: comment,
-    //     },
-    //   })
-    //     .then(() => {
-    //       // setComList(res.data);
-    //       setRefresh((prev) => !prev);
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //     });
-    //
-    //   if (inputRef !== null) {
-    //     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    //     // @ts-ignore
-    //     document.getElementById('commentInput').value = '';
-    //   }
-    // }
-      }
-  };
+      //   axios({
+      //     method: 'post',
+      //     url: `${process.env.REACT_APP_API_URL}/forms/${shortFormId}/comments`,
+      //     headers: {
+      //       Authorization: `Bearer ${accessToken}`,
+      //     },
+      //     data: {
+      //       content: comment,
+      //     },
+      //   })
+      //     .then(() => {
+      //       // setComList(res.data);
+      //       setRefresh((prev) => !prev);
+      //     })
+      //     .catch((err) => {
+      //       console.log(err);
+      //     });
+      //
+      //   if (inputRef !== null) {
+      //     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //     // @ts-ignore
+      //     document.getElementById('commentInput').value = '';
+      //   }
+      // }
+    }
+  }
 
   return (
     <div className={'comment-modal-container'}>
@@ -265,10 +280,11 @@ function Comment({ setViewComment, commentList, user, shortFormId }: IComment) {
         <div className={'comment-item-list-inner-container'}>
           <div className={'comment-item-register-comment-container'}>
             <div className={'comment-item-img-container'}>
+              {/* user default img 변경 */}
               <img
                 className={'comment-item-img'}
                 src={
-                  currentUser !== null && currentUser.image !== null ? currentUser.image : '/img/profile.png'
+                  currentUser && currentUser.image !== null ? currentUser.image : '/img/profile_default.png'
                 }
                 alt={'user profile'}
               />
@@ -291,20 +307,20 @@ function Comment({ setViewComment, commentList, user, shortFormId }: IComment) {
           <div>
             {comList !== null
               ? comList.map((item) => {
-                  // commentList.map((item)=>{
-                  return (
-                    <CommentItem
-                      setRefresh={setRefresh}
-                      token={accessToken}
-                      commentId={item.id}
-                      currentUser={currentUser.id}
-                      name={item.user.nickname}
-                      comment={item.content}
-                      userId={item.user.id}
-                      imagePath={item.user.image}
-                    />
-                  );
-                })
+                // commentList.map((item)=>{
+                return (
+                  <CommentItem
+                    setRefresh={setRefresh}
+                    token={accessToken}
+                    commentId={item.id}
+                    currentUser={currentUser.id}
+                    name={item.user.nickname}
+                    comment={item.content}
+                    userId={item.user.id}
+                    imagePath={item.user.image}
+                  />
+                );
+              })
               : null}
           </div>
         </div>
