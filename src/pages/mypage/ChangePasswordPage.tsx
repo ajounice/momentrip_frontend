@@ -18,7 +18,8 @@ function ChangePasswordPage() {
   const [view, setView] = useState(false);
   const [modalView, setModalView] = useState({
     view: false,
-    result: ''
+    result: '',
+    message: '',
   });
 
   const onPressEnter = (e: any) => {
@@ -26,8 +27,9 @@ function ChangePasswordPage() {
         if(view && password.changePW === password.changePW2) {
           axios
             .patch(`${process.env.REACT_APP_API_URL}/users/my/edit/password`,{
-              password: password.changePW,
-              passwordConfirmation: password.currentPW
+              currentPassword: password.currentPW,
+              changePassword: password.changePW,
+              changePasswordConfirmation: password.changePW2,
             }, {
               headers: {
                 Authorization: `Bearer ${window.localStorage.getItem('Token')}`,
@@ -35,11 +37,11 @@ function ChangePasswordPage() {
             })
             .then((res) => {
               if(res.status === 200) {
-                setModalView({view: true, result: 'success'});
+                setModalView({view: true, result: 'success', message: ''});
               }
             })
             .catch((err) => {
-              setModalView({view: true, result: 'fail'});
+              setModalView({view: true, result: 'fail', message: err.response.data.message});
             });
         }
       }
@@ -84,7 +86,7 @@ function ChangePasswordPage() {
               </div>
                 :
                 <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
-                  <BasicModal title="비밀번호 변경에 실패하였습니다." open={true} setOpen={() => {setModalView({view: false, result: ''})}}>
+                  <BasicModal title={modalView.message} open={true} setOpen={() => {setModalView({view: false, result: '', message: ''})}}>
                     <>
                       <div className="m-8"> </div>
                       <div className="flex gap-2">
