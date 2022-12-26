@@ -259,7 +259,7 @@ function Comment({ setViewComment, commentList, user, shortFormId }: IComment) {
       //   }
       // }
     }
-
+  }
 
   return (
     <div className={'comment-modal-container'}>
