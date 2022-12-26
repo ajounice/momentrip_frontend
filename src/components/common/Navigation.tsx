@@ -217,7 +217,6 @@ function TopBar({
   const DefaultPathList = ['/home', '/following', '/search', '/upload'];
 
   return (
-    // <div className={beforeButton ? 'page-left-trans' : ''}>
     <div className={'top-bar-container-bg'}>
       <div className={'top-bar-inner-left-container'}>
         {/* 뒤로가기 / 왼쪽 텍스트 */}
@@ -260,9 +259,7 @@ function TopBar({
         {/* 알람 */}
         {alarm ? (
           <div onClick={alarmOnClickEvent} className={'right-icon-container'}>
-            <>
               <RiNotification2Line className={'alarm-icon'} />
-            </>
           </div>
         ) : null}
 
@@ -288,7 +285,6 @@ function TopBar({
         ) : null}
       </div>
     </div>
-    // </div>
   );
 }
 

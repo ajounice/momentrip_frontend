@@ -6,16 +6,6 @@ import axios from 'axios';
 import { TopBar } from '../../components/common/Navigation';
 import { Form } from '../../globalType';
 
-// 서버에서 가져온 정보
-// const userInfo = {
-//   userId: '',
-//   userName: '',
-//   src: '',
-//   profileMessage: '',
-//   followers: 0,
-//   following: 0,
-//   badge: 'mountain',
-// };
 const userInfo = {
   userId: '',
   userName: '',
@@ -221,7 +211,6 @@ function MyPage() {
 
   const [mount, setMount] = useState(0);
   const [accessToken, setAccessToken] = useState<string | null>();
-  const [alarmOpen, setAlarmOpen] = useState(false);
 
   const [follower, setFollower] = useState(0);
   const [following, setFollowing] = useState(0);
@@ -314,10 +303,9 @@ function MyPage() {
     <div>
       <TopBar
         beforeButton={true}
-        alarmOnClickEvent={() => setAlarmOpen(true)}
         centerText={myInfo.name}
         centerTextType={'user'}
-        alarm={true}
+        alarm={false}
         dropdown={'mypage'}
         // dropdownList={['프로필 편집', '개인정보 설정', '설정']}
       />
