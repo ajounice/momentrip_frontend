@@ -39,7 +39,7 @@ function HomePage() {
         },
       })
       .then((res) => {
-        console.log("/users/my in Home");
+        // 필요 없는 주석 제거
         if (res.data.nickname === null) {
           window.location.assign('/add/data');
         }
