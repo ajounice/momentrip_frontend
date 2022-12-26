@@ -5,8 +5,7 @@ import Avatar from '../../components/common/Avatar';
 import Input from '../../components/common/Input';
 import axios from 'axios';
 import { MyInfo } from './MyPage';
-
-const rexId = '';
+import BasicModal from '../../components/common/BasicModal';
 
 interface profileInfo {
   name: string;
@@ -22,6 +21,8 @@ const ProfileSettingPage = () => {
     name: '',
     intro: '',
   });
+  const [okModalMessage, setOkModalMessage] = useState("준비중인 기능입니다.");
+  const [okModalOpen, setOkModalOpen] = useState(false);
 
   const [mount, setMount] = useState(0);
   const [accessToken, setAccessToken] = useState<string | null>();
@@ -159,6 +160,7 @@ const ProfileSettingPage = () => {
     setProfileImgData(e.target.files[0]);
   };
 
+
   return (
     <div className={'profile-setting-page-container'}>
       <div className={'profile-setting-page-top-bar-container'}>
@@ -232,9 +234,16 @@ const ProfileSettingPage = () => {
             disabled={false}
             placeholder={'텍스트를 입력해주세요.'}
           />
-          <span className={'business-account-change'}>비지니스 계정으로 전환</span>
+          <button className={'business-account-change'} onClick={()=>{setOkModalMessage("준비중인 기능입니다."); setOkModalOpen(true);}}>비즈니스 계정으로 전환</button>
         </div>
       </div>
+      <BasicModal
+        open={okModalOpen}
+        setOpen={() => setOkModalOpen(false)}
+        title={okModalMessage}
+        type="alert"
+        ok="닫기"
+      ></BasicModal>
     </div>
   );
 };

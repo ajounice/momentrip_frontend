@@ -224,24 +224,6 @@ export default function VerticalNavigation({
         ) : (
           <RiHeart3Line color={'white'} onClick={onClickHeart} className={'icon'} />
         )}
-        {/* {isBookMark ? (
-          <RiBookmarkFill
-            color={'white'}
-            className={'icon'}
-            onClick={() => {
-              // setIsBookMark(false);
-            }}
-          />
-        ) : (
-          <RiBookmarkLine
-            color={'white'}
-            className={'icon'}
-            onClick={() => {
-              // setIsBookMark(true);
-              setBookmarkModalOpen(true);
-            }}
-          />
-        )} */}
         <RiBookmarkLine
           color={'white'}
           className={'icon'}
