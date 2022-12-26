@@ -37,7 +37,8 @@ function SignUpPage() {
       },
     })
       .then((res) => {
-        if (res.data) {
+        // API response 구조 변경에 맞춰 res.data -> res.data.isDuplicated 로 변경
+        if (res.data.isDuplicated) {
           alert('중복된 이메일입니다.');
           setDuplicate(true);
         } else {
@@ -45,7 +46,8 @@ function SignUpPage() {
         }
       })
       .catch((err) => {
-        alert('중복된 ID입니다.');
+        // 중복 문제가 아닌 다른 문제로 error 발생하기 때문에 문구 변경
+        alert('일시적인 오류로 해결할 수 없습니다. 다시 시도해주세요.');
       });
   };
 
