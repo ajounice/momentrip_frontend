@@ -10,7 +10,7 @@ const ThumbnailList = ({ DataThumbnailList }: any) => {
     <div className="flex overflow-x-auto">
       <div className="gap-1 flex ml-4git ">
         {DataThumbnailList.map((data: any) => (
-          <RoundSF key={data.id} src={data.src} href={data.href} shortFormId={1} likeCount={11} />
+          <RoundSF key={data.id} src={data.src} href={data.href} shortFormId={1} likeCount={data.likeCount} />
         ))}
       </div>
     </div>

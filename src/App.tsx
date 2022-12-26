@@ -5,7 +5,7 @@ import './styles/pages/HomePage.css';
 
 import HomePage from './pages/HomePage';
 import FollowingPage from './pages/FollowingPage';
-import SearchPage from './pages/SearchPage';
+import SearchPage from './pages/search/SearchPage';
 import MyPage from './pages/mypage/MyPage';
 import WishPage from './pages/WishPage';
 import UploadShortFormPage from './pages/UploadShortFormPage';

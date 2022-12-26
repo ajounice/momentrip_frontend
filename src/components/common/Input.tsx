@@ -1,5 +1,6 @@
 import { UseFormRegisterReturn } from 'react-hook-form';
 import React, { Dispatch, SetStateAction } from 'react';
+import { useKeyPressEvent } from "react-use";
 
 interface IInput {
   type: string; // text, password
@@ -10,6 +11,7 @@ interface IInput {
   placeholder: string;
   errorMessage?: any;
   defaultValue?: string;
+  onPress?: (e: any) => void;
   onChangeEventHandler?: (e: any) => void;
 }
 // valid나 error msg 둘 중 하나만 필요
@@ -23,6 +25,7 @@ export default function Input({
   placeholder = '',
   errorMessage,
   defaultValue = '',
+  onPress,
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onChangeEventHandler = () => {}, // input 값 바뀌는 함수가 없어서 추가함.
 }: IInput) {
@@ -36,6 +39,7 @@ export default function Input({
       {register ? (
         <div className="mt-1 border-b border-gray-300 ">
           <input
+            onKeyPress={onPress}
             type={type}
             id={id}
             className="block w-full border-0 border-b border-transparent bg-gray-50 focus:border-gray-600 focus:ring-0 "
@@ -50,6 +54,7 @@ export default function Input({
       ) : (
         <div className="mt-1 border-b border-gray-300 ">
           <input
+            onKeyPress={onPress}
             type={type}
             id={id}
             className="block w-full border-0 border-b border-transparent bg-gray-50 focus:border-gray-600 focus:ring-0 "

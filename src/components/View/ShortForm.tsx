@@ -70,8 +70,31 @@ function ShortForm() {
         password: '',
         type: false,
       },
-    },
+    }
+    // {
+    //   id: -1,
+    //   content: '',
+    //   title: '',
+    //   thumbnail: '',
+    //   video: '',
+    //   viewCount: 0,
+    //   videoHidden: false,
+    //   videoStop: true,
+    //   user: {
+    //     id: 0,
+    //     email: '',
+    //     image: '',
+    //     intro: '',
+    //     name: '',
+    //     nickname: '',
+    //     password: '',
+    //     type: false,
+    //   },
+    // },
   ]);
+
+
+
 
   const [follow, setFollow] = useState(1);
 
@@ -89,6 +112,8 @@ function ShortForm() {
     baseURL: 'http://test.heroforyou.space/api',
     timeout: 3000,
   });
+
+  /** dummy data 보여주기 위해 주석처리 **/
   // useEffect(() => {
   //   async function getForms() {
   //     try {
@@ -123,26 +148,26 @@ function ShortForm() {
 
   useEffect(() => {
     const tmp: any[] = [];
-    formsData.forEach((item) => {
-      const itemID = item.id;
-      axios({
-        method: 'get',
-        url: `${process.env.REACT_APP_API_URL}/forms/${itemID}/comments`,
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      })
-        .then((res: any) => {
-          if (res.status === 200) {
-            tmp.push(res.data);
-          }
-        })
-        .catch((err: any) => {
-          console.log(err);
-        });
-    });
-
-    setCommentList(tmp);
+    // formsData.forEach((item) => {
+    //   const itemID = item.id;
+    //   axios({
+    //     method: 'get',
+    //     url: `${process.env.REACT_APP_API_URL}/forms/${itemID}/comments`,
+    //     headers: {
+    //       Authorization: `Bearer ${accessToken}`,
+    //     },
+    //   })
+    //     .then((res: any) => {
+    //       if (res.status === 200) {
+    //         tmp.push(res.data);
+    //       }
+    //     })
+    //     .catch((err: any) => {
+    //       console.log(err);
+    //     });
+    // });
+    //
+    // setCommentList(tmp);
   }, [formsData]);
   const [currentSfId, setCurrentSfId] = useState(0);
 

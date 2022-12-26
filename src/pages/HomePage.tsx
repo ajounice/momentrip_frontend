@@ -39,8 +39,12 @@ function HomePage() {
         },
       })
       .then((res) => {
+        // 필요 없는 주석 제거
         if (res.data.nickname === null) {
           window.location.assign('/add/data');
+        }
+        else {
+          window.sessionStorage.setItem('user', JSON.stringify(res.data));
         }
       })
       .catch((err) => {
